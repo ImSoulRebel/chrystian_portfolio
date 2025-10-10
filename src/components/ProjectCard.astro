@@ -1,0 +1,366 @@
+---
+const {
+  title,
+  stack,
+  description,
+  impact,
+  image,
+  liveUrl,
+  githubUrl,
+  featured = false,
+} = Astro.props;
+
+// Convert stack string to array for better display
+const techStack = typeof stack === 'string' ? stack.split(' · ') : stack || [];
+---
+
+<div class={`project-card ${featured ? 'featured' : ''}`}>
+  <div class="project-image">
+    {
+      image ? (
+        <img src={image} alt={title} loading="lazy" />
+      ) : (
+        <div class="project-placeholder">
+          <svg
+            width="60"
+            height="60"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M12 2L2 7L12 12L22 7L12 2Z"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linejoin="round"
+            />
+            <path
+              d="M2 17L12 22L22 17"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linejoin="round"
+            />
+            <path
+              d="M2 12L12 17L22 12"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </div>
+      )
+    }
+    <div class="project-overlay">
+      <div class="project-links">
+        {
+          liveUrl && (
+            <a
+              href={liveUrl}
+              class="project-link"
+              target="_blank"
+              rel="noopener noreferrer"
+              title="Ver proyecto"
+            >
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M18 13V19C18 19.5304 17.7893 20.0391 17.4142 20.4142C17.0391 20.7893 16.5304 21 16 21H5C4.46957 21 3.96086 20.7893 3.58579 20.4142C3.21071 20.0391 3 19.5304 3 19V8C3 7.46957 3.21071 6.96086 3.58579 6.58579C3.96086 6.21071 4.46957 6 5 6H11"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M15 3H21V9"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M10 14L21 3"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </a>
+          )
+        }
+        {
+          githubUrl && (
+            <a
+              href={githubUrl}
+              class="project-link"
+              target="_blank"
+              rel="noopener noreferrer"
+              title="Ver código"
+            >
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M15 22V18C15.1392 16.7473 14.78 15.4901 14 14.5C17 14.5 20 12.5 20 9C20.08 7.75 19.73 6.52 19 5.5C19.28 4.35 19.28 3.15 19 2C19 2 18 2 16 3.5C13.36 3 10.64 3 8.00004 3.5C6.00004 2 5.00004 2 5.00004 2C4.70004 3.15 4.70004 4.35 5.00004 5.5C4.27191 6.51588 3.91851 7.75279 4.00004 9C4.00004 12.5 7.00004 14.5 10 14.5C9.61004 14.99 9.32004 15.55 9.15004 16.15C8.98004 16.75 8.93004 17.38 9.00004 18V22"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M9 18C4.49 20 4 16 2 16"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </a>
+          )
+        }
+      </div>
+    </div>
+  </div>
+
+  <div class="project-content">
+    {featured && <div class="featured-badge">Destacado</div>}
+
+    <h3 class="project-title">{title}</h3>
+
+    <p class="project-description">{description}</p>
+
+    {
+      impact && (
+        <div class="project-impact">
+          <svg
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M13 2L3 14H12L11 22L21 10H12L13 2Z"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linejoin="round"
+            />
+          </svg>
+          <span>{impact}</span>
+        </div>
+      )
+    }
+
+    <div class="project-tech">
+      {
+        techStack.map((tech: string) => (
+          <span class="tech-tag">{tech.trim()}</span>
+        ))
+      }
+    </div>
+  </div>
+</div>
+
+<style>
+  .project-card {
+    background: var(--gradient-secondary);
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    border: 1px solid rgba(0, 212, 255, 0.1);
+    transition: var(--transition);
+    position: relative;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .project-card:hover {
+    transform: translateY(-10px);
+    box-shadow: var(--shadow-dark);
+    border-color: var(--primary-color);
+  }
+
+  .project-card.featured {
+    border-color: var(--primary-color);
+    box-shadow: var(--shadow-light);
+  }
+
+  .project-card.featured::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: var(--gradient-primary);
+    z-index: 1;
+  }
+
+  .project-image {
+    height: 200px;
+    position: relative;
+    overflow: hidden;
+    background: var(--gradient-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .project-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+
+  .project-card:hover .project-image img {
+    transform: scale(1.05);
+  }
+
+  .project-placeholder {
+    color: var(--background-dark);
+    opacity: 0.7;
+  }
+
+  .project-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .project-card:hover .project-overlay {
+    opacity: 1;
+  }
+
+  .project-links {
+    display: flex;
+    gap: 1rem;
+  }
+
+  .project-link {
+    width: 50px;
+    height: 50px;
+    background: var(--primary-color);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--background-dark);
+    transition: var(--transition);
+    text-decoration: none;
+  }
+
+  .project-link:hover {
+    background: var(--text-primary);
+    transform: scale(1.1);
+    color: var(--background-dark);
+  }
+
+  .project-content {
+    padding: 2rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+  }
+
+  .featured-badge {
+    position: absolute;
+    top: -10px;
+    right: 20px;
+    background: var(--gradient-primary);
+    color: var(--background-dark);
+    padding: 0.3rem 1rem;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .project-title {
+    font-size: 1.5rem;
+    margin: 0 0 1rem 0;
+    color: var(--text-primary);
+    font-weight: 600;
+  }
+
+  .project-description {
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+    flex: 1;
+  }
+
+  .project-impact {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--primary-color);
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
+    padding: 0.8rem;
+    background: rgba(0, 212, 255, 0.1);
+    border-radius: 8px;
+    border-left: 3px solid var(--primary-color);
+  }
+
+  .project-impact svg {
+    flex-shrink: 0;
+  }
+
+  .project-tech {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: auto;
+  }
+
+  .tech-tag {
+    background: rgba(0, 212, 255, 0.1);
+    color: var(--primary-color);
+    padding: 0.4rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    border: 1px solid rgba(0, 212, 255, 0.2);
+    transition: var(--transition);
+  }
+
+  .tech-tag:hover {
+    background: rgba(0, 212, 255, 0.2);
+    transform: translateY(-1px);
+  }
+
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .project-content {
+      padding: 1.5rem;
+    }
+
+    .project-image {
+      height: 160px;
+    }
+
+    .project-title {
+      font-size: 1.3rem;
+    }
+  }
+</style>
