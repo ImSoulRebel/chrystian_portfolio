@@ -34,22 +34,22 @@ const highlights = [
 ];
 
 const skills = [
-  { name: 'Flutter', icon: 'flutter', level: 95 },
-  { name: 'Dart', icon: 'dart', level: 95 },
-  { name: 'Clean Architecture', icon: 'code', level: 92 },
-  { name: 'BLoC Pattern', icon: 'react', level: 90 },
-  { name: 'Firebase', icon: 'firebase', level: 90 },
-  { name: 'TypeScript', icon: 'typescript', level: 88 },
-  { name: 'JavaScript', icon: 'javascript', level: 88 },
-  { name: 'React', icon: 'react', level: 85 },
-  { name: 'Node.js', icon: 'nodejs', level: 82 },
-  { name: 'Docker', icon: 'docker', level: 85 },
-  { name: 'Git', icon: 'git', level: 92 },
-  { name: 'CI/CD', icon: 'cicd', level: 88 },
-  { name: 'AWS', icon: 'aws', level: 80 },
-  { name: 'Astro', icon: 'astro', level: 85 },
-  { name: 'SolidJS', icon: 'javascript', level: 82 },
-  { name: 'WebSockets', icon: 'websocket', level: 85 },
+  { name: 'Flutter', icon: 'flutter' },
+  { name: 'Dart', icon: 'dart' },
+  { name: 'Clean Architecture', icon: 'code' },
+  { name: 'BLoC Pattern', icon: 'react' },
+  { name: 'Firebase', icon: 'firebase' },
+  { name: 'TypeScript', icon: 'typescript' },
+  { name: 'JavaScript', icon: 'javascript' },
+  { name: 'React', icon: 'react' },
+  { name: 'Node.js', icon: 'nodejs' },
+  { name: 'Docker', icon: 'docker' },
+  { name: 'Git', icon: 'git' },
+  { name: 'CI/CD', icon: 'cicd' },
+  { name: 'AWS', icon: 'aws' },
+  { name: 'Astro', icon: 'astro' },
+  { name: 'SolidJS', icon: 'javascript' },
+  { name: 'WebSockets', icon: 'websocket' },
 ];
 
 const experiences = [
@@ -317,16 +317,14 @@ const stats = [
     <section id="skills" class="skills">
       <div class="container">
         <h2 class="section-title">Habilidades Técnicas</h2>
-        <div class="skills-grid">
-          {
-            skills.map((skill) => (
-              <SkillCard
-                name={skill.name}
-                icon={skill.icon}
-                level={skill.level}
-              />
-            ))
-          }
+        <div class="skills-carousel">
+          <div class="skills-track">
+            {
+              [...skills, ...skills, ...skills].map((skill, index) => (
+                <SkillCard name={skill.name} icon={skill.icon} />
+              ))
+            }
+          </div>
         </div>
       </div>
     </section>
@@ -500,6 +498,160 @@ const stats = [
           element.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
           observer.observe(el);
         });
+
+      // Skills carousel enhancements with seamless infinite scroll
+      const skillsTrack = document.querySelector(
+        '.skills-track',
+      ) as HTMLElement;
+      const skillsCarousel = document.querySelector(
+        '.skills-carousel',
+      ) as HTMLElement;
+
+      if (skillsTrack && skillsCarousel) {
+        let isDragging = false;
+        let startX = 0;
+        let currentTranslate = 0;
+        let animationFrame = 0;
+
+        // Calculate the width of one skill set (we have 3 copies, so divide by 3)
+        const getOneSetWidth = () => skillsTrack.scrollWidth / 3;
+
+        // Reset position seamlessly when needed
+        const resetPositionIfNeeded = () => {
+          const oneSetWidth = getOneSetWidth();
+          const currentPos = currentTranslate;
+
+          // If we've scrolled past one full set, reset to the beginning
+          if (currentPos <= -oneSetWidth) {
+            currentTranslate = currentPos + oneSetWidth;
+            skillsTrack.style.transform = `translateX(${currentTranslate}px)`;
+          }
+          // If we've scrolled backwards past the start, reset to the end
+          else if (currentPos > 0) {
+            currentTranslate = currentPos - oneSetWidth;
+            skillsTrack.style.transform = `translateX(${currentTranslate}px)`;
+          }
+        };
+
+        // Animation loop for continuous scrolling
+        const animate = () => {
+          if (!isDragging) {
+            currentTranslate -= 0.5; // Adjust speed here
+            skillsTrack.style.transform = `translateX(${currentTranslate}px)`;
+            resetPositionIfNeeded();
+          }
+          animationFrame = requestAnimationFrame(animate);
+        };
+
+        // Start the animation
+        animate();
+
+        // Pause/resume logic
+        let isPaused = false;
+
+        const pauseAnimation = () => {
+          if (!isPaused) {
+            isPaused = true;
+            cancelAnimationFrame(animationFrame);
+          }
+        };
+
+        const resumeAnimation = () => {
+          if (isPaused && !isDragging) {
+            isPaused = false;
+            animate();
+          }
+        };
+
+        // Mouse events
+        skillsCarousel.addEventListener('mouseenter', pauseAnimation);
+        skillsCarousel.addEventListener('mouseleave', resumeAnimation);
+
+        // Drag functionality
+        const startDrag = (e: MouseEvent | TouchEvent) => {
+          isDragging = true;
+          pauseAnimation();
+
+          const clientX = 'touches' in e ? e.touches[0].clientX : e.clientX;
+          startX = clientX;
+
+          skillsCarousel.style.cursor = 'grabbing';
+          e.preventDefault();
+        };
+
+        const drag = (e: MouseEvent | TouchEvent) => {
+          if (!isDragging) return;
+
+          e.preventDefault();
+          const clientX = 'touches' in e ? e.touches[0].clientX : e.clientX;
+          const deltaX = clientX - startX;
+
+          currentTranslate += deltaX;
+          startX = clientX;
+
+          skillsTrack.style.transform = `translateX(${currentTranslate}px)`;
+          resetPositionIfNeeded();
+        };
+
+        const endDrag = () => {
+          if (!isDragging) return;
+
+          isDragging = false;
+          skillsCarousel.style.cursor = 'grab';
+
+          // Resume animation after a short delay
+          setTimeout(() => {
+            if (!skillsCarousel.matches(':hover')) {
+              resumeAnimation();
+            }
+          }, 1000);
+        };
+
+        // Mouse events
+        skillsCarousel.addEventListener('mousedown', startDrag);
+        document.addEventListener('mousemove', drag);
+        document.addEventListener('mouseup', endDrag);
+
+        // Touch events
+        skillsCarousel.addEventListener('touchstart', startDrag, {
+          passive: false,
+        });
+        document.addEventListener('touchmove', drag, { passive: false });
+        document.addEventListener('touchend', endDrag);
+
+        // Prevent context menu
+        skillsCarousel.addEventListener('contextmenu', (e) =>
+          e.preventDefault(),
+        );
+
+        // Accessibility
+        skillsCarousel.addEventListener('focusin', pauseAnimation);
+        skillsCarousel.addEventListener('focusout', () => {
+          if (!isDragging) resumeAnimation();
+        });
+
+        // Hide indicator text after first interaction
+        let hasInteracted = false;
+        const indicatorText = document.querySelector(
+          '.indicator-text',
+        ) as HTMLElement;
+
+        const hideIndicator = () => {
+          if (!hasInteracted && indicatorText) {
+            hasInteracted = true;
+            indicatorText.style.opacity = '0';
+            indicatorText.style.transition = 'opacity 0.5s ease';
+          }
+        };
+
+        skillsCarousel.addEventListener('mousedown', hideIndicator);
+        skillsCarousel.addEventListener('touchstart', hideIndicator);
+
+        // Cleanup on page unload
+        window.addEventListener('beforeunload', () => {
+          cancelAnimationFrame(animationFrame);
+        });
+      }
     </script>
   </body>
 </html>
