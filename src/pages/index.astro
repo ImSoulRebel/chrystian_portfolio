@@ -117,8 +117,8 @@ const projects = [
     impact:
       'Desplegada en +30 hoteles en Europa y LATAM. Mejora del 35% en satisfacción de huéspedes según encuestas post-estancia.',
     featured: true,
-    githubUrl: 'https://github.com/chrystian-dev',
     liveUrl: 'https://yuvod.com',
+    image: '/src/assets/projects/yuvod_logo.svg',
   },
   {
     title: 'Nextival CMS – Gestión de Festivales',
@@ -127,7 +127,7 @@ const projects = [
       'Sistema de gestión de contenido para festivales musicales con renderizado híbrido SSR/SSG, Clean Architecture con Repository Pattern, integración con Spotify Web API y editor WYSIWYG. WebSockets para notificaciones en tiempo real.',
     impact:
       'Tiempos de carga <1.5s, optimización SEO completa. Entregado en 4 meses como proyecto funcional para producción.',
-    githubUrl: 'https://github.com/chrystian-dev',
+    image: '/src/assets/projects/nextival_logo.svg',
   },
   {
     title: 'STELCAMPING – Gestión de Campings',
@@ -136,8 +136,8 @@ const projects = [
       'Aplicación integral para gestión de campings con sistema de reservas, calendario de actividades, notificaciones push, chat en tiempo real y panel administrativo. Arquitectura modular con clase base BaseState<T> para centralizar utilidades.',
     impact:
       'Más de 1,000 usuarios activos. Automatizó procesos que antes requerían 3 personas, reduciendo costes operativos en 40%.',
-    githubUrl: 'https://github.com/chrystian-dev',
     liveUrl: 'https://stel.es',
+    image: '/src/assets/projects/stel_logo.svg',
   },
   {
     title: 'BNC10 – Aplicación Neobanca',
@@ -146,7 +146,7 @@ const projects = [
       'App de neobanca social con P2P, gestión de cuentas y analytics financieras. Implementé seguridad bancaria (biometric auth, encrypted storage), responsive avanzado con responsive_framework y monitoreo con Sentry.',
     impact:
       '500+ usuarios activos, rating 4.7⭐, 99.5% de sesiones sin crashes. Reducción del 60% en fricción de autenticación.',
-    githubUrl: 'https://github.com/chrystian-dev',
+    image: '/src/assets/projects/bnc10_logo.svg',
   },
   {
     title: 'TOOKANE – Seguimiento Logístico',
@@ -155,7 +155,7 @@ const projects = [
       'Sistema de tracking en tiempo real con offline-first architecture para zonas con conectividad limitada. Clean Architecture + MVVM + Repository Pattern con optimización de batería reduciendo consumo en 40%.',
     impact:
       'Mejora del 30% en eficiencia de entregas mediante optimización de rutas basada en datos reales de geolocalización.',
-    githubUrl: 'https://github.com/chrystian-dev',
+    image: '/src/assets/projects/tookane_logo.svg',
     liveUrl: 'https://tookane.com',
   },
 ];
@@ -343,7 +343,7 @@ const stats = [
     <!-- PROJECTS SECTION -->
     <section id="projects" class="projects">
       <div class="container">
-        <h2 class="section-title">📂 Proyectos Destacados</h2>
+        <h2 class="section-title">Proyectos Destacados</h2>
         <div class="projects-grid">
           {
             projects.map((project) => (
@@ -353,8 +353,8 @@ const stats = [
                 description={project.description}
                 impact={project.impact}
                 featured={project.featured}
-                githubUrl={project.githubUrl}
                 liveUrl={project.liveUrl}
+                image={project.image}
               />
             ))
           }

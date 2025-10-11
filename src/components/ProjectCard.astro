@@ -18,7 +18,12 @@ const techStack = typeof stack === 'string' ? stack.split(' · ') : stack || [];
   <div class="project-image">
     {
       image ? (
-        <img src={image} alt={title} loading="lazy" />
+        <img
+          src={image}
+          alt={title}
+          loading="lazy"
+          style="object-fit: contain; padding: 20px;"
+        />
       ) : (
         <div class="project-placeholder">
           <svg
