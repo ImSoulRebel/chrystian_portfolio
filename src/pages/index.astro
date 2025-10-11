@@ -7,12 +7,30 @@ import ExperienceItem from '../components/ExperienceItem.astro';
 import Icon from '../components/Icon.astro';
 
 const highlights = [
-  'Líder técnico de plataforma OTT desplegada en más de 30 hoteles en Europa y LATAM',
-  'Arquitectura escalable soportando +1000 usuarios concurrentes con 95% de disponibilidad',
-  'Liderazgo de equipos multidisciplinares de hasta 9 personas con metodologías ágiles',
-  'Optimización de rendimiento: 60% mejora en Smart TVs y 40% reducción en tiempo de despliegue',
-  'Integración exitosa con +10 sistemas PMS hoteleros (Oracle OPERA, Mews, Cloudbeds)',
-  'Más de 50,000 usuarios impactados a través de aplicaciones multiplataforma',
+  {
+    emoji: '🏨',
+    text: 'Líder técnico de plataforma OTT desplegada en más de 30 hoteles en Europa y LATAM',
+  },
+  {
+    emoji: '🚀',
+    text: 'Arquitectura escalable soportando +1000 usuarios concurrentes con 95% de disponibilidad',
+  },
+  {
+    emoji: '👥',
+    text: 'Liderazgo de equipos multidisciplinares de hasta 9 personas con metodologías ágiles',
+  },
+  {
+    emoji: '⚡',
+    text: 'Optimización de rendimiento: 60% mejora en Smart TVs y 40% reducción en tiempo de despliegue',
+  },
+  {
+    emoji: '🔗',
+    text: 'Integración exitosa con +10 sistemas PMS hoteleros (Oracle OPERA, Mews, Cloudbeds)',
+  },
+  {
+    emoji: '🌍',
+    text: 'Más de 50,000 usuarios impactados a través de aplicaciones multiplataforma',
+  },
 ];
 
 const skills = [
@@ -226,8 +244,8 @@ const stats = [
           en 11 países en Europa y LATAM, impactando a más de 50,000 usuarios.
         </p>
         <div class="hero-cta">
-          <a href="#contact" class="btn btn-primary">📩 Contáctame</a>
-          <a href="#projects" class="btn btn-outline">💼 Ver Proyectos</a>
+          <a href="#contact" class="btn btn-primary">Contáctame</a>
+          <a href="#projects" class="btn btn-outline">Ver Proyectos</a>
         </div>
       </div>
     </section>
@@ -281,19 +299,13 @@ const stats = [
     <!-- HIGHLIGHTS SECTION -->
     <section class="highlights">
       <div class="container">
-        <h2 class="section-title">
-          <Icon
-            name="trophy"
-            size="32"
-            style="display: inline; margin-right: 0.5rem;"
-          />
-          Logros Destacados
-        </h2>
+        <h2 class="section-title">Logros Destacados</h2>
         <div class="highlights-grid">
           {
             highlights.map((highlight) => (
               <div class="highlight-item">
-                <p class="highlight-text">{highlight}</p>
+                <div class="highlight-emoji">{highlight.emoji}</div>
+                <p class="highlight-text">{highlight.text}</p>
               </div>
             ))
           }
@@ -322,7 +334,7 @@ const stats = [
     <!-- EXPERIENCE SECTION -->
     <section id="experience" class="experience">
       <div class="container">
-        <h2 class="section-title">💼 Experiencia Profesional</h2>
+        <h2 class="section-title">Experiencia Profesional</h2>
         <div class="experience-timeline">
           {
             experiences.map((exp) => (
@@ -366,7 +378,7 @@ const stats = [
     <section id="contact" class="contact">
       <div class="container">
         <div class="contact-content">
-          <h2 class="section-title">📩 ¿Hablamos?</h2>
+          <h2 class="section-title">¿Hablamos?</h2>
           <p class="hero-description">
             ¿Tienes un proyecto en mente o necesitas liderazgo técnico? Me
             encantaría conocer más sobre tu visión y cómo puedo ayudarte a
@@ -376,7 +388,7 @@ const stats = [
           <div class="contact-info">
             <a href="mailto:chrystianmichell@hotmail.com" class="contact-item">
               <div class="contact-icon">
-                <Icon name="email" size={24} />
+                <Icon color="var(--background-dark)" name="email" size={24} />
               </div>
               <h3>Email</h3>
               <span>chrystianmichell@hotmail.com</span>
@@ -384,7 +396,7 @@ const stats = [
 
             <a href="tel:+34653316944" class="contact-item">
               <div class="contact-icon">
-                <Icon name="phone" size={24} />
+                <Icon color="var(--background-dark)" name="phone" size={24} />
               </div>
               <h3>Teléfono</h3>
               <span>+34 653 31 69 44</span>
@@ -397,23 +409,27 @@ const stats = [
               class="contact-item"
             >
               <div class="contact-icon">
-                <Icon name="linkedin" size={24} />
+                <Icon
+                  color="var(--background-dark)"
+                  name="linkedin"
+                  size={24}
+                />
               </div>
               <h3>LinkedIn</h3>
               <span>linkedin.com/in/chrystianmichell</span>
             </a>
 
             <a
-              href="https://github.com/chrystian-dev"
+              href="https://github.com/ImSoulRebel"
               target="_blank"
               rel="noopener"
               class="contact-item"
             >
               <div class="contact-icon">
-                <Icon name="github" size={24} />
+                <Icon color="var(--background-dark)" name="github" size={24} />
               </div>
               <h3>GitHub</h3>
-              <span>github.com/chrystian-dev</span>
+              <span>github.com/ImSoulRebel</span>
             </a>
           </div>
 
