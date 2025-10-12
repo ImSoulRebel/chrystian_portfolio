@@ -69,11 +69,13 @@ export const translations = {
 
     // Contact Section
     contact: {
-      title: 'Contacto',
+      title: 'Trabajemos Juntos',
       subtitle: '¿Listo para transformar tu idea en realidad?',
       description:
-        'Estoy disponible para nuevas oportunidades de liderazgo técnico, desarrollo senior y consultoría especializada.',
+        '¿Tienes un proyecto en mente? Me encantaría conocer más sobre tu idea y cómo puedo ayudarte a hacerla realidad.',
       form: {
+        title: 'Cuéntame sobre tu proyecto',
+        text: 'Completa el formulario y te responderé en menos de 24 horas con una propuesta personalizada.',
         name: 'Nombre',
         email: 'Email',
         message: 'Mensaje',
@@ -82,6 +84,34 @@ export const translations = {
         success: '¡Mensaje enviado correctamente!',
         error: 'Error al enviar el mensaje. Inténtalo de nuevo.',
       },
+      expectation: {
+        quickResponse: {
+          title: 'Respuesta rápida',
+          text: 'Te responderé en menos de 24 horas con una propuesta inicial y algunas preguntas adicionales.',
+        },
+        collaborationOpportunity: {
+          title: 'Oportunidad de colaboración',
+          text: 'Evaluaré si tu proyecto es un buen fit para mis habilidades y disponibilidad actual como Tech Lead.',
+        },
+        actionPlan: {
+          title: 'Plan de acción claro',
+          text: 'Recibirás un plan detallado con alcance, enfoque técnico y condiciones de colaboración.',
+        },
+      },
+      tipSection: {
+        title: 'Consejo para un contacto efectivo',
+        description:
+          'Mientras más detalles compartas sobre tu proyecto, mejor podré entender tus necesidades y ofrecerte una solución perfecta.',
+      },
+
+      quickLinks: {
+        label: 'O conecta directamente:',
+        email: 'Correo electrónico',
+        phone: 'Teléfono',
+        linkedin: 'LinkedIn',
+        github: 'GitHub',
+      },
+
       info: {
         location: 'España (Remote/Presencial)',
         availability: 'Disponible inmediatamente',

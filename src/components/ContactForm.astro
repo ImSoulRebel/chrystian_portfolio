@@ -4,14 +4,11 @@ import {
   PUBLIC_FORMSPREE_ENDPOINT,
 } from 'astro:env/client';
 
-// Endpoint de Formspree - Configurado mediante variable de entorno
-const formAction =
-  PUBLIC_FORMSPREE_ENDPOINT || 'https://formspree.io/f/YOUR_FORM_ID';
+const formAction = PUBLIC_FORMSPREE_ENDPOINT;
 const contactEmail = PUBLIC_CONTACT_EMAIL;
 ---
 
 <form class="contact-form" method="POST" action={formAction} id="contact-form">
-  <!-- Campo oculto para el email de destino -->
   <input type="hidden" name="_to" value={contactEmail} />
   <input
     type="hidden"
@@ -24,43 +21,63 @@ const contactEmail = PUBLIC_CONTACT_EMAIL;
     value="https://imsoulrebel.github.io/chrystian_portfolio/es/contact?success=true"
   />
 
-  <div class="form-group">
-    <label for="name">Nombre *</label>
-    <input
-      type="text"
-      id="name"
-      name="name"
-      placeholder="Tu nombre completo"
-      required
-      autocomplete="name"
-    />
+  <!-- Primera fila: Nombre y Email -->
+  <div class="form-row">
+    <div class="form-group">
+      <label for="name">Nombre completo <span class="required">*</span></label>
+      <input
+        type="text"
+        id="name"
+        name="name"
+        placeholder="Tu nombre"
+        required
+        autocomplete="name"
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="email">Email <span class="required">*</span></label>
+      <input
+        type="email"
+        id="email"
+        name="email"
+        placeholder="tu@email.com"
+        required
+        autocomplete="email"
+      />
+    </div>
   </div>
 
-  <div class="form-group">
-    <label for="email">Email *</label>
-    <input
-      type="email"
-      id="email"
-      name="email"
-      placeholder="tu@email.com"
-      required
-      autocomplete="email"
-    />
+  <!-- Segunda fila: Empresa y Teléfono -->
+  <div class="form-row">
+    <div class="form-group">
+      <label for="company">Empresa/Organización</label>
+      <input
+        type="text"
+        id="company"
+        name="company"
+        placeholder="Nombre de tu empresa"
+        autocomplete="organization"
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="phone">Teléfono</label>
+      <input
+        type="tel"
+        id="phone"
+        name="phone"
+        placeholder="+34 XXX XX XX XX"
+        autocomplete="tel"
+      />
+    </div>
   </div>
 
-  <div class="form-group">
-    <label for="company">Empresa/Organización</label>
-    <input
-      type="text"
-      id="company"
-      name="company"
-      placeholder="Nombre de tu empresa (opcional)"
-      autocomplete="organization"
-    />
-  </div>
-
-  <div class="form-group">
-    <label for="project-type">Tipo de proyecto *</label>
+  <!-- Tipo de proyecto -->
+  <div class="form-group full">
+    <label for="project-type"
+      >Tipo de proyecto <span class="required">*</span></label
+    >
     <select id="project-type" name="project-type" required>
       <option value="">Selecciona el tipo de proyecto</option>
       <option value="app-movil">Aplicación móvil</option>
@@ -72,43 +89,50 @@ const contactEmail = PUBLIC_CONTACT_EMAIL;
     </select>
   </div>
 
-  <div class="form-group">
-    <label for="budget">Presupuesto estimado</label>
-    <select id="budget" name="budget">
-      <option value="">Selecciona un rango (opcional)</option>
-      <option value="5k-15k">€5,000 - €15,000</option>
-      <option value="15k-30k">€15,000 - €30,000</option>
-      <option value="30k-50k">€30,000 - €50,000</option>
-      <option value="50k+">€50,000+</option>
-      <option value="por-definir">Por definir</option>
-    </select>
+  <!-- Tercera fila: Presupuesto y Timeline -->
+  <div class="form-row">
+    <div class="form-group">
+      <label for="budget">Presupuesto estimado</label>
+      <select id="budget" name="budget">
+        <option value="">Selecciona un rango</option>
+        <option value="5k-15k">€5,000 - €15,000</option>
+        <option value="15k-30k">€15,000 - €30,000</option>
+        <option value="30k-50k">€30,000 - €50,000</option>
+        <option value="50k+">€50,000+</option>
+        <option value="por-definir">Por definir</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="timeline">Timeline esperado</label>
+      <select id="timeline" name="timeline">
+        <option value="">Selecciona un timeline</option>
+        <option value="inmediato">Inmediato (&lt; 1 mes)</option>
+        <option value="1-3-meses">1-3 meses</option>
+        <option value="3-6-meses">3-6 meses</option>
+        <option value="6-12-meses">6-12 meses</option>
+        <option value="flexible">Flexible</option>
+      </select>
+    </div>
   </div>
 
-  <div class="form-group">
-    <label for="timeline">Timeline esperado</label>
-    <select id="timeline" name="timeline">
-      <option value="">Selecciona un timeline (opcional)</option>
-      <option value="inmediato">Inmediato (menos de 1 mes)</option>
-      <option value="1-3-meses">1-3 meses</option>
-      <option value="3-6-meses">3-6 meses</option>
-      <option value="6-12-meses">6-12 meses</option>
-      <option value="flexible">Flexible</option>
-    </select>
-  </div>
-
-  <div class="form-group">
-    <label for="message">Describe tu proyecto *</label>
+  <!-- Descripción del proyecto -->
+  <div class="form-group full">
+    <label for="message"
+      >Describe tu proyecto <span class="required">*</span></label
+    >
     <textarea
       id="message"
       name="message"
-      placeholder="Cuéntame sobre tu proyecto, objetivos, características principales, usuarios objetivo, etc. Cuanta más información compartas, mejor podré ayudarte."
+      placeholder="Cuéntame sobre tu proyecto, objetivos, características principales, usuarios objetivo, contexto técnico, etc."
       required
-      rows="6"></textarea>
+      rows="7"></textarea>
   </div>
 
+  <!-- Botón submit -->
   <div class="form-actions">
     <button type="submit" class="btn btn-primary">
-      <span class="btn-text">📤 Enviar mensaje</span>
+      <span class="btn-text">Enviar mensaje</span>
       <span class="btn-loading" style="display: none;">
         <svg class="spinner" width="20" height="20" viewBox="0 0 50 50">
           <circle
@@ -124,6 +148,7 @@ const contactEmail = PUBLIC_CONTACT_EMAIL;
         Enviando...
       </span>
     </button>
+    <p class="form-notice">Te responderé en menos de 24 horas</p>
   </div>
 
   <!-- Success/Error Messages -->
@@ -132,48 +157,54 @@ const contactEmail = PUBLIC_CONTACT_EMAIL;
 
 <style>
   .contact-form {
-    max-width: 100%;
-    background: var(--gradient-secondary);
-    padding: 3rem;
-    border-radius: var(--border-radius);
-    border: 1px solid rgba(0, 212, 255, 0.1);
-    box-shadow: var(--shadow-dark);
+    width: 100%;
+    background: transparent;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
   }
 
   .form-group {
-    margin-bottom: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  .form-group.full {
+    grid-column: 1 / -1;
   }
 
   .form-group label {
-    display: block;
     color: var(--text-primary);
     font-weight: 600;
-    margin-bottom: 0.8rem;
-    font-size: 1rem;
+    font-size: 0.95rem;
+    text-transform: capitalize;
+  }
+
+  .required {
+    color: var(--primary-color);
   }
 
   .form-group input,
   .form-group select,
   .form-group textarea {
     width: 100%;
-    padding: 1rem 1.5rem;
-    border-radius: var(--border-radius);
-    border: 2px solid rgba(0, 212, 255, 0.2);
-    background: var(--background-dark);
+    padding: 0.95rem 1.25rem;
+    border-radius: 8px;
+    border: 1.5px solid rgba(0, 212, 255, 0.15);
+    background: rgba(15, 15, 35, 0.6);
     color: var(--text-primary);
-    font-size: 1rem;
+    font-size: 0.95rem;
     font-family: inherit;
     transition: var(--transition);
     resize: vertical;
-  }
-
-  .form-group input:focus,
-  .form-group select:focus,
-  .form-group textarea:focus {
-    outline: none;
-    border-color: var(--primary-color);
-    box-shadow: 0 0 0 3px rgba(0, 212, 255, 0.1);
-    transform: translateY(-2px);
+    backdrop-filter: blur(10px);
   }
 
   .form-group input::placeholder,
@@ -181,22 +212,41 @@ const contactEmail = PUBLIC_CONTACT_EMAIL;
     color: var(--text-muted);
   }
 
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    background: rgba(15, 15, 35, 0.8);
+    box-shadow:
+      0 0 0 3px rgba(0, 212, 255, 0.08),
+      inset 0 0 0 1px rgba(0, 212, 255, 0.1);
+  }
+
   .form-group select {
     cursor: pointer;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%2300d4ff' d='M1 1l5 5 5-5'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 1.25rem center;
+    padding-right: 3rem;
   }
 
   .form-group textarea {
-    min-height: 120px;
+    min-height: 140px;
     line-height: 1.6;
+    resize: vertical;
   }
 
   .form-actions {
-    text-align: center;
-    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 1rem;
   }
 
   .form-actions .btn {
-    min-width: 200px;
+    min-width: 100%;
     position: relative;
     overflow: hidden;
   }
@@ -205,7 +255,8 @@ const contactEmail = PUBLIC_CONTACT_EMAIL;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 0.5rem;
+    gap: 0.6rem;
+    font-size: 0.95rem;
   }
 
   .spinner {
@@ -243,60 +294,87 @@ const contactEmail = PUBLIC_CONTACT_EMAIL;
     }
   }
 
+  .form-notice {
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    margin: 0;
+  }
+
   .form-message {
-    margin-top: 1.5rem;
-    padding: 1rem 1.5rem;
-    border-radius: var(--border-radius);
+    padding: 1.25rem 1.5rem;
+    border-radius: 8px;
     text-align: center;
     font-weight: 500;
+    font-size: 0.95rem;
+    animation: slideIn 0.3s ease-out;
   }
 
   .form-message.success {
     background: rgba(124, 242, 157, 0.1);
-    border: 1px solid #7cf29d;
+    border: 1px solid rgba(124, 242, 157, 0.3);
     color: #7cf29d;
   }
 
   .form-message.error {
     background: rgba(255, 107, 107, 0.1);
-    border: 1px solid #ff6b6b;
+    border: 1px solid rgba(255, 107, 107, 0.3);
     color: #ff6b6b;
   }
 
-  /* Form validation styles */
-  .form-group input:invalid:not(:placeholder-shown),
-  .form-group select:invalid:not(:placeholder-shown),
-  .form-group textarea:invalid:not(:placeholder-shown) {
-    border-color: #ff6b6b;
+  @keyframes slideIn {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 
+  /* Validación */
   .form-group input:valid,
   .form-group select:valid,
   .form-group textarea:valid {
-    border-color: rgba(124, 242, 157, 0.5);
+    border-color: rgba(124, 242, 157, 0.3);
+  }
+
+  .form-group input:invalid:not(:placeholder-shown),
+  .form-group select:invalid:not(:placeholder-shown),
+  .form-group textarea:invalid:not(:placeholder-shown) {
+    border-color: rgba(255, 107, 107, 0.3);
   }
 
   /* Mobile responsive */
   @media (max-width: 768px) {
     .contact-form {
-      padding: 2rem 1.5rem;
+      gap: 1.5rem;
     }
 
-    .form-group {
-      margin-bottom: 1.5rem;
+    .form-row {
+      grid-template-columns: 1fr;
+      gap: 1.25rem;
     }
 
     .form-group input,
     .form-group select,
     .form-group textarea {
-      padding: 0.8rem 1rem;
+      padding: 0.85rem 1rem;
+      font-size: 0.9rem;
+    }
+
+    .form-group label {
+      font-size: 0.9rem;
+    }
+
+    .form-group textarea {
+      min-height: 120px;
     }
   }
 </style>
 
 <script>
   import { ContactForm } from '../scripts/contactForm.js';
-
-  // Initialize contact form when component loads
   new ContactForm();
 </script>
