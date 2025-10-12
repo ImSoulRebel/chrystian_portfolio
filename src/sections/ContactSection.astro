@@ -1,0 +1,77 @@
+---
+import Icon from '../components/Icon.astro';
+---
+
+<section id="contact" class="contact">
+  <div class="container">
+    <div class="contact-content">
+      <h2 class="section-title">¿Hablamos?</h2>
+      <p class="hero-description">
+        ¿Tienes un proyecto en mente o necesitas liderazgo técnico? Me
+        encantaría conocer más sobre tu visión y cómo puedo ayudarte a hacerla
+        realidad.
+      </p>
+
+      <div class="contact-info">
+        <a href="mailto:chrystianmichell@hotmail.com" class="contact-item">
+          <div class="contact-icon">
+            <Icon color="var(--background-dark)" name="email" size={24} />
+          </div>
+          <h3>Email</h3>
+          <span>chrystianmichell@hotmail.com</span>
+        </a>
+
+        <a href="tel:+34653316944" class="contact-item">
+          <div class="contact-icon">
+            <Icon color="var(--background-dark)" name="phone" size={24} />
+          </div>
+          <h3>Teléfono</h3>
+          <span>+34 653 31 69 44</span>
+        </a>
+
+        <a
+          href="https://linkedin.com/in/chrystianmichell"
+          target="_blank"
+          rel="noopener"
+          class="contact-item"
+        >
+          <div class="contact-icon">
+            <Icon color="var(--background-dark)" name="linkedin" size={24} />
+          </div>
+          <h3>LinkedIn</h3>
+          <span>linkedin.com/in/chrystianmichell</span>
+        </a>
+
+        <a
+          href="https://github.com/ImSoulRebel"
+          target="_blank"
+          rel="noopener"
+          class="contact-item"
+        >
+          <div class="contact-icon">
+            <Icon color="var(--background-dark)" name="github" size={24} />
+          </div>
+          <h3>GitHub</h3>
+          <span>github.com/ImSoulRebel</span>
+        </a>
+      </div>
+
+      <div class="hero-cta">
+        <a
+          href="mailto:chrystianmichell@hotmail.com?subject=Propuesta de colaboración"
+          class="btn btn-primary"
+        >
+          Enviar Email
+        </a>
+        <a
+          href="https://linkedin.com/in/chrystianmichell"
+          class="btn btn-outline"
+          target="_blank"
+          rel="noopener"
+        >
+          Conectar en LinkedIn
+        </a>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,53 @@
+---
+const stats = [
+  { number: '10+', label: 'Apps en Producción' },
+  { number: '5+', label: 'Años de Experiencia' },
+  { number: '50K+', label: 'Usuarios Impactados' },
+  { number: '11', label: 'Países Desplegados' },
+];
+---
+
+<section id="about" class="about">
+  <div class="container">
+    <h2 class="section-title">Sobre mí</h2>
+    <div class="about-content">
+      <div class="about-text">
+        <p>
+          Soy un <strong>líder técnico apasionado</strong> con más de 5 años de experiencia
+          especializándome en desarrollo multiplataforma con <strong
+            >Flutter</strong
+          >. Mi enfoque combina <strong>expertise técnico profundo</strong> (Clean
+          Architecture, DDD, optimización de rendimiento) con <strong
+            >liderazgo de equipos multidisciplinares</strong
+          >.
+        </p>
+        <p>
+          He liderado el ciclo completo de <strong
+            >más de 10 aplicaciones multiplataforma</strong
+          >
+          (iOS, Android, Web, Smart TV) desplegadas en 11 países en Europa y LATAM.
+          Mi experiencia previa de más de 10 años en retail de tecnología me aporta
+          una perspectiva única: entiendo tanto la complejidad técnica como las necesidades
+          reales del usuario final.
+        </p>
+        <p>
+          Me apasiona <strong>traducir complejidad en claridad</strong>: crear
+          arquitecturas escalables, establecer procesos que funcionen, y
+          desarrollar equipos que crezcan. Creo firmemente que la mejor
+          tecnología es la que resuelve problemas de negocio de forma
+          sostenible.
+        </p>
+      </div>
+      <div class="stats">
+        {
+          stats.map((stat) => (
+            <div class="stat-item">
+              <div class="stat-number">{stat.number}</div>
+              <div class="stat-label">{stat.label}</div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</section>

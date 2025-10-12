@@ -10,5 +10,8 @@
   },
   "dependencies": {
     "astro": "^5.14.4"
+  },
+  "optionalDependencies": {
+    "@rollup/rollup-win32-arm64-msvc": "^4.52.4"
   }
 }

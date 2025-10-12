@@ -1,0 +1,63 @@
+---
+import SkillCard from '../components/SkillCard.astro';
+
+const skills = [
+  { name: 'Flutter', icon: 'flutter' },
+  { name: 'Dart', icon: 'dart' },
+  { name: 'Clean Architecture', icon: 'code' },
+  { name: 'BLoC Pattern', icon: 'react' },
+  { name: 'Firebase', icon: 'firebase' },
+  { name: 'TypeScript', icon: 'typescript' },
+  { name: 'JavaScript', icon: 'javascript' },
+  { name: 'React', icon: 'react' },
+  { name: 'Node.js', icon: 'nodejs' },
+  { name: 'Docker', icon: 'docker' },
+  { name: 'Git', icon: 'git' },
+  { name: 'CI/CD', icon: 'cicd' },
+  { name: 'AWS', icon: 'aws' },
+  { name: 'Astro', icon: 'astro' },
+  { name: 'SolidJS', icon: 'javascript' },
+  { name: 'WebSockets', icon: 'websocket' },
+];
+---
+
+<section id="skills" class="skills">
+  <div class="container">
+    <h2 class="section-title">Habilidades Técnicas</h2>
+    <div class="skills-carousel">
+      <div class="skills-track">
+        {
+          [...skills, ...skills, ...skills].map((skill, index) => (
+            <SkillCard name={skill.name} icon={skill.icon} />
+          ))
+        }
+      </div>
+      <div class="indicator-text">Arrastra para navegar</div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .indicator-text {
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    margin-top: 1rem;
+    opacity: 0.7;
+    transition: opacity 0.5s ease;
+  }
+
+  @media (max-width: 768px) {
+    .indicator-text {
+      font-size: 0.8rem;
+      margin-top: 0.5rem;
+    }
+  }
+</style>
+
+<script>
+  import { SkillsCarousel } from '../scripts/skillsCarousel.js';
+
+  // Initialize skills carousel when component loads
+  new SkillsCarousel();
+</script>

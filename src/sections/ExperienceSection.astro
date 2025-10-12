@@ -1,0 +1,97 @@
+---
+import ExperienceItem from '../components/ExperienceItem.astro';
+
+const experiences = [
+  {
+    title: 'Líder Técnico & Arquitecto Flutter',
+    company: 'YUVOD',
+    period: 'Enero 2023 – Enero 2025',
+    location: 'Remoto desde Madrid para empresa en Valencia, España',
+    description:
+      'Lideré la estrategia técnica de una plataforma OTT (streaming de contenidos) para el sector hotelero desplegada en más de 30 hoteles en Europa y LATAM. Gestioné equipos multidisciplinares de hasta 9 personas, implementé arquitecturas escalables con Clean Architecture y BLoC, y establecí pipelines CI/CD que redujeron el tiempo de despliegue en 40%. Logré mejoras de rendimiento del 60% en Smart TVs de gama baja.',
+    skills: [
+      'Flutter',
+      'Dart',
+      'BLoC',
+      'Clean Architecture',
+      'Video.js',
+      'Firebase',
+      'Docker',
+      'AWS',
+      'GitHub Actions',
+      'WebSockets',
+    ],
+  },
+  {
+    title: 'Arquitecto Frontend & Desarrollador Full Stack',
+    company: 'NEXTIVAL (Proyecto Pro Bono)',
+    period: 'Febrero 2025 – Junio 2025',
+    location: 'Remoto',
+    description:
+      'Durante período entre roles, lideré arquitectura y desarrollo frontend de gestor de contenidos para festivales de música. Definí arquitectura frontend completa utilizando Astro con SolidJS para renderizado híbrido (SSR/SSG), optimizando SEO y rendimiento con tiempos de carga inferiores a 1.5 segundos. Proyecto completado y entregado para uso en producción.',
+    skills: [
+      'Astro',
+      'SolidJS',
+      'TypeScript',
+      'TailwindCSS',
+      'Node.js',
+      'WebSockets',
+      'JWT',
+      'Spotify API',
+    ],
+  },
+  {
+    title: 'Desarrollador Flutter Senior',
+    company: 'OPTIMUS APPS LAB (Freelance)',
+    period: 'Abril 2021 – Diciembre 2022',
+    location: 'Híbrido, Madrid, España',
+    description:
+      'Desarrollé soluciones móviles end-to-end para clientes B2B en neobanca, logística y turismo. Entregué más de 5 aplicaciones Flutter para iOS, Android y Web, logrando reducción del 35% en tiempo de comercialización mediante arquitecturas estandarizadas. Gestioné relación directa con clientes, traduciendo necesidades de negocio en requisitos técnicos.',
+    skills: [
+      'Flutter',
+      'GetX',
+      'Riverpod',
+      'BLoC',
+      'Firebase',
+      'Supabase',
+      'REST APIs',
+      'Biometric Auth',
+    ],
+  },
+  {
+    title: 'Especialista en Producto y Tecnología – Retail',
+    company: 'World Duty Free Group, Fnac, Worten, Carrefour',
+    period: 'Mayo 2008 – Febrero 2021',
+    location: 'Madrid, España',
+    description:
+      '13 años en primera línea de retail tecnológico, desarrollando perspectiva única sobre interacción usuario-tecnología. Progresión desde especialista de producto hasta roles de mayor responsabilidad, gestionando equipos y formando a nuevos miembros. Esta experiencia fundamenta mi enfoque actual en desarrollo de producto centrado en el cliente.',
+    skills: [
+      'Gestión de Equipos',
+      'Formación',
+      'Atención al Cliente',
+      'Ventas Consultivas',
+      'Análisis de Producto',
+    ],
+  },
+];
+---
+
+<section id="experience" class="experience">
+  <div class="container">
+    <h2 class="section-title">Experiencia Profesional</h2>
+    <div class="experience-timeline">
+      {
+        experiences.map((exp) => (
+          <ExperienceItem
+            title={exp.title}
+            company={exp.company}
+            period={exp.period}
+            location={exp.location}
+            description={exp.description}
+            skills={exp.skills}
+          />
+        ))
+      }
+    </div>
+  </div>
+</section>

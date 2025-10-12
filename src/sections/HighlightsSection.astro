@@ -1,0 +1,44 @@
+---
+const highlights = [
+  {
+    emoji: '🏨',
+    text: 'Líder técnico de plataforma OTT desplegada en más de 30 hoteles en Europa y LATAM',
+  },
+  {
+    emoji: '🚀',
+    text: 'Arquitectura escalable soportando +1000 usuarios concurrentes con 95% de disponibilidad',
+  },
+  {
+    emoji: '👥',
+    text: 'Liderazgo de equipos multidisciplinares de hasta 9 personas con metodologías ágiles',
+  },
+  {
+    emoji: '⚡',
+    text: 'Optimización de rendimiento: 60% mejora en Smart TVs y 40% reducción en tiempo de despliegue',
+  },
+  {
+    emoji: '🔗',
+    text: 'Integración exitosa con +10 sistemas PMS hoteleros (Oracle OPERA, Mews, Cloudbeds)',
+  },
+  {
+    emoji: '🌍',
+    text: 'Más de 50,000 usuarios impactados a través de aplicaciones multiplataforma',
+  },
+];
+---
+
+<section class="highlights">
+  <div class="container">
+    <h2 class="section-title">Logros Destacados</h2>
+    <div class="highlights-grid">
+      {
+        highlights.map((highlight) => (
+          <div class="highlight-item">
+            <div class="highlight-emoji">{highlight.emoji}</div>
+            <p class="highlight-text">{highlight.text}</p>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
