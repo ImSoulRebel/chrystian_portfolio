@@ -1,5 +1,10 @@
 ---
 import { ExperienceItem } from '@components';
+import { getLocaleFromUrl, useTranslations } from '../utils/i18n';
+
+// Detectar el locale actual y obtener traducciones
+const locale = getLocaleFromUrl(Astro.url);
+const t = useTranslations(locale);
 
 const experiences = [
   {
@@ -78,7 +83,7 @@ const experiences = [
 
 <section id="experience" class="experience">
   <div class="container">
-    <h2 class="section-title">Experiencia Profesional</h2>
+    <h2 class="section-title">{t('experience.title')}</h2>
     <div class="experience-timeline">
       {
         experiences.map((exp) => (

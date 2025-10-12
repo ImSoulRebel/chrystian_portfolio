@@ -2,6 +2,15 @@ import { defineConfig } from 'astro/config';
 
 export default defineConfig({
   output: 'static',
+  site: 'https://imsoulrebel.github.io/chrystian_portfolio',
+  i18n: {
+    locales: ['es', 'en'],
+    defaultLocale: 'es',
+    routing: {
+      prefixDefaultLocale: true, // Ahora español también tendrá prefijo /es/
+      redirectToDefaultLocale: true,
+    },
+  },
   build: {
     // Genera sitemap automáticamente
     inlineStylesheets: 'auto',

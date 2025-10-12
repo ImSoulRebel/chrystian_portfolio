@@ -1,5 +1,10 @@
 ---
 import Icon from './Icon.astro';
+import { getLocaleFromUrl, useTranslations } from '../utils/i18n';
+
+// Detectar el locale actual y obtener traducciones
+const locale = getLocaleFromUrl(Astro.url);
+const t = useTranslations(locale);
 
 const currentYear = new Date().getFullYear();
 
@@ -106,10 +111,10 @@ const socialLinks = [
       <div class="footer-divider"></div>
       <div class="footer-copyright">
         <p>
-          © {currentYear} Chrystian Michell. Todos los derechos reservados.
+          © {currentYear} Chrystian Michell. {t('footer.rights')}
         </p>
         <p class="footer-made">
-          Hecho con ❤️ y <strong>Astro</strong>
+          {t('footer.madeWith')} ❤️ y <strong>Astro</strong>
         </p>
       </div>
     </div>

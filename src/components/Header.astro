@@ -1,11 +1,20 @@
 ---
-const links = [
-  { name: 'Inicio', href: '#home' },
-  { name: 'Sobre mí', href: '#about' },
-  { name: 'Habilidades', href: '#skills' },
-  { name: 'Experiencia', href: '#experience' },
-  { name: 'Proyectos', href: '#projects' },
-  { name: 'Contacto', href: '#contact' },
+import { getLocaleFromUrl, useTranslations } from '../utils/i18n';
+import LanguageSelector from './LanguageSelector.astro';
+
+// Detectar el locale actual
+const locale = getLocaleFromUrl(Astro.url);
+const t = useTranslations(locale);
+const currentPath = Astro.url.pathname;
+
+// Generar links de navegación localizados
+const navLinks = [
+  { name: t('nav.home'), href: '#home' },
+  { name: t('nav.about'), href: '#about' },
+  { name: t('nav.skills'), href: '#skills' },
+  { name: t('nav.experience'), href: '#experience' },
+  { name: t('nav.projects'), href: '#projects' },
+  { name: t('nav.contact'), href: '#contact' },
 ];
 ---
 
@@ -19,7 +28,7 @@ const links = [
 
       <ul class="nav-menu" id="nav-menu">
         {
-          links.map((link) => (
+          navLinks.map((link) => (
             <li class="nav-item">
               <a href={link.href} class="nav-link">
                 {link.name}
@@ -28,6 +37,9 @@ const links = [
           ))
         }
       </ul>
+
+      <!-- Language Selector -->
+      <LanguageSelector currentLocale={locale} currentPath={currentPath} />
 
       <div class="nav-toggle" id="nav-toggle">
         <span></span>
@@ -62,6 +74,7 @@ const links = [
     align-items: center;
     padding: 1rem 0;
     position: relative;
+    gap: 2rem;
   }
 
   .logo {
@@ -93,6 +106,8 @@ const links = [
     margin: 0;
     padding: 0;
     align-items: center;
+    flex: 1;
+    justify-content: center;
   }
 
   .nav-item {
@@ -159,6 +174,10 @@ const links = [
 
   /* Mobile Responsive */
   @media (max-width: 768px) {
+    .nav {
+      gap: 1rem;
+    }
+
     .nav-menu {
       position: absolute;
       top: 100%;
@@ -173,6 +192,7 @@ const links = [
       visibility: hidden;
       transition: all 0.3s ease;
       border-bottom: 1px solid rgba(0, 212, 255, 0.1);
+      justify-content: flex-start;
     }
 
     .nav-menu.active {

@@ -1,5 +1,10 @@
 ---
 import { SkillCard } from '@components';
+import { getLocaleFromUrl, useTranslations } from '../utils/i18n';
+
+// Detectar el locale actual y obtener traducciones
+const locale = getLocaleFromUrl(Astro.url);
+const t = useTranslations(locale);
 
 const skills = [
   { name: 'Flutter', icon: 'flutter' },
@@ -23,7 +28,7 @@ const skills = [
 
 <section id="skills" class="skills">
   <div class="container">
-    <h2 class="section-title">Habilidades Técnicas</h2>
+    <h2 class="section-title">{t('skills.title')}</h2>
     <div class="skills-carousel">
       <div class="skills-track">
         {
