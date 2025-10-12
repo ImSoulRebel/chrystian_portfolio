@@ -1,0 +1,42 @@
+/**
+ * Barrel file for Astro Components
+ * Centralizes all component exports for easier imports
+ *
+ * Usage:
+ * import { Header, Footer, ProjectCard } from '@components';
+ *
+ * Note: All Astro components must be default exports
+ */
+
+// === Layout Components ===
+export { default as Header } from './Header.astro';
+export { default as Footer } from './Footer.astro';
+export { default as Section } from './Section.astro';
+
+// === UI Components ===
+export { default as Icon } from './Icon.astro';
+export { default as Welcome } from './Welcome.astro';
+
+// === Card Components ===
+export { default as ProjectCard } from './ProjectCard.astro';
+export { default as SkillCard } from './SkillCard.astro';
+export { default as ExperienceItem } from './ExperienceItem.astro';
+
+// === Form Components ===
+export { default as ContactForm } from './ContactForm.astro';
+
+// === Type Definitions (for better TypeScript support) ===
+export type ComponentProps = {
+  // Define common props that your components might share
+  class?: string;
+  id?: string;
+  'data-testid'?: string;
+};
+
+/**
+ * Re-export pattern for future sub-barrel files
+ * Uncomment when you create sub-folders with their own barrels
+ */
+// export * from './forms';     // Future: src/components/forms/index.ts
+// export * from './cards';     // Future: src/components/cards/index.ts
+// export * from './layout';    // Future: src/components/layout/index.ts

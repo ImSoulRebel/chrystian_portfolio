@@ -1,13 +1,14 @@
 ---
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
-import AboutSection from '../sections/AboutSection.astro';
-import HighlightsSection from '../sections/HighlightsSection.astro';
-import SkillsSection from '../sections/SkillsSection.astro';
-import ExperienceSection from '../sections/ExperienceSection.astro';
-import ProjectsSection from '../sections/ProjectsSection.astro';
-import ContactSection from '../sections/ContactSection.astro';
-import HeroSection from '../sections/HeroSection.astro';
+import {
+  AboutSection,
+  HighlightsSection,
+  SkillsSection,
+  ExperienceSection,
+  ProjectsSection,
+  ContactSection,
+  HeroSection,
+} from '@sections';
+import { Header, Footer } from '@components';
 ---
 
 <html lang="es">
@@ -72,7 +73,7 @@ import HeroSection from '../sections/HeroSection.astro';
     <Footer />
 
     <script>
-      import { App } from '../scripts/app.js';
+      import { App } from '@scripts';
 
       // Initialize main application
       new App();
