@@ -1,5 +1,5 @@
 ---
-import SkillCard from '../components/SkillCard.astro';
+import { SkillCard } from '@components';
 
 const skills = [
   { name: 'Flutter', icon: 'flutter' },
@@ -27,7 +27,7 @@ const skills = [
     <div class="skills-carousel">
       <div class="skills-track">
         {
-          [...skills, ...skills, ...skills].map((skill, index) => (
+          [...skills, ...skills, ...skills].map((skill) => (
             <SkillCard name={skill.name} icon={skill.icon} />
           ))
         }

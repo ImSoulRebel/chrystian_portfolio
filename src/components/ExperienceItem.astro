@@ -1,21 +1,5 @@
 ---
-import Icon from './Icon.astro';
-
 const { title, company, period, description, skills, location } = Astro.props;
-
-// Mapeo de empresas a sus logos
-const companyLogos = {
-  YUVOD: 'yuvod',
-  NEXTIVAL: 'nextival',
-  'OPTIMUS APPS LAB': 'optimus',
-  'World Duty Free Group': 'default',
-  Fnac: 'default',
-  Worten: 'default',
-  Carrefour: 'default',
-};
-
-const companyLogo =
-  companyLogos[company as keyof typeof companyLogos] || 'default';
 ---
 
 <div class="experience-item">
@@ -28,11 +12,6 @@ const companyLogo =
       <h3 class="experience-title">{title}</h3>
       <div class="experience-meta">
         <div class="company-info">
-          <!-- {
-            companyLogo !== 'default' && (
-              <Icon name={companyLogo} size={24} class="company-logo" />
-            )
-          } -->
           <span class="company">{company}</span>
         </div>
         {location && <span class="location">📍 {location}</span>}

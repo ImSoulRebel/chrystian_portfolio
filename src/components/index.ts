@@ -15,7 +15,6 @@ export { default as Section } from './Section.astro';
 
 // === UI Components ===
 export { default as Icon } from './Icon.astro';
-export { default as Welcome } from './Welcome.astro';
 
 // === Card Components ===
 export { default as ProjectCard } from './ProjectCard.astro';
