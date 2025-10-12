@@ -1,8 +1,29 @@
 ---
-const formAction = 'https://formspree.io/f/mqkoanop'; // Reemplaza con tu ID de Formspree
+import {
+  PUBLIC_CONTACT_EMAIL,
+  PUBLIC_FORMSPREE_ENDPOINT,
+} from 'astro:env/client';
+
+// Endpoint de Formspree - Configurado mediante variable de entorno
+const formAction =
+  PUBLIC_FORMSPREE_ENDPOINT || 'https://formspree.io/f/YOUR_FORM_ID';
+const contactEmail = PUBLIC_CONTACT_EMAIL;
 ---
 
 <form class="contact-form" method="POST" action={formAction} id="contact-form">
+  <!-- Campo oculto para el email de destino -->
+  <input type="hidden" name="_to" value={contactEmail} />
+  <input
+    type="hidden"
+    name="_subject"
+    value="Nuevo mensaje desde el portfolio"
+  />
+  <input
+    type="hidden"
+    name="_next"
+    value="https://imsoulrebel.github.io/chrystian_portfolio/es/contact?success=true"
+  />
+
   <div class="form-group">
     <label for="name">Nombre *</label>
     <input

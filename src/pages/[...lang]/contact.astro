@@ -1,4 +1,5 @@
 ---
+import { PUBLIC_AUTHOR_NAME } from 'astro:env/client';
 import { Layout } from '@layouts';
 import { Header, Footer } from '@components';
 import { ContactSection } from '@sections';
@@ -17,8 +18,10 @@ const { lang } = Astro.params;
 const locale = (lang as Locale) || 'es';
 const t = useTranslations(locale);
 
+const authorName = PUBLIC_AUTHOR_NAME;
+
 // SEO content based on locale
-const pageTitle = `${t('contact.title')} | Chrystian Michell - ${t('hero.title')}`;
+const pageTitle = `${t('contact.title')} | ${authorName} - ${t('hero.title')}`;
 const pageDescription =
   locale === 'es'
     ? 'Contacta con Chrystian Michell para oportunidades de liderazgo técnico, proyectos de desarrollo Flutter y servicios de consultoría especializada. Disponible para contratación inmediata.'
