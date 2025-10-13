@@ -1,6 +1,7 @@
 ---
 import { ProjectCard } from '@components';
 import { useTranslations, type Locale } from '../utils/i18n';
+import { translations } from '../config/translations';
 import * as assets from '../assets';
 
 // Recibir locale como prop en lugar de detectarlo
@@ -11,115 +12,59 @@ interface Props {
 const { locale = 'es' } = Astro.props;
 const t = useTranslations(locale);
 
-// Datos de proyectos traducidos
-const projectsData = {
-  es: [
-    {
-      title: 'YUVOD – Plataforma OTT para Hoteles',
-      stack: 'Flutter · BLoC · WebSockets · Video.js · Docker · AWS',
-      description:
-        'Plataforma de streaming multiplataforma para SmartTVs, móviles y web con navegación espacial custom, reproductor modular con DRM y subtítulos dinámicos. Arquitectura multientrada con selección dinámica de UI para diferentes dispositivos.',
-      impact:
-        'Desplegada en +30 hoteles en Europa y LATAM. Mejora del 35% en satisfacción de huéspedes según encuestas post-estancia.',
-      featured: true,
-      liveUrl: 'https://yuvod.com',
-      image: assets.yuvodLogo,
-    },
-    {
-      title: 'Nextival CMS – Gestión de Festivales',
-      stack: 'Astro · SolidJS · TailwindCSS · Node.js · WebSockets',
-      description:
-        'Sistema de gestión de contenido para festivales musicales con renderizado híbrido SSR/SSG, Clean Architecture con Repository Pattern, integración con Spotify Web API y editor WYSIWYG. WebSockets para notificaciones en tiempo real.',
-      impact:
-        'Tiempos de carga <1.5s, optimización SEO completa. Entregado en 4 meses como proyecto funcional para producción.',
-      image: assets.nextivalLogo,
-      githubUrl: 'https://github.com/ImSoulRebel/nextival-cms',
-    },
-    {
-      title: 'STELCAMPING – Gestión de Campings',
-      stack: 'Flutter · Firebase · GetX · REST APIs · Push Notifications',
-      description:
-        'Aplicación integral para gestión de campings con sistema de reservas, calendario de actividades, notificaciones push, chat en tiempo real y panel administrativo. Arquitectura modular con clase base BaseState<T> para centralizar utilidades.',
-      impact:
-        'Más de 1,000 usuarios activos. Automatizó procesos que antes requerían 3 personas, reduciendo costes operativos en 40%.',
-      liveUrl: 'https://stel.es',
-      image: assets.stelLogo,
-    },
-    {
-      title: 'BNC10 – Aplicación Neobanca',
-      stack: 'Flutter · GetX · Firebase · Biometric Auth · Secure Storage',
-      description:
-        'App de neobanca social con P2P, gestión de cuentas y analytics financieras. Implementé seguridad bancaria (biometric auth, encrypted storage), responsive avanzado con responsive_framework y monitoreo con Sentry.',
-      impact:
-        '500+ usuarios activos, rating 4.7⭐, 99.5% de sesiones sin crashes. Reducción del 60% en fricción de autenticación.',
-      image: assets.bnc10Logo,
-    },
-    {
-      title: 'TOOKANE – Seguimiento Logístico',
-      stack: 'Flutter · Riverpod · Supabase · Geolocalización Real-Time',
-      description:
-        'Sistema de tracking en tiempo real con offline-first architecture para zonas con conectividad limitada. Clean Architecture + MVVM + Repository Pattern con optimización de batería reduciendo consumo en 40%.',
-      impact:
-        'Mejora del 30% en eficiencia de entregas mediante optimización de rutas basada en datos reales de geolocalización.',
-      image: assets.tookaneLogo,
-      liveUrl: 'https://tookane.com',
-    },
-  ],
-  en: [
-    {
-      title: 'YUVOD – OTT Platform for Hotels',
-      stack: 'Flutter · BLoC · WebSockets · Video.js · Docker · AWS',
-      description:
-        'Cross-platform streaming platform for SmartTVs, mobile, and web with custom spatial navigation, modular player with DRM and dynamic subtitles. Multi-entry architecture with dynamic UI selection for different devices.',
-      impact:
-        'Deployed in +30 hotels across Europe and LATAM. 35% improvement in guest satisfaction according to post-stay surveys.',
-      featured: true,
-      liveUrl: 'https://yuvod.com',
-      image: assets.yuvodLogo,
-    },
-    {
-      title: 'Nextival CMS – Festival Management',
-      stack: 'Astro · SolidJS · TailwindCSS · Node.js · WebSockets',
-      description:
-        'Content management system for music festivals with hybrid SSR/SSG rendering, Clean Architecture with Repository Pattern, Spotify Web API integration, and WYSIWYG editor. WebSockets for real-time notifications.',
-      impact:
-        'Load times <1.5s, complete SEO optimization. Delivered in 4 months as a production-ready project.',
-      image: assets.nextivalLogo,
-      githubUrl: 'https://github.com/ImSoulRebel/nextival-cms',
-    },
-    {
-      title: 'STELCAMPING – Camping Management',
-      stack: 'Flutter · Firebase · GetX · REST APIs · Push Notifications',
-      description:
-        'Comprehensive camping management application with booking system, activities calendar, push notifications, real-time chat, and admin panel. Modular architecture with BaseState<T> base class to centralize utilities.',
-      impact:
-        'More than 1,000 active users. Automated processes that previously required 3 people, reducing operational costs by 40%.',
-      liveUrl: 'https://stel.es',
-      image: assets.stelLogo,
-    },
-    {
-      title: 'BNC10 – Neobanking App',
-      stack: 'Flutter · GetX · Firebase · Biometric Auth · Secure Storage',
-      description:
-        'Social neobanking app with P2P, account management, and financial analytics. Implemented banking security (biometric auth, encrypted storage), advanced responsive design with responsive_framework, and monitoring with Sentry.',
-      impact:
-        '500+ active users, 4.7⭐ rating, 99.5% crash-free sessions. 60% reduction in authentication friction.',
-      image: assets.bnc10Logo,
-    },
-    {
-      title: 'TOOKANE – Logistics Tracking',
-      stack: 'Flutter · Riverpod · Supabase · Real-Time Geolocation',
-      description:
-        'Real-time tracking system with offline-first architecture for areas with limited connectivity. Clean Architecture + MVVM + Repository Pattern with battery optimization reducing consumption by 40%.',
-      impact:
-        '30% improvement in delivery efficiency through route optimization based on real geolocation data.',
-      image: assets.tookaneLogo,
-      liveUrl: 'https://tookane.com',
-    },
-  ],
-};
+// Configuración de proyectos con URLs e imágenes
+const projectsConfig = [
+  {
+    key: 'yuvod' as const,
+    featured: true,
+    liveUrl: 'https://yuvod.com',
+    githubUrl: undefined,
+    image: assets.yuvodLogo,
+  },
+  {
+    key: 'nextival' as const,
+    featured: false,
+    liveUrl: undefined,
+    githubUrl: 'https://github.com/ImSoulRebel/nextival-cms',
+    image: assets.nextivalLogo,
+  },
+  {
+    key: 'stelcamping' as const,
+    featured: false,
+    liveUrl: 'https://stel.es',
+    githubUrl: undefined,
+    image: assets.stelLogo,
+  },
+  {
+    key: 'bnc10' as const,
+    featured: false,
+    liveUrl: undefined,
+    githubUrl: undefined,
+    image: assets.bnc10Logo,
+  },
+  {
+    key: 'tookane' as const,
+    featured: false,
+    liveUrl: 'https://tookane.com',
+    githubUrl: undefined,
+    image: assets.tookaneLogo,
+  },
+];
 
-const projects = projectsData[locale];
+// Construir proyectos desde traducciones + configuración
+const projects = projectsConfig.map((config) => {
+  const projectData = translations[locale].projects.list[config.key];
+  return {
+    title: projectData.title,
+    stack: projectData.stack,
+    description: projectData.description,
+    impact: projectData.impact,
+    featured: config.featured,
+    liveUrl: config.liveUrl,
+    githubUrl: config.githubUrl,
+    image: config.image,
+  };
+});
 ---
 
 <section id="projects" class="projects">

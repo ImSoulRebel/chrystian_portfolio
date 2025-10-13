@@ -1,5 +1,6 @@
 ---
-import { type Locale } from '../utils/i18n';
+import { useTranslations, type Locale } from '../utils/i18n';
+import { translations } from '../config/translations';
 
 // Recibir locale como prop
 interface Props {
@@ -7,73 +8,15 @@ interface Props {
 }
 
 const { locale = 'es' } = Astro.props;
+const t = useTranslations(locale);
 
-const highlightsData = {
-  es: [
-    {
-      emoji: '🏨',
-      text: 'Líder técnico de plataforma OTT desplegada en más de 30 hoteles en Europa y LATAM',
-    },
-    {
-      emoji: '🚀',
-      text: 'Arquitectura escalable soportando +1000 usuarios concurrentes con 95% de disponibilidad',
-    },
-    {
-      emoji: '👥',
-      text: 'Liderazgo de equipos multidisciplinares de hasta 9 personas con metodologías ágiles',
-    },
-    {
-      emoji: '⚡',
-      text: 'Optimización de rendimiento: 60% mejora en Smart TVs y 40% reducción en tiempo de despliegue',
-    },
-    {
-      emoji: '🔗',
-      text: 'Integración exitosa con +10 sistemas PMS hoteleros (Oracle OPERA, Mews, Cloudbeds)',
-    },
-    {
-      emoji: '🌍',
-      text: 'Más de 50,000 usuarios impactados a través de aplicaciones multiplataforma',
-    },
-  ],
-  en: [
-    {
-      emoji: '🏨',
-      text: 'Technical leader of OTT platform deployed in over 30 hotels across Europe and LATAM',
-    },
-    {
-      emoji: '🚀',
-      text: 'Scalable architecture supporting +1000 concurrent users with 95% uptime',
-    },
-    {
-      emoji: '👥',
-      text: 'Leadership of multidisciplinary teams of up to 9 people with agile methodologies',
-    },
-    {
-      emoji: '⚡',
-      text: 'Performance optimization: 60% improvement on Smart TVs and 40% reduction in deployment time',
-    },
-    {
-      emoji: '🔗',
-      text: 'Successful integration with +10 hotel PMS systems (Oracle OPERA, Mews, Cloudbeds)',
-    },
-    {
-      emoji: '🌍',
-      text: 'More than 50,000 users impacted through cross-platform applications',
-    },
-  ],
-};
-
-const highlights = highlightsData[locale];
-
-const sectionTitles = {
-  es: 'Logros Destacados',
-  en: 'Highlights',
-};
+// Obtener highlights directamente del objeto de traducciones
+const highlights = translations[locale].about.highlights.list;
 ---
 
 <section class="highlights">
   <div class="container">
-    <h2 class="section-title">{sectionTitles[locale]}</h2>
+    <h2 class="section-title">{t('about.highlights.title')}</h2>
     <div class="highlights-grid">
       {
         highlights.map((highlight) => (

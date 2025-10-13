@@ -36,6 +36,35 @@ export const translations = {
         users: 'Usuarios Impactados',
         countries: 'Países Desplegados',
       },
+      highlights: {
+        title: 'Logros Destacados',
+        list: [
+          {
+            emoji: '🏨',
+            text: 'Líder técnico de plataforma OTT desplegada en más de 30 hoteles en Europa y LATAM',
+          },
+          {
+            emoji: '🚀',
+            text: 'Arquitectura escalable soportando +1000 usuarios concurrentes con 95% de disponibilidad',
+          },
+          {
+            emoji: '👥',
+            text: 'Liderazgo de equipos multidisciplinares de hasta 9 personas con metodologías ágiles',
+          },
+          {
+            emoji: '⚡',
+            text: 'Optimización de rendimiento: 60% mejora en Smart TVs y 40% reducción en tiempo de despliegue',
+          },
+          {
+            emoji: '🔗',
+            text: 'Integración exitosa con +10 sistemas PMS hoteleros (Oracle OPERA, Mews, Cloudbeds)',
+          },
+          {
+            emoji: '🌍',
+            text: 'Más de 50,000 usuarios impactados a través de aplicaciones multiplataforma',
+          },
+        ],
+      },
     },
 
     // Skills Section
@@ -65,6 +94,48 @@ export const translations = {
       viewDemo: 'Ver Demo',
       viewCode: 'Ver Código',
       viewMore: 'Ver Más Proyectos',
+      list: {
+        yuvod: {
+          title: 'YUVOD – Plataforma OTT para Hoteles',
+          stack: 'Flutter · BLoC · WebSockets · Video.js · Docker · AWS',
+          description:
+            'Plataforma de streaming multiplataforma para SmartTVs, móviles y web con navegación espacial custom, reproductor modular con DRM y subtítulos dinámicos. Arquitectura multientrada con selección dinámica de UI para diferentes dispositivos.',
+          impact:
+            'Desplegada en +30 hoteles en Europa y LATAM. Mejora del 35% en satisfacción de huéspedes según encuestas post-estancia.',
+        },
+        nextival: {
+          title: 'Nextival CMS – Gestión de Festivales',
+          stack: 'Astro · SolidJS · TailwindCSS · Node.js · WebSockets',
+          description:
+            'Sistema de gestión de contenido para festivales musicales con renderizado híbrido SSR/SSG, Clean Architecture con Repository Pattern, integración con Spotify Web API y editor WYSIWYG. WebSockets para notificaciones en tiempo real.',
+          impact:
+            'Tiempos de carga <1.5s, optimización SEO completa. Entregado en 4 meses como proyecto funcional para producción.',
+        },
+        stelcamping: {
+          title: 'STELCAMPING – Gestión de Campings',
+          stack: 'Flutter · Firebase · GetX · REST APIs · Push Notifications',
+          description:
+            'Aplicación integral para gestión de campings con sistema de reservas, calendario de actividades, notificaciones push, chat en tiempo real y panel administrativo. Arquitectura modular con clase base BaseState<T> para centralizar utilidades.',
+          impact:
+            'Más de 1,000 usuarios activos. Automatizó procesos que antes requerían 3 personas, reduciendo costes operativos en 40%.',
+        },
+        bnc10: {
+          title: 'BNC10 – Aplicación Neobanca',
+          stack: 'Flutter · GetX · Firebase · Biometric Auth · Secure Storage',
+          description:
+            'App de neobanca social con P2P, gestión de cuentas y analytics financieras. Implementé seguridad bancaria (biometric auth, encrypted storage), responsive avanzado con responsive_framework y monitoreo con Sentry.',
+          impact:
+            '500+ usuarios activos, rating 4.7⭐, 99.5% de sesiones sin crashes. Reducción del 60% en fricción de autenticación.',
+        },
+        tookane: {
+          title: 'TOOKANE – Seguimiento Logístico',
+          stack: 'Flutter · Riverpod · Supabase · Geolocalización Real-Time',
+          description:
+            'Sistema de tracking en tiempo real con offline-first architecture para zonas con conectividad limitada. Clean Architecture + MVVM + Repository Pattern con optimización de batería reduciendo consumo en 40%.',
+          impact:
+            'Mejora del 30% en eficiencia de entregas mediante optimización de rutas basada en datos reales de geolocalización.',
+        },
+      },
     },
 
     // Contact Section
@@ -260,6 +331,35 @@ export const translations = {
         users: 'Users Impacted',
         countries: 'Countries Deployed',
       },
+      highlights: {
+        title: 'Highlights',
+        list: [
+          {
+            emoji: '🏨',
+            text: 'Technical leader of OTT platform deployed in over 30 hotels across Europe and LATAM',
+          },
+          {
+            emoji: '🚀',
+            text: 'Scalable architecture supporting +1000 concurrent users with 95% uptime',
+          },
+          {
+            emoji: '👥',
+            text: 'Leadership of multidisciplinary teams of up to 9 people with agile methodologies',
+          },
+          {
+            emoji: '⚡',
+            text: 'Performance optimization: 60% improvement on Smart TVs and 40% reduction in deployment time',
+          },
+          {
+            emoji: '🔗',
+            text: 'Successful integration with +10 hotel PMS systems (Oracle OPERA, Mews, Cloudbeds)',
+          },
+          {
+            emoji: '🌍',
+            text: 'More than 50,000 users impacted through cross-platform applications',
+          },
+        ],
+      },
     },
 
     // Skills Section
@@ -289,6 +389,48 @@ export const translations = {
       viewDemo: 'View Demo',
       viewCode: 'View Code',
       viewMore: 'View More Projects',
+      list: {
+        yuvod: {
+          title: 'YUVOD – OTT Platform for Hotels',
+          stack: 'Flutter · BLoC · WebSockets · Video.js · Docker · AWS',
+          description:
+            'Cross-platform streaming platform for SmartTVs, mobile, and web with custom spatial navigation, modular player with DRM and dynamic subtitles. Multi-entry architecture with dynamic UI selection for different devices.',
+          impact:
+            'Deployed in +30 hotels across Europe and LATAM. 35% improvement in guest satisfaction according to post-stay surveys.',
+        },
+        nextival: {
+          title: 'Nextival CMS – Festival Management',
+          stack: 'Astro · SolidJS · TailwindCSS · Node.js · WebSockets',
+          description:
+            'Content management system for music festivals with hybrid SSR/SSG rendering, Clean Architecture with Repository Pattern, Spotify Web API integration, and WYSIWYG editor. WebSockets for real-time notifications.',
+          impact:
+            'Load times <1.5s, complete SEO optimization. Delivered in 4 months as a production-ready project.',
+        },
+        stelcamping: {
+          title: 'STELCAMPING – Camping Management',
+          stack: 'Flutter · Firebase · GetX · REST APIs · Push Notifications',
+          description:
+            'Comprehensive camping management application with booking system, activities calendar, push notifications, real-time chat, and admin panel. Modular architecture with BaseState<T> base class to centralize utilities.',
+          impact:
+            'More than 1,000 active users. Automated processes that previously required 3 people, reducing operational costs by 40%.',
+        },
+        bnc10: {
+          title: 'BNC10 – Neobanking App',
+          stack: 'Flutter · GetX · Firebase · Biometric Auth · Secure Storage',
+          description:
+            'Social neobanking app with P2P, account management, and financial analytics. Implemented banking security (biometric auth, encrypted storage), advanced responsive design with responsive_framework, and monitoring with Sentry.',
+          impact:
+            '500+ active users, 4.7⭐ rating, 99.5% crash-free sessions. 60% reduction in authentication friction.',
+        },
+        tookane: {
+          title: 'TOOKANE – Logistics Tracking',
+          stack: 'Flutter · Riverpod · Supabase · Real-Time Geolocation',
+          description:
+            'Real-time tracking system with offline-first architecture for areas with limited connectivity. Clean Architecture + MVVM + Repository Pattern with battery optimization reducing consumption by 40%.',
+          impact:
+            '30% improvement in delivery efficiency through route optimization based on real geolocation data.',
+        },
+      },
     },
 
     // Contact Section
@@ -398,6 +540,31 @@ export const translations = {
 
     // Footer
     footer: {
+      position: 'Senior Flutter Developer & Tech Lead',
+      tagline: 'Building the digital future, one app at a time',
+      nav: {
+        title: 'Navigation',
+        home: 'Home',
+        about: 'About',
+        contact: 'Contact',
+        skills: 'Skills',
+        experience: 'Experience',
+        projects: 'Projects',
+      },
+      tech: {
+        title: 'Technologies',
+        flutter: 'Flutter & Dart',
+        firebase: 'Firebase & AWS',
+        javascript: 'JavaScript & TypeScript',
+        react: 'React & Node.js',
+        ciCd: 'CI/CD & DevOps',
+      },
+      contact: {
+        title: 'Contact',
+        subtitle: 'Have a project in mind?',
+        cta: "Let's Talk!",
+        email: 'Email',
+      },
       rights: 'All rights reserved.',
       madeWith: 'Made with',
       technologies: 'Astro, TypeScript and lots of ☕',
