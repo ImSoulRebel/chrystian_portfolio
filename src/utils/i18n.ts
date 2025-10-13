@@ -5,10 +5,7 @@ import {
 } from '../config/translations';
 
 // Importar helpers nativos de Astro para i18n
-import {
-  getRelativeLocaleUrl,
-  getAbsoluteLocaleUrl,
-} from 'astro:i18n';
+import { getRelativeLocaleUrl, getAbsoluteLocaleUrl } from 'astro:i18n';
 
 // Re-exportar tipos para facilitar el uso
 export type { Locale } from '../config/translations';
@@ -41,7 +38,11 @@ export function getSiteUrl(): string {
  * Obtiene la plataforma de deployment actual
  * @returns El identificador de la plataforma (development, github, netlify)
  */
-export function getDeploymentPlatform(): 'development' | 'github' | 'netlify' | 'production' {
+export function getDeploymentPlatform():
+  | 'development'
+  | 'github'
+  | 'netlify'
+  | 'production' {
   return (import.meta.env.PUBLIC_DEPLOYMENT_PLATFORM as any) || 'development';
 }
 
@@ -118,7 +119,7 @@ export function getPathnameWithoutLocale(pathname: string): string {
  * - Maneja automáticamente el base path
  * - Es agnóstica al hosting
  * - Funciona tanto en GitHub Pages como en Netlify
- * 
+ *
  * @param pathname - La ruta base
  * @param targetLocale - El locale objetivo
  * @returns La URL completa para el locale objetivo con base path incluido
@@ -130,23 +131,23 @@ export function getLocalizedPath(
   // Limpiar el pathname de cualquier locale y base path existente
   const basePath = getBasePath();
   let cleanPath = pathname;
-  
+
   // Remover base path si existe
   if (basePath && cleanPath.startsWith(basePath)) {
     cleanPath = cleanPath.slice(basePath.length);
   }
-  
+
   // Remover prefijo de locale /es/ o /en/
   cleanPath = cleanPath.replace(/^\/(es|en)/, '') || '/';
-  
+
   // Asegurar que el path comience con /
   if (!cleanPath.startsWith('/')) {
     cleanPath = '/' + cleanPath;
   }
-  
+
   // Remover la / inicial para pasarla a getRelativeLocaleUrl
   const pathForHelper = cleanPath === '/' ? '' : cleanPath.slice(1);
-  
+
   // Usar el helper nativo de Astro que maneja base path automáticamente
   return getRelativeLocaleUrl(targetLocale, pathForHelper);
 }
@@ -239,20 +240,20 @@ export function formatDate(
 /**
  * Obtiene las URLs hreflang para SEO (MEJORADO con helpers de Astro)
  * Ahora utiliza getAbsoluteLocaleUrl que maneja automáticamente el base path
- * 
+ *
  * @param currentPath - La ruta actual sin locale
  * @returns Objeto con las URLs para cada locale
  */
 export function getHreflangUrls(currentPath: string) {
   const basePath = getBasePath();
-  
+
   // Limpiar el path
   let cleanPath = currentPath;
   if (basePath && cleanPath.startsWith(basePath)) {
     cleanPath = cleanPath.slice(basePath.length);
   }
   cleanPath = cleanPath.replace(/^\/(es|en)/, '') || '/';
-  
+
   const pathForHelper = cleanPath === '/' ? '' : cleanPath.slice(1);
 
   return {

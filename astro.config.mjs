@@ -11,13 +11,14 @@ const __dirname = dirname(__filename);
 // DETECCIÓN DE PLATAFORMA DE DEPLOYMENT
 // ===========================================
 // Cargar variables de entorno según la plataforma
-const deploymentPlatform = process.env.PUBLIC_DEPLOYMENT_PLATFORM || 'development';
+const deploymentPlatform =
+  process.env.PUBLIC_DEPLOYMENT_PLATFORM || 'development';
 
 // Cargar el archivo .env correspondiente solo si no está en CI/CD
 if (!process.env.CI) {
   const envFile = `.env.${deploymentPlatform}`;
   const envPath = resolve(__dirname, envFile);
-  
+
   console.log('📄 Loading env from:', envFile);
   config({ path: envPath, override: false });
 }
