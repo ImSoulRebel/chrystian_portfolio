@@ -1,4 +1,5 @@
 ---
 // Redirect automático a la versión en español
-return Astro.redirect('/es/', 301);
+// En producción usa el base path, en desarrollo no
+return Astro.redirect(`${import.meta.env.PROD ? '/chrystian_portfolio' : ''}/es/`, 301);
 ---

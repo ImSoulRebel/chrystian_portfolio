@@ -32,8 +32,10 @@ const content = {
 };
 
 const pageContent = content[locale];
-const homeUrl = '/';
-const contactUrl = '/contact';
+// En producción usa el base path, en desarrollo no
+const base = import.meta.env.PROD ? '/chrystian_portfolio' : '';
+const homeUrl = `${base}/`;
+const contactUrl = `${base}/contact`;
 ---
 
 <Layout title={pageContent.title} description={pageContent.description}>
@@ -88,6 +90,10 @@ const contactUrl = '/contact';
   function updateContent() {
     const locale = detectClientLocale();
 
+    // Detectar si estamos en producción (GitHub Pages)
+    const isProduction = window.location.hostname.includes('github.io');
+    const base = isProduction ? '/chrystian_portfolio' : '';
+
     const content = {
       es: {
         title: '404 - Página No Encontrada | Chrystian Michell',
@@ -96,8 +102,8 @@ const contactUrl = '/contact';
         message: 'La página que buscas no existe o ha sido movida.',
         homeButton: 'Volver al Inicio',
         contactButton: 'Contactar',
-        homeUrl: '/',
-        contactUrl: '/contact',
+        homeUrl: `${base}/`,
+        contactUrl: `${base}/contact`,
       },
       en: {
         title: '404 - Page Not Found | Chrystian Michell',
@@ -106,8 +112,8 @@ const contactUrl = '/contact';
         message: "The page you're looking for doesn't exist or has been moved.",
         homeButton: 'Back to Home',
         contactButton: 'Contact Me',
-        homeUrl: '/en/',
-        contactUrl: '/en/contact',
+        homeUrl: `${base}/en/`,
+        contactUrl: `${base}/en/contact`,
       },
     };
 
