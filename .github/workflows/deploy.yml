@@ -1,0 +1,57 @@
+name: Deploy to GitHub Pages
+
+on:
+  # Se ejecuta en push a main
+  push:
+    branches: [main]
+  # Permite ejecución manual desde la pestaña Actions
+  workflow_dispatch:
+
+# Permisos necesarios para desplegar
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Previene ejecuciones concurrentes
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 📥 Checkout
+        uses: actions/checkout@v4
+
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "yarn"
+
+      - name: 📦 Install Dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: 🔍 Type Check & Lint
+        run: yarn run lint
+
+      - name: 🏗️ Build
+        run: yarn run build
+
+      - name: 📤 Upload Artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: 🚀 Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
