@@ -2,7 +2,8 @@ import { defineConfig, envField } from 'astro/config';
 
 export default defineConfig({
   output: 'static',
-  site: 'https://imsoulrebel.github.io/chrystian_portfolio',
+  site: 'https://imsoulrebel.github.io',
+  base: '/chrystian_portfolio',
 
   // ===========================================
   // SCHEMA DE VARIABLES DE ENTORNO (TYPE SAFE)
@@ -153,6 +154,4 @@ export default defineConfig({
   },
   // Compresión adicional
   compressHTML: true,
-  // Configuración de sitemap y robots
-  site: 'https://imsoulrebel.github.io/chrystian_portfolio', // Cambia por tu dominio
 });
