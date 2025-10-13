@@ -1,5 +1,5 @@
 // Main application scripts coordinator
-import { PageInteractions } from './interactions.js';
+import { PageInteractions } from "./interactions.js";
 
 // Main app class to coordinate all page functionality
 export class App {
@@ -10,8 +10,8 @@ export class App {
 
   init() {
     // Wait for DOM to be ready
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', () => this.initializeApp());
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", () => this.initializeApp());
     } else {
       this.initializeApp();
     }
@@ -33,9 +33,9 @@ export class App {
     // Example: Respect user's system theme preference
     if (
       window.matchMedia &&
-      window.matchMedia('(prefers-reduced-motion: reduce)').matches
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches
     ) {
-      document.body.classList.add('reduce-motion');
+      document.body.classList.add("reduce-motion");
     }
   }
 
@@ -53,14 +53,14 @@ export class App {
     // Enhanced lazy loading for better performance
     const images = document.querySelectorAll('img[loading="lazy"]');
 
-    if ('IntersectionObserver' in window) {
+    if ("IntersectionObserver" in window) {
       const imageObserver = new IntersectionObserver((entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             const img = entry.target;
             if (img.dataset.src) {
               img.src = img.dataset.src;
-              img.removeAttribute('data-src');
+              img.removeAttribute("data-src");
             }
             imageObserver.unobserve(img);
           }
@@ -78,9 +78,9 @@ export class App {
     ];
 
     criticalImages.forEach((src) => {
-      const link = document.createElement('link');
-      link.rel = 'preload';
-      link.as = 'image';
+      const link = document.createElement("link");
+      link.rel = "preload";
+      link.as = "image";
       link.href = src;
       document.head.appendChild(link);
     });

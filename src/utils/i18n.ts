@@ -2,10 +2,10 @@ import {
   translations,
   type Locale,
   type TranslationKeyPath,
-} from '../config/translations';
+} from "../config/translations";
 
 // Re-exportar tipos para facilitar el uso
-export type { Locale } from '../config/translations';
+export type { Locale } from "../config/translations";
 
 /**
  * Hook para obtener la función de traducción basada en el locale actual
@@ -14,7 +14,7 @@ export type { Locale } from '../config/translations';
  */
 export function useTranslations(locale: Locale) {
   return function t(key: TranslationKeyPath): string {
-    const keys = key.split('.');
+    const keys = key.split(".");
     let value: any = translations[locale];
 
     for (const k of keys) {
@@ -22,7 +22,7 @@ export function useTranslations(locale: Locale) {
     }
 
     // Fallback al español si no existe la traducción
-    if (value === undefined && locale !== 'es') {
+    if (value === undefined && locale !== "es") {
       let fallbackValue: any = translations.es;
       for (const k of keys) {
         fallbackValue = fallbackValue?.[k];
@@ -43,15 +43,15 @@ export function getLocaleFromUrl(url: URL): Locale {
   const pathname = url.pathname;
 
   // Detectar idioma basado en el prefijo de la URL
-  if (pathname.startsWith('/en/') || pathname === '/en') {
-    return 'en';
+  if (pathname.startsWith("/en/") || pathname === "/en") {
+    return "en";
   }
-  if (pathname.startsWith('/es/') || pathname === '/es') {
-    return 'es';
+  if (pathname.startsWith("/es/") || pathname === "/es") {
+    return "es";
   }
 
   // Por defecto, español (para URLs legacy o redirects)
-  return 'es';
+  return "es";
 }
 
 /**
@@ -61,11 +61,11 @@ export function getLocaleFromUrl(url: URL): Locale {
  */
 export function getPathnameWithoutLocale(pathname: string): string {
   // Remover prefijo /es o /en
-  if (pathname.startsWith('/es/') || pathname.startsWith('/en/')) {
-    return pathname.replace(/^\/(es|en)/, '') || '/';
+  if (pathname.startsWith("/es/") || pathname.startsWith("/en/")) {
+    return pathname.replace(/^\/(es|en)/, "") || "/";
   }
-  if (pathname === '/es' || pathname === '/en') {
-    return '/';
+  if (pathname === "/es" || pathname === "/en") {
+    return "/";
   }
   return pathname;
 }
@@ -81,13 +81,13 @@ export function getLocalizedPath(
   targetLocale: Locale,
 ): string {
   // Remover cualquier prefijo de locale existente
-  const cleanPath = pathname.replace(/^\/(es|en)/, '') || '/';
+  const cleanPath = pathname.replace(/^\/(es|en)/, "") || "/";
 
   // Agregar el prefijo correspondiente
-  if (targetLocale === 'en') {
-    return `/en${cleanPath === '/' ? '' : cleanPath}`;
+  if (targetLocale === "en") {
+    return `/en${cleanPath === "/" ? "" : cleanPath}`;
   } else {
-    return `/es${cleanPath === '/' ? '' : cleanPath}`;
+    return `/es${cleanPath === "/" ? "" : cleanPath}`;
   }
 }
 
@@ -98,7 +98,7 @@ export function getLocalizedPath(
  * @returns Las traducciones del componente
  */
 export function getComponentTranslations<
-  T extends keyof (typeof translations)['es'],
+  T extends keyof (typeof translations)["es"],
 >(locale: Locale, component: T) {
   return translations[locale][component];
 }
@@ -109,7 +109,7 @@ export function getComponentTranslations<
  * @returns El locale alternativo
  */
 export function getAlternateLocale(currentLocale: Locale): Locale {
-  return currentLocale === 'es' ? 'en' : 'es';
+  return currentLocale === "es" ? "en" : "es";
 }
 
 /**
@@ -118,27 +118,27 @@ export function getAlternateLocale(currentLocale: Locale): Locale {
  * @returns El locale más apropiado basado en las preferencias del usuario
  */
 export function detectBrowserLocale(acceptLanguage?: string): Locale {
-  if (!acceptLanguage) return 'es';
+  if (!acceptLanguage) return "es";
 
   const languages = acceptLanguage
-    .split(',')
-    .map((lang) => lang?.split(';')[0]?.trim().toLowerCase())
+    .split(",")
+    .map((lang) => lang?.split(";")[0]?.trim().toLowerCase())
     .filter(Boolean);
 
   // Buscar coincidencias exactas primero
   for (const lang of languages) {
-    if (lang === 'es' || lang === 'es-es') return 'es';
-    if (lang === 'en' || lang === 'en-us' || lang === 'en-gb') return 'en';
+    if (lang === "es" || lang === "es-es") return "es";
+    if (lang === "en" || lang === "en-us" || lang === "en-gb") return "en";
   }
 
   // Buscar coincidencias parciales
   for (const lang of languages) {
-    if (lang?.startsWith('es')) return 'es';
-    if (lang?.startsWith('en')) return 'en';
+    if (lang?.startsWith("es")) return "es";
+    if (lang?.startsWith("en")) return "en";
   }
 
   // Fallback a español
-  return 'es';
+  return "es";
 }
 
 /**
@@ -149,8 +149,8 @@ export function detectBrowserLocale(acceptLanguage?: string): Locale {
  */
 export function formatNumber(number: number, locale: Locale): string {
   const localeMap = {
-    es: 'es-ES',
-    en: 'en-US',
+    es: "es-ES",
+    en: "en-US",
   };
 
   return new Intl.NumberFormat(localeMap[locale]).format(number);
@@ -169,8 +169,8 @@ export function formatDate(
   options?: Intl.DateTimeFormatOptions,
 ): string {
   const localeMap = {
-    es: 'es-ES',
-    en: 'en-US',
+    es: "es-ES",
+    en: "en-US",
   };
 
   return new Intl.DateTimeFormat(localeMap[locale], options).format(date);
@@ -183,11 +183,11 @@ export function formatDate(
  * @returns Objeto con las URLs para cada locale
  */
 export function getHreflangUrls(currentPath: string, baseUrl: string) {
-  const cleanPath = currentPath.replace(/^\/(es|en)/, '') || '/';
+  const cleanPath = currentPath.replace(/^\/(es|en)/, "") || "/";
 
   return {
-    es: `${baseUrl}/es${cleanPath === '/' ? '' : cleanPath}`,
-    en: `${baseUrl}/en${cleanPath === '/' ? '' : cleanPath}`,
-    'x-default': `${baseUrl}/es${cleanPath === '/' ? '' : cleanPath}`, // Español como predeterminado
+    es: `${baseUrl}/es${cleanPath === "/" ? "" : cleanPath}`,
+    en: `${baseUrl}/en${cleanPath === "/" ? "" : cleanPath}`,
+    "x-default": `${baseUrl}/es${cleanPath === "/" ? "" : cleanPath}`, // Español como predeterminado
   };
 }

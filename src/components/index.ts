@@ -9,28 +9,28 @@
  */
 
 // === Layout Components ===
-export { default as Header } from './Header.astro';
-export { default as Footer } from './Footer.astro';
-export { default as Section } from './Section.astro';
+export { default as Header } from "./Header.astro";
+export { default as Footer } from "./Footer.astro";
+export { default as Section } from "./Section.astro";
 
 // === UI Components ===
-export { default as Icon } from './Icon.astro';
-export { default as LanguageSelector } from './LanguageSelector.astro';
+export { default as Icon } from "./Icon.astro";
+export { default as LanguageSelector } from "./LanguageSelector.astro";
 
 // === Card Components ===
-export { default as ProjectCard } from './ProjectCard.astro';
-export { default as SkillCard } from './SkillCard.astro';
-export { default as ExperienceItem } from './ExperienceItem.astro';
+export { default as ProjectCard } from "./ProjectCard.astro";
+export { default as SkillCard } from "./SkillCard.astro";
+export { default as ExperienceItem } from "./ExperienceItem.astro";
 
 // === Form Components ===
-export { default as ContactForm } from './ContactForm.astro';
+export { default as ContactForm } from "./ContactForm.astro";
 
 // === Type Definitions (for better TypeScript support) ===
 export type ComponentProps = {
   // Define common props that your components might share
   class?: string;
   id?: string;
-  'data-testid'?: string;
+  "data-testid"?: string;
 };
 
 /**

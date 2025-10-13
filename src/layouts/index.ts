@@ -9,7 +9,7 @@
  */
 
 // === Base Layouts ===
-export { default as Layout } from './Layout.astro';
+export { default as Layout } from "./Layout.astro";
 
 // === Future layout exports (uncomment when created) ===
 // export { default as BlogLayout } from './BlogLayout.astro';

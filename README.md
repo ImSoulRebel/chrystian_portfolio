@@ -5,7 +5,7 @@ Un portfolio profesional y moderno desarrollado con **Astro**, diseñado para mo
 ## ✨ Características
 
 - 🎨 **Diseño Moderno**: Interfaz elegante con tema oscuro y gradientes
-- 📱 **Responsive**: Optimizado para todos los dispositivos  
+- 📱 **Responsive**: Optimizado para todos los dispositivos
 - ⚡ **Performance**: Carga rápida gracias a Astro
 - 🎯 **SEO Optimizado**: Meta tags y estructura semántica
 - 🔄 **Animaciones Suaves**: Transiciones y efectos visuales
@@ -160,12 +160,12 @@ bun preview
 
 ### 🔒 **Mejores Prácticas**
 
-| ✅ Hacer | ❌ No Hacer |
-|---------|-------------|
+| ✅ Hacer                                    | ❌ No Hacer                          |
+| ------------------------------------------- | ------------------------------------ |
 | Usar `PUBLIC_` solo para datos no sensibles | Poner API keys en variables públicas |
-| Mantener `.env` en `.gitignore` | Subir archivos `.env` a Git |
-| Documentar variables en `.env.example` | Hardcodear valores en el código |
-| Validar variables en `astro.config.mjs` | Usar variables sin validación |
+| Mantener `.env` en `.gitignore`             | Subir archivos `.env` a Git          |
+| Documentar variables en `.env.example`      | Hardcodear valores en el código      |
+| Validar variables en `astro.config.mjs`     | Usar variables sin validación        |
 
 ---
 
@@ -182,6 +182,7 @@ El formulario de contacto utiliza **[Formspree](https://formspree.io)** - un ser
    - Copiar el endpoint generado: `https://formspree.io/f/XXXXXXXX`
 
 3. **Configurar en `.env`**:
+
    ```env
    PUBLIC_FORMSPREE_ENDPOINT=https://formspree.io/f/XXXXXXXX
    ```
@@ -206,6 +207,7 @@ El formulario de contacto utiliza **[Formspree](https://formspree.io)** - un ser
 ### � **Configuración Avanzada** (Opcional)
 
 En el dashboard de Formspree puedes:
+
 - **CAPTCHA**: Activar reCAPTCHA para mejor protección anti-spam
 - **Integraciones**: Conectar con Slack, Zapier, webhooks
 - **Email Template**: Personalizar el formato de notificación
@@ -213,10 +215,10 @@ En el dashboard de Formspree puedes:
 
 ### 📊 **Planes**
 
-| Plan | Mensajes/mes | Características |
-|------|--------------|-----------------|
-| **Free** | 50 | Formularios ilimitados, notificaciones email |
-| **Premium** | 1,000 | CAPTCHA avanzado, exportación de datos, analytics |
+| Plan        | Mensajes/mes | Características                                   |
+| ----------- | ------------ | ------------------------------------------------- |
+| **Free**    | 50           | Formularios ilimitados, notificaciones email      |
+| **Premium** | 1,000        | CAPTCHA avanzado, exportación de datos, analytics |
 
 ---
 
@@ -344,6 +346,7 @@ bun build
 ### **Otras Plataformas**
 
 Compatible con:
+
 - **Vercel**: Deploy automático desde Git
 - **Netlify**: Configuración de build incluida
 - **Cloudflare Pages**: Compatible con Astro SSG
@@ -363,6 +366,7 @@ PUBLIC_DEBUG_MODE=true
 ### **Página de Prueba**
 
 Visita `/env-example` para verificar:
+
 - ✅ Estado de todas las variables de entorno
 - ✅ Configuración de servicios (Formspree)
 - ✅ Diferencias entre variables cliente/servidor
@@ -383,12 +387,12 @@ bun build --verbose
 
 ### **Solución de Problemas Comunes**
 
-| Problema | Solución |
-|----------|----------|
-| Variables no definidas | Ejecutar `bun astro sync` para regenerar tipos |
-| TypeScript no reconoce imports | Verificar que existe `src/env.d.ts` |
-| Formulario no envía | Verificar `PUBLIC_FORMSPREE_ENDPOINT` en `.env` |
-| Build falla | Revisar que todas las variables requeridas estén en `.env.production` |
+| Problema                       | Solución                                                              |
+| ------------------------------ | --------------------------------------------------------------------- |
+| Variables no definidas         | Ejecutar `bun astro sync` para regenerar tipos                        |
+| TypeScript no reconoce imports | Verificar que existe `src/env.d.ts`                                   |
+| Formulario no envía            | Verificar `PUBLIC_FORMSPREE_ENDPOINT` en `.env`                       |
+| Build falla                    | Revisar que todas las variables requeridas estén en `.env.production` |
 
 ---
 
@@ -413,6 +417,7 @@ Este proyecto es de código abierto y está disponible bajo la licencia MIT.
 ## 👨‍💻 Autor
 
 **Chrystian Michell**
+
 - 🌐 Portfolio: [imsoulrebel.github.io/chrystian_portfolio](https://imsoulrebel.github.io/chrystian_portfolio)
 - 💼 GitHub: [@ImSoulRebel](https://github.com/ImSoulRebel)
 - 💼 LinkedIn: [chrystianmichell](https://linkedin.com/in/chrystianmichell)

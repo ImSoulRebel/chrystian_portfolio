@@ -9,17 +9,17 @@
  */
 
 // === Hero & Introduction Sections ===
-export { default as HeroSection } from './HeroSection.astro';
-export { default as AboutSection } from './AboutSection.astro';
-export { default as HighlightsSection } from './HighlightsSection.astro';
+export { default as HeroSection } from "./HeroSection.astro";
+export { default as AboutSection } from "./AboutSection.astro";
+export { default as HighlightsSection } from "./HighlightsSection.astro";
 
 // === Content Sections ===
-export { default as ProjectsSection } from './ProjectsSection.astro';
-export { default as SkillsSection } from './SkillsSection.astro';
-export { default as ExperienceSection } from './ExperienceSection.astro';
+export { default as ProjectsSection } from "./ProjectsSection.astro";
+export { default as SkillsSection } from "./SkillsSection.astro";
+export { default as ExperienceSection } from "./ExperienceSection.astro";
 
 // === Contact & Footer Sections ===
-export { default as ContactSection } from './ContactSection.astro';
+export { default as ContactSection } from "./ContactSection.astro";
 
 // === Type definitions for section props ===
 export type SectionProps = {
@@ -27,34 +27,34 @@ export type SectionProps = {
   class?: string;
   title?: string;
   subtitle?: string;
-  background?: 'dark' | 'light' | 'gradient';
-  padding?: 'sm' | 'md' | 'lg';
+  background?: "dark" | "light" | "gradient";
+  padding?: "sm" | "md" | "lg";
 };
 
 /**
  * Section categories for organized imports
  */
 export const IntroSections = [
-  'HeroSection',
-  'AboutSection',
-  'HighlightsSection',
+  "HeroSection",
+  "AboutSection",
+  "HighlightsSection",
 ] as const;
 
 export const ContentSections = [
-  'ProjectsSection',
-  'SkillsSection',
-  'ExperienceSection',
+  "ProjectsSection",
+  "SkillsSection",
+  "ExperienceSection",
 ] as const;
 
-export const ContactSections = ['ContactSection'] as const;
+export const ContactSections = ["ContactSection"] as const;
 
 // === Section order for home page ===
 export const HomePageSections = [
-  'HeroSection',
-  'AboutSection',
-  'HighlightsSection',
-  'SkillsSection',
-  'ExperienceSection',
-  'ProjectsSection',
-  'ContactSection',
+  "HeroSection",
+  "AboutSection",
+  "HighlightsSection",
+  "SkillsSection",
+  "ExperienceSection",
+  "ProjectsSection",
+  "ContactSection",
 ] as const;

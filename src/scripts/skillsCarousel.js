@@ -15,16 +15,16 @@ export class SkillsCarousel {
 
   init() {
     // Wait for DOM to be ready
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', () => this.setupCarousel());
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", () => this.setupCarousel());
     } else {
       this.setupCarousel();
     }
   }
 
   setupCarousel() {
-    this.skillsTrack = document.querySelector('.skills-track');
-    this.skillsCarousel = document.querySelector('.skills-carousel');
+    this.skillsTrack = document.querySelector(".skills-track");
+    this.skillsCarousel = document.querySelector(".skills-carousel");
 
     if (!this.skillsTrack || !this.skillsCarousel) return;
 
@@ -90,10 +90,10 @@ export class SkillsCarousel {
     this.isDragging = true;
     this.pauseAnimation();
 
-    const clientX = 'touches' in e ? e.touches[0].clientX : e.clientX;
+    const clientX = "touches" in e ? e.touches[0].clientX : e.clientX;
     this.startX = clientX;
 
-    this.skillsCarousel.style.cursor = 'grabbing';
+    this.skillsCarousel.style.cursor = "grabbing";
     e.preventDefault();
   }
 
@@ -102,7 +102,7 @@ export class SkillsCarousel {
     if (!this.isDragging) return;
 
     e.preventDefault();
-    const clientX = 'touches' in e ? e.touches[0].clientX : e.clientX;
+    const clientX = "touches" in e ? e.touches[0].clientX : e.clientX;
     const deltaX = clientX - this.startX;
 
     this.currentTranslate += deltaX;
@@ -117,11 +117,11 @@ export class SkillsCarousel {
     if (!this.isDragging) return;
 
     this.isDragging = false;
-    this.skillsCarousel.style.cursor = 'grab';
+    this.skillsCarousel.style.cursor = "grab";
 
     // Resume animation after a short delay
     setTimeout(() => {
-      if (!this.skillsCarousel.matches(':hover')) {
+      if (!this.skillsCarousel.matches(":hover")) {
         this.resumeAnimation();
       }
     }, 1000);
@@ -131,10 +131,10 @@ export class SkillsCarousel {
   hideIndicator() {
     if (!this.hasInteracted) {
       this.hasInteracted = true;
-      const indicatorText = document.querySelector('.indicator-text');
+      const indicatorText = document.querySelector(".indicator-text");
       if (indicatorText) {
-        indicatorText.style.opacity = '0';
-        indicatorText.style.transition = 'opacity 0.5s ease';
+        indicatorText.style.opacity = "0";
+        indicatorText.style.transition = "opacity 0.5s ease";
       }
     }
   }
@@ -142,50 +142,50 @@ export class SkillsCarousel {
   // Bind all event listeners
   bindEvents() {
     // Mouse hover events
-    this.skillsCarousel.addEventListener('mouseenter', () =>
+    this.skillsCarousel.addEventListener("mouseenter", () =>
       this.pauseAnimation(),
     );
-    this.skillsCarousel.addEventListener('mouseleave', () =>
+    this.skillsCarousel.addEventListener("mouseleave", () =>
       this.resumeAnimation(),
     );
 
     // Mouse drag events
-    this.skillsCarousel.addEventListener('mousedown', (e) => {
+    this.skillsCarousel.addEventListener("mousedown", (e) => {
       this.startDrag(e);
       this.hideIndicator();
     });
-    document.addEventListener('mousemove', (e) => this.drag(e));
-    document.addEventListener('mouseup', () => this.endDrag());
+    document.addEventListener("mousemove", (e) => this.drag(e));
+    document.addEventListener("mouseup", () => this.endDrag());
 
     // Touch events
     this.skillsCarousel.addEventListener(
-      'touchstart',
+      "touchstart",
       (e) => {
         this.startDrag(e);
         this.hideIndicator();
       },
       { passive: false },
     );
-    document.addEventListener('touchmove', (e) => this.drag(e), {
+    document.addEventListener("touchmove", (e) => this.drag(e), {
       passive: false,
     });
-    document.addEventListener('touchend', () => this.endDrag());
+    document.addEventListener("touchend", () => this.endDrag());
 
     // Prevent context menu
-    this.skillsCarousel.addEventListener('contextmenu', (e) =>
+    this.skillsCarousel.addEventListener("contextmenu", (e) =>
       e.preventDefault(),
     );
 
     // Accessibility events
-    this.skillsCarousel.addEventListener('focusin', () =>
+    this.skillsCarousel.addEventListener("focusin", () =>
       this.pauseAnimation(),
     );
-    this.skillsCarousel.addEventListener('focusout', () => {
+    this.skillsCarousel.addEventListener("focusout", () => {
       if (!this.isDragging) this.resumeAnimation();
     });
 
     // Cleanup on page unload
-    window.addEventListener('beforeunload', () => {
+    window.addEventListener("beforeunload", () => {
       cancelAnimationFrame(this.animationFrame);
     });
   }
