@@ -76,7 +76,7 @@ declare global {
   namespace App {
     // Tipos para locals de Astro (middleware)
     interface Locals {
-      currentLanguage?: "es" | "en";
+      currentLanguage?: 'es' | 'en';
       isProduction?: boolean;
     }
 

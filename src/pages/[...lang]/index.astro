@@ -7,6 +7,6 @@ export async function getStaticPaths() {
 // En producción usa el base path, en desarrollo no
 return Astro.redirect(
   `${import.meta.env.PROD ? '/chrystian_portfolio' : ''}/${Astro.params.lang}/portfolio/`,
-  302,
+  302
 );
 ---

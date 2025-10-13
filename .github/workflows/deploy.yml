@@ -15,7 +15,7 @@ permissions:
 
 # Previene ejecuciones concurrentes
 concurrency:
-  group: "pages"
+  group: 'pages'
   cancel-in-progress: false
 
 jobs:
@@ -28,8 +28,8 @@ jobs:
       - name: 🟢 Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: "20"
-          cache: "yarn"
+          node-version: '20'
+          cache: 'yarn'
 
       - name: 📦 Install Dependencies
         run: yarn install --frozen-lockfile

@@ -215,7 +215,7 @@ const alternateLang = languageLabels[alternateLocale];
 
     constructor() {
       this.toggle = document.querySelector(
-        '[data-lang-toggle]',
+        '[data-lang-toggle]'
       ) as HTMLButtonElement;
       this.dropdown = document.querySelector('.lang-dropdown') as HTMLElement;
       this.init();
@@ -278,7 +278,7 @@ const alternateLang = languageLabels[alternateLocale];
           this.openDropdown();
           // Focus first option
           const firstOption = this.dropdown?.querySelector(
-            '.lang-option',
+            '.lang-option'
           ) as HTMLElement;
           firstOption?.focus();
           break;

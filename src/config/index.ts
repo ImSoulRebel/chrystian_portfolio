@@ -9,7 +9,7 @@
  */
 
 // === Site Configuration ===
-export * from "./site.js";
+export * from './site.js';
 
 // === Type definitions for configuration ===
 export type SiteConfig = {
@@ -47,11 +47,11 @@ export type ContactInfo = {
  * Configuration categories
  */
 export const ConfigCategories = [
-  "site",
-  "navigation",
-  "social",
-  "contact",
-  "seo",
+  'site',
+  'navigation',
+  'social',
+  'contact',
+  'seo',
 ] as const;
 
 // === Future config exports (uncomment when created) ===

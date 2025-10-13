@@ -16,7 +16,7 @@ import {
   PUBLIC_INSTAGRAM_URL,
   PUBLIC_SITE_VERSION,
   PUBLIC_DEBUG_MODE,
-} from "astro:env/client";
+} from 'astro:env/client';
 
 export const SITE_CONFIG = {
   // Información básica del sitio
@@ -29,21 +29,21 @@ export const SITE_CONFIG = {
 
   // Información técnica
   version: PUBLIC_SITE_VERSION,
-  locale: "es-ES",
-  image: "/og-image.jpg",
+  locale: 'es-ES',
+  image: '/og-image.jpg',
 
   // Configuración de desarrollo
   debug: PUBLIC_DEBUG_MODE || false,
 
   // SEO Keywords
   keywords:
-    "Flutter Developer, Dart, Tech Lead, Clean Architecture, BLoC Pattern, Desarrollo Multiplataforma, Apps Móviles, Smart TV, OTT Platform, Liderazgo Técnico",
+    'Flutter Developer, Dart, Tech Lead, Clean Architecture, BLoC Pattern, Desarrollo Multiplataforma, Apps Móviles, Smart TV, OTT Platform, Liderazgo Técnico',
 
   // Información de contacto
   contact: {
     email: PUBLIC_CONTACT_EMAIL,
-    phone: PUBLIC_CONTACT_PHONE || "+34 653 31 69 44",
-    location: PUBLIC_CONTACT_ADDRESS || "Aranjuez, Madrid, España",
+    phone: PUBLIC_CONTACT_PHONE || '+34 653 31 69 44',
+    location: PUBLIC_CONTACT_ADDRESS || 'Aranjuez, Madrid, España',
   },
 
   // Redes sociales (usando variables de entorno cuando estén disponibles)
@@ -69,14 +69,14 @@ export const SITE_CONFIG = {
 
 // Helper para obtener URL completa de assets
 export const getAssetUrl = (path) => {
-  const baseUrl = PUBLIC_SITE_URL || "";
-  return `${baseUrl}${path.startsWith("/") ? "" : "/"}${path}`;
+  const baseUrl = PUBLIC_SITE_URL || '';
+  return `${baseUrl}${path.startsWith('/') ? '' : '/'}${path}`;
 };
 
 // Helper para debug logging
 export const debugLog = (message, data = null) => {
   if (PUBLIC_DEBUG_MODE) {
-    console.log(`[SITE_CONFIG] ${message}`, data || "");
+    console.log(`[SITE_CONFIG] ${message}`, data || '');
   }
 };
 

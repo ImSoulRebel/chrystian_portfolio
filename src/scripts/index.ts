@@ -9,16 +9,16 @@
  */
 
 // === Core Application Scripts ===
-export * from "./app.js";
+export * from './app.js';
 
 // === Form Handling ===
-export * from "./contactForm.js";
+export * from './contactForm.js';
 
 // === UI Interactions ===
-export * from "./interactions.js";
+export * from './interactions.js';
 
 // === Component-specific Scripts ===
-export * from "./skillsCarousel.js";
+export * from './skillsCarousel.js';
 
 // === Type definitions for script functions ===
 export type ScriptFunction = () => void | Promise<void>;
@@ -34,21 +34,21 @@ export type InteractionConfig = {
 /**
  * Script categories for organized usage
  */
-export const CoreScripts = ["app"] as const;
+export const CoreScripts = ['app'] as const;
 
-export const FormScripts = ["contactForm"] as const;
+export const FormScripts = ['contactForm'] as const;
 
-export const UIScripts = ["interactions", "skillsCarousel"] as const;
+export const UIScripts = ['interactions', 'skillsCarousel'] as const;
 
 /**
  * Script initialization order
  * Use this array to ensure scripts load in the correct sequence
  */
 export const ScriptLoadOrder = [
-  "app",
-  "interactions",
-  "skillsCarousel",
-  "contactForm",
+  'app',
+  'interactions',
+  'skillsCarousel',
+  'contactForm',
 ] as const;
 
 // === Utility functions for script management ===
