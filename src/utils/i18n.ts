@@ -250,65 +250,37 @@ export function getHreflangUrls(currentPath: string) {
 
   // Limpiar el path: remover base path y locale
   let cleanPath = currentPath;
-<<<<<<< HEAD
 
-=======
-  
->>>>>>> 74b77bc38bfc4edb6ef46d446b530628c3953d09
   // Primero remover el base path si existe
   if (basePath && cleanPath.startsWith(basePath)) {
     cleanPath = cleanPath.slice(basePath.length);
   }
-<<<<<<< HEAD
 
-=======
-  
->>>>>>> 74b77bc38bfc4edb6ef46d446b530628c3953d09
   // Luego remover el prefijo de locale /es/ o /en/
   cleanPath = cleanPath.replace(/^\/(es|en)/, '') || '/';
-  
+
   // Asegurar que el path comience con /
   if (!cleanPath.startsWith('/')) {
     cleanPath = '/' + cleanPath;
   }
 
-<<<<<<< HEAD
-  // Asegurar que el path comience con /
-  if (!cleanPath.startsWith('/')) {
-    cleanPath = '/' + cleanPath;
-  }
-
-=======
->>>>>>> 74b77bc38bfc4edb6ef46d446b530628c3953d09
   // Construir URLs completas
   // siteUrl ya incluye el base path (ej: https://imsoulrebel.github.io/chrystian_portfolio)
   // solo necesitamos añadir: /locale/path
   const buildUrl = (locale: Locale) => {
     // Asegurar que siteUrl no termine con /
     const site = siteUrl.replace(/\/$/, '');
-<<<<<<< HEAD
 
     // Construir path: /locale + cleanPath
     let fullPath = `/${locale}`;
     if (cleanPath !== '/') {
       fullPath += cleanPath.endsWith('/')
-=======
-    
-    // Construir path: /locale + cleanPath
-    let fullPath = `/${locale}`;
-    if (cleanPath !== '/') {
-      fullPath += cleanPath.endsWith('/') 
->>>>>>> 74b77bc38bfc4edb6ef46d446b530628c3953d09
         ? `/${cleanPath.replace(/^\//, '')}`.replace(/\/$/, '') + '/'
         : `/${cleanPath.replace(/^\//, '')}`;
     } else {
       fullPath += '/';
     }
-<<<<<<< HEAD
 
-=======
-    
->>>>>>> 74b77bc38bfc4edb6ef46d446b530628c3953d09
     return `${site}${fullPath}`;
   };
 
