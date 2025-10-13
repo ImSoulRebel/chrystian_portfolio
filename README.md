@@ -7,11 +7,13 @@ Un portfolio profesional y moderno desarrollado con **Astro**, diseñado para mo
 - 🎨 **Diseño Moderno**: Interfaz elegante con tema oscuro y gradientes
 - 📱 **Responsive**: Optimizado para todos los dispositivos
 - ⚡ **Performance**: Carga rápida gracias a Astro
-- 🎯 **SEO Optimizado**: Meta tags y estructura semántica
+- 🎯 **SEO Optimizado**: Meta tags, hreflang y estructura semántica
 - 🔄 **Animaciones Suaves**: Transiciones y efectos visuales
 - 📧 **Formulario de Contacto**: Integración con Formspree
-- 🌍 **Multi-idioma**: Soporte para inglés y español
+- 🌍 **Multi-idioma**: Sistema i18n nativo con español e inglés
+- 🌐 **Multi-Plataforma**: Deployment automático en GitHub Pages y Netlify
 - 🔐 **Variables de Entorno**: Sistema tipo-seguro con Astro v5
+- 🚀 **CI/CD**: Linting, formateo y deployment automatizado
 
 ## 🛠️ Tecnologías
 
@@ -36,136 +38,131 @@ cd chrystian_portfolio
 ### 2️⃣ **Instalar Dependencias**
 
 ```bash
-bun install
+yarn install
 # o
 npm install
 ```
 
 ### 3️⃣ **Configurar Variables de Entorno**
 
-```bash
-# Copiar el archivo de ejemplo
-cp .env.example .env
+El proyecto incluye archivos `.env` pre-configurados para cada plataforma:
 
-# Editar con tus valores reales
-# Ver sección "Variables de Entorno" más abajo
+```bash
+# ✅ Ya incluidos en el repositorio
+.env.development    # Para desarrollo local
+.env.github         # Para GitHub Pages
+.env.netlify        # Para Netlify
+
+# ⚠️ Opcional: Sobrescribir localmente
+cp .env.development .env
 ```
+
+**Formspree (Opcional)**: Si quieres usar el formulario de contacto:
+1. Regístrate en [formspree.io](https://formspree.io)
+2. Crea un formulario y copia el endpoint
+3. Edita `.env.development` o crea `.env`:
+
+```env
+PUBLIC_FORMSPREE_ENDPOINT=https://formspree.io/f/TU_FORM_ID
+```
+
+Ver sección "📧 Configuración de Formspree" más abajo para detalles.
 
 ### 4️⃣ **Iniciar Servidor de Desarrollo**
 
 ```bash
-bun dev
+yarn dev
 # o
 npm run dev
 ```
 
 El sitio estará disponible en: `http://localhost:4321`
 
+**Nota**: El proyecto detecta automáticamente que estás en modo desarrollo y usa la configuración de `.env.development`.
+
 ---
 
 ## 🌍 Variables de Entorno
 
-Este proyecto utiliza el sistema de variables de entorno tipo-seguras de **Astro v5** con la API `astro:env`.
+Este proyecto utiliza un **sistema multi-plataforma** con archivos `.env` pre-configurados:
 
-### 📁 **Estructura de Archivos**
+### 📁 **Archivos de Configuración**
 
 ```
 📁 Proyecto/
-├── 📄 .env                 # Tu configuración local (NO subir a Git)
-├── 📄 .env.example         # Plantilla con ejemplos
-├── 📄 .env.development     # Configuración de desarrollo
-├── 📄 .env.production      # Configuración de producción
-└── 📄 astro.config.mjs     # Schema de tipos seguros
+├── 📄 .env.development     # ✅ Desarrollo local (incluido)
+├── 📄 .env.github          # ✅ GitHub Pages (incluido)
+├── 📄 .env.netlify         # ✅ Netlify (incluido)
+├── 📄 .env                 # ⚙️ Local override (opcional, .gitignore)
+└── 📄 astro.config.mjs     # 🔧 Configuración de plataforma
 ```
 
-### 🔐 **Variables Configuradas**
+### 🎯 **Detección Automática de Plataforma**
 
-El proyecto incluye dos tipos de variables:
+El sistema detecta automáticamente la plataforma usando `PUBLIC_DEPLOYMENT_PLATFORM`:
 
-#### **🌐 Variables Públicas** (accesibles en cliente y servidor)
+| Plataforma    | Variable                                | Base Path             | Site URL                              |
+| ------------- | --------------------------------------- | --------------------- | ------------------------------------- |
+| **GitHub**    | `PUBLIC_DEPLOYMENT_PLATFORM=github`     | `/chrystian_portfolio` | `imsoulrebel.github.io/chrystian_...` |
+| **Netlify**   | `PUBLIC_DEPLOYMENT_PLATFORM=netlify`    | `/` (root)            | `www.chrystianmichell.com`            |
+| **Dev**       | `PUBLIC_DEPLOYMENT_PLATFORM=development`| `/` (root)            | `localhost:4321`                      |
 
-Tienen el prefijo `PUBLIC_` y están disponibles tanto en el cliente como en el servidor:
+### 🔐 **Variables Principales**
+
+#### **Variables Públicas** (accesibles en cliente y servidor)
 
 ```env
-# Configuración del Sitio
+# Plataforma
+PUBLIC_DEPLOYMENT_PLATFORM=github|netlify|development
+
+# URLs del Sitio
 PUBLIC_SITE_URL=https://imsoulrebel.github.io/chrystian_portfolio
-PUBLIC_BASE_DOMAIN=https://www.imsoulrebel.github.io
+PUBLIC_BASE_PATH=/chrystian_portfolio
+
+# Información del Sitio
 PUBLIC_SITE_TITLE=Chrystian Michell | Portfolio
 PUBLIC_SITE_DESCRIPTION=Portfolio profesional de Chrystian Michell
-PUBLIC_SITE_VERSION=1.0.0
 
 # Información Personal
 PUBLIC_AUTHOR_NAME=Chrystian Michell
 PUBLIC_CONTACT_EMAIL=chrystianmichell@hotmail.com
 PUBLIC_GITHUB_USERNAME=ImSoulRebel
-PUBLIC_LINKEDIN_URL=https://linkedin.com/in/chrystianmichell
-PUBLIC_PHONE=+51 945 062 690
 
-# Configuración de Desarrollo
-PUBLIC_DEV_PORT=4321
-PUBLIC_DEBUG_MODE=false
-
-# Formspree
+# Servicios
 PUBLIC_FORMSPREE_ENDPOINT=https://formspree.io/f/YOUR_FORM_ID
 ```
 
-#### **🔒 Variables Secretas** (solo servidor)
+###  **Uso en el Código**
 
-Sin prefijo, solo accesibles en el servidor (para APIs, webhooks, etc.):
-
-```env
-CONTACT_FORM_API_KEY=tu_api_key_secreta
-WEBHOOK_URL=https://hooks.slack.com/services/...
-```
-
-### 📖 **Uso en el Código**
+Las variables públicas se cargan automáticamente en `astro:env/client`:
 
 ```astro
 ---
-// Variables públicas (disponibles en cliente y servidor)
-import { PUBLIC_SITE_TITLE, PUBLIC_AUTHOR_NAME } from 'astro:env/client';
-
-// Variables secretas (solo en servidor)
-import { CONTACT_FORM_API_KEY } from 'astro:env/server';
+import { PUBLIC_SITE_TITLE, PUBLIC_BASE_PATH } from 'astro:env/client';
 ---
 
 <h1>{PUBLIC_SITE_TITLE}</h1>
-<p>Por: {PUBLIC_AUTHOR_NAME}</p>
+<a href={`${PUBLIC_BASE_PATH}/portfolio/`}>Portfolio</a>
 ```
 
-### 🔄 **Gestión de Entornos**
+### 🔄 **Cómo Funciona**
 
-El proyecto soporta diferentes entornos automáticamente:
-
-```bash
-# Desarrollo (usa .env + .env.development)
-bun dev
-
-# Producción (usa .env.production)
-bun build
-
-# Preview de producción local
-bun preview
-```
-
-**Prioridad de carga**: `.env.local` > `.env.[mode]` > `.env`
+1. **Build**: Los scripts `build:github` y `build:netlify` establecen `PUBLIC_DEPLOYMENT_PLATFORM`
+2. **Detección**: `astro.config.mjs` carga el archivo `.env.[platform]` correspondiente
+3. **Construcción**: Astro genera URLs correctas automáticamente usando `base` configurado
 
 ### ⚙️ **Características del Sistema**
 
-- ✅ **Type-safe**: Validación automática de tipos en build time
-- ✅ **IntelliSense**: Autocompletado completo en VS Code
-- ✅ **Seguridad**: Variables secretas nunca llegan al cliente
-- ✅ **Multi-entorno**: Configuraciones separadas por entorno
-- ✅ **Validación**: Errores claros si faltan variables requeridas
+- ✅ **Sin cambios de código**: El mismo código funciona en todas las plataformas
+- ✅ **Type-safe**: Validación automática de tipos con TypeScript
+- ✅ **Helpers nativos**: Usa `getRelativeLocaleUrl` de Astro para rutas i18n
+- ✅ **SEO optimizado**: Hreflang URLs correctos para cada plataforma
 
-### 🔒 **Mejores Prácticas**
+### 🔒 **Seguridad**
 
-| ✅ Hacer                                    | ❌ No Hacer                          |
-| ------------------------------------------- | ------------------------------------ |
-| Usar `PUBLIC_` solo para datos no sensibles | Poner API keys en variables públicas |
-| Mantener `.env` en `.gitignore`             | Subir archivos `.env` a Git          |
-| Documentar variables en `.env.example`      | Hardcodear valores en el código      |
-| Validar variables en `astro.config.mjs`     | Usar variables sin validación        |
+- ✅ Los archivos `.env.[platform]` contienen valores **no sensibles** (están en Git)
+- ⚠️ Para API keys secretas, usa `.env` local (está en `.gitignore`)
+- ❌ **NUNCA** expongas API keys en variables `PUBLIC_*`
 
 ---
 
@@ -226,17 +223,37 @@ En el dashboard de Formspree puedes:
 
 ```bash
 # Desarrollo
-bun dev              # Inicia servidor de desarrollo
-bun dev:staging      # Desarrollo con entorno staging
+yarn dev                    # Inicia servidor de desarrollo (puerto 4321)
 
-# Producción
-bun build            # Build de producción
-bun build:staging    # Build para staging
-bun preview          # Preview del build
+# Build Multi-Plataforma
+yarn build:github           # Build para GitHub Pages (con base path)
+yarn build:netlify          # Build para Netlify (sin base path)
+
+# Preview
+yarn preview:github         # Preview del build de GitHub
+yarn preview:netlify        # Preview del build de Netlify
+
+# QA y Testing
+yarn lint                   # Ejecutar ESLint
+yarn format                 # Formatear código con Prettier
+yarn check                  # Verificar tipos TypeScript
+
+# Deployment
+yarn deploy:github          # Deploy a GitHub Pages
 
 # Utilidades
-bun astro sync       # Sincronizar tipos y validar variables
+yarn astro sync             # Sincronizar tipos y validar variables
 ```
+
+### 📚 **Guía de Deployment**
+
+Para instrucciones completas sobre deployment multi-plataforma, consulta **[DEPLOYMENT_GUIDE.md](./DEPLOYMENT_GUIDE.md)**:
+
+- 🔵 GitHub Pages (actual)
+- 🟢 Netlify (configurado y listo)
+- 📋 Variables de entorno por plataforma
+- 🔍 Solución de problemas
+- 📊 Checklists de deployment
 
 ---
 
@@ -331,24 +348,52 @@ export const SITE_CONFIG = {
 
 ## 🚀 Deployment
 
-### **GitHub Pages**
+### **🌐 Sistema Multi-Plataforma**
 
-El proyecto está configurado para deployar automáticamente en GitHub Pages.
+Este proyecto está diseñado para desplegarse en múltiples plataformas sin cambios en el código:
+
+| Plataforma       | Estado         | URL                                                          | Base Path             |
+| ---------------- | -------------- | ------------------------------------------------------------ | --------------------- |
+| **GitHub Pages** | ✅ Activo      | https://imsoulrebel.github.io/chrystian_portfolio            | `/chrystian_portfolio` |
+| **Netlify**      | 🟢 Configurado | https://www.chrystianmichell.com *(futuro)*                  | `/` (root)            |
+| **Development**  | 🔧 Local       | http://localhost:4321                                        | `/` (root)            |
+
+### **GitHub Pages (Actual)**
+
+El proyecto se despliega automáticamente mediante GitHub Actions:
 
 ```bash
-# Build para producción
-bun build
-
-# El output estará en /dist
-# GitHub Actions se encarga del deploy automático
+# Configuración automática en cada push a main
+git push origin main
 ```
+
+El workflow incluye:
+- ✅ Linting automático
+- ✅ Formateo de código (Prettier)
+- ✅ Build optimizado
+- ✅ Deploy a GitHub Pages
+
+### **Migración a Netlify (Futuro)**
+
+El proyecto está **completamente configurado** para Netlify. Cuando decidas migrar:
+
+1. Conecta el repositorio en Netlify
+2. Netlify detectará automáticamente `netlify.toml`
+3. El build se ejecutará con la configuración correcta
+4. Configura tu dominio personalizado
+
+No requiere cambios en el código - el sistema de detección de plataforma se encarga automáticamente.
+
+### **📖 Documentación Completa**
+
+Para guía detallada de deployment, troubleshooting y migración:
+
+👉 **[Ver DEPLOYMENT_GUIDE.md](./DEPLOYMENT_GUIDE.md)**
 
 ### **Otras Plataformas**
 
-Compatible con:
-
+También compatible con:
 - **Vercel**: Deploy automático desde Git
-- **Netlify**: Configuración de build incluida
 - **Cloudflare Pages**: Compatible con Astro SSG
 
 ---
