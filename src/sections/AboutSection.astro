@@ -1,0 +1,42 @@
+---
+import { getLocaleFromUrl, useTranslations } from '../utils/i18n';
+
+// Detectar el locale actual y obtener traducciones
+const locale = getLocaleFromUrl(Astro.url);
+const t = useTranslations(locale);
+
+const stats = [
+  { number: '10+', label: t('about.stats.apps') },
+  { number: '5+', label: t('about.stats.experience') },
+  { number: '50K+', label: t('about.stats.users') },
+  { number: '11', label: t('about.stats.countries') },
+];
+---
+
+<section id="about" class="about">
+  <div class="container">
+    <h2 class="section-title">{t('about.title')}</h2>
+    <div class="about-content">
+      <div class="about-text">
+        <p set:html={t('about.description1')} />
+        <p set:html={t('about.description2')} />
+      </div>
+      <p>
+        Me apasiona <strong>traducir complejidad en claridad</strong>: crear
+        arquitecturas escalables, establecer procesos que funcionen, y
+        desarrollar equipos que crezcan. Creo firmemente que la mejor tecnología
+        es la que resuelve problemas de negocio de forma sostenible.
+      </p>
+    </div>
+    <div class="stats">
+      {
+        stats.map((stat) => (
+          <div class="stat-item">
+            <div class="stat-number">{stat.number}</div>
+            <div class="stat-label">{stat.label}</div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>

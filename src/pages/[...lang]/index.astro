@@ -1,0 +1,248 @@
+---
+import {
+  AboutSection,
+  HighlightsSection,
+  SkillsSection,
+  ExperienceSection,
+  ProjectsSection,
+  ContactSection,
+  HeroSection,
+} from '@sections';
+import { Header, Footer } from '@components';
+import { Layout } from '@layouts';
+import { useTranslations, type Locale } from '@utils/i18n';
+
+// Define static paths for both languages
+export async function getStaticPaths() {
+  return [
+    { params: { lang: 'es' } }, // /es/
+    { params: { lang: 'en' } }, // /en/
+  ];
+}
+
+// Get the language from params
+const { lang } = Astro.params;
+const locale = (lang as Locale) || 'es';
+const t = useTranslations(locale);
+
+// SEO content based on locale
+const pageTitle = t('seo.title');
+const pageDescription = t('seo.description');
+const pageKeywords = t('seo.keywords');
+
+// Structured data for homepage
+const homeStructuredData = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'Person',
+      '@id': 'https://imsoulrebel.github.io/chrystian_portfolio/#person',
+      name: 'Chrystian Michell',
+      givenName: 'Chrystian',
+      familyName: 'Michell',
+      jobTitle:
+        locale === 'es'
+          ? 'Líder Técnico & Arquitecto Flutter'
+          : 'Tech Lead & Flutter Architect',
+      description:
+        locale === 'es'
+          ? 'Líder técnico con más de 5 años construyendo aplicaciones móviles escalables y liderando equipos de desarrollo'
+          : 'Technical leader with over 5 years building scalable mobile applications and leading development teams',
+      url: 'https://imsoulrebel.github.io/chrystian_portfolio/',
+      image: {
+        '@type': 'ImageObject',
+        url: 'https://imsoulrebel.github.io/chrystian_portfolio/profile-image.jpg',
+        width: 400,
+        height: 400,
+      },
+      sameAs: [
+        'https://linkedin.com/in/chrystianmichell',
+        'https://github.com/chrystian-dev',
+        'https://twitter.com/chrystianmichell',
+      ],
+      knowsAbout: [
+        'Flutter Development',
+        'Dart Programming',
+        'Mobile Architecture',
+        'Technical Leadership',
+        'Clean Architecture',
+        'BLoC Pattern',
+        'Cross-platform Development',
+        'DevOps',
+        'Team Management',
+        'Code Review',
+        'Agile Methodologies',
+        'CI/CD Implementation',
+      ],
+      hasOccupation: {
+        '@type': 'Occupation',
+        name:
+          locale === 'es'
+            ? 'Líder Técnico & Arquitecto Flutter'
+            : 'Technical Lead & Flutter Architect',
+        occupationLocation: {
+          '@type': 'Place',
+          name: locale === 'es' ? 'Remoto / España' : 'Remote / Spain',
+        },
+        skills:
+          'Flutter, Dart, Technical Leadership, Mobile Architecture, Clean Code, Team Management',
+        experienceRequirements: '5+ years',
+        responsibilities:
+          locale === 'es'
+            ? 'Liderar equipos de desarrollo, arquitectura de aplicaciones móviles escalables, revisión de código, mentoría técnica'
+            : 'Leading development teams, architecting scalable mobile applications, code review, technical mentoring',
+      },
+      worksFor: {
+        '@type': 'Organization',
+        name:
+          locale === 'es'
+            ? 'Disponible para Nuevas Oportunidades'
+            : 'Available for New Opportunities',
+        description:
+          locale === 'es'
+            ? 'Abierto a roles de Tech Lead, CTO, Desarrollador Senior y Consultoría'
+            : 'Open to Tech Lead, CTO, Senior Developer, and Consulting roles',
+      },
+      seeks: {
+        '@type': 'Demand',
+        name:
+          locale === 'es'
+            ? 'Posición de Liderazgo Técnico'
+            : 'Technical Leadership Position',
+        description:
+          locale === 'es'
+            ? 'Buscando roles de Tech Lead, CTO, Desarrollador Senior Flutter, o Consultor Técnico en empresas innovadoras'
+            : 'Seeking Tech Lead, CTO, Senior Flutter Developer, or Technical Consultant roles in innovative companies',
+      },
+    },
+    {
+      '@type': 'WebSite',
+      '@id': 'https://imsoulrebel.github.io/chrystian_portfolio/#website',
+      url: 'https://imsoulrebel.github.io/chrystian_portfolio/',
+      name: 'Chrystian Michell - Professional Portfolio',
+      description:
+        locale === 'es'
+          ? 'Portfolio que muestra expertise en Flutter, experiencia en liderazgo técnico y aplicaciones móviles exitosas'
+          : 'Portfolio showcasing Flutter expertise, technical leadership experience, and successful mobile applications',
+      publisher: {
+        '@id': 'https://imsoulrebel.github.io/chrystian_portfolio/#person',
+      },
+      potentialAction: {
+        '@type': 'SearchAction',
+        target:
+          'https://imsoulrebel.github.io/chrystian_portfolio/?s={search_term_string}',
+        'query-input': 'required name=search_term_string',
+      },
+    },
+    {
+      '@type': 'ProfessionalService',
+      name:
+        locale === 'es'
+          ? 'Servicios de Desarrollo Flutter y Liderazgo Técnico'
+          : 'Flutter Development & Technical Leadership Services',
+      description:
+        locale === 'es'
+          ? 'Desarrollo profesional de Flutter, diseño de arquitectura móvil, liderazgo técnico y servicios de consultoría'
+          : 'Professional Flutter development, mobile architecture design, technical leadership, and consulting services',
+      provider: {
+        '@id': 'https://imsoulrebel.github.io/chrystian_portfolio/#person',
+      },
+      serviceType: 'Software Development',
+      areaServed: 'Worldwide',
+      hasOfferCatalog: {
+        '@type': 'OfferCatalog',
+        name:
+          locale === 'es' ? 'Servicios de Desarrollo' : 'Development Services',
+        itemListElement: [
+          {
+            '@type': 'Offer',
+            itemOffered: {
+              '@type': 'Service',
+              name:
+                locale === 'es'
+                  ? 'Desarrollo de Apps Flutter'
+                  : 'Flutter App Development',
+              description:
+                locale === 'es'
+                  ? 'Desarrollo de aplicaciones móviles multiplataforma usando Flutter'
+                  : 'Cross-platform mobile application development using Flutter',
+            },
+          },
+          {
+            '@type': 'Offer',
+            itemOffered: {
+              '@type': 'Service',
+              name:
+                locale === 'es' ? 'Liderazgo Técnico' : 'Technical Leadership',
+              description:
+                locale === 'es'
+                  ? 'Liderazgo de equipos, diseño de arquitectura y mentoría técnica'
+                  : 'Team leadership, architecture design, and technical mentoring',
+            },
+          },
+          {
+            '@type': 'Offer',
+            itemOffered: {
+              '@type': 'Service',
+              name:
+                locale === 'es'
+                  ? 'Consultoría en Arquitectura Móvil'
+                  : 'Mobile Architecture Consulting',
+              description:
+                locale === 'es'
+                  ? 'Diseño e implementación de arquitectura móvil escalable'
+                  : 'Scalable mobile architecture design and implementation',
+            },
+          },
+        ],
+      },
+    },
+  ],
+};
+
+// Additional meta tags for recruiters
+const additionalMeta = [
+  { name: 'hiring-status', content: 'available' },
+  { name: 'work-authorization', content: 'EU citizen' },
+  { name: 'salary-expectation', content: 'competitive' },
+  { name: 'notice-period', content: 'immediate to 2 weeks' },
+  {
+    name: 'preferred-role',
+    content: 'Tech Lead, CTO, Senior Flutter Developer',
+  },
+  { name: 'team-size-managed', content: '2-15 developers' },
+  { name: 'years-experience', content: '5+' },
+  {
+    name: 'specialization',
+    content: 'Flutter, Mobile Architecture, Technical Leadership',
+  },
+];
+
+
+---
+
+<Layout
+  title={pageTitle}
+  description={pageDescription}
+  keywords={pageKeywords}
+  structuredData={homeStructuredData}
+  additionalMeta={additionalMeta}
+>
+  <Header />
+
+  <HeroSection />
+
+  <AboutSection />
+
+  <HighlightsSection />
+
+  <SkillsSection />
+
+  <ExperienceSection />
+
+  <ProjectsSection />
+
+  <ContactSection />
+
+  <Footer />
+</Layout>

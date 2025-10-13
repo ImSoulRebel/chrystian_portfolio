@@ -1,0 +1,282 @@
+---
+import {
+  getLocaleFromUrl,
+  getHreflangUrls,
+  useTranslations,
+} from '@utils/i18n';
+
+export interface Props {
+  title?: string;
+  description?: string;
+  keywords?: string;
+  author?: string;
+  ogTitle?: string;
+  ogDescription?: string;
+  ogImage?: string;
+  ogUrl?: string;
+  twitterTitle?: string;
+  twitterDescription?: string;
+  twitterImage?: string;
+  canonicalUrl?: string;
+  structuredData?: any;
+  additionalMeta?: Array<{ name?: string; property?: string; content: string }>;
+}
+
+// Detectar el locale actual
+const locale = getLocaleFromUrl(Astro.url);
+const t = useTranslations(locale);
+
+// Obtener traducciones por defecto
+const defaultSeoTranslations = {
+  title: t('seo.title'),
+  description: t('seo.description'),
+  keywords: t('seo.keywords'),
+};
+
+const {
+  title = defaultSeoTranslations.title,
+  description = defaultSeoTranslations.description,
+  keywords = defaultSeoTranslations.keywords,
+  author = 'Chrystian Michell',
+  ogTitle = title,
+  ogDescription = description,
+  ogImage = 'https://imsoulrebel.github.io/chrystian_portfolio/og-image.jpg',
+  ogUrl = 'https://imsoulrebel.github.io/chrystian_portfolio/',
+  twitterTitle = title,
+  twitterDescription = description,
+  twitterImage = ogImage,
+  canonicalUrl = ogUrl,
+  structuredData,
+  additionalMeta = [],
+} = Astro.props;
+
+// Generar URLs hreflang
+const currentPath = Astro.url.pathname;
+const siteUrl =
+  Astro.site?.toString() ||
+  'https://imsoulrebel.github.io/chrystian_portfolio/';
+const hreflangUrls = getHreflangUrls(currentPath, siteUrl);
+
+// Schema.org JSON-LD por defecto
+const defaultStructuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'Chrystian Michell',
+  jobTitle:
+    locale === 'es'
+      ? 'Líder Técnico & Arquitecto Flutter'
+      : 'Tech Lead & Flutter Architect',
+  description:
+    locale === 'es'
+      ? 'Líder técnico con más de 5 años construyendo aplicaciones móviles escalables'
+      : 'Technical leader with over 5 years building scalable mobile applications',
+  url: siteUrl,
+  image: `${siteUrl}profile-image.jpg`,
+  sameAs: [
+    'https://linkedin.com/in/chrystianmichell',
+    'https://github.com/chrystian-dev',
+    'https://twitter.com/chrystianmichell',
+  ],
+  knowsAbout: [
+    'Flutter Development',
+    'Dart Programming',
+    'Mobile Architecture',
+    'Technical Leadership',
+    'Clean Architecture',
+    'BLoC Pattern',
+    'Cross-platform Development',
+    'DevOps',
+    'Team Management',
+  ],
+  worksFor: {
+    '@type': 'Organization',
+    name:
+      locale === 'es'
+        ? 'Consultor Técnico Freelance'
+        : 'Freelance Technical Consultant',
+  },
+  hasOccupation: {
+    '@type': 'Occupation',
+    name:
+      locale === 'es'
+        ? 'Líder Técnico & Arquitecto Flutter'
+        : 'Technical Lead & Flutter Architect',
+    occupationLocation: {
+      '@type': 'Place',
+      name: locale === 'es' ? 'Remoto / España' : 'Remote / Spain',
+    },
+    skills:
+      'Flutter, Dart, Technical Leadership, Mobile Architecture, Clean Code',
+  },
+};
+
+const finalStructuredData = structuredData || defaultStructuredData;
+
+// Meta locale específicos
+const localeSpecificMeta =
+  locale === 'es'
+    ? {
+        ogLocale: 'es_ES',
+        language: 'es',
+        region: 'ES',
+      }
+    : {
+        ogLocale: 'en_US',
+        language: 'en',
+        region: 'US',
+      };
+---
+
+<!doctype html>
+<html lang={locale}>
+  <head>
+    <!-- Meta tags básicos optimizados -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <meta name="keywords" content={keywords} />
+    <meta name="author" content={author} />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="language" content={localeSpecificMeta.language} />
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href={canonicalUrl} />
+
+    <!-- Hreflang tags para SEO internacional -->
+    <link rel="alternate" hreflang="es" href={hreflangUrls.es} />
+    <link rel="alternate" hreflang="en" href={hreflangUrls.en} />
+    <link
+      rel="alternate"
+      hreflang="x-default"
+      href={hreflangUrls['x-default']}
+    />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={ogUrl} />
+    <meta property="og:title" content={ogTitle} />
+    <meta property="og:description" content={ogDescription} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:locale" content={localeSpecificMeta.ogLocale} />
+    <meta
+      property="og:site_name"
+      content="Chrystian Michell - Portfolio Profesional"
+    />
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content={ogUrl} />
+    <meta name="twitter:title" content={twitterTitle} />
+    <meta name="twitter:description" content={twitterDescription} />
+    <meta name="twitter:image" content={twitterImage} />
+    <meta name="twitter:creator" content="@chrystianmichell" />
+    <meta name="twitter:site" content="@chrystianmichell" />
+
+    <!-- Meta tags para reclutadores y buscadores de talento -->
+    <meta
+      name="robots"
+      content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
+    />
+    <meta name="googlebot" content="index, follow" />
+    <meta name="availability" content="available for hire" />
+    <meta name="employment-type" content="full-time, contract, freelance" />
+    <meta name="experience-level" content="senior, lead, architect" />
+    <meta name="remote-work" content="yes" />
+    <meta name="location" content="Spain, Remote, Europe" />
+    <meta
+      name="industry"
+      content="Technology, Software Development, Mobile Applications"
+    />
+
+    <!-- LinkedIn específico -->
+    <meta property="profile:first_name" content="Chrystian" />
+    <meta property="profile:last_name" content="Michell" />
+    <meta property="profile:username" content="chrystianmichell" />
+
+    <!-- Meta tags adicionales personalizados -->
+    {
+      additionalMeta.map((meta) => (
+        <meta
+          {...(meta.name && { name: meta.name })}
+          {...(meta.property && { property: meta.property })}
+          content={meta.content}
+        />
+      ))
+    }
+
+    <!-- Structured Data (JSON-LD) -->
+    <script
+      type="application/ld+json"
+      set:html={JSON.stringify(finalStructuredData)}
+    />
+
+    <!-- Favicon optimizado -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+
+    <!-- Preconnect para optimización de performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <!-- DNS prefetch para recursos externos -->
+    <link rel="dns-prefetch" href="https://linkedin.com" />
+    <link rel="dns-prefetch" href="https://github.com" />
+
+    <!-- Título dinámico -->
+    <title>{title}</title>
+
+    <!-- Estilos globales -->
+    <link rel="stylesheet" href="/src/styles/global.css" />
+
+    <!-- Optimizaciones adicionales -->
+    <meta name="theme-color" content="#00d4ff" />
+    <meta name="msapplication-TileColor" content="#1a1a2e" />
+    <meta name="format-detection" content="telephone=no" />
+  </head>
+  <body>
+    <slot />
+
+    <!-- Scripts de optimización -->
+    <script>
+      import { App } from '@scripts';
+
+      // Initialize main application
+      new App();
+    </script>
+  </body>
+</html>
+
+<style>
+  html,
+  body {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    scroll-behavior: smooth;
+  }
+
+  /* Optimizaciones de performance */
+  * {
+    box-sizing: border-box;
+  }
+
+  /* Mejoras de accesibilidad */
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+</style>

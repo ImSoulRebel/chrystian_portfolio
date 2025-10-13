@@ -1,0 +1,39 @@
+---
+import { PUBLIC_AUTHOR_NAME } from 'astro:env/client';
+import { Layout } from '@layouts';
+import { Header, Footer } from '@components';
+import { ContactSection } from '@sections';
+import { useTranslations, type Locale } from '@utils/i18n';
+
+// Define static paths for both languages
+export async function getStaticPaths() {
+  return [
+    { params: { lang: 'es' } }, // /es/contact
+    { params: { lang: 'en' } }, // /en/contact
+  ];
+}
+
+// Get the language from params
+const { lang } = Astro.params;
+const locale = (lang as Locale) || 'es';
+const t = useTranslations(locale);
+
+const authorName = PUBLIC_AUTHOR_NAME;
+
+// SEO content based on locale
+const pageTitle = `${t('contact.title')} | ${authorName} - ${t('hero.title')}`;
+const pageDescription =
+  locale === 'es'
+    ? 'Contacta con Chrystian Michell para oportunidades de liderazgo técnico, proyectos de desarrollo Flutter y servicios de consultoría especializada. Disponible para contratación inmediata.'
+    : 'Contact Chrystian Michell for technical leadership opportunities, Flutter development projects, and specialized consulting services. Available for immediate hire.';
+---
+
+<Layout title={pageTitle} description={pageDescription}>
+  <Header />
+
+  <main>
+    <ContactSection />
+  </main>
+
+  <Footer />
+</Layout>

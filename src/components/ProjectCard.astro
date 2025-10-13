@@ -1,0 +1,436 @@
+---
+const {
+  title,
+  stack,
+  description,
+  impact,
+  image,
+  liveUrl,
+  githubUrl,
+  featured = false,
+} = Astro.props;
+
+// Convert stack string to array for better display
+const techStack = typeof stack === 'string' ? stack.split(' · ') : stack || [];
+---
+
+<div class={`project-card ${featured ? 'featured' : ''}`}>
+  <div class="project-image">
+    {
+      image ? (
+        <img
+          src={image}
+          alt={title}
+          loading="lazy"
+          style="object-fit: contain; padding: 20px;"
+        />
+      ) : (
+        <div class="project-placeholder">
+          <svg
+            width="60"
+            height="60"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M12 2L2 7L12 12L22 7L12 2Z"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linejoin="round"
+            />
+            <path
+              d="M2 17L12 22L22 17"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linejoin="round"
+            />
+            <path
+              d="M2 12L12 17L22 12"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </div>
+      )
+    }
+
+    <!-- Icon buttons in bottom left corner -->
+    <div class="project-actions">
+      {
+        liveUrl && (
+          <a
+            href={liveUrl}
+            class="icon-button live-button"
+            target="_blank"
+            rel="noopener noreferrer"
+            title="Visitar sitio web"
+            aria-label="Visitar sitio web del proyecto"
+          >
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M18 13V6A2 2 0 0 0 16 4H4A2 2 0 0 0 2 6V18A2 2 0 0 0 4 20H11"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M15 15L21 9"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M16 9H21V14"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </a>
+        )
+      }
+      {
+        githubUrl && (
+          <a
+            href={githubUrl}
+            class="icon-button github-button"
+            target="_blank"
+            rel="noopener noreferrer"
+            title="Ver código en GitHub"
+            aria-label="Ver código en GitHub"
+          >
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M15 22V18C15.1392 16.7473 14.78 15.4901 14 14.5C17 14.5 20 12.5 20 9C20.08 7.75 19.73 6.52 19 5.5C19.28 4.35 19.28 3.15 19 2C19 2 18 2 16 3.5C13.36 3 10.64 3 8 3.5C6 2 5 2 5 2C4.7 3.15 4.7 4.35 5 5.5C4.27 6.52 3.92 7.75 4 9C4 12.5 7 14.5 10 14.5C9.61 14.99 9.32 15.55 9.15 16.15C8.98 16.75 8.93 17.38 9 18V22"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M9 18C4.49 20 4 16 2 16"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </a>
+        )
+      }
+    </div>
+  </div>
+
+  <div class="project-content">
+    {featured && <div class="featured-badge">Destacado</div>}
+
+    <h3 class="project-title">{title}</h3>
+
+    <p class="project-description">{description}</p>
+
+    {
+      impact && (
+        <div class="project-impact">
+          <svg
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M13 2L3 14H12L11 22L21 10H12L13 2Z"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linejoin="round"
+            />
+          </svg>
+          <span>{impact}</span>
+        </div>
+      )
+    }
+
+    <div class="project-tech">
+      {
+        techStack.map((tech: string) => (
+          <span class="tech-tag">{tech.trim()}</span>
+        ))
+      }
+    </div>
+  </div>
+</div>
+
+<style>
+  .project-card {
+    background: var(--gradient-secondary);
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    border: 1px solid rgba(0, 212, 255, 0.1);
+    transition: var(--transition);
+    position: relative;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .project-card:hover {
+    transform: translateY(-10px);
+    box-shadow: var(--shadow-dark);
+    border-color: var(--primary-color);
+  }
+
+  .project-card.featured {
+    border-color: var(--primary-color);
+    box-shadow: var(--shadow-light);
+  }
+
+  .project-card.featured::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: var(--gradient-primary);
+    z-index: 1;
+  }
+
+  .project-image {
+    height: 200px;
+    position: relative;
+    overflow: hidden;
+    background: var(--gradient-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .project-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+
+  .project-card:hover .project-image img {
+    transform: scale(1.05);
+  }
+
+  .project-placeholder {
+    color: var(--background-dark);
+    opacity: 0.7;
+  }
+
+  .project-actions {
+    position: absolute;
+    bottom: 12px;
+    left: 12px;
+    display: flex;
+    gap: 8px;
+    z-index: 10;
+  }
+
+  .icon-button {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--background-dark);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    text-decoration: none;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  .project-card:hover .icon-button {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .icon-button:nth-child(1) {
+    transition-delay: 0.1s;
+  }
+
+  .icon-button:nth-child(2) {
+    transition-delay: 0.2s;
+  }
+
+  .icon-button:hover {
+    transform: translateY(-3px) scale(1.1);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+  }
+
+  .live-button {
+    border-color: #10b981;
+  }
+
+  .live-button:hover {
+    background: #10b981;
+    color: white;
+    border-color: #10b981;
+  }
+
+  .github-button {
+    border-color: #6366f1;
+  }
+
+  .github-button:hover {
+    background: #6366f1;
+    color: white;
+    border-color: #6366f1;
+  }
+
+  .icon-button svg {
+    width: 20px;
+    height: 20px;
+    transition: all 0.3s ease;
+  }
+
+  .project-content {
+    padding: 2rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+  }
+
+  .featured-badge {
+    position: absolute;
+    top: -10px;
+    right: 20px;
+    background: var(--gradient-primary);
+    color: var(--background-dark);
+    padding: 0.3rem 1rem;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .project-title {
+    font-size: 1.5rem;
+    margin: 0 0 1rem 0;
+    color: var(--text-primary);
+    font-weight: 600;
+  }
+
+  .project-description {
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+    flex: 1;
+  }
+
+  .project-impact {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--primary-color);
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
+    padding: 0.8rem;
+    background: rgba(0, 212, 255, 0.1);
+    border-radius: 8px;
+    border-left: 3px solid var(--primary-color);
+  }
+
+  .project-impact svg {
+    flex-shrink: 0;
+  }
+
+  .project-tech {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: auto;
+  }
+
+  .tech-tag {
+    background: rgba(0, 212, 255, 0.1);
+    color: var(--primary-color);
+    padding: 0.4rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    border: 1px solid rgba(0, 212, 255, 0.2);
+    transition: var(--transition);
+  }
+
+  .tech-tag:hover {
+    background: rgba(0, 212, 255, 0.2);
+    transform: translateY(-1px);
+  }
+
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .project-content {
+      padding: 1.5rem;
+    }
+
+    .project-image {
+      height: 160px;
+    }
+
+    .project-title {
+      font-size: 1.3rem;
+    }
+
+    .project-actions {
+      bottom: 10px;
+      left: 10px;
+      gap: 6px;
+    }
+
+    .icon-button {
+      width: 36px;
+      height: 36px;
+    }
+
+    .icon-button svg {
+      width: 18px;
+      height: 18px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .project-actions {
+      bottom: 8px;
+      left: 8px;
+      gap: 4px;
+    }
+
+    .icon-button {
+      width: 32px;
+      height: 32px;
+    }
+
+    .icon-button svg {
+      width: 16px;
+      height: 16px;
+    }
+  }
+</style>

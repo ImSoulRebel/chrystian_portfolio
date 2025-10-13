@@ -1,0 +1,22 @@
+---
+import { getLocaleFromUrl, useTranslations } from '../utils/i18n';
+
+// Detectar el locale actual y obtener traducciones
+const locale = getLocaleFromUrl(Astro.url);
+const t = useTranslations(locale);
+---
+
+<section id="home" class="hero">
+  <div class="hero-content">
+    <p class="hero-subtitle">{t('hero.greeting')}</p>
+    <h1 class="hero-title">{t('hero.name')}</h1>
+    <h2 class="hero-subtitle-main">{t('hero.title')}</h2>
+    <p class="hero-description">
+      {t('hero.description')}
+    </p>
+    <div class="hero-cta">
+      <a href="#contact" class="btn btn-primary">{t('hero.cta.contact')}</a>
+      <a href="#projects" class="btn btn-outline">{t('hero.cta.projects')}</a>
+    </div>
+  </div>
+</section>

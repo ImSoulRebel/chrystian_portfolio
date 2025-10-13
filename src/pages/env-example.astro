@@ -1,0 +1,256 @@
+---
+// ===========================================
+// EJEMPLO DE USO DE VARIABLES DE ENTORNO
+// ===========================================
+// Esta página demuestra cómo usar variables de entorno en Astro
+
+// IMPORTACIÓN EN CLIENTE (Variables públicas) - Estas siempre estarán disponibles
+import {
+  PUBLIC_SITE_TITLE,
+  PUBLIC_AUTHOR_NAME,
+  PUBLIC_GITHUB_USERNAME,
+  PUBLIC_DEBUG_MODE,
+  PUBLIC_FORMSPREE_ENDPOINT,
+} from 'astro:env/client';
+
+import { Layout } from '@layouts';
+import { SITE_CONFIG } from '@config/site.js';
+
+// Función helper para verificar si una variable del servidor está disponible
+// const checkServerVariable = async (varName: string) => {
+//   try {
+//     const { getSecret } = await import('astro:env/server');
+//     return !!getSecret(varName);
+//   } catch {
+//     return false;
+//   }
+// };
+
+// Verificaciones de variables del servidor usando getSecret
+let serverStatus = {
+  hasFormspree: false,
+  hasWebhook: false,
+  hasAnalytics: false,
+  timestamp: new Date().toISOString(),
+};
+
+try {
+  const { getSecret } = await import('astro:env/server');
+  serverStatus = {
+    hasFormspree: !!PUBLIC_FORMSPREE_ENDPOINT,
+    hasWebhook: !!getSecret('WEBHOOK_URL'),
+    hasAnalytics: !!getSecret('ANALYTICS_API_KEY'),
+    timestamp: new Date().toISOString(),
+  };
+} catch (error) {
+  console.log('Variables del servidor no disponibles en modo estático');
+}
+
+const pageTitle = `${PUBLIC_SITE_TITLE} - Variables de Entorno`;
+---
+
+<Layout title={pageTitle}>
+  <main class="max-w-4xl mx-auto py-8 px-4">
+    <h1 class="text-3xl font-bold mb-8 text-center">
+      🔧 Variables de Entorno en Astro
+    </h1>
+
+    <!-- INFORMACIÓN DEL SITIO -->
+    <section class="mb-8 p-6 bg-blue-50 rounded-lg">
+      <h2 class="text-2xl font-semibold mb-4">📋 Información del Sitio</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div>
+          <strong>Título:</strong>
+          {PUBLIC_SITE_TITLE}
+        </div>
+        <div>
+          <strong>Autor:</strong>
+          {PUBLIC_AUTHOR_NAME}
+        </div>
+        <div>
+          <strong>GitHub:</strong>
+          {PUBLIC_GITHUB_USERNAME || 'No configurado'}
+        </div>
+        <div>
+          <strong>Debug Mode:</strong>
+          <span
+            class={PUBLIC_DEBUG_MODE ? 'text-orange-600' : 'text-green-600'}
+          >
+            {PUBLIC_DEBUG_MODE ? 'Habilitado' : 'Deshabilitado'}
+          </span>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONFIGURACIÓN DEL SERVIDOR -->
+    <section class="mb-8 p-6 bg-green-50 rounded-lg">
+      <h2 class="text-2xl font-semibold mb-4">🖥️ Servicios del Servidor</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div class="text-center p-4 bg-white rounded-lg shadow">
+          <div class="text-2xl mb-2">
+            {serverStatus.hasFormspree ? '✅' : '❌'}
+          </div>
+          <div class="font-medium">Formspree</div>
+          <div class="text-sm text-gray-600">
+            {serverStatus.hasFormspree ? 'Configurado' : 'No configurado'}
+          </div>
+        </div>
+
+        <div class="text-center p-4 bg-white rounded-lg shadow">
+          <div class="text-2xl mb-2">
+            {serverStatus.hasWebhook ? '✅' : '❌'}
+          </div>
+          <div class="font-medium">Webhook</div>
+          <div class="text-sm text-gray-600">
+            {serverStatus.hasWebhook ? 'Configurado' : 'No configurado'}
+          </div>
+        </div>
+
+        <div class="text-center p-4 bg-white rounded-lg shadow">
+          <div class="text-2xl mb-2">
+            {serverStatus.hasAnalytics ? '✅' : '❌'}
+          </div>
+          <div class="font-medium">Analytics</div>
+          <div class="text-sm text-gray-600">
+            {serverStatus.hasAnalytics ? 'Configurado' : 'No configurado'}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONFIGURACIÓN DESDE SITE.JS -->
+    <section class="mb-8 p-6 bg-purple-50 rounded-lg">
+      <h2 class="text-2xl font-semibold mb-4">
+        ⚙️ Configuración desde site.js
+      </h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div>
+          <strong>URL del Sitio:</strong><br />
+          <code class="text-sm bg-gray-100 px-2 py-1 rounded"
+            >{SITE_CONFIG.url}</code
+          >
+        </div>
+        <div>
+          <strong>Versión:</strong><br />
+          <code class="text-sm bg-gray-100 px-2 py-1 rounded"
+            >{SITE_CONFIG.version}</code
+          >
+        </div>
+        <div>
+          <strong>Autor:</strong><br />
+          <code class="text-sm bg-gray-100 px-2 py-1 rounded"
+            >{SITE_CONFIG.author}</code
+          >
+        </div>
+        <div>
+          <strong>Debug:</strong><br />
+          <code class="text-sm bg-gray-100 px-2 py-1 rounded"
+            >{SITE_CONFIG.debug}</code
+          >
+        </div>
+      </div>
+    </section>
+
+    <!-- INFORMACIÓN TÉCNICA -->
+    <section class="mb-8 p-6 bg-gray-50 rounded-lg">
+      <h2 class="text-2xl font-semibold mb-4">🔍 Información Técnica</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+        <div>
+          <strong>Modo Astro:</strong>
+          {import.meta.env.MODE}
+        </div>
+        <div>
+          <strong>Producción:</strong>
+          {import.meta.env.PROD ? 'Sí' : 'No'}
+        </div>
+        <div>
+          <strong>Desarrollo:</strong>
+          {import.meta.env.DEV ? 'Sí' : 'No'}
+        </div>
+        <div>
+          <strong>Timestamp:</strong>
+          {serverStatus.timestamp}
+        </div>
+      </div>
+    </section>
+
+    <!-- INSTRUCCIONES -->
+    <section class="p-6 bg-yellow-50 rounded-lg border-l-4 border-yellow-400">
+      <h2 class="text-xl font-semibold mb-4">
+        💡 Cómo usar las variables de entorno
+      </h2>
+      <div class="space-y-4 text-sm">
+        <div>
+          <strong>Variables Públicas (CLIENT):</strong>
+          <pre
+            class="bg-gray-100 p-2 rounded mt-2 overflow-x-auto"><code>{'import { PUBLIC_SITE_TITLE } from \'astro:env/client\';'}</code></pre>
+          <p class="mt-1 text-gray-600">
+            Disponibles en cliente y servidor. Visibles en DevTools.
+          </p>
+        </div>
+
+        <div>
+          <strong>Variables Secretas (SERVER):</strong>
+          <pre
+            class="bg-gray-100 p-2 rounded mt-2 overflow-x-auto"><code>{'import { WEBHOOK_URL, ANALYTICS_API_KEY } from \'astro:env/server\';'}</code></pre>
+          <p class="mt-1 text-gray-600">
+            Solo en servidor. No se incluyen en el bundle del cliente.
+          </p>
+        </div>
+
+        <div>
+          <strong>Configuración:</strong>
+          <p class="mt-1 text-gray-600">
+            Las variables se definen en <code>astro.config.mjs</code> con tipos seguros.
+            Valores reales en <code>.env</code> (no subir a Git).
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- SCRIPT DEL CLIENTE PARA DEMOSTRAR VARIABLES PÚBLICAS -->
+  <script>
+    // Las variables públicas también están disponibles en scripts del cliente
+    import { PUBLIC_DEBUG_MODE, PUBLIC_SITE_TITLE } from 'astro:env/client';
+
+    console.log('🌐 Variables de entorno en el cliente:');
+    console.log('- Título del sitio:', PUBLIC_SITE_TITLE);
+    console.log('- Debug mode:', PUBLIC_DEBUG_MODE);
+
+    // Ejemplo de uso condicional basado en variables de entorno
+    if (PUBLIC_DEBUG_MODE) {
+      console.log(
+        '🔧 Modo debug habilitado - Información adicional disponible',
+      );
+
+      // Crear indicador visual de debug mode
+      const debugIndicator = document.createElement('div');
+      debugIndicator.innerHTML = '🔧 DEBUG MODE';
+      debugIndicator.style.cssText = `
+        position: fixed;
+        top: 10px;
+        right: 10px;
+        background: orange;
+        color: white;
+        padding: 5px 10px;
+        border-radius: 5px;
+        font-size: 12px;
+        z-index: 1000;
+        font-weight: bold;
+      `;
+      document.body.appendChild(debugIndicator);
+    }
+  </script>
+
+  <style>
+    code {
+      font-family: 'Courier New', monospace;
+    }
+
+    pre {
+      white-space: pre-wrap;
+      word-wrap: break-word;
+    }
+  </style>
+</Layout>

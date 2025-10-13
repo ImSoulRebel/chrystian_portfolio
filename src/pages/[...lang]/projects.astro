@@ -1,0 +1,36 @@
+---
+import { Layout } from '@layouts';
+import { Header, Footer } from '@components';
+import { ProjectsSection } from '@sections';
+import { useTranslations, type Locale } from '@utils/i18n';
+
+// Define static paths for both languages
+export async function getStaticPaths() {
+  return [
+    { params: { lang: 'es' } }, // /es/projects
+    { params: { lang: 'en' } }, // /en/projects
+  ];
+}
+
+// Get the language from params
+const { lang } = Astro.params;
+const locale = (lang as Locale) || 'es';
+const t = useTranslations(locale);
+
+// SEO content based on locale
+const pageTitle = `${t('projects.title')} | Chrystian Michell - ${t('hero.title')}`;
+const pageDescription =
+  locale === 'es'
+    ? 'Explora los proyectos destacados de Chrystian Michell: aplicaciones Flutter multiplataforma, plataformas OTT, Smart TV apps y soluciones móviles innovadoras desplegadas en múltiples países.'
+    : "Explore Chrystian Michell's featured projects: cross-platform Flutter applications, OTT platforms, Smart TV apps, and innovative mobile solutions deployed across multiple countries.";
+---
+
+<Layout title={pageTitle} description={pageDescription}>
+  <Header />
+
+  <main>
+    <ProjectsSection />
+  </main>
+
+  <Footer />
+</Layout>

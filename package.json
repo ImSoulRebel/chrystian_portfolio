@@ -1,0 +1,69 @@
+{
+  "name": "chrystian-portfolio",
+  "version": "1.0.0",
+  "description": "Portfolio personal de Chrystian Michell - Desarrollador Full Stack & Tech Lead",
+  "type": "module",
+  "private": true,
+  "author": {
+    "name": "Chrystian Michell",
+    "email": "chrystianmichell@hotmail.com",
+    "url": "https://imsoulrebel.github.io/chrystian_portfolio"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ImSoulRebel/chrystian_portfolio.git"
+  },
+  "homepage": "https://imsoulrebel.github.io/chrystian_portfolio",
+  "bugs": {
+    "url": "https://github.com/ImSoulRebel/chrystian_portfolio/issues"
+  },
+  "license": "MIT",
+  "scripts": {
+    "dev": "astro dev --host",
+    "start": "astro dev",
+    "build": "astro check && astro build",
+    "preview": "astro preview --host",
+    "preview:build": "yarn run build && yarn run preview",
+    "deploy": "yarn run build && gh-pages -d dist",
+    "deploy:force": "yarn run build && gh-pages -d dist -f",
+    "clean": "rimraf dist .astro node_modules/.astro",
+    "clean:all": "rimraf dist .astro node_modules",
+    "astro": "astro",
+    "check": "astro check",
+    "check:watch": "astro check --watch",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "type-check": "tsc --noEmit",
+    "lint": "prettier --check . && astro check",
+    "test": "echo \"No tests configured yet\" && exit 0",
+    "validate": "yarn run lint && yarn run type-check && yarn run build",
+    "postinstall": "astro sync"
+  },
+  "dependencies": {
+    "astro": "^5.14.4"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.4",
+    "gh-pages": "^6.2.0",
+    "prettier": "^3.4.2",
+    "prettier-plugin-astro": "^0.15.1",
+    "rimraf": "^6.0.1",
+    "typescript": "^5.7.3"
+  },
+  "optionalDependencies": {
+    "@rollup/rollup-win32-arm64-msvc": "^4.52.4"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "keywords": [
+    "portfolio",
+    "astro",
+    "static-site",
+    "personal-website",
+    "developer-portfolio",
+    "tech-lead",
+    "typescript",
+    "responsive-design"
+  ]
+}
