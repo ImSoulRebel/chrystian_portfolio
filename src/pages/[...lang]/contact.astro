@@ -28,12 +28,12 @@ const pageDescription =
     : 'Contact Chrystian Michell for technical leadership opportunities, Flutter development projects, and specialized consulting services. Available for immediate hire.';
 ---
 
-<Layout title={pageTitle} description={pageDescription}>
-  <Header />
+<Layout title={pageTitle} description={pageDescription} locale={locale}>
+  <Header locale={locale} />
 
   <main>
-    <ContactSection />
+    <ContactSection locale={locale} />
   </main>
 
-  <Footer />
+  <Footer locale={locale} />
 </Layout>

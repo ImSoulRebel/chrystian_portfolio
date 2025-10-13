@@ -3,6 +3,7 @@ import {
   getLocaleFromUrl,
   getHreflangUrls,
   useTranslations,
+  type Locale,
 } from '@utils/i18n';
 
 // Importar estilos globales correctamente
@@ -23,10 +24,12 @@ export interface Props {
   canonicalUrl?: string;
   structuredData?: any;
   additionalMeta?: Array<{ name?: string; property?: string; content: string }>;
+  locale?: Locale;
 }
 
-// Detectar el locale actual
-const locale = getLocaleFromUrl(Astro.url);
+// Detectar el locale: usar prop si se pasa, sino detectar de URL
+const propsLocale = Astro.props.locale;
+const locale = propsLocale || getLocaleFromUrl(Astro.url);
 const t = useTranslations(locale);
 
 // Obtener traducciones por defecto

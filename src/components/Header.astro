@@ -1,9 +1,13 @@
 ---
-import { getLocaleFromUrl, useTranslations } from '../utils/i18n';
+import { useTranslations, type Locale } from '../utils/i18n';
 import LanguageSelector from './LanguageSelector.astro';
 
-// Detectar el locale actual
-const locale = getLocaleFromUrl(Astro.url);
+// Recibir locale como prop
+interface Props {
+  locale?: Locale;
+}
+
+const { locale = 'es' } = Astro.props;
 const t = useTranslations(locale);
 const currentPath = Astro.url.pathname;
 

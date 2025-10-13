@@ -1,6 +1,6 @@
 ---
 import { Icon, ContactForm } from '@components';
-import { getLocaleFromUrl, useTranslations } from '@utils/i18n';
+import { useTranslations, type Locale } from '@utils/i18n';
 import {
   PUBLIC_CONTACT_EMAIL,
   PUBLIC_CONTACT_PHONE,
@@ -8,7 +8,12 @@ import {
   PUBLIC_LINKEDIN_URL,
 } from 'astro:env/client';
 
-const locale = getLocaleFromUrl(Astro.url);
+// Recibir locale como prop en lugar de detectarlo
+interface Props {
+  locale?: Locale;
+}
+
+const { locale = 'es' } = Astro.props;
 const t = useTranslations(locale);
 const contactEmail = PUBLIC_CONTACT_EMAIL;
 const contactPhone = PUBLIC_CONTACT_PHONE;

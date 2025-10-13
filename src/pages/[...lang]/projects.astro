@@ -25,12 +25,12 @@ const pageDescription =
     : "Explore Chrystian Michell's featured projects: cross-platform Flutter applications, OTT platforms, Smart TV apps, and innovative mobile solutions deployed across multiple countries.";
 ---
 
-<Layout title={pageTitle} description={pageDescription}>
-  <Header />
+<Layout title={pageTitle} description={pageDescription} locale={locale}>
+  <Header locale={locale} />
 
   <main>
-    <ProjectsSection />
+    <ProjectsSection locale={locale} />
   </main>
 
-  <Footer />
+  <Footer locale={locale} />
 </Layout>
