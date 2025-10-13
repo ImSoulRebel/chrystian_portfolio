@@ -5,6 +5,9 @@ import {
   useTranslations,
 } from '@utils/i18n';
 
+// Importar estilos globales correctamente
+import '../styles/global.css';
+
 export interface Props {
   title?: string;
   description?: string;
@@ -230,9 +233,6 @@ const localeSpecificMeta =
 
     <!-- Título dinámico -->
     <title>{title}</title>
-
-    <!-- Estilos globales -->
-    <link rel="stylesheet" href="/src/styles/global.css" />
 
     <!-- Optimizaciones adicionales -->
     <meta name="theme-color" content="#00d4ff" />
