@@ -55,10 +55,8 @@ const {
 
 // Generar URLs hreflang
 const currentPath = Astro.url.pathname;
-const siteUrl =
-  Astro.site?.toString() ||
-  'https://imsoulrebel.github.io/chrystian_portfolio/';
-const hreflangUrls = getHreflangUrls(currentPath, siteUrl);
+const siteUrl = Astro.site?.toString() || import.meta.env.PUBLIC_SITE_URL;
+const hreflangUrls = getHreflangUrls(currentPath);
 
 // Schema.org JSON-LD por defecto
 const defaultStructuredData = {
