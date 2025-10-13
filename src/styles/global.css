@@ -239,6 +239,11 @@ section {
   grid-template-columns: 1fr 1fr;
   gap: 4rem;
   align-items: center;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  position: relative;
+  z-index: 1;
 }
 
 .about-text {
@@ -250,7 +255,8 @@ section {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   gap: 2rem;
-  margin-top: 3rem;
+  margin-top: 2rem;
+  padding: 2rem;
 }
 
 .stat-item {
