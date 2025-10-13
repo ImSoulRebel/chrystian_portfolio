@@ -2,7 +2,12 @@
 import {
   PUBLIC_CONTACT_EMAIL,
   PUBLIC_FORMSPREE_ENDPOINT,
+  PUBLIC_SITE_URL,
 } from 'astro:env/client';
+import { useTranslations, getLocaleFromUrl } from '@utils/i18n';
+
+const locale = getLocaleFromUrl(Astro.url) || 'es';
+const t = useTranslations(locale);
 
 const formAction = PUBLIC_FORMSPREE_ENDPOINT;
 const contactEmail = PUBLIC_CONTACT_EMAIL;
@@ -10,38 +15,34 @@ const contactEmail = PUBLIC_CONTACT_EMAIL;
 
 <form class="contact-form" method="POST" action={formAction} id="contact-form">
   <input type="hidden" name="_to" value={contactEmail} />
-  <input
-    type="hidden"
-    name="_subject"
-    value="Nuevo mensaje desde el portfolio"
-  />
+  <input type="hidden" name="_subject" value={t('contact.form.subject')} />
   <input
     type="hidden"
     name="_next"
-    value="https://imsoulrebel.github.io/chrystian_portfolio/es/contact?success=true"
+    value={`${PUBLIC_SITE_URL}/es/contact?success=true`}
   />
 
   <!-- Primera fila: Nombre y Email -->
   <div class="form-row">
     <div class="form-group">
-      <label for="name">Nombre completo <span class="required">*</span></label>
+      <label for="name">{t('contact.form.name.label')}</label>
       <input
         type="text"
         id="name"
         name="name"
-        placeholder="Tu nombre"
+        placeholder={t('contact.form.name.placeholder')}
         required
         autocomplete="name"
       />
     </div>
 
     <div class="form-group">
-      <label for="email">Email <span class="required">*</span></label>
+      <label for="email">{t('contact.form.email.label')}</label>
       <input
         type="email"
         id="email"
         name="email"
-        placeholder="tu@email.com"
+        placeholder={t('contact.form.email.placeholder')}
         required
         autocomplete="email"
       />
@@ -51,23 +52,23 @@ const contactEmail = PUBLIC_CONTACT_EMAIL;
   <!-- Segunda fila: Empresa y Teléfono -->
   <div class="form-row">
     <div class="form-group">
-      <label for="company">Empresa/Organización</label>
+      <label for="company">{t('contact.form.company.label')}</label>
       <input
         type="text"
         id="company"
         name="company"
-        placeholder="Nombre de tu empresa"
+        placeholder={t('contact.form.company.placeholder')}
         autocomplete="organization"
       />
     </div>
 
     <div class="form-group">
-      <label for="phone">Teléfono</label>
+      <label for="phone">{t('contact.form.phone.label')}</label>
       <input
         type="tel"
         id="phone"
         name="phone"
-        placeholder="+34 XXX XX XX XX"
+        placeholder={t('contact.form.phone.placeholder')}
         autocomplete="tel"
       />
     </div>
@@ -76,42 +77,71 @@ const contactEmail = PUBLIC_CONTACT_EMAIL;
   <!-- Tipo de proyecto -->
   <div class="form-group full">
     <label for="project-type"
-      >Tipo de proyecto <span class="required">*</span></label
+      >{t('contact.form.projectType.label')}<span class="required">*</span
+      ></label
     >
     <select id="project-type" name="project-type" required>
-      <option value="">Selecciona el tipo de proyecto</option>
-      <option value="app-movil">Aplicación móvil</option>
-      <option value="app-web">Aplicación web</option>
-      <option value="consultoria">Consultoría técnica</option>
-      <option value="liderazgo">Liderazgo técnico</option>
-      <option value="migracion">Migración/Modernización</option>
-      <option value="otro">Otro</option>
+      <option value="">{t('contact.form.projectType.placeholder')}</option>
+      <option value="app-movil"
+        >{t('contact.form.projectType.options.mobileApp')}</option
+      >
+      <option value="app-web"
+        >{t('contact.form.projectType.options.webApp')}</option
+      >
+      <option value="consultoria"
+        >{t('contact.form.projectType.options.consulting')}</option
+      >
+      <option value="liderazgo"
+        >{t('contact.form.projectType.options.leadership')}</option
+      >
+      <option value="migracion"
+        >{t('contact.form.projectType.options.migration')}</option
+      >
+      <option value="otro">{t('contact.form.projectType.options.other')}</option
+      >
     </select>
   </div>
 
   <!-- Tercera fila: Presupuesto y Timeline -->
   <div class="form-row">
     <div class="form-group">
-      <label for="budget">Presupuesto estimado</label>
+      <label for="budget">{t('contact.form.budget.label')}</label>
       <select id="budget" name="budget">
-        <option value="">Selecciona un rango</option>
-        <option value="5k-15k">€5,000 - €15,000</option>
-        <option value="15k-30k">€15,000 - €30,000</option>
-        <option value="30k-50k">€30,000 - €50,000</option>
-        <option value="50k+">€50,000+</option>
-        <option value="por-definir">Por definir</option>
+        <option value="">{t('contact.form.budget.placeholder')}</option>
+        <option value="5k-15k">{t('contact.form.budget.options.range1')}</option
+        >
+        <option value="15k-30k"
+          >{t('contact.form.budget.options.range2')}</option
+        >
+        <option value="30k-50k"
+          >{t('contact.form.budget.options.range3')}</option
+        >
+        <option value="50k+">{t('contact.form.budget.options.range4')}</option>
+        <option value="por-definir"
+          >{t('contact.form.budget.options.undefined')}</option
+        >
       </select>
     </div>
 
     <div class="form-group">
-      <label for="timeline">Timeline esperado</label>
+      <label for="timeline">{t('contact.form.timeline.label')}</label>
       <select id="timeline" name="timeline">
-        <option value="">Selecciona un timeline</option>
-        <option value="inmediato">Inmediato (&lt; 1 mes)</option>
-        <option value="1-3-meses">1-3 meses</option>
-        <option value="3-6-meses">3-6 meses</option>
-        <option value="6-12-meses">6-12 meses</option>
-        <option value="flexible">Flexible</option>
+        <option value="">{t('contact.form.timeline.placeholder')}</option>
+        <option value="inmediato"
+          >{t('contact.form.timeline.options.immediate')}</option
+        >
+        <option value="1-3-meses"
+          >{t('contact.form.timeline.options.range1')}</option
+        >
+        <option value="3-6-meses"
+          >{t('contact.form.timeline.options.range2')}</option
+        >
+        <option value="6-12-meses"
+          >{t('contact.form.timeline.options.range3')}</option
+        >
+        <option value="flexible"
+          >{t('contact.form.timeline.options.flexible')}</option
+        >
       </select>
     </div>
   </div>
@@ -119,12 +149,12 @@ const contactEmail = PUBLIC_CONTACT_EMAIL;
   <!-- Descripción del proyecto -->
   <div class="form-group full">
     <label for="message"
-      >Describe tu proyecto <span class="required">*</span></label
+      >{t('contact.form.message.label')}<span class="required">*</span></label
     >
     <textarea
       id="message"
       name="message"
-      placeholder="Cuéntame sobre tu proyecto, objetivos, características principales, usuarios objetivo, contexto técnico, etc."
+      placeholder={t('contact.form.message.placeholder')}
       required
       rows="7"></textarea>
   </div>
@@ -132,7 +162,7 @@ const contactEmail = PUBLIC_CONTACT_EMAIL;
   <!-- Botón submit -->
   <div class="form-actions">
     <button type="submit" class="btn btn-primary">
-      <span class="btn-text">Enviar mensaje</span>
+      <span class="btn-text">{t('contact.form.send')}</span>
       <span class="btn-loading" style="display: none;">
         <svg class="spinner" width="20" height="20" viewBox="0 0 50 50">
           <circle
@@ -144,11 +174,10 @@ const contactEmail = PUBLIC_CONTACT_EMAIL;
             stroke="currentColor"
             stroke-width="5"
             stroke-miterlimit="10"></circle>
-        </svg>
-        Enviando...
-      </span>
+        </svg>{t('contact.form.sending')}</span
+      >
     </button>
-    <p class="form-notice">Te responderé en menos de 24 horas</p>
+    <p class="form-notice">{t('contact.form.notice')}</p>
   </div>
 
   <!-- Success/Error Messages -->

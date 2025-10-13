@@ -1,6 +1,14 @@
 ---
+import {
+  PUBLIC_LINKEDIN_URL,
+  PUBLIC_GITHUB_USERNAME,
+  PUBLIC_CONTACT_EMAIL,
+  PUBLIC_AUTHOR_NAME,
+  PUBLIC_CONTACT_PHONE,
+  PUBLIC_CONTACT_ADDRESS,
+} from 'astro:env/client';
 import Icon from './Icon.astro';
-import { getLocaleFromUrl, useTranslations } from '../utils/i18n';
+import { getLocaleFromUrl, useTranslations } from '@utils/i18n';
 
 // Detectar el locale actual y obtener traducciones
 const locale = getLocaleFromUrl(Astro.url);
@@ -8,20 +16,26 @@ const t = useTranslations(locale);
 
 const currentYear = new Date().getFullYear();
 
+const githubUrl = `https://github.com/${PUBLIC_GITHUB_USERNAME}`;
+const linkedinUrl = PUBLIC_LINKEDIN_URL;
+const contactEmail = `mailto:${PUBLIC_CONTACT_EMAIL}`;
+const authorName = PUBLIC_AUTHOR_NAME;
+const contactPhone = `tel:${PUBLIC_CONTACT_PHONE}`;
+
 const socialLinks = [
   {
     name: 'GitHub',
-    url: 'https://github.com/chrystian-dev',
+    url: { githubUrl },
     icon: 'github',
   },
   {
     name: 'LinkedIn',
-    url: 'https://linkedin.com/in/chrystianmichell',
+    url: { linkedinUrl },
     icon: 'linkedin',
   },
   {
     name: 'Email',
-    url: 'mailto:chrystianmichell@hotmail.com',
+    url: { contactEmail },
     icon: 'email',
   },
 ];
@@ -32,10 +46,10 @@ const socialLinks = [
     <div class="footer-content">
       <div class="footer-main">
         <div class="footer-brand">
-          <h3>Chrystian Michell</h3>
-          <p>Senior Flutter Developer & Tech Lead</p>
+          <h3>{authorName}</h3>
+          <p>{t('footer.position')}</p>
           <p class="footer-tagline">
-            Construyendo el futuro digital, una app a la vez <Icon
+            {t('footer.tagline')}<Icon
               name="flutter"
               size="16"
               style="display: inline; color: var(--primary-color);"
@@ -45,39 +59,39 @@ const socialLinks = [
 
         <div class="footer-links">
           <div class="footer-section">
-            <h4>Navegación</h4>
+            <h4>{t('footer.nav.title')}</h4>
             <ul>
-              <li><a href="#home">Inicio</a></li>
-              <li><a href="#about">Sobre mí</a></li>
-              <li><a href="#projects">Proyectos</a></li>
-              <li><a href="#experience">Experiencia</a></li>
-              <li><a href="#contact">Contacto</a></li>
+              <li><a href="#home">{t('footer.nav.home')}</a></li>
+              <li><a href="#about">{t('footer.nav.about')}</a></li>
+              <li><a href="#projects">{t('footer.nav.projects')}</a></li>
+              <li><a href="#experience">{t('footer.nav.experience')}</a></li>
+              <li><a href="#contact">{t('footer.nav.contact')}</a></li>
             </ul>
           </div>
 
           <div class="footer-section">
-            <h4>Tecnologías</h4>
+            <h4>{t('footer.tech.title')}</h4>
             <ul>
-              <li>Flutter & Dart</li>
-              <li>Firebase & AWS</li>
-              <li>JavaScript & TypeScript</li>
-              <li>React & Node.js</li>
-              <li>CI/CD & DevOps</li>
+              <li>{t('footer.tech.flutter')}</li>
+              <li>{t('footer.tech.firebase')}</li>
+              <li>{t('footer.tech.javascript')}</li>
+              <li>{t('footer.tech.react')}</li>
+              <li>{t('footer.tech.ciCd')}</li>
             </ul>
           </div>
 
           <div class="footer-section">
-            <h4>Contacto</h4>
+            <h4>{t('footer.contact.title')}</h4>
             <ul>
               <li>
-                <a href="mailto:chrystianmichell@hotmail.com">
-                  chrystianmichell@hotmail.com
+                <a href={contactEmail}>
+                  {PUBLIC_CONTACT_EMAIL}
                 </a>
               </li>
               <li>
-                <a href="tel:+34653316944">+34 653 31 69 44</a>
+                <a href={contactPhone}>{PUBLIC_CONTACT_PHONE}</a>
               </li>
-              <li>Madrid, España</li>
+              <li>{PUBLIC_CONTACT_ADDRESS}</li>
             </ul>
           </div>
         </div>
@@ -101,8 +115,10 @@ const socialLinks = [
         </div>
 
         <div class="footer-cta">
-          <p>¿Tienes un proyecto en mente?</p>
-          <a href="#contact" class="btn btn-primary btn-sm">¡Hablemos!</a>
+          <p>{t('footer.contact.subtitle')}</p>
+          <a href="#contact" class="btn btn-primary btn-sm"
+            >{t('footer.contact.cta')}</a
+          >
         </div>
       </div>
     </div>
@@ -111,7 +127,8 @@ const socialLinks = [
       <div class="footer-divider"></div>
       <div class="footer-copyright">
         <p>
-          © {currentYear} Chrystian Michell. {t('footer.rights')}
+          © {currentYear}
+          {authorName}. {t('footer.rights')}
         </p>
         <p class="footer-made">
           {t('footer.madeWith')} ❤️ y <strong>Astro</strong>
