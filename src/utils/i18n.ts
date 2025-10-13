@@ -5,13 +5,13 @@ import {
 } from '../config/translations';
 
 // Importar helpers nativos de Astro para i18n
-import { getRelativeLocaleUrl, getAbsoluteLocaleUrl } from 'astro:i18n';
+import { getRelativeLocaleUrl } from 'astro:i18n';
 
 // Re-exportar tipos para facilitar el uso
 export type { Locale } from '../config/translations';
 
 // Re-exportar helpers de Astro para consistencia
-export { getRelativeLocaleUrl, getAbsoluteLocaleUrl } from 'astro:i18n';
+export { getRelativeLocaleUrl } from 'astro:i18n';
 
 // ===========================================
 // HELPER FUNCIONS - DEPLOYMENT AGNÓSTICO
@@ -238,27 +238,55 @@ export function formatDate(
 }
 
 /**
- * Obtiene las URLs hreflang para SEO (MEJORADO con helpers de Astro)
- * Ahora utiliza getAbsoluteLocaleUrl que maneja automáticamente el base path
+ * Obtiene las URLs hreflang para SEO
+ * Construye las URLs absolutas usando el site URL (que ya incluye el base path) + locale + path
  *
- * @param currentPath - La ruta actual sin locale
- * @returns Objeto con las URLs para cada locale
+ * @param currentPath - La ruta actual (puede incluir base path y locale)
+ * @returns Objeto con las URLs absolutas para cada locale
  */
 export function getHreflangUrls(currentPath: string) {
   const basePath = getBasePath();
+  const siteUrl = getSiteUrl();
 
-  // Limpiar el path
+  // Limpiar el path: remover base path y locale
   let cleanPath = currentPath;
+
+  // Primero remover el base path si existe
   if (basePath && cleanPath.startsWith(basePath)) {
     cleanPath = cleanPath.slice(basePath.length);
   }
+
+  // Luego remover el prefijo de locale /es/ o /en/
   cleanPath = cleanPath.replace(/^\/(es|en)/, '') || '/';
 
-  const pathForHelper = cleanPath === '/' ? '' : cleanPath.slice(1);
+  // Asegurar que el path comience con /
+  if (!cleanPath.startsWith('/')) {
+    cleanPath = '/' + cleanPath;
+  }
+
+  // Construir URLs completas
+  // siteUrl ya incluye el base path (ej: https://imsoulrebel.github.io/chrystian_portfolio)
+  // solo necesitamos añadir: /locale/path
+  const buildUrl = (locale: Locale) => {
+    // Asegurar que siteUrl no termine con /
+    const site = siteUrl.replace(/\/$/, '');
+
+    // Construir path: /locale + cleanPath
+    let fullPath = `/${locale}`;
+    if (cleanPath !== '/') {
+      fullPath += cleanPath.endsWith('/')
+        ? `/${cleanPath.replace(/^\//, '')}`.replace(/\/$/, '') + '/'
+        : `/${cleanPath.replace(/^\//, '')}`;
+    } else {
+      fullPath += '/';
+    }
+
+    return `${site}${fullPath}`;
+  };
 
   return {
-    es: getAbsoluteLocaleUrl('es', pathForHelper),
-    en: getAbsoluteLocaleUrl('en', pathForHelper),
-    'x-default': getAbsoluteLocaleUrl('es', pathForHelper), // Español como predeterminado
+    es: buildUrl('es'),
+    en: buildUrl('en'),
+    'x-default': buildUrl('es'), // Español como predeterminado
   };
 }
