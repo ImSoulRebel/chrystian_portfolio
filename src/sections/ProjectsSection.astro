@@ -1,6 +1,7 @@
 ---
 import { ProjectCard } from '@components';
 import { getLocaleFromUrl, useTranslations } from '../utils/i18n';
+import * as assets from '../assets';
 
 // Detectar el locale actual y obtener traducciones
 const locale = getLocaleFromUrl(Astro.url);
@@ -16,7 +17,7 @@ const projects = [
       'Desplegada en +30 hoteles en Europa y LATAM. Mejora del 35% en satisfacción de huéspedes según encuestas post-estancia.',
     featured: true,
     liveUrl: 'https://yuvod.com',
-    image: '/src/assets/projects/yuvod_logo.svg',
+    image: assets.yuvodLogo,
   },
   {
     title: 'Nextival CMS – Gestión de Festivales',
@@ -25,7 +26,7 @@ const projects = [
       'Sistema de gestión de contenido para festivales musicales con renderizado híbrido SSR/SSG, Clean Architecture con Repository Pattern, integración con Spotify Web API y editor WYSIWYG. WebSockets para notificaciones en tiempo real.',
     impact:
       'Tiempos de carga <1.5s, optimización SEO completa. Entregado en 4 meses como proyecto funcional para producción.',
-    image: '/src/assets/projects/nextival_logo.svg',
+    image: assets.nextivalLogo,
     githubUrl: 'https://github.com/ImSoulRebel/nextival-cms',
   },
   {
@@ -36,7 +37,7 @@ const projects = [
     impact:
       'Más de 1,000 usuarios activos. Automatizó procesos que antes requerían 3 personas, reduciendo costes operativos en 40%.',
     liveUrl: 'https://stel.es',
-    image: '/src/assets/projects/stel_logo.svg',
+    image: assets.stelLogo,
   },
   {
     title: 'BNC10 – Aplicación Neobanca',
@@ -45,7 +46,7 @@ const projects = [
       'App de neobanca social con P2P, gestión de cuentas y analytics financieras. Implementé seguridad bancaria (biometric auth, encrypted storage), responsive avanzado con responsive_framework y monitoreo con Sentry.',
     impact:
       '500+ usuarios activos, rating 4.7⭐, 99.5% de sesiones sin crashes. Reducción del 60% en fricción de autenticación.',
-    image: '/src/assets/projects/bnc10_logo.svg',
+    image: assets.bnc10Logo,
   },
   {
     title: 'TOOKANE – Seguimiento Logístico',
@@ -54,7 +55,7 @@ const projects = [
       'Sistema de tracking en tiempo real con offline-first architecture para zonas con conectividad limitada. Clean Architecture + MVVM + Repository Pattern con optimización de batería reduciendo consumo en 40%.',
     impact:
       'Mejora del 30% en eficiencia de entregas mediante optimización de rutas basada en datos reales de geolocalización.',
-    image: '/src/assets/projects/tookane_logo.svg',
+    image: assets.tookaneLogo,
     liveUrl: 'https://tookane.com',
   },
 ];

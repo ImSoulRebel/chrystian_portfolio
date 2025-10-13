@@ -1,5 +1,6 @@
 ---
 import { Image } from 'astro:assets';
+import * as assets from '../assets';
 
 const { name, size = 24, color, class: className = '' } = Astro.props;
 
@@ -71,31 +72,31 @@ const processColor = (inputColor?: string) => {
 };
 
 // Mapping de iconos disponibles en la carpeta logos
-const iconMap = {
-  architecture: '/src/assets/logos/clean_architecture_logo.svg',
-  astro: '/src/assets/logos/astro_logo.svg',
-  aws: '/src/assets/logos/aws_logo.svg',
-  bloc: '/src/assets/logos/bloc_logo.svg',
-  bnc10: '/src/assets/projects/bnc10_logo.svg',
-  cicd: '/src/assets/logos/cicd_logo.svg',
-  dart: '/src/assets/logos/dart_logo.svg',
-  docker: '/src/assets/logos/docker_logo.svg',
-  firebase: '/src/assets/logos/firebase_logo.svg',
-  flutter: '/src/assets/logos/flutter_logo.svg',
-  git: '/src/assets/logos/git_logo.svg',
-  github: '/src/assets/logos/github_icon.svg',
-  javascript: '/src/assets/logos/javascript_logo.svg',
-  linkedin: '/src/assets/logos/Linkedin_icon.svg',
-  nextival: '/src/assets/projects/nextival_logo.svg',
-  nodejs: '/src/assets/logos/nodejs_logo.svg',
-  optimus: '/src/assets/projects/optimus_apps_lab_logo.svg',
-  react: '/src/assets/logos/react_logo.svg',
-  solidjs: '/src/assets/logos/solidjs_logo.svg',
-  stel: '/src/assets/projects/stel_logo.svg',
-  tookane: '/src/assets/projects/tookane_logo.svg',
-  typescript: '/src/assets/logos/typescript_logo.svg',
-  websockets: '/src/assets/logos/websocket_logo.svg',
-  yuvod: '/src/assets/projects/yuvod_logo.svg',
+const iconMap: Record<string, any> = {
+  architecture: assets.architectureLogo,
+  astro: assets.astroLogo,
+  aws: assets.awsLogo,
+  bloc: assets.blocLogo,
+  bnc10: assets.bnc10Logo,
+  cicd: assets.cicdLogo,
+  dart: assets.dartLogo,
+  docker: assets.dockerLogo,
+  firebase: assets.firebaseLogo,
+  flutter: assets.flutterLogo,
+  git: assets.gitLogo,
+  github: assets.githubIcon,
+  javascript: assets.javascriptLogo,
+  linkedin: assets.linkedinIcon,
+  nextival: assets.nextivalLogo,
+  nodejs: assets.nodejsLogo,
+  optimus: assets.optimusLogo,
+  react: assets.reactLogo,
+  solidjs: assets.solidjsLogo,
+  stel: assets.stelLogo,
+  tookane: assets.tookaneLogo,
+  typescript: assets.typescriptLogo,
+  websockets: assets.websocketLogo,
+  yuvod: assets.yuvodLogo,
 };
 
 // Iconos por defecto para tecnologías
