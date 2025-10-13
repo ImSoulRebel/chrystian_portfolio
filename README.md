@@ -58,6 +58,7 @@ cp .env.development .env
 ```
 
 **Formspree (Opcional)**: Si quieres usar el formulario de contacto:
+
 1. Regístrate en [formspree.io](https://formspree.io)
 2. Crea un formulario y copia el endpoint
 3. Edita `.env.development` o crea `.env`:
@@ -101,11 +102,11 @@ Este proyecto utiliza un **sistema multi-plataforma** con archivos `.env` pre-co
 
 El sistema detecta automáticamente la plataforma usando `PUBLIC_DEPLOYMENT_PLATFORM`:
 
-| Plataforma    | Variable                                | Base Path             | Site URL                              |
-| ------------- | --------------------------------------- | --------------------- | ------------------------------------- |
-| **GitHub**    | `PUBLIC_DEPLOYMENT_PLATFORM=github`     | `/chrystian_portfolio` | `imsoulrebel.github.io/chrystian_...` |
-| **Netlify**   | `PUBLIC_DEPLOYMENT_PLATFORM=netlify`    | `/` (root)            | `www.chrystianmichell.com`            |
-| **Dev**       | `PUBLIC_DEPLOYMENT_PLATFORM=development`| `/` (root)            | `localhost:4321`                      |
+| Plataforma  | Variable                                 | Base Path              | Site URL                              |
+| ----------- | ---------------------------------------- | ---------------------- | ------------------------------------- |
+| **GitHub**  | `PUBLIC_DEPLOYMENT_PLATFORM=github`      | `/chrystian_portfolio` | `imsoulrebel.github.io/chrystian_...` |
+| **Netlify** | `PUBLIC_DEPLOYMENT_PLATFORM=netlify`     | `/` (root)             | `www.chrystianmichell.com`            |
+| **Dev**     | `PUBLIC_DEPLOYMENT_PLATFORM=development` | `/` (root)             | `localhost:4321`                      |
 
 ### 🔐 **Variables Principales**
 
@@ -132,7 +133,7 @@ PUBLIC_GITHUB_USERNAME=ImSoulRebel
 PUBLIC_FORMSPREE_ENDPOINT=https://formspree.io/f/YOUR_FORM_ID
 ```
 
-###  **Uso en el Código**
+### **Uso en el Código**
 
 Las variables públicas se cargan automáticamente en `astro:env/client`:
 
@@ -352,11 +353,11 @@ export const SITE_CONFIG = {
 
 Este proyecto está diseñado para desplegarse en múltiples plataformas sin cambios en el código:
 
-| Plataforma       | Estado         | URL                                                          | Base Path             |
-| ---------------- | -------------- | ------------------------------------------------------------ | --------------------- |
-| **GitHub Pages** | ✅ Activo      | https://imsoulrebel.github.io/chrystian_portfolio            | `/chrystian_portfolio` |
-| **Netlify**      | 🟢 Configurado | https://www.chrystianmichell.com *(futuro)*                  | `/` (root)            |
-| **Development**  | 🔧 Local       | http://localhost:4321                                        | `/` (root)            |
+| Plataforma       | Estado         | URL                                               | Base Path              |
+| ---------------- | -------------- | ------------------------------------------------- | ---------------------- |
+| **GitHub Pages** | ✅ Activo      | https://imsoulrebel.github.io/chrystian_portfolio | `/chrystian_portfolio` |
+| **Netlify**      | 🟢 Configurado | https://www.chrystianmichell.com _(futuro)_       | `/` (root)             |
+| **Development**  | 🔧 Local       | http://localhost:4321                             | `/` (root)             |
 
 ### **GitHub Pages (Actual)**
 
@@ -368,6 +369,7 @@ git push origin main
 ```
 
 El workflow incluye:
+
 - ✅ Linting automático
 - ✅ Formateo de código (Prettier)
 - ✅ Build optimizado
@@ -393,6 +395,7 @@ Para guía detallada de deployment, troubleshooting y migración:
 ### **Otras Plataformas**
 
 También compatible con:
+
 - **Vercel**: Deploy automático desde Git
 - **Cloudflare Pages**: Compatible con Astro SSG
 

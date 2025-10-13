@@ -19,11 +19,11 @@ El proyecto está configurado para funcionar en múltiples plataformas sin cambi
 
 ### Plataformas Soportadas
 
-| Plataforma | Base Path | Site URL | Configuración |
-|------------|-----------|----------|---------------|
-| **GitHub Pages** | `/chrystian_portfolio` | `https://imsoulrebel.github.io/chrystian_portfolio` | `.env.github` |
-| **Netlify** | `/` (root) | `https://www.chrystianmichell.com` | `.env.netlify` |
-| **Development** | `/` (root) | `http://localhost:4321` | `.env.development` |
+| Plataforma       | Base Path              | Site URL                                            | Configuración      |
+| ---------------- | ---------------------- | --------------------------------------------------- | ------------------ |
+| **GitHub Pages** | `/chrystian_portfolio` | `https://imsoulrebel.github.io/chrystian_portfolio` | `.env.github`      |
+| **Netlify**      | `/` (root)             | `https://www.chrystianmichell.com`                  | `.env.netlify`     |
+| **Development**  | `/` (root)             | `http://localhost:4321`                             | `.env.development` |
 
 ### Sistema de Detección Automática
 
@@ -31,8 +31,12 @@ El sistema detecta automáticamente la plataforma basándose en la variable `PUB
 
 ```javascript
 // astro.config.mjs
-const deploymentPlatform = process.env.PUBLIC_DEPLOYMENT_PLATFORM || 'development';
-config({ path: resolve(__dirname, `.env.${deploymentPlatform}`), override: false });
+const deploymentPlatform =
+  process.env.PUBLIC_DEPLOYMENT_PLATFORM || 'development';
+config({
+  path: resolve(__dirname, `.env.${deploymentPlatform}`),
+  override: false,
+});
 ```
 
 ---
@@ -69,8 +73,8 @@ jobs:
       - name: 🟢 Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: "20"
-          cache: "yarn"
+          node-version: '20'
+          cache: 'yarn'
 
       - name: 📦 Install Dependencies
         run: yarn install --frozen-lockfile
@@ -150,7 +154,7 @@ El archivo `netlify.toml` ya está configurado con:
 [build]
   command = "yarn build:netlify"
   publish = "dist"
-  
+
   [build.environment]
     NODE_VERSION = "20"
     YARN_VERSION = "1.22.22"
@@ -254,6 +258,7 @@ Después del deployment:
 El proyecto incluye tres archivos `.env`:
 
 #### `.env.development`
+
 ```bash
 PUBLIC_DEPLOYMENT_PLATFORM=development
 PUBLIC_SITE_URL=http://localhost:4321
@@ -261,6 +266,7 @@ PUBLIC_BASE_PATH=
 ```
 
 #### `.env.github`
+
 ```bash
 PUBLIC_DEPLOYMENT_PLATFORM=github
 PUBLIC_SITE_URL=https://imsoulrebel.github.io/chrystian_portfolio
@@ -268,6 +274,7 @@ PUBLIC_BASE_PATH=/chrystian_portfolio
 ```
 
 #### `.env.netlify`
+
 ```bash
 PUBLIC_DEPLOYMENT_PLATFORM=netlify
 PUBLIC_SITE_URL=https://www.chrystianmichell.com
@@ -276,11 +283,11 @@ PUBLIC_BASE_PATH=
 
 ### Variables Importantes
 
-| Variable | Descripción | Valores Posibles |
-|----------|-------------|------------------|
-| `PUBLIC_DEPLOYMENT_PLATFORM` | Identifica la plataforma actual | `development`, `github`, `netlify` |
-| `PUBLIC_SITE_URL` | URL completa del sitio | URL completa incluyendo base path si es necesario |
-| `PUBLIC_BASE_PATH` | Subcarpeta del hosting | `/chrystian_portfolio` para GitHub, vacío para Netlify |
+| Variable                     | Descripción                     | Valores Posibles                                       |
+| ---------------------------- | ------------------------------- | ------------------------------------------------------ |
+| `PUBLIC_DEPLOYMENT_PLATFORM` | Identifica la plataforma actual | `development`, `github`, `netlify`                     |
+| `PUBLIC_SITE_URL`            | URL completa del sitio          | URL completa incluyendo base path si es necesario      |
+| `PUBLIC_BASE_PATH`           | Subcarpeta del hosting          | `/chrystian_portfolio` para GitHub, vacío para Netlify |
 
 ### Uso en el Código
 
@@ -357,31 +364,39 @@ yarn deploy:github
 ### GitHub Pages
 
 #### Problema: 404 en todas las rutas
+
 **Solución**: Verifica que GitHub Pages esté habilitado en Settings → Pages → Source: GitHub Actions
 
 #### Problema: Estilos no cargan
+
 **Solución**: Verifica que `PUBLIC_BASE_PATH` esté correctamente configurado en el workflow
 
 #### Problema: Selector de idioma no funciona
+
 **Solución**: Verifica que las URLs generadas incluyan el base path
 
 ### Netlify
 
 #### Problema: Página 404 en refresh
+
 **Solución**: Verifica que `netlify.toml` esté en la raíz y los redirects estén configurados
 
 #### Problema: Headers de seguridad no aplican
+
 **Solución**: Verifica la sintaxis de `[[headers]]` en `netlify.toml`
 
 #### Problema: Build falla
+
 **Solución**: Verifica que las variables de entorno en `netlify.toml` sean correctas
 
 ### General
 
 #### Problema: URLs con doble base path
+
 **Solución**: Asegúrate de que `PUBLIC_SITE_URL` no incluya el base path cuando `PUBLIC_BASE_PATH` esté definido
 
 #### Problema: i18n no funciona correctamente
+
 **Solución**: Verifica que estés usando los helpers de Astro (`getRelativeLocaleUrl`, `getAbsoluteLocaleUrl`)
 
 ---
@@ -391,7 +406,7 @@ yarn deploy:github
 ### Pre-Deployment
 
 - [ ] Ejecutar `yarn lint` sin errores
-- [ ] Ejecutar `yarn format` 
+- [ ] Ejecutar `yarn format`
 - [ ] Ejecutar `yarn build:github` exitosamente
 - [ ] Ejecutar `yarn build:netlify` exitosamente
 - [ ] Verificar URLs hreflang en dist/
