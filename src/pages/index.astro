@@ -1,5 +1,8 @@
 ---
 // Redirect automático a la versión en español
 // En producción usa el base path, en desarrollo no
-return Astro.redirect(`${import.meta.env.PROD ? '/chrystian_portfolio' : ''}/es/`, 301);
+return Astro.redirect(
+  `${import.meta.env.PROD ? '/chrystian_portfolio' : ''}/es/`,
+  301,
+);
 ---
