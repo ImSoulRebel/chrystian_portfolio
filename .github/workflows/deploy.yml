@@ -38,7 +38,11 @@ jobs:
         run: yarn run lint
 
       - name: 🏗️ Build
-        run: yarn run build
+        run: yarn run build:github
+        env:
+          PUBLIC_DEPLOYMENT_PLATFORM: github
+          PUBLIC_SITE_URL: https://imsoulrebel.github.io/chrystian_portfolio
+          PUBLIC_BASE_PATH: /chrystian_portfolio
 
       - name: 📤 Upload Artifact
         uses: actions/upload-pages-artifact@v3

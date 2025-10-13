@@ -1,17 +1,68 @@
 import { defineConfig, envField } from 'astro/config';
+import { config } from 'dotenv';
+import { fileURLToPath } from 'url';
+import { dirname, resolve } from 'path';
+
+// Obtener el directorio actual
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+// ===========================================
+// DETECCIÓN DE PLATAFORMA DE DEPLOYMENT
+// ===========================================
+// Cargar variables de entorno según la plataforma
+const deploymentPlatform = process.env.PUBLIC_DEPLOYMENT_PLATFORM || 'development';
+
+// Cargar el archivo .env correspondiente solo si no está en CI/CD
+if (!process.env.CI) {
+  const envFile = `.env.${deploymentPlatform}`;
+  const envPath = resolve(__dirname, envFile);
+  
+  console.log('📄 Loading env from:', envFile);
+  config({ path: envPath, override: false });
+}
+
+const isGitHub = deploymentPlatform === 'github';
+const isNetlify = deploymentPlatform === 'netlify';
+const isDevelopment = deploymentPlatform === 'development';
+
+// Configuración dinámica según plataforma
+const siteUrl = process.env.PUBLIC_SITE_URL || 'http://localhost:4321';
+const basePath = process.env.PUBLIC_BASE_PATH || undefined;
+
+console.log('🚀 Deployment Platform:', deploymentPlatform);
+console.log('🌐 Site URL:', siteUrl);
+console.log('📁 Base Path:', basePath || '(root)');
 
 export default defineConfig({
   output: 'static',
-  site: 'https://imsoulrebel.github.io',
-  // Solo usar base en producción (GitHub Pages), no en desarrollo
-  base: import.meta.env.PROD ? '/chrystian_portfolio' : undefined,
+  site: siteUrl,
+  // Base path dinámico: solo para GitHub Pages
+  base: basePath,
 
   // ===========================================
   // SCHEMA DE VARIABLES DE ENTORNO (TYPE SAFE)
   // ===========================================
   env: {
     schema: {
+      // ===========================================
+      // CONFIGURACIÓN DE DEPLOYMENT
+      // ===========================================
+      PUBLIC_DEPLOYMENT_PLATFORM: envField.string({
+        context: 'client',
+        access: 'public',
+        default: 'development',
+      }),
+      PUBLIC_BASE_PATH: envField.string({
+        context: 'client',
+        access: 'public',
+        default: '',
+        optional: true,
+      }),
+
+      // ===========================================
       // CONFIGURACIÓN DEL SITIO (Públicas)
+      // ===========================================
       PUBLIC_SITE_URL: envField.string({
         context: 'client',
         access: 'public',

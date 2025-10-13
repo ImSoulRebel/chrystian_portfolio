@@ -18,9 +18,13 @@ pnpm-debug.log*
 .env
 .env.local
 .env.production
-.env.development
 .env.staging
 .env.*.local
+
+# Permitir archivos de configuración de plataforma
+!.env.github
+!.env.netlify
+!.env.development
 
 # macOS-specific files
 .DS_Store
