@@ -3,7 +3,8 @@ import { defineConfig, envField } from "astro/config";
 export default defineConfig({
   output: "static",
   site: "https://imsoulrebel.github.io",
-  base: "/chrystian_portfolio",
+  // Solo usar base en producción (GitHub Pages), no en desarrollo
+  base: import.meta.env.PROD ? "/chrystian_portfolio" : undefined,
 
   // ===========================================
   // SCHEMA DE VARIABLES DE ENTORNO (TYPE SAFE)
