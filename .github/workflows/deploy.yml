@@ -37,6 +37,9 @@ jobs:
       - name: 🔍 Type Check & Lint
         run: yarn run lint
 
+      - name: ✨ Format Code
+        run: yarn run format
+
       - name: 🏗️ Build
         run: yarn run build:github
         env:

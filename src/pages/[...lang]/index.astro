@@ -1,12 +1,15 @@
 ---
+import { getRelativeLocaleUrl } from 'astro:i18n';
+
 export async function getStaticPaths() {
   return [{ params: { lang: 'es' } }, { params: { lang: 'en' } }];
 }
 
 // Get the language from params
-// En producción usa el base path, en desarrollo no
-return Astro.redirect(
-  `${import.meta.env.PROD ? '/chrystian_portfolio' : ''}/${Astro.params.lang}/portfolio/`,
-  302
-);
+// getRelativeLocaleUrl incluye automáticamente el base path configurado
+// @ts-ignore - TypeScript doesn't detect usage in Astro.redirect return statement
+const lang = Astro.params.lang as 'es' | 'en';
+// @ts-ignore - TypeScript doesn't detect usage in Astro.redirect return statement
+const redirectUrl = getRelativeLocaleUrl(lang, '/portfolio/');
+return Astro.redirect(redirectUrl, 302);
 ---

@@ -1,7 +1,7 @@
 ---
 import { Layout } from '@layouts';
 import { Header, Footer } from '@components';
-import { type Locale } from '@utils/i18n';
+import { type Locale, getBasePath } from '@utils/i18n';
 
 // Para una página 404 prerenderizada, usamos español como idioma por defecto
 // El contenido se actualizará dinámicamente en el cliente
@@ -32,8 +32,8 @@ const content = {
 };
 
 const pageContent = content[locale];
-// En producción usa el base path, en desarrollo no
-const base = import.meta.env.PROD ? '/chrystian_portfolio' : '';
+// Usa el base path según la plataforma de deployment
+const base = getBasePath();
 const homeUrl = `${base}/`;
 const contactUrl = `${base}/contact`;
 ---
@@ -90,9 +90,8 @@ const contactUrl = `${base}/contact`;
   function updateContent() {
     const locale = detectClientLocale();
 
-    // Detectar si estamos en producción (GitHub Pages)
-    const isProduction = window.location.hostname.includes('github.io');
-    const base = isProduction ? '/chrystian_portfolio' : '';
+    // Obtener el base path de manera consistente desde el PUBLIC_BASE_PATH
+    const base = import.meta.env.PUBLIC_BASE_PATH || '';
 
     const content = {
       es: {

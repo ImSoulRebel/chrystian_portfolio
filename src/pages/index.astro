@@ -1,8 +1,9 @@
 ---
+import { getRelativeLocaleUrl } from 'astro:i18n';
+
 // Redirect automático a la versión en español
-// En producción usa el base path, en desarrollo no
-return Astro.redirect(
-  `${import.meta.env.PROD ? '/chrystian_portfolio' : ''}/es/`,
-  301
-);
+// getRelativeLocaleUrl incluye automáticamente el base path configurado
+// @ts-ignore - TypeScript doesn't detect usage in Astro.redirect return statement
+const redirectUrl = getRelativeLocaleUrl('es', '/');
+return Astro.redirect(redirectUrl, 301);
 ---

@@ -1,0 +1,183 @@
+# Configuración de Netlify para Chrystian Michell Portfolio
+# Este archivo configura el build, redirects, y headers de seguridad para Netlify
+
+[build]
+  # Comando de build que usa el script específico de Netlify
+  command = "yarn build:netlify"
+  
+  # Directorio donde se genera el sitio estático
+  publish = "dist"
+  
+  # Variables de entorno para el build
+  [build.environment]
+    NODE_VERSION = "20"
+    YARN_VERSION = "1.22.22"
+    PUBLIC_DEPLOYMENT_PLATFORM = "netlify"
+    PUBLIC_SITE_URL = "https://www.chrystianmichell.com"
+    PUBLIC_BASE_PATH = ""
+
+# ==================================================
+# REDIRECTS Y REWRITES
+# ==================================================
+
+# Redirect de la raíz al idioma español por defecto
+[[redirects]]
+  from = "/"
+  to = "/es/"
+  status = 301
+  force = true
+
+# Redirect de /portfolio/* a /es/portfolio/ (compatibilidad con URLs antiguas)
+[[redirects]]
+  from = "/portfolio/*"
+  to = "/es/portfolio/:splat"
+  status = 301
+
+# Redirect de /projects/* a /es/projects/ (compatibilidad con URLs antiguas)
+[[redirects]]
+  from = "/projects/*"
+  to = "/es/projects/:splat"
+  status = 301
+
+# Redirect de /contact a /es/contact/ (compatibilidad con URLs antiguas)
+[[redirects]]
+  from = "/contact"
+  to = "/es/contact/"
+  status = 301
+
+# Manejo de errores 404 - redireccionar a la página 404 personalizada
+[[redirects]]
+  from = "/*"
+  to = "/404.html"
+  status = 404
+
+# ==================================================
+# HEADERS DE SEGURIDAD
+# ==================================================
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    # Content Security Policy
+    Content-Security-Policy = """
+      default-src 'self';
+      script-src 'self' 'unsafe-inline' 'unsafe-eval' https://web3forms.com;
+      style-src 'self' 'unsafe-inline';
+      img-src 'self' data: https: blob:;
+      font-src 'self' data:;
+      connect-src 'self' https://web3forms.com https://api.web3forms.com;
+      frame-src 'self' https://www.youtube.com;
+      object-src 'none';
+      base-uri 'self';
+      form-action 'self' https://web3forms.com;
+      frame-ancestors 'none';
+      upgrade-insecure-requests;
+    """
+    
+    # Prevenir MIME type sniffing
+    X-Content-Type-Options = "nosniff"
+    
+    # Protección XSS
+    X-XSS-Protection = "1; mode=block"
+    
+    # Prevenir clickjacking
+    X-Frame-Options = "DENY"
+    
+    # Referrer Policy
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    
+    # Permissions Policy (antes Feature Policy)
+    Permissions-Policy = """
+      camera=(),
+      microphone=(),
+      geolocation=(),
+      interest-cohort=()
+    """
+    
+    # Strict Transport Security (HSTS)
+    Strict-Transport-Security = "max-age=31536000; includeSubDomains; preload"
+
+# Headers específicos para assets estáticos (caché agresivo)
+[[headers]]
+  for = "/_astro/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+    X-Content-Type-Options = "nosniff"
+
+# Headers para archivos de imágenes (caché de 1 año)
+[[headers]]
+  for = "/*.{jpg,jpeg,png,gif,webp,svg,ico}"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+    X-Content-Type-Options = "nosniff"
+
+# Headers para fuentes (caché de 1 año)
+[[headers]]
+  for = "/*.{woff,woff2,ttf,otf,eot}"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+    X-Content-Type-Options = "nosniff"
+    Access-Control-Allow-Origin = "*"
+
+# Headers para archivos HTML (sin caché para tener actualizaciones inmediatas)
+[[headers]]
+  for = "/*.html"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+    X-Content-Type-Options = "nosniff"
+
+# ==================================================
+# CONFIGURACIÓN DE FUNCIONES (si se necesitan en el futuro)
+# ==================================================
+
+[functions]
+  # Directorio de funciones serverless (si se necesitan)
+  directory = "netlify/functions"
+  
+  # Node version para funciones
+  node_bundler = "esbuild"
+
+# ==================================================
+# CONFIGURACIÓN DE DEPLOY
+# ==================================================
+
+# Contexto de producción (rama main)
+[context.production]
+  command = "yarn build:netlify"
+  publish = "dist"
+  [context.production.environment]
+    NODE_VERSION = "20"
+    PUBLIC_DEPLOYMENT_PLATFORM = "netlify"
+    PUBLIC_SITE_URL = "https://www.chrystianmichell.com"
+    PUBLIC_BASE_PATH = ""
+
+# Contexto de deploy previews (PRs)
+[context.deploy-preview]
+  command = "yarn build:netlify"
+  publish = "dist"
+  [context.deploy-preview.environment]
+    NODE_VERSION = "20"
+    PUBLIC_DEPLOYMENT_PLATFORM = "netlify"
+
+# Contexto de branch deploys
+[context.branch-deploy]
+  command = "yarn build:netlify"
+  publish = "dist"
+  [context.branch-deploy.environment]
+    NODE_VERSION = "20"
+    PUBLIC_DEPLOYMENT_PLATFORM = "netlify"
+
+# ==================================================
+# PLUGINS DE NETLIFY (opcionales)
+# ==================================================
+
+# Plugin para optimización adicional de imágenes
+# [[plugins]]
+#   package = "@netlify/plugin-lighthouse"
+
+# Plugin para análisis de rendimiento
+# [[plugins]]
+#   package = "netlify-plugin-submit-sitemap"
+#   [plugins.inputs]
+#     baseUrl = "https://www.chrystianmichell.com"
+#     sitemapPath = "/sitemap.xml"
