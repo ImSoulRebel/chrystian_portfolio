@@ -28,5 +28,7 @@ pnpm-debug.log*
 # jetbrains setting folder
 .idea/
 
-# lock files
-*.lock
+# lock files (permitir yarn.lock para GitHub Actions)
+package-lock.json
+pnpm-lock.yaml
+bun.lockb
