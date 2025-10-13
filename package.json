@@ -4,7 +4,6 @@
   "description": "Portfolio personal de Chrystian Michell - Desarrollador Full Stack & Tech Lead",
   "type": "module",
   "private": true,
-  "packageManager": "yarn@4.5.3",
   "author": {
     "name": "Chrystian Michell",
     "email": "chrystianmichell@hotmail.com",
@@ -24,9 +23,9 @@
     "start": "astro dev",
     "build": "astro check && astro build",
     "preview": "astro preview --host",
-    "preview:build": "yarn build && yarn preview",
-    "deploy": "yarn build && gh-pages -d dist",
-    "deploy:force": "yarn build && gh-pages -d dist -f",
+    "preview:build": "yarn run build && yarn run preview",
+    "deploy": "yarn run build && gh-pages -d dist",
+    "deploy:force": "yarn run build && gh-pages -d dist -f",
     "clean": "rimraf dist .astro node_modules/.astro",
     "clean:all": "rimraf dist .astro node_modules",
     "astro": "astro",
@@ -37,7 +36,7 @@
     "type-check": "tsc --noEmit",
     "lint": "prettier --check . && astro check",
     "test": "echo \"No tests configured yet\" && exit 0",
-    "validate": "yarn lint && yarn type-check && yarn build",
+    "validate": "yarn run lint && yarn run type-check && yarn run build",
     "postinstall": "astro sync"
   },
   "dependencies": {
@@ -55,8 +54,7 @@
     "@rollup/rollup-win32-arm64-msvc": "^4.52.4"
   },
   "engines": {
-    "node": ">=18.0.0",
-    "yarn": ">=4.0.0"
+    "node": ">=18.0.0"
   },
   "keywords": [
     "portfolio",
