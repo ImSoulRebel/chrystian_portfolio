@@ -4,9 +4,12 @@ import {
   PUBLIC_FORMSPREE_ENDPOINT,
   PUBLIC_SITE_URL,
 } from 'astro:env/client';
-import { useTranslations, getLocaleFromUrl } from '@utils/i18n';
+import { useTranslations, type Locale } from '@utils/i18n';
 
-const locale = getLocaleFromUrl(Astro.url) || 'es';
+interface Props {
+  locale?: Locale;
+}
+const { locale = 'es' } = Astro.props;
 const t = useTranslations(locale);
 
 const formAction = PUBLIC_FORMSPREE_ENDPOINT;
