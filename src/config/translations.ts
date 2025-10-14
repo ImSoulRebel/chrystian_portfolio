@@ -186,6 +186,7 @@ export const translations = {
       viewDemo: 'Ver Demo',
       viewCode: 'Ver Código',
       viewMore: 'Ver Más Proyectos',
+      featured: 'Destacado',
       list: {
         yuvod: {
           title: 'YUVOD – Plataforma OTT para Hoteles',
@@ -651,6 +652,7 @@ export const translations = {
       viewDemo: 'View Demo',
       viewCode: 'View Code',
       viewMore: 'View More Projects',
+      featured: 'Featured',
       list: {
         yuvod: {
           title: 'YUVOD – OTT Platform for Hotels',

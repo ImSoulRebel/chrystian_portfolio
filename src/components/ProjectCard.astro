@@ -1,5 +1,19 @@
 ---
 import { Image } from 'astro:assets';
+import { useTranslations, type Locale } from '@utils/i18n';
+import { SvgComponent } from 'astro/types';
+
+interface Props {
+  title: string | undefined;
+  stack: string | string[] | undefined;
+  description: string | undefined;
+  impact?: string | undefined;
+  image?: (SvgComponent & ImageMetadata) | undefined;
+  liveUrl?: string | undefined;
+  githubUrl?: string | undefined;
+  featured?: boolean;
+  locale?: Locale;
+}
 
 const {
   title,
@@ -10,8 +24,10 @@ const {
   liveUrl,
   githubUrl,
   featured = false,
+  locale = 'es',
 } = Astro.props;
 
+const t = useTranslations(locale);
 // Convert stack string to array for better display
 const techStack = typeof stack === 'string' ? stack.split(' · ') : stack || [];
 ---
@@ -143,7 +159,7 @@ const techStack = typeof stack === 'string' ? stack.split(' · ') : stack || [];
   </div>
 
   <div class="project-content">
-    {featured && <div class="featured-badge">Destacado</div>}
+    {featured && <div class="featured-badge">{t('projects.featured')}</div>}
 
     <h3 class="project-title">{title}</h3>
 

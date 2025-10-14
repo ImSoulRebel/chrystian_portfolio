@@ -12,8 +12,8 @@ const alternateLocale = getAlternateLocale(currentLocale);
 const alternatePath = getLocalizedPath(currentPath, alternateLocale);
 
 const languageLabels = {
-  es: { flag: '🇪🇸', label: 'ES', name: 'Español' },
-  en: { flag: '🇺🇸', label: 'EN', name: 'English' },
+  es: { label: 'ES', name: 'Español' },
+  en: { label: 'EN', name: 'English' },
 };
 
 const currentLang = languageLabels[currentLocale];
@@ -30,13 +30,10 @@ const alternateLang = languageLabels[alternateLocale];
     data-path={alternatePath}
   >
     <div class="lang-current">
-      <span class="lang-flag">{currentLang.flag}</span>
       <span class="lang-label">{currentLang.label}</span>
     </div>
     <div class="lang-dropdown">
       <a href={alternatePath} class="lang-option" hreflang={alternateLocale}>
-        <!-- <span class="lang-flag">{alternateLang.flag}</span> -->
-        <!-- <span class="lang-label">{alternateLang.label}</span> -->
         <span class="lang-name">{alternateLang.name}</span>
       </a>
     </div>
@@ -121,7 +118,7 @@ const alternateLang = languageLabels[alternateLocale];
     position: absolute;
     top: calc(100% + 0.5rem);
     left: 0;
-    right: 0;
+    right: auto;
     background: rgba(15, 15, 35, 0.95);
     backdrop-filter: blur(15px);
     border: 1px solid rgba(0, 212, 255, 0.2);
@@ -158,7 +155,7 @@ const alternateLang = languageLabels[alternateLocale];
   }
 
   .lang-name {
-    margin-left: auto;
+    margin: auto;
     font-size: 0.8rem;
     opacity: 0.8;
   }
