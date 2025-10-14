@@ -129,7 +129,7 @@ export function getLocalizedPath(
   targetLocale: Locale
 ): string {
   // Limpiar el pathname de cualquier locale y base path existente
-  const basePath = getBasePath();
+  const basePath = getBasePath().replace(/\/$/, ''); // Remover barra final del base path
   let cleanPath = pathname;
 
   // Remover base path si existe
@@ -137,19 +137,23 @@ export function getLocalizedPath(
     cleanPath = cleanPath.slice(basePath.length);
   }
 
-  // Remover prefijo de locale /es/ o /en/
-  cleanPath = cleanPath.replace(/^\/(es|en)/, '') || '/';
-
-  // Asegurar que el path comience con /
-  if (!cleanPath.startsWith('/')) {
-    cleanPath = '/' + cleanPath;
+  // Remover prefijo de locale /es/ o /en/ (puede estar repetido)
+  cleanPath = cleanPath.replace(/^\/(es|en)(\/|$)/, '/');
+  
+  // Si después de limpiar queda vacío o solo /, normalizar a /
+  if (!cleanPath || cleanPath === '' || cleanPath === '/') {
+    cleanPath = '/';
   }
 
   // Remover la / inicial para pasarla a getRelativeLocaleUrl
-  const pathForHelper = cleanPath === '/' ? '' : cleanPath.slice(1);
+  // Si es la raíz (/), pasar cadena vacía
+  const pathForHelper = cleanPath === '/' ? '' : cleanPath.replace(/^\//, '');
 
   // Usar el helper nativo de Astro que maneja base path automáticamente
-  return getRelativeLocaleUrl(targetLocale, pathForHelper);
+  const result = getRelativeLocaleUrl(targetLocale, pathForHelper);
+  
+  // Normalizar dobles barras
+  return result.replace(/\/\//g, '/');
 }
 
 /**

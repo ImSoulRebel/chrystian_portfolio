@@ -1,6 +1,6 @@
 ---
 import LanguageSelector from './LanguageSelector.astro';
-import { useTranslations, type Locale } from '@utils/i18n';
+import { useTranslations, getRelativeLocaleUrl, type Locale } from '@utils/i18n';
 
 // Recibir locale como prop
 interface Props {
@@ -10,6 +10,9 @@ interface Props {
 const { locale = 'es' } = Astro.props;
 const t = useTranslations(locale);
 const currentPath = Astro.url.pathname;
+
+// Obtener la URL base localizada (home page del idioma actual)
+const homeUrl = getRelativeLocaleUrl(locale, '');
 
 // Generar links de navegación localizados
 const navLinks = [
@@ -25,10 +28,10 @@ const navLinks = [
 <header class="header" id="header">
   <div class="container">
     <nav class="nav">
-      <div class="logo">
+      <a href={homeUrl} class="logo">
         <span class="logo-text">Chrystian</span>
         <span class="logo-accent">Michell</span>
-      </div>
+      </a>
 
       <ul class="nav-menu" id="nav-menu">
         {
@@ -86,6 +89,7 @@ const navLinks = [
     align-items: center;
     font-size: 1.5rem;
     font-weight: 700;
+    text-decoration: none;
     cursor: pointer;
     transition: transform 0.3s ease;
   }
