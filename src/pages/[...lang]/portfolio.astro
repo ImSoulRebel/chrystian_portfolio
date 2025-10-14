@@ -30,13 +30,16 @@ const pageTitle = t('seo.title');
 const pageDescription = t('seo.description');
 const pageKeywords = t('seo.keywords');
 
+const baseUrl = import.meta.env.PUBLIC_BASE_PATH || import.meta.env.BASE_URL || '';
+const siteUrl = Astro.site?.toString() || 'https://imsoulrebel.github.io/chrystian_portfolio/';
+
 // Structured data for homepage
 const homeStructuredData = {
   '@context': 'https://schema.org',
   '@graph': [
     {
       '@type': 'Person',
-      '@id': 'https://imsoulrebel.github.io/chrystian_portfolio/#person',
+      '@id': `${siteUrl}#person`,
       name: 'Chrystian Michell',
       givenName: 'Chrystian',
       familyName: 'Michell',
@@ -48,10 +51,10 @@ const homeStructuredData = {
         locale === 'es'
           ? 'Líder técnico con más de 5 años construyendo aplicaciones móviles escalables y liderando equipos de desarrollo'
           : 'Technical leader with over 5 years building scalable mobile applications and leading development teams',
-      url: 'https://imsoulrebel.github.io/chrystian_portfolio/',
+      url: siteUrl,
       image: {
         '@type': 'ImageObject',
-        url: 'https://imsoulrebel.github.io/chrystian_portfolio/profile-image.jpg',
+        url: new URL(`${baseUrl.replace(/\/$/, '')}/profile-image.jpg`, siteUrl).href,
         width: 400,
         height: 400,
       },

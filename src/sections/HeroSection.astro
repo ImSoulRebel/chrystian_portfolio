@@ -10,8 +10,9 @@ const { locale = 'es' } = Astro.props;
 const t = useTranslations(locale);
 
 // Obtener la imagen de perfil desde las variables de entorno
+const baseUrl = import.meta.env.PUBLIC_BASE_PATH || import.meta.env.BASE_URL || '';
 const profileImage =
-  import.meta.env.PUBLIC_PROFILE_IMAGE || '/profile-image.jpg';
+  import.meta.env.PUBLIC_PROFILE_IMAGE || `${baseUrl.replace(/\/$/, '')}/profile-image.jpg`;
 ---
 
 <section id="home" class="hero">

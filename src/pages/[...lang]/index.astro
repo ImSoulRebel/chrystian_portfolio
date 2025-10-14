@@ -68,11 +68,12 @@ const pageKeywords = t('seo.keywords');
 
 // Build dynamic URLs from environment variables
 const siteUrl = PUBLIC_SITE_URL;
+const baseUrl = import.meta.env.PUBLIC_BASE_PATH || import.meta.env.BASE_URL || '';
 const personId = `${siteUrl}/#person`;
 const websiteId = `${siteUrl}/#website`;
 const profileImageUrl = PUBLIC_PROFILE_IMAGE
   ? `${siteUrl}${PUBLIC_PROFILE_IMAGE}`
-  : `${siteUrl}/profile-image.jpg`;
+  : new URL(`${baseUrl.replace(/\/$/, '')}/profile-image.jpg`, siteUrl).href;
 
 // Get author information from ENV or use defaults from translations
 const authorName = PUBLIC_AUTHOR_NAME || t('structuredData.person.name');
