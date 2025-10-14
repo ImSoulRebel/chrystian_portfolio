@@ -13,11 +13,22 @@ interface ImportMetaEnv {
 
   // INFORMACIÓN PERSONAL (Públicas)
   readonly PUBLIC_AUTHOR_NAME: string;
+  readonly PUBLIC_AUTHOR_GIVEN_NAME?: string;
+  readonly PUBLIC_AUTHOR_FAMILY_NAME?: string;
   readonly PUBLIC_CONTACT_EMAIL: string;
   readonly PUBLIC_CONTACT_PHONE?: string;
   readonly PUBLIC_CONTACT_ADDRESS?: string;
   readonly PUBLIC_GITHUB_USERNAME?: string;
+  readonly PUBLIC_GITHUB_URL?: string;
   readonly PUBLIC_LINKEDIN_URL?: string;
+  readonly PUBLIC_TWITTER_URL?: string;
+  readonly PUBLIC_TWITTER_HANDLE?: string;
+  readonly PUBLIC_INSTAGRAM_URL?: string;
+
+  // PERFIL Y MEDIA (Públicas)
+  readonly PUBLIC_PROFILE_IMAGE?: string;
+  readonly PUBLIC_PROFILE_IMAGE_WIDTH?: number;
+  readonly PUBLIC_PROFILE_IMAGE_HEIGHT?: number;
 
   // SERVICIOS EXTERNOS (Solo disponibles en servidor)
   readonly PUBLIC_FORMSPREE_ENDPOINT?: string;

@@ -53,10 +53,10 @@ export function getDeploymentPlatform():
 /**
  * Hook para obtener la función de traducción basada en el locale actual
  * @param locale - El locale actual ('es' | 'en')
- * @returns Función de traducción tipada
+ * @returns Función de traducción tipada que puede retornar string, array u objeto
  */
 export function useTranslations(locale: Locale) {
-  return function t(key: TranslationKeyPath): string {
+  return function t<T = any>(key: TranslationKeyPath): T {
     const keys = key.split('.');
     let value: any = translations[locale];
 

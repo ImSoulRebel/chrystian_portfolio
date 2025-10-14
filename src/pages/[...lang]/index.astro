@@ -1,15 +1,252 @@
 ---
-import { getRelativeLocaleUrl } from 'astro:i18n';
+// This file handles the root path and redirects to the portfolio path section based on the selected language
 
+// import { getRelativeLocaleUrl } from 'astro:i18n';
+// export async function getStaticPaths() {
+//   return [{ params: { lang: 'es' } }, { params: { lang: 'en' } }];
+// }
+// // Get the language from params
+// // getRelativeLocaleUrl incluye automáticamente el base path configurado
+// // @ts-ignore - TypeScript doesn't detect usage in Astro.redirect return statement
+// const lang = Astro.params.lang as 'es' | 'en';
+// // @ts-ignore - TypeScript doesn't detect usage in Astro.redirect return statement
+// const redirectUrl = getRelativeLocaleUrl(lang, '/portfolio/');
+// return Astro.redirect(redirectUrl, 302);
+
+import {
+  AboutSection,
+  HighlightsSection,
+  SkillsSection,
+  ExperienceSection,
+  ProjectsSection,
+  ContactSection,
+  HeroSection,
+} from '@sections';
+import { Header, Footer } from '@components';
+import { Layout } from '@layouts';
+import { useTranslations, type Locale } from '@utils/i18n';
+import {
+  PUBLIC_SITE_URL,
+  PUBLIC_AUTHOR_NAME,
+  PUBLIC_AUTHOR_GIVEN_NAME,
+  PUBLIC_AUTHOR_FAMILY_NAME,
+  PUBLIC_CONTACT_EMAIL,
+  PUBLIC_CONTACT_PHONE,
+  PUBLIC_CONTACT_STREET,
+  PUBLIC_CONTACT_POSTAL_CODE,
+  PUBLIC_CONTACT_CITY,
+  PUBLIC_CONTACT_REGION,
+  PUBLIC_CONTACT_COUNTRY,
+  PUBLIC_LINKEDIN_URL,
+  PUBLIC_GITHUB_URL,
+  PUBLIC_TWITTER_URL,
+  PUBLIC_PROFILE_IMAGE,
+  PUBLIC_PROFILE_IMAGE_WIDTH,
+  PUBLIC_PROFILE_IMAGE_HEIGHT,
+} from 'astro:env/client';
+
+// Define static paths for both languages
 export async function getStaticPaths() {
-  return [{ params: { lang: 'es' } }, { params: { lang: 'en' } }];
+  return [
+    { params: { lang: 'es' } }, // /es/
+    { params: { lang: 'en' } }, // /en/
+  ];
 }
 
 // Get the language from params
 // getRelativeLocaleUrl incluye automáticamente el base path configurado
-// @ts-ignore - TypeScript doesn't detect usage in Astro.redirect return statement
-const lang = Astro.params.lang as 'es' | 'en';
-// @ts-ignore - TypeScript doesn't detect usage in Astro.redirect return statement
-const redirectUrl = getRelativeLocaleUrl(lang, '/portfolio/');
-return Astro.redirect(redirectUrl, 302);
+const { lang } = Astro.params as { lang: 'es' | 'en' };
+
+// Get the language from params
+const locale = (lang as Locale) || 'es';
+const t = useTranslations(locale);
+
+// SEO content based on locale
+const pageTitle = t('seo.title');
+const pageDescription = t('seo.description');
+const pageKeywords = t('seo.keywords');
+
+// Build dynamic URLs from environment variables
+const siteUrl = PUBLIC_SITE_URL;
+const personId = `${siteUrl}/#person`;
+const websiteId = `${siteUrl}/#website`;
+const profileImageUrl = PUBLIC_PROFILE_IMAGE
+  ? `${siteUrl}${PUBLIC_PROFILE_IMAGE}`
+  : `${siteUrl}/profile-image.jpg`;
+
+// Get author information from ENV or use defaults from translations
+const authorName = PUBLIC_AUTHOR_NAME || t('structuredData.person.name');
+const authorGivenName =
+  PUBLIC_AUTHOR_GIVEN_NAME || t('structuredData.person.givenName');
+const authorFamilyName =
+  PUBLIC_AUTHOR_FAMILY_NAME || t('structuredData.person.familyName');
+
+// Get social media URLs from ENV (only if they exist)
+const socialUrls = [
+  PUBLIC_LINKEDIN_URL,
+  PUBLIC_GITHUB_URL,
+  PUBLIC_TWITTER_URL,
+].filter(Boolean); // Remove undefined/null values
+
+// Structured data for homepage
+const homeStructuredData = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'Person',
+      '@id': personId,
+      name: authorName,
+      givenName: authorGivenName,
+      familyName: authorFamilyName,
+      jobTitle: t('structuredData.person.jobTitle'),
+      description: t('structuredData.person.description'),
+      url: siteUrl,
+      image: {
+        '@type': 'ImageObject',
+        url: profileImageUrl,
+        width: PUBLIC_PROFILE_IMAGE_WIDTH || 400,
+        height: PUBLIC_PROFILE_IMAGE_HEIGHT || 400,
+      },
+      email: PUBLIC_CONTACT_EMAIL || 'contact@example.com',
+      telephone: PUBLIC_CONTACT_PHONE || '',
+      address: {
+        '@type': 'PostalAddress',
+        streetAddress: PUBLIC_CONTACT_STREET || '',
+        addressLocality: PUBLIC_CONTACT_CITY || 'Madrid',
+        addressRegion: PUBLIC_CONTACT_REGION || 'Comunidad de Madrid',
+        postalCode: PUBLIC_CONTACT_POSTAL_CODE || '',
+        addressCountry: PUBLIC_CONTACT_COUNTRY || 'ES',
+      },
+      ...(socialUrls.length > 0 && { sameAs: socialUrls }),
+      knowsAbout: t('structuredData.person.knowsAbout'),
+      hasOccupation: {
+        '@type': 'Occupation',
+        name: t('structuredData.person.occupation.name'),
+        occupationLocation: {
+          '@type': 'Place',
+          name: t('structuredData.person.occupation.location'),
+        },
+        skills: t('structuredData.person.occupation.skills'),
+        experienceRequirements: t(
+          'structuredData.person.occupation.experienceRequirements'
+        ),
+        responsibilities: t(
+          'structuredData.person.occupation.responsibilities'
+        ),
+      },
+      worksFor: {
+        '@type': 'Organization',
+        name: t('structuredData.person.worksFor.name'),
+        description: t('structuredData.person.worksFor.description'),
+      },
+      seeks: {
+        '@type': 'Demand',
+        name: t('structuredData.person.seeks.name'),
+        description: t('structuredData.person.seeks.description'),
+      },
+    },
+    {
+      '@type': 'WebSite',
+      '@id': websiteId,
+      url: siteUrl,
+      name: t('structuredData.website.name'),
+      description: t('structuredData.website.description'),
+      publisher: {
+        '@id': personId,
+      },
+      inLanguage: locale,
+      potentialAction: {
+        '@type': 'SearchAction',
+        target: {
+          '@type': 'EntryPoint',
+          urlTemplate: `${siteUrl}/?s={search_term_string}`,
+        },
+        'query-input': 'required name=search_term_string',
+      },
+    },
+    {
+      '@type': 'ProfessionalService',
+      '@id': `${siteUrl}/#service`,
+      name: t('structuredData.services.name'),
+      description: t('structuredData.services.description'),
+      image: profileImageUrl,
+      telephone: PUBLIC_CONTACT_PHONE || '',
+      priceRange: '€€€',
+      address: {
+        '@type': 'PostalAddress',
+        streetAddress: PUBLIC_CONTACT_STREET || '',
+        addressLocality: PUBLIC_CONTACT_CITY || 'Madrid',
+        addressRegion: PUBLIC_CONTACT_REGION || 'Comunidad de Madrid',
+        postalCode: PUBLIC_CONTACT_POSTAL_CODE || '',
+        addressCountry: PUBLIC_CONTACT_COUNTRY || 'ES',
+      },
+      provider: {
+        '@id': personId,
+      },
+      serviceType: t('structuredData.services.serviceType'),
+      areaServed: {
+        '@type': 'Country',
+        name: 'Worldwide',
+      },
+      availableChannel: {
+        '@type': 'ServiceChannel',
+        serviceUrl: siteUrl,
+        availableLanguage: ['es', 'en'],
+      },
+      hasOfferCatalog: {
+        '@type': 'OfferCatalog',
+        name: t('structuredData.services.catalog.name'),
+        itemListElement: t('structuredData.services.catalog.offers').map(
+          (offer: any) => ({
+            '@type': 'Offer',
+            itemOffered: {
+              '@type': 'Service',
+              name: offer.name,
+              description: offer.description,
+            },
+          })
+        ),
+      },
+    },
+  ],
+};
+
+// Additional meta tags for recruiters (now using translations)
+const additionalMeta = [
+  { name: 'hiring-status', content: t('recruiterMeta.hiringStatus') },
+  { name: 'work-authorization', content: t('recruiterMeta.workAuthorization') },
+  { name: 'salary-expectation', content: t('recruiterMeta.salaryExpectation') },
+  { name: 'notice-period', content: t('recruiterMeta.noticePeriod') },
+  { name: 'preferred-role', content: t('recruiterMeta.preferredRole') },
+  { name: 'team-size-managed', content: t('recruiterMeta.teamSizeManaged') },
+  { name: 'years-experience', content: t('recruiterMeta.yearsExperience') },
+  { name: 'specialization', content: t('recruiterMeta.specialization') },
+];
 ---
+
+<Layout
+  title={pageTitle}
+  description={pageDescription}
+  keywords={pageKeywords}
+  structuredData={homeStructuredData}
+  additionalMeta={additionalMeta}
+  locale={locale}
+>
+  <Header locale={locale} />
+
+  <HeroSection locale={locale} />
+
+  <AboutSection locale={locale} />
+
+  <HighlightsSection locale={locale} />
+
+  <SkillsSection locale={locale} />
+
+  <ExperienceSection locale={locale} />
+
+  <ProjectsSection locale={locale} />
+
+  <ContactSection locale={locale} />
+
+  <Footer locale={locale} />
+</Layout>

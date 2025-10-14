@@ -14,13 +14,23 @@ const __dirname = dirname(__filename);
 const deploymentPlatform =
   process.env.PUBLIC_DEPLOYMENT_PLATFORM || 'development';
 
-// Cargar el archivo .env correspondiente solo si no está en CI/CD
+// ===========================================
+// PATRÓN BASE + OVERRIDES
+// ===========================================
+// 1. Cargar .env.production (configuración base) si no es development
+// 2. Cargar .env.{platform} específico con override: true
 if (!process.env.CI) {
-  const envFile = `.env.${deploymentPlatform}`;
-  const envPath = resolve(__dirname, envFile);
+  if (deploymentPlatform !== 'development') {
+    const productionEnvPath = resolve(__dirname, '.env.production');
+    console.log('📄 Loading base config from: .env.production');
+    config({ path: productionEnvPath, override: false });
+  }
 
-  console.log('📄 Loading env from:', envFile);
-  config({ path: envPath, override: false });
+  // Cargar archivo específico de plataforma (sobreescribe base)
+  const platformEnvFile = `.env.${deploymentPlatform}`;
+  const platformEnvPath = resolve(__dirname, platformEnvFile);
+  console.log('📄 Loading platform overrides from:', platformEnvFile);
+  config({ path: platformEnvPath, override: true });
 }
 
 const isGitHub = deploymentPlatform === 'github';
@@ -91,6 +101,16 @@ export default defineConfig({
         access: 'public',
         default: 'Desarrollador',
       }),
+      PUBLIC_AUTHOR_GIVEN_NAME: envField.string({
+        context: 'client',
+        access: 'public',
+        optional: true,
+      }),
+      PUBLIC_AUTHOR_FAMILY_NAME: envField.string({
+        context: 'client',
+        access: 'public',
+        optional: true,
+      }),
       PUBLIC_CONTACT_EMAIL: envField.string({
         context: 'client',
         access: 'public',
@@ -106,7 +126,37 @@ export default defineConfig({
         access: 'public',
         optional: true,
       }),
+      PUBLIC_CONTACT_STREET: envField.string({
+        context: 'client',
+        access: 'public',
+        optional: true,
+      }),
+      PUBLIC_CONTACT_POSTAL_CODE: envField.string({
+        context: 'client',
+        access: 'public',
+        optional: true,
+      }),
+      PUBLIC_CONTACT_CITY: envField.string({
+        context: 'client',
+        access: 'public',
+        optional: true,
+      }),
+      PUBLIC_CONTACT_REGION: envField.string({
+        context: 'client',
+        access: 'public',
+        optional: true,
+      }),
+      PUBLIC_CONTACT_COUNTRY: envField.string({
+        context: 'client',
+        access: 'public',
+        optional: true,
+      }),
       PUBLIC_GITHUB_USERNAME: envField.string({
+        context: 'client',
+        access: 'public',
+        optional: true,
+      }),
+      PUBLIC_GITHUB_URL: envField.string({
         context: 'client',
         access: 'public',
         optional: true,
@@ -116,21 +166,43 @@ export default defineConfig({
         access: 'public',
         optional: true,
       }),
-
-      // SERVICIOS EXTERNOS (Secretas - Solo servidor)
-      PUBLIC_FORMSPREE_ENDPOINT: envField.string({
+      PUBLIC_TWITTER_URL: envField.string({
         context: 'client',
         access: 'public',
         optional: true,
       }),
-      WEBHOOK_URL: envField.string({
-        context: 'server',
-        access: 'secret',
+      PUBLIC_TWITTER_HANDLE: envField.string({
+        context: 'client',
+        access: 'public',
         optional: true,
       }),
-      ANALYTICS_API_KEY: envField.string({
-        context: 'server',
-        access: 'secret',
+      PUBLIC_INSTAGRAM_URL: envField.string({
+        context: 'client',
+        access: 'public',
+        optional: true,
+      }),
+
+      // PERFIL Y MEDIA (Públicas)
+      PUBLIC_PROFILE_IMAGE: envField.string({
+        context: 'client',
+        access: 'public',
+        optional: true,
+      }),
+      PUBLIC_PROFILE_IMAGE_WIDTH: envField.number({
+        context: 'client',
+        access: 'public',
+        optional: true,
+      }),
+      PUBLIC_PROFILE_IMAGE_HEIGHT: envField.number({
+        context: 'client',
+        access: 'public',
+        optional: true,
+      }),
+
+      // SERVICIOS EXTERNOS (Públicas)
+      PUBLIC_FORMSPREE_ENDPOINT: envField.string({
+        context: 'client',
+        access: 'public',
         optional: true,
       }),
 
@@ -172,7 +244,7 @@ export default defineConfig({
     locales: ['es', 'en'],
     defaultLocale: 'es',
     routing: {
-      prefixDefaultLocale: true, // Ahora español también tendrá prefijo /es/
+      prefixDefaultLocale: true,
       redirectToDefaultLocale: true,
     },
   },
