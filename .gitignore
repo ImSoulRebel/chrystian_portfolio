@@ -14,17 +14,20 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 
-# environment variables
+# environment variables - TEMPLATE MODE
+# Los archivos .env contienen datos personales y no deben subirse
 .env
 .env.local
 .env.production
+.env.development
+.env.github
+.env.netlify
 .env.staging
 .env.*.local
 
-# Permitir archivos de configuración de plataforma
-!.env.github
-!.env.netlify
-!.env.development
+# Permitir archivos template (placeholders genéricos)
+!.env.*.template
+!.env.example
 
 # macOS-specific files
 .DS_Store

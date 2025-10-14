@@ -1,180 +1,658 @@
-# 🚀 Portfolio Personal - Chrystian Michell
+# 🚀 Portfolio Template - Astro
 
-Un portfolio profesional y moderno desarrollado con **Astro**, diseñado para mostrar proyectos, habilidades y experiencia como Senior Flutter Developer & Tech Lead.
+> 🎨 **Úsalo como Template:** Este proyecto está diseñado para ser usado como plantilla pública. Haz clic en "Use this template" en GitHub para crear tu propio portfolio profesional.
+
+<div align="center">
+
+[![Astro](https://img.shields.io/badge/Astro-v5-blueviolet?logo=astro)](https://astro.build)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.7-blue?logo=typescript)](https://www.typescriptlang.org/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+</div>
+
+Un portfolio profesional y moderno desarrollado con **Astro v5**, completamente personalizable, type-safe, y listo para deployment en múltiples plataformas sin cambios en el código.
+
+---
+
+## ⚡ Quick Start
+
+```bash
+# 1. Usa este template en GitHub (botón "Use this template") o clónalo
+git clone https://github.com/TU_USERNAME/portfolio-template.git mi-portfolio
+cd mi-portfolio
+
+# 2. Instala dependencias
+yarn install
+
+# 3. Ejecuta el wizard de configuración interactivo
+yarn setup
+
+# 4. Inicia el servidor de desarrollo
+yarn dev
+```
+
+**¡Listo!** Tu portfolio estará en `http://localhost:4321` 🎉
+
+---
 
 ## 📑 Tabla de Contenidos
 
 - [✨ Características](#-características)
-- [📁 Arquitectura de Variables de Entorno](#-arquitectura-de-variables-de-entorno)
-- [📦 Instalación y Configuración](#-instalación-y-configuración)
-- [🌍 Variables de Entorno](#-variables-de-entorno)
-- [📧 Configuración de Formspree](#-configuración-de-formspree)
-- [🚀 Scripts Disponibles](#-scripts-disponibles)
-- [🎯 SEO y Structured Data](#-seo-y-structured-data)
-- [🔒 Privacidad y Seguridad](#-privacidad-y-seguridad)
-- [🛠️ Tecnologías](#️-tecnologías)
-- [📂 Estructura del Proyecto](#-estructura-del-proyecto)
-- [🌍 Internacionalización (i18n)](#-internacionalización-i18n)
+- [🚀 Configuración Inicial](#-configuración-inicial)
 - [🎨 Personalización](#-personalización)
-- [🚀 Deployment](#-deployment)
+- [📧 Formulario de Contacto](#-formulario-de-contacto)
+- [🌍 Deployment Multi-Plataforma](#-deployment-multi-plataforma)
+- [🔧 Scripts Disponibles](#-scripts-disponibles)
+- [📁 Estructura del Proyecto](#-estructura-del-proyecto)
+- [🌐 Internacionalización](#-internacionalización)
+- [🎯 SEO y Structured Data](#-seo-y-structured-data)
+- [🔐 Variables de Entorno](#-variables-de-entorno)
+- [🛠️ Tecnologías](#️-tecnologías)
 - [🐛 Troubleshooting](#-troubleshooting)
-- [📊 Métricas del Proyecto](#-métricas-del-proyecto)
-- [🔄 Historial de Cambios](#-historial-de-cambios)
-- [🤝 Contribuir](#-contribuir)
+- [📋 Guía de Migración a Template Público](#-guía-de-migración-a-template-público)
 - [📝 Licencia](#-licencia)
-- [👨‍💻 Autor](#-autor)
 
 ---
 
 ## ✨ Características
 
-- 🎨 **Diseño Moderno**: Interfaz elegante con tema oscuro y gradientes
-- 📱 **Responsive**: Optimizado para todos los dispositivos
-- ⚡ **Performance**: Carga rápida gracias a Astro
-- 🎯 **SEO Optimizado**: Meta tags, hreflang y estructura semántica
-- 🔄 **Animaciones Suaves**: Transiciones y efectos visuales
-- 📧 **Formulario de Contacto**: Integración con Formspree
-- 🌍 **Multi-idioma**: Sistema i18n nativo con español e inglés
-- 🌐 **Multi-Plataforma**: Deployment automático en GitHub Pages y Netlify
-- 🔐 **Variables de Entorno**: Sistema tipo-seguro con Astro v5
-- 🚀 **CI/CD**: Linting, formateo y deployment automatizado
+### 🎨 Diseño y UX
+- **Diseño Moderno**: Interfaz elegante con tema oscuro y gradientes profesionales
+- **Responsive**: Optimizado para móviles, tablets y desktop
+- **Animaciones Suaves**: Transiciones fluidas y efectos visuales atractivos
+- **Accesibilidad**: ARIA labels, semantic HTML, navegación por teclado
+
+### ⚡ Performance y Tecnología
+- **Astro v5**: Static Site Generation ultra-rápido
+- **TypeScript**: Type-safe en todo el proyecto
+- **Zero JS por defecto**: Solo JavaScript donde es necesario
+- **Optimización de imágenes**: Sharp integration para imágenes optimizadas
+
+### 🌍 Multi-idioma y Multi-plataforma
+- **i18n Nativo**: Sistema de internacionalización con español e inglés
+- **Multi-Plataforma**: Deploy en GitHub Pages, Netlify, o Vercel sin cambios
+- **Rutas SEO-friendly**: URLs limpias con hreflang automático
+
+### 🎯 SEO y Marketing
+- **SEO Optimizado**: Meta tags, Open Graph, Twitter Cards
+- **Structured Data**: Schema.org (Person, WebSite, ProfessionalService)
+- **Google Rich Results**: Validado y optimizado para Rich Snippets
+- **Sitemap y Robots**: Configuración automática
+
+### 🔐 Desarrollo
+- **Variables de Entorno Type-Safe**: Sistema nativo de Astro v5
+- **Patrón Base + Overrides**: Reduce duplicación de configuración en 71%
+- **CI/CD**: Linting, formateo y deployment automatizado
+- **Git Hooks**: Pre-commit para calidad de código
+
+---
+
+## 🚀 Configuración Inicial
+
+### Opción 1: Wizard Interactivo (Recomendado) 🪄
+
+El wizard te hace preguntas y genera toda la configuración automáticamente:
+
+```bash
+yarn install
+yarn setup
+```
+
+**Te preguntará:**
+- ✅ Tu nombre completo y datos de contacto
+- ✅ Tus redes sociales (GitHub, LinkedIn, Twitter, Instagram)
+- ✅ Configuración de GitHub Pages (nombre de repo)
+- ✅ Tu endpoint de Formspree (opcional)
+
+**Resultado:**
+- ✅ Archivos `.env.*` generados con tus datos
+- ✅ Configuración lista para desarrollo
+- ✅ Listo para deploy
+
+### Opción 2: Configuración Manual
+
+Si prefieres configurar manualmente:
+
+```bash
+# 1. Copia los archivos template
+cp .env.production.template .env.production
+cp .env.development.template .env.development
+cp .env.github.template .env.github
+cp .env.netlify.template .env.netlify
+
+# 2. Edita cada archivo con tus datos
+# Reemplaza: "tu-username", "tu-email@ejemplo.com", etc.
+```
+
+**Archivos a editar:**
+- `.env.production` → Datos base (nombre, email, redes sociales)
+- `.env.development` → Desarrollo local
+- `.env.github` → GitHub Pages (nombre de repo, URLs)
+- `.env.netlify` → Netlify (dominio personalizado)
+
+---
+
+## 🎨 Personalización
+
+### 1. Contenido y Textos
+
+Edita `src/config/translations.ts`:
+
+```typescript
+export const translations = {
+  es: {
+    nav: {
+      home: 'Inicio',
+      about: 'Sobre mí',
+      portfolio: 'Portfolio',
+      contact: 'Contacto',
+    },
+    hero: {
+      greeting: 'Hola, soy',
+      title: 'Tu Nombre',
+      subtitle: 'Tu Título Profesional',
+      description: 'Tu descripción breve y atractiva',
+      cta: 'Ver mi trabajo',
+    },
+    // ... más secciones
+  },
+  en: {
+    // ... traducciones al inglés
+  }
+};
+```
+
+### 2. Imágenes
+
+Reemplaza en `public/`:
+
+```
+public/
+├── profile-image.jpg     # Tu foto (400x400px recomendado)
+├── favicon.svg          # Tu favicon
+├── og-image.jpg         # Para redes sociales (1200x630px)
+└── robots.txt           # Configuración de bots
+```
+
+### 3. Proyectos y Experiencia
+
+Edita los archivos en `src/sections/`:
+
+```astro
+<!-- src/sections/ProjectsSection.astro -->
+const projects = [
+  {
+    title: 'Nombre del Proyecto',
+    description: 'Descripción breve',
+    image: '/projects/proyecto1.jpg',
+    tech: ['React', 'TypeScript', 'Node.js'],
+    demo: 'https://demo.com',
+    github: 'https://github.com/...',
+  },
+  // ... más proyectos
+];
+```
+
+### 4. Colores y Estilos
+
+Edita `src/styles/global.css`:
+
+```css
+:root {
+  /* Colores principales */
+  --color-primary: #667eea;
+  --color-secondary: #764ba2;
+  --color-accent: #f093fb;
+  
+  /* Colores de fondo */
+  --bg-primary: #0a0e27;
+  --bg-secondary: #1a1f3a;
+  
+  /* Tipografía */
+  --font-sans: 'Inter', sans-serif;
+  
+  /* Espaciado */
+  --spacing-xs: 0.5rem;
+  --spacing-sm: 1rem;
+  --spacing-md: 2rem;
+  --spacing-lg: 4rem;
+}
+```
+
+### 5. Agregar Nuevas Secciones
+
+1. Crea el componente:
+```astro
+<!-- src/sections/MiNuevaSeccion.astro -->
+---
+import Section from '@/components/Section.astro';
+---
+
+<Section id="mi-seccion" title="Mi Nueva Sección">
+  <p>Contenido de tu sección</p>
+</Section>
+```
+
+2. Impórtalo en la página:
+```astro
+<!-- src/pages/[...lang]/index.astro -->
+import MiNuevaSeccion from '@/sections/MiNuevaSeccion.astro';
+
+<MiNuevaSeccion />
+```
+
+---
+
+## 📧 Formulario de Contacto
+
+### Configuración de Formspree
+
+El formulario usa [Formspree](https://formspree.io) (plan gratuito: 50 envíos/mes).
+
+#### Durante el Setup
+
+El wizard te pedirá tu endpoint de Formspree automáticamente.
+
+#### Configuración Manual
+
+1. **Regístrate** en [formspree.io](https://formspree.io)
+2. **Crea un formulario** y copia el endpoint: `https://formspree.io/f/XXXXXXXX`
+3. **Añádelo** a tus archivos `.env.*`:
+
+```env
+PUBLIC_FORMSPREE_ENDPOINT=https://formspree.io/f/XXXXXXXX
+```
+
+#### Sin Formulario
+
+Si no quieres usar el formulario:
+
+```env
+PUBLIC_FORMSPREE_ENDPOINT=
+```
+
+El componente mostrará solo tus datos de contacto.
+
+### Características del Formulario
+
+- ✅ Validación en tiempo real
+- ✅ Estados visuales (loading, éxito, error)
+- ✅ Campos optimizados para proyectos
+- ✅ Responsive y accesible
+- ✅ Prevención básica de spam
+
+---
+
+## 🌍 Deployment Multi-Plataforma
+
+### Plataformas Soportadas
+
+| Plataforma | Base Path | Site URL | Build Command |
+|------------|-----------|----------|---------------|
+| **GitHub Pages** | `/tu-repo` | `username.github.io/tu-repo` | `yarn build:github` |
+| **Netlify** | `/` | `tudominio.com` | `yarn build:netlify` |
+| **Development** | `/` | `localhost:4321` | `yarn dev` |
+
+### 🔵 GitHub Pages (Gratis)
+
+#### Configuración Automática con GitHub Actions
+
+1. **Configura `.env.github`:**
+```env
+PUBLIC_BASE_PATH=/tu-repo  # Debe coincidir con nombre del repo
+```
+
+2. **Habilita GitHub Pages:**
+   - Settings → Pages → Source: **GitHub Actions**
+
+3. **Push tu código:**
+```bash
+git add .
+git commit -m "Initial commit"
+git push origin main
+```
+
+4. **El workflow se ejecuta automáticamente:**
+   - ✅ Type checking y linting
+   - ✅ Formateo de código
+   - ✅ Build optimizado
+   - ✅ Deploy a GitHub Pages
+
+5. **Tu sitio estará en:**
+   - `https://tu-username.github.io/tu-repo`
+
+#### Deployment Manual
+
+```bash
+yarn build:github
+yarn deploy:github
+```
+
+### 🟢 Netlify (Gratis + Dominio Personalizado)
+
+#### Deployment Automático
+
+1. **Conecta tu repositorio:**
+   - Ve a [app.netlify.com](https://app.netlify.com)
+   - "Add new site" → "Import an existing project"
+   - Selecciona tu repositorio
+
+2. **Netlify detecta la configuración automáticamente:**
+   - El archivo `netlify.toml` ya tiene todo configurado
+   - Build command: `yarn build:netlify`
+   - Publish directory: `dist`
+
+3. **Configura dominio personalizado (opcional):**
+   - Site settings → Domain management
+   - Añade tu dominio
+   - Actualiza `PUBLIC_SITE_URL` en `.env.netlify`
+
+#### Características de netlify.toml
+
+```toml
+[build]
+  command = "yarn build:netlify"
+  publish = "dist"
+
+# Redirects automáticos
+[[redirects]]
+  from = "/"
+  to = "/es/"  # Idioma por defecto
+
+# Headers de seguridad
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Content-Security-Policy = "..."
+    X-Frame-Options = "DENY"
+    Strict-Transport-Security = "..."
+```
+
+### ⚙️ Sistema Multi-Plataforma
+
+**Sin cambios en el código**, el mismo build funciona en todas las plataformas:
+
+```javascript
+// astro.config.mjs detecta automáticamente la plataforma
+const platform = process.env.PUBLIC_DEPLOYMENT_PLATFORM;
+
+// Carga configuración base + overrides
+config({ path: `.env.production` });  // Base
+config({ path: `.env.${platform}` }); // Platform-specific
+```
+
+**Ventajas:**
+- ✅ URLs correctas automáticamente
+- ✅ Base paths correctos
+- ✅ Sin duplicar configuración
+- ✅ Fácil migración entre plataformas
+
+---
+
+## 🔧 Scripts Disponibles
+
+### Desarrollo
+
+```bash
+yarn dev              # Servidor de desarrollo (localhost:4321)
+yarn setup            # Wizard de configuración inicial
+```
+
+### Build por Plataforma
+
+```bash
+yarn build:github     # Build para GitHub Pages
+yarn build:netlify    # Build para Netlify
+yarn build            # Build genérico
+```
+
+### Preview
+
+```bash
+yarn preview:github   # Preview del build de GitHub
+yarn preview:netlify  # Preview del build de Netlify
+yarn preview          # Preview genérico
+```
+
+### Quality Assurance
+
+```bash
+yarn lint             # Prettier + Astro check
+yarn format           # Formatear código con Prettier
+yarn check            # Solo type-checking
+yarn validate         # Lint + Type-check + Build (validación completa)
+```
+
+### Deployment
+
+```bash
+yarn deploy:github    # Deploy manual a GitHub Pages
+yarn deploy:force     # Deploy forzado (sobrescribe historial)
+```
+
+### Utilidades
+
+```bash
+yarn astro sync       # Sincronizar tipos y variables
+yarn clean            # Limpiar dist y .astro
+yarn clean:all        # Limpiar todo incluido node_modules
+```
+
+---
+
+## 📁 Estructura del Proyecto
+
+```
+📁 portfolio-template/
+├── 📄 .env.*.template       # Templates de configuración (placeholders)
+├── 📄 setup.js              # Wizard de configuración interactivo
+├── 📄 netlify.toml          # Configuración de Netlify
+├── 📁 .github/
+│   └── workflows/
+│       └── deploy.yml       # GitHub Actions workflow
+├── 📁 public/               # Archivos estáticos
+│   ├── profile-image.jpg    # → Reemplaza con tu foto
+│   ├── favicon.svg          # → Reemplaza con tu favicon
+│   └── robots.txt
+├── 📁 src/
+│   ├── 📁 assets/           # Imágenes optimizadas
+│   │   ├── logos/
+│   │   └── projects/
+│   ├── 📁 components/       # Componentes reutilizables
+│   │   ├── Header.astro
+│   │   ├── Footer.astro
+│   │   ├── ContactForm.astro
+│   │   └── ...
+│   ├── 📁 config/           # Configuración
+│   │   ├── site.js          # Config del sitio
+│   │   └── translations.ts  # → Edita tus textos
+│   ├── 📁 layouts/
+│   │   └── Layout.astro     # Layout base
+│   ├── 📁 pages/            # Páginas del sitio
+│   │   ├── index.astro      # Redirect a idioma
+│   │   ├── 404.astro
+│   │   └── [...lang]/       # Rutas i18n
+│   │       ├── index.astro
+│   │       ├── portfolio.astro
+│   │       └── contact.astro
+│   ├── 📁 sections/         # → Edita contenido
+│   │   ├── HeroSection.astro
+│   │   ├── AboutSection.astro
+│   │   ├── ProjectsSection.astro
+│   │   ├── ExperienceSection.astro
+│   │   └── SkillsSection.astro
+│   ├── 📁 scripts/          # JavaScript del cliente
+│   │   ├── app.js           # Coordinador principal
+│   │   ├── interactions.js  # Interacciones globales
+│   │   ├── skillsCarousel.js
+│   │   └── contactForm.js
+│   ├── 📁 styles/
+│   │   └── global.css       # → Edita estilos/colores
+│   └── 📁 utils/
+│       └── i18n.ts          # Helpers de i18n
+├── 📄 astro.config.mjs      # Configuración de Astro
+├── 📄 tsconfig.json
+└── 📄 package.json
+```
+
+### Scripts JavaScript (src/scripts/)
+
+Todos los scripts están organizados por funcionalidad:
+
+- **`app.js`**: Coordinador principal, inicializa todas las interacciones
+- **`interactions.js`**: Scroll suave, animaciones, intersection observers
+- **`skillsCarousel.js`**: Carrusel infinito de habilidades
+- **`contactForm.js`**: Manejo del formulario de contacto
+
+**Patrón de clase consistente:**
+```javascript
+export class NombreClase {
+  constructor() {
+    this.init();
+  }
+  
+  init() {
+    // Configuración inicial
+  }
+  
+  destroy() {
+    // Limpieza de recursos
+  }
+}
+```
+
+---
+
+## 🌐 Internacionalización
+
+### Idiomas Soportados
+
+- **Español** (`/es/`) - Idioma por defecto
+- **Inglés** (`/en/`) - Traducción completa
+
+### Agregar Nuevo Idioma
+
+1. **Edita `src/config/translations.ts`:**
+
+```typescript
+export const translations = {
+  es: { /* ... */ },
+  en: { /* ... */ },
+  fr: {  // Nuevo idioma
+    nav: {
+      home: 'Accueil',
+      about: 'À propos',
+      // ...
+    }
+  }
+};
+```
+
+2. **Actualiza `astro.config.mjs`:**
+
+```javascript
+i18n: {
+  locales: ['es', 'en', 'fr'],
+  defaultLocale: 'es',
+  routing: {
+    prefixDefaultLocale: true,
+  },
+}
+```
+
+3. **Las rutas se generan automáticamente:**
+   - `/es/` (español)
+   - `/en/` (inglés)
+   - `/fr/` (francés)
+
+### Uso en el Código
+
+```astro
+---
+import { getRelativeLocaleUrl } from 'astro:i18n';
+import { t } from '@/utils/i18n';
+
+const lang = Astro.currentLocale || 'es';
+const portfolioUrl = getRelativeLocaleUrl(lang, '/portfolio/');
+---
+
+<a href={portfolioUrl}>{t(lang, 'nav.portfolio')}</a>
+```
+
+---
 
 ## 🎯 SEO y Structured Data
 
-### 📊 Google Rich Results - Validación Exitosa
+### Google Rich Results Validado ✅
 
-El sitio está optimizado con structured data (Schema.org) para mejorar el SEO y la visibilidad en Google:
+El sitio está optimizado con Schema.org structured data:
 
 ```
-✅ 2 elementos válidos detectados por Google
+✅ 2 elementos válidos detectados
 ✅ 0 errores críticos
-✅ 0 problemas no críticos
 ✅ Rich Results habilitados
 ```
 
-**Schemas implementados:**
+### Schemas Implementados
 
-1. **👤 Person** (Interpretado como "Organización" por Google)
+1. **👤 Person Schema**
    - Perfil profesional completo
    - Redes sociales vinculadas
-   - Ocupación y expertise documentados
+   - Ocupación y expertise
    - Knowledge Graph habilitado
 
-2. **💼 ProfessionalService** (Interpretado como "Empresas locales")
-   - Servicios catalogados (Flutter, Liderazgo Técnico, Arquitectura)
-   - Información de contacto completa
-   - SEO local optimizado (Madrid)
+2. **💼 ProfessionalService Schema**
+   - Servicios catalogados
+   - Información de contacto
+   - SEO local optimizado
    - Click-to-call habilitado
 
-3. **🌐 WebSite**
+3. **🌐 WebSite Schema**
    - Sitelinks Search Box
-   - Multi-idioma (es/en)
+   - Multi-idioma (hreflang)
    - Publisher vinculado
 
-**Beneficios SEO:**
-- ✅ Rich Snippets con ubicación, teléfono y servicios
-- ✅ Knowledge Graph en búsquedas de marca
-- ✅ SEO local optimizado para Madrid
+### Beneficios SEO
+
+- ✅ Rich Snippets en resultados de búsqueda
+- ✅ Knowledge Graph para búsquedas de marca
+- ✅ SEO local optimizado
 - ✅ Social profiles verificados
 - ✅ Better CTR con información enriquecida
 
-**Validación:** Probado con [Google Rich Results Test](https://search.google.com/test/rich-results)
+**Validación:** [Google Rich Results Test](https://search.google.com/test/rich-results)
+
+### Meta Tags Incluidos
+
+- Open Graph (Facebook, LinkedIn)
+- Twitter Cards
+- Hreflang para idiomas
+- Canonical URLs
+- Structured Data (JSON-LD)
 
 ---
 
-## 🔒 Privacidad y Seguridad
+## 🔐 Variables de Entorno
 
-### Datos Públicos en Structured Data
+### Sistema Base + Overrides
 
-⚠️ **Importante:** Todo lo que está en el structured data es **público** y visible para cualquiera que:
-- Visite el sitio web
-- Vea el código fuente (Ctrl+U)
-- Use herramientas de scraping
-
-**Información pública actual:**
-- 📧 Email: chrystianmichell@hotmail.com
-- 📞 Teléfono: +34653316944
-- 📍 Ubicación: Madrid, España (genérico - no dirección exacta)
-
-**Privacidad protegida:**
-- ✅ Dirección genérica (Madrid) en vez de domicilio real
-- ✅ Código postal genérico (28001)
-- ✅ SEO local mantenido sin exponer ubicación exacta
-
-### Opciones para Mayor Privacidad
-
-Si deseas proteger más tu información:
-
-1. **Email profesional separado:** Crea `contacto@tudominio.com`
-2. **Número virtual:** Usa Google Voice o servicio similar
-3. **Eliminar campos opcionales:** Quita `streetAddress` y `postalCode` del structured data
-4. **Solo formulario:** Elimina email/teléfono del structured data, usa solo el formulario
-
-Para modificar tu privacidad, edita:
-```bash
-.env.production
-```
-
-Y ajusta las variables `PUBLIC_CONTACT_*`.
-
----
-
-## 🛠️ Tecnologías
-
-- **Framework**: Astro v5
-- **Lenguaje**: TypeScript
-- **Styling**: CSS Variables, Flexbox, Grid
-- **Formularios**: Formspree
-- **Fonts**: Google Fonts (Inter)
-- **Gestión de Estado**: Variables de entorno tipo-seguras
-
----
-
-## � Arquitectura de Variables de Entorno
-
-### 🎯 Patrón Base + Overrides
-
-El proyecto implementa un **sistema de herencia inteligente** que reduce duplicación en un **71%**:
+**Reduce duplicación en 71%:**
 
 ```
-Antes: 3 archivos × 30 variables = 90 líneas duplicadas ❌
-Ahora: 1 base + 2 overrides = 33 líneas totales ✅
+Antes: 3 archivos × 30 variables = 90 líneas ❌
+Ahora: 1 base + overrides = 33 líneas ✅
 ```
 
-**Estructura:**
+### Archivos de Configuración
 
 ```bash
-.env.production      # Base común (25 variables)
-                     # - Datos personales
-                     # - Redes sociales
-                     # - Configuración general
-
-.env.github          # Solo 5 overrides
-                     # - PUBLIC_SITE_URL
-                     # - PUBLIC_BASE_PATH
-                     # - PUBLIC_DEPLOYMENT_PLATFORM
-
-.env.netlify         # Solo 3 overrides
-                     # - PUBLIC_SITE_URL
-                     # - PUBLIC_DEPLOYMENT_PLATFORM
+.env.production.template    # Base común (25 variables)
+.env.development.template   # Desarrollo local
+.env.github.template        # GitHub Pages (5 overrides)
+.env.netlify.template       # Netlify (3 overrides)
 ```
 
-**Cómo funciona:**
-
-1. `astro.config.mjs` detecta la plataforma desde `PUBLIC_DEPLOYMENT_PLATFORM`
-2. Carga **primero** `.env.production` (base completa)
-3. Carga **después** `.env.[platform]` que sobrescribe solo lo específico
-4. Astro genera el sitio con la configuración correcta
-
-**Ventajas:**
-
-- ✅ Cambiar email = editar 1 archivo en vez de 3
-- ✅ Agregar red social = 1 línea en vez de 3
-- ✅ Nueva plataforma = solo 2-3 variables override
-- ✅ Menos errores de sincronización
-- ✅ Más fácil de mantener
-
-### 🔄 Flujo de Carga
+### Flujo de Carga
 
 ```
 yarn build:github
@@ -183,608 +661,264 @@ cross-env PUBLIC_DEPLOYMENT_PLATFORM=github
     ↓
 astro.config.mjs detecta "github"
     ↓
-dotenv.config({ path: '.env.production', override: false })  ← Base
+dotenv.config({ path: '.env.production' })  ← Base completa
     ↓
-dotenv.config({ path: '.env.github', override: true })       ← Overrides
+dotenv.config({ path: '.env.github' })      ← Solo overrides
     ↓
-Build con configuración completa
+Build con configuración correcta
 ```
 
-**Ejemplo práctico:**
-
-```javascript
-// .env.production (BASE)
-PUBLIC_AUTHOR_NAME=Chrystian Michell
-PUBLIC_CONTACT_EMAIL=chrystianmichell@hotmail.com
-PUBLIC_LINKEDIN_URL=https://linkedin.com/in/chrystianmichell
-PUBLIC_SITE_URL=https://www.chrystianmichell.com
-
-// .env.github (OVERRIDE - solo lo diferente)
-PUBLIC_DEPLOYMENT_PLATFORM=github
-PUBLIC_BASE_PATH=/chrystian_portfolio
-PUBLIC_SITE_URL=https://imsoulrebel.github.io/chrystian_portfolio
-
-// Resultado final para GitHub:
-// ✅ Hereda: AUTHOR_NAME, CONTACT_EMAIL, LINKEDIN_URL
-// ✅ Sobrescribe: DEPLOYMENT_PLATFORM, BASE_PATH, SITE_URL
-```
-
----
-
-## �📦 Instalación y Configuración
-
-### 1️⃣ **Clonar el Repositorio**
-
-```bash
-git clone https://github.com/ImSoulRebel/chrystian_portfolio.git
-cd chrystian_portfolio
-```
-
-### 2️⃣ **Instalar Dependencias**
-
-```bash
-yarn install
-# o
-npm install
-```
-
-### 3️⃣ **Configurar Variables de Entorno**
-
-El proyecto incluye archivos `.env` pre-configurados para cada plataforma:
-
-```bash
-# ✅ Ya incluidos en el repositorio
-.env.development    # Para desarrollo local
-.env.github         # Para GitHub Pages
-.env.netlify        # Para Netlify
-
-# ⚠️ Opcional: Sobrescribir localmente
-cp .env.development .env
-```
-
-**Formspree (Opcional)**: Si quieres usar el formulario de contacto:
-
-1. Regístrate en [formspree.io](https://formspree.io)
-2. Crea un formulario y copia el endpoint
-3. Edita `.env.development` o crea `.env`:
-
-```env
-PUBLIC_FORMSPREE_ENDPOINT=https://formspree.io/f/TU_FORM_ID
-```
-
-Ver sección "📧 Configuración de Formspree" más abajo para detalles.
-
-### 4️⃣ **Iniciar Servidor de Desarrollo**
-
-```bash
-yarn dev
-# o
-npm run dev
-```
-
-El sitio estará disponible en: `http://localhost:4321`
-
-**Nota**: El proyecto detecta automáticamente que estás en modo desarrollo y usa la configuración de `.env.development`.
-
----
-
-## 🌍 Variables de Entorno
-
-Este proyecto utiliza un **sistema multi-plataforma** con el patrón **Base + Overrides** para minimizar duplicación y facilitar el mantenimiento.
-
-### 📁 **Archivos de Configuración**
-
-```
-📁 Proyecto/
-├── 📄 .env.production      # ✅ Base común (25 variables) - producción
-├── 📄 .env.development     # ✅ Desarrollo local (independiente)
-├── 📄 .env.github          # ✅ GitHub Pages (solo 5 overrides)
-├── 📄 .env.netlify         # ✅ Netlify (solo 3 overrides)
-├── 📄 .env                 # ⚙️ Local override (opcional, .gitignore)
-└── 📄 astro.config.mjs     # 🔧 Configuración de plataforma
-```
-
-### 🏗️ **Patrón Base + Overrides**
-
-El sistema usa un patrón de herencia para evitar duplicación:
-
-1. **`.env.production`** → Configuración base completa (datos reales, URLs de redes sociales, etc.)
-2. **`.env.github`** → Solo sobrescribe URLs y base path específicos de GitHub Pages
-3. **`.env.netlify`** → Solo sobrescribe URLs específicas de Netlify
-
-**Beneficios:**
-
-- ✅ **71% menos duplicación** de código
-- ✅ Cambiar email/teléfono = editar 1 archivo en vez de 3
-- ✅ Agregar nueva plataforma = 2-3 líneas en vez de 50+
-
-**📖 Documentación completa:** Ver [ENV_ARCHITECTURE.md](./ENV_ARCHITECTURE.md) para detalles del patrón de herencia.
-
-### 🎯 **Detección Automática de Plataforma**
-
-El sistema detecta automáticamente la plataforma usando `PUBLIC_DEPLOYMENT_PLATFORM`:
-
-| Plataforma  | Variable                                 | Base Path              | Site URL                              |
-| ----------- | ---------------------------------------- | ---------------------- | ------------------------------------- |
-| **GitHub**  | `PUBLIC_DEPLOYMENT_PLATFORM=github`      | `/chrystian_portfolio` | `imsoulrebel.github.io/chrystian_...` |
-| **Netlify** | `PUBLIC_DEPLOYMENT_PLATFORM=netlify`     | `/` (root)             | `www.chrystianmichell.com`            |
-| **Dev**     | `PUBLIC_DEPLOYMENT_PLATFORM=development` | `/` (root)             | `localhost:4321`                      |
-
-### 🔐 **Variables Principales**
-
-#### **Variables Públicas** (accesibles en cliente y servidor)
+### Variables Principales
 
 ```env
 # Plataforma
 PUBLIC_DEPLOYMENT_PLATFORM=github|netlify|development
 
-# URLs del Sitio
-PUBLIC_SITE_URL=https://imsoulrebel.github.io/chrystian_portfolio
-PUBLIC_BASE_PATH=/chrystian_portfolio
-
-# Información del Sitio
-PUBLIC_SITE_TITLE=Chrystian Michell | Portfolio
-PUBLIC_SITE_DESCRIPTION=Portfolio profesional de Chrystian Michell
+# URLs
+PUBLIC_SITE_URL=https://tudominio.com
+PUBLIC_BASE_PATH=/tu-repo  # Solo GitHub Pages
 
 # Información Personal
-PUBLIC_AUTHOR_NAME=Chrystian Michell
-PUBLIC_CONTACT_EMAIL=chrystianmichell@hotmail.com
-PUBLIC_GITHUB_USERNAME=ImSoulRebel
+PUBLIC_AUTHOR_NAME=Tu Nombre
+PUBLIC_CONTACT_EMAIL=tu@email.com
+PUBLIC_GITHUB_USERNAME=tu-username
+PUBLIC_LINKEDIN_URL=https://linkedin.com/in/tu-perfil
 
 # Servicios
-PUBLIC_FORMSPREE_ENDPOINT=https://formspree.io/f/YOUR_FORM_ID
+PUBLIC_FORMSPREE_ENDPOINT=https://formspree.io/f/XXXXXXXX
 ```
 
-### **Uso en el Código**
+### Uso en el Código
 
-Las variables públicas se cargan automáticamente en `astro:env/client`:
-
-```astro
----
+```typescript
 import { PUBLIC_SITE_TITLE, PUBLIC_BASE_PATH } from 'astro:env/client';
----
 
-<h1>{PUBLIC_SITE_TITLE}</h1>
-<a href={`${PUBLIC_BASE_PATH}/portfolio/`}>Portfolio</a>
+const title = PUBLIC_SITE_TITLE;
+const basePath = PUBLIC_BASE_PATH;
 ```
 
-### 🔄 **Cómo Funciona**
+---
 
-1. **Build**: Los scripts `build:github` y `build:netlify` establecen `PUBLIC_DEPLOYMENT_PLATFORM`
-2. **Detección**: `astro.config.mjs` carga el archivo `.env.[platform]` correspondiente
-3. **Construcción**: Astro genera URLs correctas automáticamente usando `base` configurado
+## 🛠️ Tecnologías
 
-### ⚙️ **Características del Sistema**
+### Core
 
-- ✅ **Sin cambios de código**: El mismo código funciona en todas las plataformas
-- ✅ **Type-safe**: Validación automática de tipos con TypeScript
-- ✅ **Helpers nativos**: Usa `getRelativeLocaleUrl` de Astro para rutas i18n
-- ✅ **SEO optimizado**: Hreflang URLs correctos para cada plataforma
+- **[Astro v5](https://astro.build)** - Static Site Generator
+- **[TypeScript](https://www.typescriptlang.org/)** - Type safety
+- **CSS Variables** - Styling sin frameworks
 
-### 🔒 **Seguridad**
+### Servicios Externos
 
-- ✅ Los archivos `.env.[platform]` contienen valores **no sensibles** (están en Git)
-- ⚠️ Para API keys secretas, usa `.env` local (está en `.gitignore`)
-- ❌ **NUNCA** expongas API keys en variables `PUBLIC_*`
+- **[Formspree](https://formspree.io)** - Formulario de contacto
+- **[Google Fonts](https://fonts.google.com)** - Tipografía (Inter)
+
+### Build & Deploy
+
+- **[GitHub Actions](https://github.com/features/actions)** - CI/CD
+- **[Netlify](https://www.netlify.com/)** - Hosting alternativo
+- **[Sharp](https://sharp.pixelplumbing.com/)** - Optimización de imágenes
+
+### Desarrollo
+
+- **[Prettier](https://prettier.io/)** - Code formatting
+- **[ESLint](https://eslint.org/)** - Linting (via Astro)
+- **[cross-env](https://www.npmjs.com/package/cross-env)** - Variables de entorno cross-platform
 
 ---
 
-## 📧 Configuración de Formspree
+## 🐛 Troubleshooting
 
-El formulario de contacto utiliza **[Formspree](https://formspree.io)** - un servicio que permite procesar formularios HTML en sitios estáticos sin backend.
-
-### 🚀 **Setup en 4 Pasos**
-
-1. **Registrarse** en [formspree.io](https://formspree.io) (Plan gratuito: 50 envíos/mes)
-
-2. **Crear un nuevo formulario**:
-   - Dashboard → New Project → New Form
-   - Copiar el endpoint generado: `https://formspree.io/f/XXXXXXXX`
-
-3. **Configurar en `.env`**:
-
-   ```env
-   PUBLIC_FORMSPREE_ENDPOINT=https://formspree.io/f/XXXXXXXX
-   ```
-
-4. **Probar**: Visita `/es/contact` y envía un mensaje de prueba
-
-### ✨ **Características Implementadas**
-
-- ✅ Validación del lado cliente en tiempo real
-- ✅ Estados visuales: loading, éxito, error
-- ✅ Design responsive y accesible (ARIA labels)
-- ✅ Campos optimizados para proyectos:
-  - Nombre y email (requeridos)
-  - Empresa/organización
-  - Tipo de proyecto (dropdown)
-  - Presupuesto estimado
-  - Timeline esperado
-  - Mensaje detallado
-- ✅ Mensajes en español
-- ✅ Prevención de spam básica
-
-### � **Configuración Avanzada** (Opcional)
-
-En el dashboard de Formspree puedes:
-
-- **CAPTCHA**: Activar reCAPTCHA para mejor protección anti-spam
-- **Integraciones**: Conectar con Slack, Zapier, webhooks
-- **Email Template**: Personalizar el formato de notificación
-- **Domain Verification**: Verificar tu dominio para mayor seguridad
-
-### 📊 **Planes**
-
-| Plan        | Mensajes/mes | Características                                   |
-| ----------- | ------------ | ------------------------------------------------- |
-| **Free**    | 50           | Formularios ilimitados, notificaciones email      |
-| **Premium** | 1,000        | CAPTCHA avanzado, exportación de datos, analytics |
-
----
-
-## 🚀 Scripts Disponibles
+### El wizard no funciona
 
 ```bash
-# Desarrollo
-yarn dev                    # Inicia servidor de desarrollo (puerto 4321)
-                           # Usa automáticamente .env.development
+# Verifica Node.js 18+
+node --version
 
-# Build Multi-Plataforma (con patrón Base + Overrides)
-yarn build:github           # Build para GitHub Pages
-                           # Carga: .env.production + .env.github (overrides)
-                           # Base path: /chrystian_portfolio
-
-yarn build:netlify          # Build para Netlify
-                           # Carga: .env.production + .env.netlify (overrides)
-                           # Base path: / (root)
-
-# Preview (Pre-visualización de builds)
-yarn preview:github         # Preview del build de GitHub Pages
-yarn preview:netlify        # Preview del build de Netlify
-
-# QA y Testing
-yarn lint                   # Ejecutar Prettier + Astro check
-yarn format                 # Formatear código con Prettier
-yarn check                  # Verificar tipos TypeScript
-yarn validate               # Lint + Type-check + Build (validación completa)
-
-# Deployment
-yarn deploy:github          # Build + Deploy a GitHub Pages
-yarn deploy:force           # Deploy forzado (sobrescribe historial)
-
-# Utilidades
-yarn astro sync             # Sincronizar tipos y validar variables de entorno
-yarn clean                  # Limpiar archivos generados (dist, .astro)
-yarn clean:all              # Limpiar todo incluido node_modules
+# Reinstala dependencias
+rm -rf node_modules yarn.lock
+yarn install
+yarn setup
 ```
 
-### 💡 **Cómo Funcionan los Builds Multi-Plataforma**
-
-Los scripts usan `cross-env` (compatible con Windows/Mac/Linux) para establecer `PUBLIC_DEPLOYMENT_PLATFORM`:
+### Variables de entorno no definidas
 
 ```bash
-# Internamente:
-build:github  → PUBLIC_DEPLOYMENT_PLATFORM=github
-                ↓
-                astro.config.mjs detecta "github"
-                ↓
-                Carga .env.production (base)
-                ↓
-                Carga .env.github (overrides)
-                ↓
-                Build con base path correcto
+# Regenera tipos de Astro
+yarn astro sync
 ```
 
-**Resultado:** El mismo código funciona en todas las plataformas sin cambios.
+### Deployment falla en GitHub Actions
 
-### 📚 **Guía de Deployment**
+1. Verifica que `.env.github` tenga el nombre correcto del repo
+2. Settings → Pages → Source: **GitHub Actions**
+3. Settings → Actions → General → Workflow permissions: **Read and write**
 
-Para instrucciones completas sobre deployment multi-plataforma, consulta **[DEPLOYMENT_GUIDE.md](./DEPLOYMENT_GUIDE.md)**:
+### Formulario no envía
 
-- 🔵 GitHub Pages (actual)
-- 🟢 Netlify (configurado y listo)
-- 📋 Variables de entorno por plataforma
-- 🔍 Solución de problemas
-- 📊 Checklists de deployment
+1. Verifica `PUBLIC_FORMSPREE_ENDPOINT` en `.env.*`
+2. Verifica que el endpoint sea válido en formspree.io
+3. Revisa la consola del navegador
 
----
-
-## 📂 Estructura del Proyecto
+### URLs con doble base path
 
 ```
-📁 chrystian_portfolio/
-├── 📁 public/                  # Archivos estáticos
-│   ├── favicon.svg
-│   └── robots.txt
-├── 📁 src/
-│   ├── 📁 assets/              # Imágenes y recursos
-│   │   ├── logos/
-│   │   └── projects/
-│   ├── 📁 components/          # Componentes reutilizables
-│   │   ├── ContactForm.astro
-│   │   ├── Header.astro
-│   │   ├── Footer.astro
-│   │   └── ...
-│   ├── 📁 config/              # Configuración
-│   │   ├── site.js             # Config del sitio
-│   │   └── translations.ts     # Traducciones i18n
-│   ├── 📁 layouts/             # Layouts base
-│   │   └── Layout.astro
-│   ├── 📁 pages/               # Páginas del sitio
-│   │   ├── index.astro
-│   │   ├── 404.astro
-│   │   └── [...lang]/          # Rutas multi-idioma
-│   ├── 📁 sections/            # Secciones de la página
-│   │   ├── HeroSection.astro
-│   │   ├── AboutSection.astro
-│   │   └── ...
-│   ├── 📁 scripts/             # Scripts del cliente
-│   │   ├── app.js
-│   │   └── contactForm.js
-│   ├── 📁 styles/              # Estilos globales
-│   │   └── global.css
-│   └── 📁 utils/               # Utilidades
-│       └── i18n.ts             # Helpers de internacionalización
-├── 📄 astro.config.mjs         # Configuración de Astro
-├── 📄 tsconfig.json            # Configuración de TypeScript
-├── 📄 package.json             # Dependencias
-└── 📄 .env.example             # Plantilla de variables de entorno
+❌ /chrystian_portfolio/chrystian_portfolio/about
+✅ /chrystian_portfolio/about
 ```
 
----
-
-## 🌍 Internacionalización (i18n)
-
-El proyecto soporta múltiples idiomas:
-
-- **Español** (`/es/`) - Idioma por defecto
-- **Inglés** (`/en/`) - Traducción completa
-
-### **Añadir Nuevo Idioma**
-
-1. Editar `src/config/translations.ts`
-2. Añadir traducciones para el nuevo idioma
-3. Actualizar rutas en `src/pages/[...lang]/`
-
----
-
-## 🎨 Personalización
-
-### **Colores y Estilos**
-
-Edita las variables CSS en `src/styles/global.css`:
-
-```css
-:root {
-  --color-primary: #667eea;
-  --color-secondary: #764ba2;
-  --color-accent: #f093fb;
-  /* ... más variables */
-}
-```
-
-### **Configuración del Sitio**
-
-Edita `src/config/site.js` o usa variables de entorno:
-
-```javascript
-export const SITE_CONFIG = {
-  title: PUBLIC_SITE_TITLE,
-  description: PUBLIC_SITE_DESCRIPTION,
-  author: PUBLIC_AUTHOR_NAME,
-  // ...
-};
-```
-
----
-
-## 🚀 Deployment
-
-### **🌐 Sistema Multi-Plataforma**
-
-Este proyecto está diseñado para desplegarse en múltiples plataformas sin cambios en el código:
-
-| Plataforma       | Estado         | URL                                               | Base Path              |
-| ---------------- | -------------- | ------------------------------------------------- | ---------------------- |
-| **GitHub Pages** | ✅ Activo      | https://imsoulrebel.github.io/chrystian_portfolio | `/chrystian_portfolio` |
-| **Netlify**      | 🟢 Configurado | https://www.chrystianmichell.com _(futuro)_       | `/` (root)             |
-| **Development**  | 🔧 Local       | http://localhost:4321                             | `/` (root)             |
-
-### **GitHub Pages (Actual)**
-
-El proyecto se despliega automáticamente mediante GitHub Actions:
-
-```bash
-# Configuración automática en cada push a main
-git push origin main
-```
-
-El workflow incluye:
-
-- ✅ Linting automático
-- ✅ Formateo de código (Prettier)
-- ✅ Build optimizado
-- ✅ Deploy a GitHub Pages
-
-### **Migración a Netlify (Futuro)**
-
-El proyecto está **completamente configurado** para Netlify. Cuando decidas migrar:
-
-1. Conecta el repositorio en Netlify
-2. Netlify detectará automáticamente `netlify.toml`
-3. El build se ejecutará con la configuración correcta
-4. Configura tu dominio personalizado
-
-No requiere cambios en el código - el sistema de detección de plataforma se encarga automáticamente.
-
-### **📖 Documentación Completa**
-
-Para guía detallada de deployment, troubleshooting y migración:
-
-👉 **[Ver DEPLOYMENT_GUIDE.md](./DEPLOYMENT_GUIDE.md)**
-
-### **Otras Plataformas**
-
-También compatible con:
-
-- **Vercel**: Deploy automático desde Git
-- **Cloudflare Pages**: Compatible con Astro SSG
-
----
-
-## 🐛 Debugging y Testing
-
-### **Debug Mode**
-
-Activa logs detallados en la consola:
-
-```env
-PUBLIC_DEBUG_MODE=true
-```
-
-### **Página de Prueba**
-
-Visita `/env-example` para verificar:
-
-- ✅ Estado de todas las variables de entorno
-- ✅ Configuración de servicios (Formspree)
-- ✅ Diferencias entre variables cliente/servidor
-- ✅ Valores actuales cargados
-
-### **Herramientas de Desarrollo**
-
-```bash
-# Sincronizar y validar tipos
-bun astro sync
-
-# Verificar errores de TypeScript
-bun astro check
-
-# Build con logs verbosos
-bun build --verbose
-```
-
-### **Solución de Problemas Comunes**
-
-| Problema                       | Solución                                                              |
-| ------------------------------ | --------------------------------------------------------------------- |
-| Variables no definidas         | Ejecutar `bun astro sync` para regenerar tipos                        |
-| TypeScript no reconoce imports | Verificar que existe `src/env.d.ts`                                   |
-| Formulario no envía            | Verificar `PUBLIC_FORMSPREE_ENDPOINT` en `.env`                       |
-| Build falla                    | Revisar que todas las variables requeridas estén en `.env.production` |
-
----
-
-## 🤝 Contribuir
-
-Las contribuciones son bienvenidas. Para cambios importantes:
-
-1. Fork el proyecto
-2. Crea una rama para tu feature (`git checkout -b feature/AmazingFeature`)
-3. Commit tus cambios (`git commit -m 'Add some AmazingFeature'`)
-4. Push a la rama (`git push origin feature/AmazingFeature`)
-5. Abre un Pull Request
-
----
-
-## � Troubleshooting
-
-### Problemas Comunes y Soluciones
-
-#### Variables de Entorno No Definidas
-
-```bash
-# Error: Cannot find name 'PUBLIC_SITE_URL'
-# Solución:
-yarn astro sync  # Regenera tipos de variables de entorno
-```
-
-#### Build Falla con "Missing Required Variable"
-
-```bash
-# Verificar que .env.production tenga todas las variables requeridas
-# Verificar que astro.config.mjs tenga el schema correcto
-yarn astro check
-```
-
-#### Formulario No Envía
-
-```bash
-# Verificar que PUBLIC_FORMSPREE_ENDPOINT esté configurado
-# En .env.production o .env.development:
-PUBLIC_FORMSPREE_ENDPOINT=https://formspree.io/f/TU_ID
-```
-
-#### Rutas 404 en GitHub Pages
-
-```bash
-# Verificar que PUBLIC_BASE_PATH esté correctamente configurado
-# En .env.github debe ser:
-PUBLIC_BASE_PATH=/chrystian_portfolio
-
-# El nombre debe coincidir con el nombre del repositorio
-```
-
-#### URLs Duplicadas (doble base path)
-
-```bash
-# ❌ INCORRECTO: /chrystian_portfolio/chrystian_portfolio/about
-# ✅ CORRECTO: /chrystian_portfolio/about
-
-# Solución: Usar getRelativeLocaleUrl de Astro
+**Solución:** Usa helpers de Astro:
+```typescript
 import { getRelativeLocaleUrl } from 'astro:i18n';
 const url = getRelativeLocaleUrl('es', '/about/');
 ```
 
-#### Imágenes No Cargan en GitHub Pages
+### Imágenes no cargan en GitHub Pages
 
-```bash
+```env
 # ❌ INCORRECTO:
 PUBLIC_PROFILE_IMAGE=/chrystian_portfolio/profile.jpg
 
 # ✅ CORRECTO:
 PUBLIC_PROFILE_IMAGE=/profile.jpg
-
 # El base path se añade automáticamente
 ```
 
-#### TypeScript No Reconoce Imports
+---
+
+## 📋 Guía de Migración a Template Público
+
+Si quieres publicar este portfolio como template público reutilizable, sigue estos pasos:
+
+### 1. Eliminar Datos Personales del Repositorio
 
 ```bash
-# Verificar que existe src/env.d.ts
-# Si no existe:
-echo '/// <reference types="astro/client" />' > src/env.d.ts
-yarn astro sync
+# Verificar qué archivos .env.* están en Git
+git ls-files | grep "\.env\."
+
+# Eliminarlos del tracking (mantiene archivos locales)
+git rm --cached .env.production
+git rm --cached .env.development
+git rm --cached .env.github
+git rm --cached .env.netlify
+
+# Commit
+git commit -m "chore: remove personal data files for template release"
 ```
 
-#### Google Rich Results No Detecta Schemas
+### 2. Verificar .gitignore
+
+Asegúrate de que `.gitignore` bloquea archivos personales:
+
+```gitignore
+# Bloquear archivos con datos reales
+.env
+.env.production
+.env.development
+.env.github
+.env.netlify
+.env.*.local
+
+# Permitir templates (placeholders genéricos)
+!.env.*.template
+!.env.example
+```
+
+### 3. Reemplazar Imágenes Personales
 
 ```bash
-# 1. Verificar que el build sea exitoso
+# Reemplaza con imágenes placeholder o genéricas
+public/profile-image.jpg  → Imagen placeholder
+public/og-image.jpg       → Imagen genérica
+src/assets/               → Verificar contenido personal
+```
+
+### 4. Actualizar package.json
+
+```json
+{
+  "name": "astro-portfolio-template",
+  "description": "Professional portfolio template - Astro v5 + TypeScript",
+  "author": {
+    "name": "Your Name",
+    "email": "contact@example.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/YOUR_ORG/portfolio-template.git"
+  }
+}
+```
+
+### 5. Configurar GitHub Repository como Template
+
+1. **Settings → General:**
+   - ✅ Marcar: **Template repository**
+   - Descripción: "Professional portfolio template built with Astro v5, TypeScript, and multi-platform deployment"
+   - Topics: `astro`, `portfolio`, `template`, `typescript`, `github-pages`, `netlify`
+
+2. **Settings → Pages:**
+   - Desactivar (el template no necesita Pages)
+
+3. **Crear Release:**
+   - Tag: `v1.0.0`
+   - Title: "🎨 Portfolio Template v1.0.0"
+
+### 6. Checklist de Verificación Final
+
+```bash
+# Clonar en directorio temporal (simular usuario nuevo)
+cd /tmp
+git clone https://github.com/TU_USERNAME/portfolio-template.git test
+cd test
+
+# Verificar que NO haya datos personales
+grep -r "tu-email-real" .
+grep -r "tu-username-real" .
+grep -r "tu-formspree-id" .
+
+# Probar el wizard
+yarn install
+yarn setup  # Completar con datos ficticios
+yarn dev    # Verificar que funcione
+
+# Probar builds
 yarn build:github
-
-# 2. Revisar el HTML generado
-# dist/es/index.html debe tener <script type="application/ld+json">
-
-# 3. Validar con Google Rich Results Test
-# https://search.google.com/test/rich-results
-
-# 4. Verificar que las variables PUBLIC_CONTACT_* estén definidas
+yarn build:netlify
 ```
 
-### Logs de Debug
+### Checklist Completo
 
-Habilita logs detallados:
+- [ ] Eliminar archivos `.env.*` del repositorio Git
+- [ ] Reemplazar imágenes personales con placeholders
+- [ ] Actualizar `package.json` (nombre, autor, repo, homepage)
+- [ ] Revisar `src/config/translations.ts` (poner textos genéricos)
+- [ ] Revisar `src/sections/*.astro` (contenido de ejemplo)
+- [ ] Verificar que no haya datos hardcodeados en el código
+- [ ] Actualizar URLs en README
+- [ ] Marcar repo como "Template repository" en GitHub
+- [ ] Crear release v1.0.0
+- [ ] Probar clonando como nuevo usuario
 
-```env
-# .env.development
-PUBLIC_DEBUG_MODE=true
-```
+---
 
-Luego verifica en la consola del navegador:
-```
-F12 → Console → Buscar logs de carga de variables
-```
+## 🎯 Checklist de Personalización
+
+Antes de publicar tu portfolio, asegúrate de:
+
+- [ ] Ejecutar `yarn setup` o configurar `.env.*` manualmente
+- [ ] Reemplazar `public/profile-image.jpg` con tu foto
+- [ ] Editar `src/config/translations.ts` con tus textos
+- [ ] Actualizar proyectos en `ProjectsSection.astro`
+- [ ] Actualizar experiencia en `ExperienceSection.astro`
+- [ ] Actualizar habilidades en `SkillsSection.astro`
+- [ ] Configurar Formspree (o dejarlo vacío)
+- [ ] Verificar que `.env.github` tenga el nombre correcto del repo
+- [ ] Personalizar colores en `global.css` (opcional)
+- [ ] Hacer commit y push a GitHub
+- [ ] Habilitar GitHub Pages (Settings → Pages → GitHub Actions)
+- [ ] Verificar que el sitio funcione correctamente
+- [ ] Probar selector de idioma
+- [ ] Validar SEO con Google Rich Results Test
 
 ---
 
@@ -801,79 +935,84 @@ F12 → Console → Buscar logs de carga de variables
 
 - ✅ **2 elementos válidos** en Google Rich Results
 - ✅ **0 errores críticos** en structured data
-- ✅ **3 schemas** implementados (Person, WebSite, ProfessionalService)
-- ✅ **Multi-idioma** con hreflang correcto
+- ✅ **3 schemas** implementados
+- ✅ **Multi-idioma** con hreflang
 
 ### Performance
 
 - ⚡ **< 5 segundos** de build time
-- 📦 **11 páginas** generadas (es + en)
-- 🚀 **Static Site Generation** (SSG)
-- ✅ **Lighthouse Score** optimizado
+- 📦 **Static Site Generation** (SSG)
+- ✅ **Lighthouse optimizado**
 
 ---
 
 ## 🔄 Historial de Cambios
 
-### v2.0.0 - Refactorización de Variables de Entorno (Oct 2025)
+### v2.0.0 - Template Público (Oct 2025)
 
-**🎯 Objetivo:** Implementar patrón Base + Overrides para reducir duplicación
-
-**Cambios:**
-- ✅ Creado `.env.production` como base común (25 variables)
-- ✅ Simplificado `.env.github` a solo 5 overrides (de 45 líneas)
-- ✅ Simplificado `.env.netlify` a solo 3 overrides (de 45 líneas)
-- ✅ **71% reducción** de código duplicado
-- ✅ Sistema de herencia automático en `astro.config.mjs`
-- ✅ Logs de carga de configuración para debugging
+**🎯 Conversión a Template Reutilizable:**
+- ✅ Creado sistema de archivos `.env.*.template` con placeholders
+- ✅ Wizard interactivo `setup.js` para configuración automática
+- ✅ Patrón Base + Overrides (71% menos duplicación)
+- ✅ Sistema multi-plataforma sin cambios en código
+- ✅ Documentación consolidada en README único
 
 **SEO y Structured Data:**
-- ✅ Implementado Schema.org (Person, WebSite, ProfessionalService)
+- ✅ Schema.org implementado (Person, WebSite, ProfessionalService)
 - ✅ Validación exitosa con Google Rich Results Test
-- ✅ 0 errores críticos, 0 warnings
-- ✅ Rich snippets habilitados
+- ✅ 0 errores, Rich snippets habilitados
 
-**Privacidad:**
-- ✅ Datos de dirección generalizados (Madrid en vez de ubicación específica)
-- ✅ Protección de información sensible
-- ✅ SEO local mantenido sin comprometer privacidad
-
-**Documentación:**
-- ✅ README consolidado con toda la información
-- ✅ Guías de troubleshooting
-- ✅ Ejemplos de uso
+**Developer Experience:**
+- ✅ Type-safe environment variables (Astro v5)
+- ✅ Scripts organizados por funcionalidad
+- ✅ CI/CD con GitHub Actions
+- ✅ Documentación completa
 
 ---
 
-## �📝 Licencia
+## 🤝 Contribuir
 
-Este proyecto es de código abierto y está disponible bajo la licencia MIT.
+Las contribuciones son bienvenidas. Para cambios importantes:
+
+1. Fork el proyecto
+2. Crea una rama: `git checkout -b feature/AmazingFeature`
+3. Commit: `git commit -m 'Add some AmazingFeature'`
+4. Push: `git push origin feature/AmazingFeature`
+5. Abre un Pull Request
+
+### Áreas de Contribución
+
+- 🐛 Bug fixes
+- ✨ Nuevas características
+- 📝 Mejoras en documentación
+- 🌍 Traducciones a nuevos idiomas
+- 🎨 Mejoras de diseño
+- ⚡ Optimizaciones de performance
 
 ---
 
-## 👨‍💻 Autor
+## 📝 Licencia
 
-**Chrystian Michell**
+MIT License - Siéntete libre de usar este template para tu portfolio personal o comercial.
 
-- 🌐 Portfolio: [imsoulrebel.github.io/chrystian_portfolio](https://imsoulrebel.github.io/chrystian_portfolio)
-- 💼 GitHub: [@ImSoulRebel](https://github.com/ImSoulRebel)
-- 💼 LinkedIn: [chrystianmichell](https://linkedin.com/in/chrystianmichell)
-- 📧 Email: chrystianmichell@hotmail.com
+Ver el archivo [LICENSE](LICENSE) para más detalles.
 
 ---
 
 ## 🙏 Agradecimientos
 
-- **Astro Team** - Por el increíble framework
-- **Formspree** - Por el servicio de formularios
-- **Community** - Por el feedback y soporte
+- **[Astro Team](https://astro.build)** - Por el increíble framework
+- **[Formspree](https://formspree.io)** - Por el servicio de formularios
+- **Comunidad Open Source** - Por el feedback y soporte
 
 ---
 
 <div align="center">
 
-**⭐ Si te gusta este proyecto, considera darle una estrella ⭐**
+**⭐ Si te gusta este template, considera darle una estrella ⭐**
 
-**Hecho con ❤️ por Chrystian Michell**
+**Hecho con ❤️ usando [Astro](https://astro.build)**
+
+[Demo](https://tu-username.github.io/portfolio-template) · [Reportar Bug](https://github.com/tu-username/portfolio-template/issues) · [Solicitar Feature](https://github.com/tu-username/portfolio-template/issues)
 
 </div>

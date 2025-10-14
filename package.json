@@ -19,6 +19,7 @@
   },
   "license": "MIT",
   "scripts": {
+    "setup": "node setup.js",
     "dev": "astro dev --host",
     "start": "astro dev",
     "build": "astro check && astro build",
