@@ -57,29 +57,34 @@ yarn dev
 ## ✨ Características
 
 ### 🎨 Diseño y UX
+
 - **Diseño Moderno**: Interfaz elegante con tema oscuro y gradientes profesionales
 - **Responsive**: Optimizado para móviles, tablets y desktop
 - **Animaciones Suaves**: Transiciones fluidas y efectos visuales atractivos
 - **Accesibilidad**: ARIA labels, semantic HTML, navegación por teclado
 
 ### ⚡ Performance y Tecnología
+
 - **Astro v5**: Static Site Generation ultra-rápido
 - **TypeScript**: Type-safe en todo el proyecto
 - **Zero JS por defecto**: Solo JavaScript donde es necesario
 - **Optimización de imágenes**: Sharp integration para imágenes optimizadas
 
 ### 🌍 Multi-idioma y Multi-plataforma
+
 - **i18n Nativo**: Sistema de internacionalización con español e inglés
 - **Multi-Plataforma**: Deploy en GitHub Pages, Netlify, o Vercel sin cambios
 - **Rutas SEO-friendly**: URLs limpias con hreflang automático
 
 ### 🎯 SEO y Marketing
+
 - **SEO Optimizado**: Meta tags, Open Graph, Twitter Cards
 - **Structured Data**: Schema.org (Person, WebSite, ProfessionalService)
 - **Google Rich Results**: Validado y optimizado para Rich Snippets
 - **Sitemap y Robots**: Configuración automática
 
 ### 🔐 Desarrollo
+
 - **Variables de Entorno Type-Safe**: Sistema nativo de Astro v5
 - **Patrón Base + Overrides**: Reduce duplicación de configuración en 71%
 - **CI/CD**: Linting, formateo y deployment automatizado
@@ -99,12 +104,14 @@ yarn setup
 ```
 
 **Te preguntará:**
+
 - ✅ Tu nombre completo y datos de contacto
 - ✅ Tus redes sociales (GitHub, LinkedIn, Twitter, Instagram)
 - ✅ Configuración de GitHub Pages (nombre de repo)
 - ✅ Tu endpoint de Formspree (opcional)
 
 **Resultado:**
+
 - ✅ Archivos `.env.*` generados con tus datos
 - ✅ Configuración lista para desarrollo
 - ✅ Listo para deploy
@@ -125,6 +132,7 @@ cp .env.netlify.template .env.netlify
 ```
 
 **Archivos a editar:**
+
 - `.env.production` → Datos base (nombre, email, redes sociales)
 - `.env.development` → Desarrollo local
 - `.env.github` → GitHub Pages (nombre de repo, URLs)
@@ -158,7 +166,7 @@ export const translations = {
   },
   en: {
     // ... traducciones al inglés
-  }
+  },
 };
 ```
 
@@ -178,7 +186,7 @@ public/
 
 Edita los archivos en `src/sections/`:
 
-```astro
+```javascript
 <!-- src/sections/ProjectsSection.astro -->
 const projects = [
   {
@@ -203,14 +211,14 @@ Edita `src/styles/global.css`:
   --color-primary: #667eea;
   --color-secondary: #764ba2;
   --color-accent: #f093fb;
-  
+
   /* Colores de fondo */
   --bg-primary: #0a0e27;
   --bg-secondary: #1a1f3a;
-  
+
   /* Tipografía */
   --font-sans: 'Inter', sans-serif;
-  
+
   /* Espaciado */
   --spacing-xs: 0.5rem;
   --spacing-sm: 1rem;
@@ -222,21 +230,23 @@ Edita `src/styles/global.css`:
 ### 5. Agregar Nuevas Secciones
 
 1. Crea el componente:
+
 ```astro
-<!-- src/sections/MiNuevaSeccion.astro -->
 ---
 import Section from '@/components/Section.astro';
 ---
 
+<!-- src/sections/MiNuevaSeccion.astro -->
 <Section id="mi-seccion" title="Mi Nueva Sección">
   <p>Contenido de tu sección</p>
 </Section>
 ```
 
 2. Impórtalo en la página:
+
 ```astro
-<!-- src/pages/[...lang]/index.astro -->
-import MiNuevaSeccion from '@/sections/MiNuevaSeccion.astro';
+<!-- src/pages/[...lang]/index.astro -->import MiNuevaSeccion from
+'@/sections/MiNuevaSeccion.astro';
 
 <MiNuevaSeccion />
 ```
@@ -287,17 +297,18 @@ El componente mostrará solo tus datos de contacto.
 
 ### Plataformas Soportadas
 
-| Plataforma | Base Path | Site URL | Build Command |
-|------------|-----------|----------|---------------|
-| **GitHub Pages** | `/tu-repo` | `username.github.io/tu-repo` | `yarn build:github` |
-| **Netlify** | `/` | `tudominio.com` | `yarn build:netlify` |
-| **Development** | `/` | `localhost:4321` | `yarn dev` |
+| Plataforma       | Base Path  | Site URL                     | Build Command        |
+| ---------------- | ---------- | ---------------------------- | -------------------- |
+| **GitHub Pages** | `/tu-repo` | `username.github.io/tu-repo` | `yarn build:github`  |
+| **Netlify**      | `/`        | `tudominio.com`              | `yarn build:netlify` |
+| **Development**  | `/`        | `localhost:4321`             | `yarn dev`           |
 
 ### 🔵 GitHub Pages (Gratis)
 
 #### Configuración Automática con GitHub Actions
 
 1. **Configura `.env.github`:**
+
 ```env
 PUBLIC_BASE_PATH=/tu-repo  # Debe coincidir con nombre del repo
 ```
@@ -306,6 +317,7 @@ PUBLIC_BASE_PATH=/tu-repo  # Debe coincidir con nombre del repo
    - Settings → Pages → Source: **GitHub Actions**
 
 3. **Push tu código:**
+
 ```bash
 git add .
 git commit -m "Initial commit"
@@ -377,11 +389,12 @@ yarn deploy:github
 const platform = process.env.PUBLIC_DEPLOYMENT_PLATFORM;
 
 // Carga configuración base + overrides
-config({ path: `.env.production` });  // Base
+config({ path: `.env.production` }); // Base
 config({ path: `.env.${platform}` }); // Platform-specific
 ```
 
 **Ventajas:**
+
 - ✅ URLs correctas automáticamente
 - ✅ Base paths correctos
 - ✅ Sin duplicar configuración
@@ -505,16 +518,17 @@ Todos los scripts están organizados por funcionalidad:
 - **`contactForm.js`**: Manejo del formulario de contacto
 
 **Patrón de clase consistente:**
+
 ```javascript
 export class NombreClase {
   constructor() {
     this.init();
   }
-  
+
   init() {
     // Configuración inicial
   }
-  
+
   destroy() {
     // Limpieza de recursos
   }
@@ -536,15 +550,20 @@ export class NombreClase {
 
 ```typescript
 export const translations = {
-  es: { /* ... */ },
-  en: { /* ... */ },
-  fr: {  // Nuevo idioma
+  es: {
+    /* ... */
+  },
+  en: {
+    /* ... */
+  },
+  fr: {
+    // Nuevo idioma
     nav: {
       home: 'Accueil',
       about: 'À propos',
       // ...
-    }
-  }
+    },
+  },
 };
 ```
 
@@ -767,6 +786,7 @@ yarn astro sync
 ```
 
 **Solución:** Usa helpers de Astro:
+
 ```typescript
 import { getRelativeLocaleUrl } from 'astro:i18n';
 const url = getRelativeLocaleUrl('es', '/about/');
@@ -951,6 +971,7 @@ Antes de publicar tu portfolio, asegúrate de:
 ### v2.0.0 - Template Público (Oct 2025)
 
 **🎯 Conversión a Template Reutilizable:**
+
 - ✅ Creado sistema de archivos `.env.*.template` con placeholders
 - ✅ Wizard interactivo `setup.js` para configuración automática
 - ✅ Patrón Base + Overrides (71% menos duplicación)
@@ -958,11 +979,13 @@ Antes de publicar tu portfolio, asegúrate de:
 - ✅ Documentación consolidada en README único
 
 **SEO y Structured Data:**
+
 - ✅ Schema.org implementado (Person, WebSite, ProfessionalService)
 - ✅ Validación exitosa con Google Rich Results Test
 - ✅ 0 errores, Rich snippets habilitados
 
 **Developer Experience:**
+
 - ✅ Type-safe environment variables (Astro v5)
 - ✅ Scripts organizados por funcionalidad
 - ✅ CI/CD con GitHub Actions
