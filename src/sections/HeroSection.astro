@@ -8,10 +8,23 @@ interface Props {
 
 const { locale = 'es' } = Astro.props;
 const t = useTranslations(locale);
+
+// Obtener la imagen de perfil desde las variables de entorno
+const profileImage =
+  import.meta.env.PUBLIC_PROFILE_IMAGE || '/profile-image.jpg';
 ---
 
 <section id="home" class="hero">
   <div class="hero-content">
+    <div class="hero-profile-image">
+      <img
+        src={profileImage}
+        alt={t('hero.name')}
+        width="200"
+        height="200"
+        loading="eager"
+      />
+    </div>
     <p class="hero-subtitle">{t('hero.greeting')}</p>
     <h1 class="hero-title">{t('hero.name')}</h1>
     <h2 class="hero-subtitle-main">{t('hero.title')}</h2>
