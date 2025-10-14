@@ -1,13 +1,12 @@
 #!/usr/bin/env node
 
 /**
- * 🚀 Setup Script para Portfolio Template
+ * 🚀 Setup Script para Portfolio
  *
  * Este script automatiza la configuración inicial del portfolio:
- * 1. Copia los archivos .env.*.template a .env.*
+ * 1. Crea el archivo .env con las variables necesarias
  * 2. Solicita información básica del usuario
- * 3. Reemplaza los placeholders con los datos reales
- * 4. Genera la configuración lista para usar
+ * 3. Genera la configuración lista para usar
  */
 
 import fs from 'fs';
@@ -42,7 +41,7 @@ const question = (query) =>
 console.log(`
 ${colors.cyan}╔════════════════════════════════════════════════════════╗
 ║                                                        ║
-║        🚀 Portfolio Template - Setup Wizard 🚀        ║
+║           🚀 Portfolio Setup Wizard 🚀                ║
 ║                                                        ║
 ║    Este script te ayudará a configurar tu portfolio   ║
 ║           personalizado en solo unos pasos            ║
@@ -71,23 +70,22 @@ async function main() {
         `${colors.blue}📧 Tu email de contacto:${colors.reset} `
       ),
       phone: await question(
-        `${colors.blue}📞 Tu teléfono (ej: +34600000000):${colors.reset} `
+        `${colors.blue}📞 Tu teléfono (opcional, Enter para omitir):${colors.reset} `
       ),
-      city: await question(`${colors.blue}🏙️  Tu ciudad:${colors.reset} `),
+      city: await question(
+        `${colors.blue}🏙️  Tu ciudad (opcional):${colors.reset} `
+      ),
       country: await question(
-        `${colors.blue}🌍 Tu país (código, ej: ES):${colors.reset} `
+        `${colors.blue}🌍 Tu país (opcional):${colors.reset} `
       ),
       githubUsername: await question(
-        `${colors.blue}💻 Tu usuario de GitHub:${colors.reset} `
-      ),
-      repoName: await question(
-        `${colors.blue}📦 Nombre de tu repositorio (para GitHub Pages):${colors.reset} `
+        `${colors.blue}💻 Tu usuario de GitHub (opcional):${colors.reset} `
       ),
       linkedinProfile: await question(
-        `${colors.blue}💼 Tu perfil de LinkedIn (sin https://linkedin.com/in/):${colors.reset} `
+        `${colors.blue}💼 Tu perfil de LinkedIn - solo el nombre (opcional):${colors.reset} `
       ),
       siteTitle: await question(
-        `${colors.blue}🎯 Título de tu sitio (ej: "Juan Pérez | Desarrollador Full Stack"):${colors.reset} `
+        `${colors.blue}🎯 Título de tu sitio (ej: "Juan Pérez - Full Stack Developer"):${colors.reset} `
       ),
       siteDescription: await question(
         `${colors.blue}📄 Descripción breve de tu portfolio:${colors.reset} `
@@ -106,74 +104,107 @@ async function main() {
       `${colors.blue}📨 Tu Formspree endpoint (o Enter para dejarlo vacío):${colors.reset} `
     );
 
-    // Archivos a procesar
-    const files = [
-      { template: '.env.production.template', output: '.env.production' },
-      { template: '.env.development.template', output: '.env.development' },
-      { template: '.env.github.template', output: '.env.github' },
-      { template: '.env.netlify.template', output: '.env.netlify' },
-    ];
+    // Verificar si .env ya existe
+    const envPath = path.join(__dirname, '.env');
+    if (fs.existsSync(envPath)) {
+      const overwrite = await question(
+        `${colors.yellow}⚠️  .env ya existe. ¿Sobrescribir? (s/N):${colors.reset} `
+      );
+      if (overwrite.toLowerCase() !== 's') {
+        console.log(
+          `\n${colors.yellow}Setup cancelado. Tu archivo .env no fue modificado.${colors.reset}`
+        );
+        rl.close();
+        return;
+      }
+    }
 
     console.log(
-      `\n${colors.green}✨ Generando archivos de configuración...${colors.reset}\n`
+      `\n${colors.green}✨ Generando archivo .env...${colors.reset}\n`
     );
 
-    // Procesar cada archivo
-    for (const file of files) {
-      const templatePath = path.join(__dirname, file.template);
-      const outputPath = path.join(__dirname, file.output);
-
-      // Verificar si el archivo ya existe
-      if (fs.existsSync(outputPath)) {
-        const overwrite = await question(
-          `${colors.yellow}⚠️  ${file.output} ya existe. ¿Sobrescribir? (s/N):${colors.reset} `
-        );
-        if (overwrite.toLowerCase() !== 's') {
-          console.log(`   Saltando ${file.output}...`);
-          continue;
-        }
-      }
-
-      // Leer template
-      let content = fs.readFileSync(templatePath, 'utf8');
-
-      // Reemplazar placeholders
-      const replacements = {
-        'Tu Nombre Completo': answers.authorName,
-        'Tu Nombre': answers.authorGivenName,
-        'Tu Apellido': answers.authorFamilyName,
-        'tu-email@ejemplo.com': answers.email,
-        'dev@localhost.local': answers.email,
-        '+34600000000': answers.phone,
-        'Tu Ciudad, Tu País': `${answers.city}, ${answers.country}`,
-        'Tu Ciudad': answers.city,
-        'Tu Región/Provincia': answers.city,
-        'Tu País': answers.country,
-        '00000': '00000', // Mantener genérico para privacidad
-        ES: answers.country,
-        'tu-username': answers.githubUsername,
-        'tu-repo': answers.repoName,
-        'tu-perfil': answers.linkedinProfile,
-        'tu-handle': answers.githubUsername, // Usar GitHub username como fallback
-        'Tu Nombre | Tu Título Profesional': answers.siteTitle,
-        'Tu Portfolio (Desarrollo)': `${answers.authorGivenName}'s Portfolio (Dev)`,
-        'Tu descripción profesional. Ejemplo: Desarrollador Full Stack especializado en React y Node.js con 5 años de experiencia.':
-          answers.siteDescription,
-        'Portfolio personal - Entorno de desarrollo': answers.siteDescription,
-        'https://formspree.io/f/TU_FORM_ID_AQUI':
-          formspreeEndpoint || 'https://formspree.io/f/TU_FORM_ID_AQUI',
-        'https://www.tu-dominio.com': `https://${answers.githubUsername}.github.io/${answers.repoName}`,
-      };
-
-      // Aplicar reemplazos
-      for (const [placeholder, value] of Object.entries(replacements)) {
-        content = content.replaceAll(placeholder, value);
-      }
-
-      // Escribir archivo
-      fs.writeFileSync(outputPath, content);
-      console.log(`   ${colors.green}✓${colors.reset} ${file.output} creado`);
+    // Leer .env.example
+    const examplePath = path.join(__dirname, '.env.example');
+    if (!fs.existsSync(examplePath)) {
+      throw new Error('.env.example no encontrado');
     }
+
+    let content = fs.readFileSync(examplePath, 'utf8');
+
+    // Reemplazar placeholders
+    const replacements = {
+      'http://localhost:4321': 'http://localhost:4321', // Mantener para desarrollo
+      'https://www.midominio.com': answers.githubUsername
+        ? `https://${answers.githubUsername}.github.io`
+        : 'https://www.midominio.com',
+      'Mi Portfolio': answers.siteTitle,
+      'Portfolio personal de desarrollador': answers.siteDescription,
+      Desarrollador: answers.authorName,
+      'contacto@example.com': answers.email,
+    };
+
+    // Aplicar reemplazos
+    for (const [placeholder, value] of Object.entries(replacements)) {
+      content = content.replace(placeholder, value);
+    }
+
+    // Agregar valores opcionales si existen
+    if (answers.authorGivenName) {
+      content = content.replace(
+        'PUBLIC_AUTHOR_GIVEN_NAME=',
+        `PUBLIC_AUTHOR_GIVEN_NAME=${answers.authorGivenName}`
+      );
+    }
+    if (answers.authorFamilyName) {
+      content = content.replace(
+        'PUBLIC_AUTHOR_FAMILY_NAME=',
+        `PUBLIC_AUTHOR_FAMILY_NAME=${answers.authorFamilyName}`
+      );
+    }
+    if (answers.phone) {
+      content = content.replace(
+        'PUBLIC_CONTACT_PHONE=',
+        `PUBLIC_CONTACT_PHONE=${answers.phone}`
+      );
+    }
+    if (answers.city) {
+      content = content.replace(
+        'PUBLIC_CONTACT_CITY=',
+        `PUBLIC_CONTACT_CITY=${answers.city}`
+      );
+    }
+    if (answers.country) {
+      content = content.replace(
+        'PUBLIC_CONTACT_COUNTRY=',
+        `PUBLIC_CONTACT_COUNTRY=${answers.country}`
+      );
+    }
+    if (answers.githubUsername) {
+      content = content.replace(
+        'PUBLIC_GITHUB_USERNAME=',
+        `PUBLIC_GITHUB_USERNAME=${answers.githubUsername}`
+      );
+      content = content.replace(
+        'PUBLIC_GITHUB_URL=',
+        `PUBLIC_GITHUB_URL=https://github.com/${answers.githubUsername}`
+      );
+    }
+    if (answers.linkedinProfile) {
+      content = content.replace(
+        'PUBLIC_LINKEDIN_URL=',
+        `PUBLIC_LINKEDIN_URL=https://linkedin.com/in/${answers.linkedinProfile}`
+      );
+    }
+    if (formspreeEndpoint) {
+      content = content.replace(
+        'PUBLIC_FORMSPREE_ENDPOINT=',
+        `PUBLIC_FORMSPREE_ENDPOINT=${formspreeEndpoint}`
+      );
+    }
+
+    // Escribir archivo .env
+    fs.writeFileSync(envPath, content);
+    console.log(`   ${colors.green}✓${colors.reset} .env creado exitosamente`);
 
     // Resumen
     console.log(`
@@ -183,11 +214,8 @@ ${colors.green}╔════════════════════�
 ║                                                        ║
 ╚════════════════════════════════════════════════════════╝${colors.reset}
 
-${colors.bright}📝 Archivos creados:${colors.reset}
-   • .env.production    → Configuración base de producción
-   • .env.development   → Configuración de desarrollo local
-   • .env.github        → Configuración para GitHub Pages
-   • .env.netlify       → Configuración para Netlify
+${colors.bright}📝 Archivo creado:${colors.reset}
+   • .env - Configuración local de desarrollo
 
 ${colors.bright}🚀 Próximos pasos:${colors.reset}
 
@@ -200,18 +228,22 @@ ${colors.bright}🚀 Próximos pasos:${colors.reset}
    • Reemplaza public/profile-image.jpg con tu foto
    • Actualiza src/sections/*.astro con tu información
 
-3. ${colors.cyan}Deployment en GitHub Pages:${colors.reset}
-   • Push tu código a GitHub
-   • Ve a Settings → Pages → Source: GitHub Actions
-   • El workflow se ejecutará automáticamente
+3. ${colors.cyan}Configurar GitHub Variables para deployment:${colors.reset}
+   • Ve a: Settings → Secrets and variables → Actions → Variables
+   • Configura las variables según GITHUB_VARIABLES_SETUP.md
+   • Haz push a main para desplegar automáticamente
 
-4. ${colors.cyan}Deployment en Netlify (opcional):${colors.reset}
-   • Conecta tu repo en https://app.netlify.com
-   • Netlify detectará la configuración automáticamente
+4. ${colors.cyan}Variables de GitHub Pages:${colors.reset}
+   Para producción, necesitarás configurar estas variables en GitHub:
+   • PUBLIC_SITE_URL
+   • PUBLIC_BASE_PATH
+   • PUBLIC_BASE_DOMAIN
+   • Y las demás según GITHUB_VARIABLES_SETUP.md
 
 ${colors.bright}📚 Documentación:${colors.reset}
    • README.md - Guía completa
-   • DEPLOYMENT_GUIDE.md - Guía de deployment
+   • GITHUB_VARIABLES_SETUP.md - Configuración de GitHub Variables
+   • CAMBIOS_APLICADOS.md - Arquitectura actualizada
 
 ${colors.green}¡Disfruta creando tu portfolio! 🎉${colors.reset}
 `);
