@@ -1,56 +1,60 @@
 name: Deploy to GitHub Pages
 
 on:
-  # Se ejecuta en push a main
   push:
     branches: [main]
-  # Permite ejecución manual desde la pestaña Actions
   workflow_dispatch:
 
-# Permisos necesarios para desplegar
 permissions:
   contents: read
   pages: write
   id-token: write
 
-# Previene ejecuciones concurrentes
 concurrency:
-  group: 'pages'
+  group: "pages"
   cancel-in-progress: false
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: 📥 Checkout
+      - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: 🟢 Setup Node.js
-        uses: actions/setup-node@v4
+      - name: Install, build, and upload site
+        uses: withastro/action@v3
         with:
-          node-version: '20'
-          cache: 'yarn'
-
-      - name: 📦 Install Dependencies
-        run: yarn install --frozen-lockfile
-
-      - name: 🔍 Type Check & Lint
-        run: yarn run lint
-
-      - name: ✨ Format Code
-        run: yarn run format
-
-      - name: 🏗️ Build
-        run: yarn run build:github
+          node-version: 20
+          package-manager: yarn@latest
         env:
-          PUBLIC_DEPLOYMENT_PLATFORM: github
-          PUBLIC_SITE_URL: https://imsoulrebel.github.io/chrystian_portfolio
-          PUBLIC_BASE_PATH: /chrystian_portfolio
-
-      - name: 📤 Upload Artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: ./dist
+          PUBLIC_SITE_URL: ${{ vars.PUBLIC_SITE_URL }}
+          PUBLIC_BASE_PATH: ${{ vars.PUBLIC_BASE_PATH }}
+          PUBLIC_BASE_DOMAIN: ${{ vars.PUBLIC_BASE_DOMAIN }}
+          PUBLIC_SITE_TITLE: ${{ vars.PUBLIC_SITE_TITLE }}
+          PUBLIC_SITE_DESCRIPTION: ${{ vars.PUBLIC_SITE_DESCRIPTION }}
+          PUBLIC_AUTHOR_NAME: ${{ vars.PUBLIC_AUTHOR_NAME }}
+          PUBLIC_AUTHOR_GIVEN_NAME: ${{ vars.PUBLIC_AUTHOR_GIVEN_NAME }}
+          PUBLIC_AUTHOR_FAMILY_NAME: ${{ vars.PUBLIC_AUTHOR_FAMILY_NAME }}
+          PUBLIC_CONTACT_EMAIL: ${{ vars.PUBLIC_CONTACT_EMAIL }}
+          PUBLIC_CONTACT_PHONE: ${{ vars.PUBLIC_CONTACT_PHONE }}
+          PUBLIC_CONTACT_ADDRESS: ${{ vars.PUBLIC_CONTACT_ADDRESS }}
+          PUBLIC_CONTACT_STREET: ${{ vars.PUBLIC_CONTACT_STREET }}
+          PUBLIC_CONTACT_POSTAL_CODE: ${{ vars.PUBLIC_CONTACT_POSTAL_CODE }}
+          PUBLIC_CONTACT_CITY: ${{ vars.PUBLIC_CONTACT_CITY }}
+          PUBLIC_CONTACT_REGION: ${{ vars.PUBLIC_CONTACT_REGION }}
+          PUBLIC_CONTACT_COUNTRY: ${{ vars.PUBLIC_CONTACT_COUNTRY }}
+          PUBLIC_GITHUB_USERNAME: ${{ vars.PUBLIC_GITHUB_USERNAME }}
+          PUBLIC_GITHUB_URL: ${{ vars.PUBLIC_GITHUB_URL }}
+          PUBLIC_LINKEDIN_URL: ${{ vars.PUBLIC_LINKEDIN_URL }}
+          PUBLIC_TWITTER_URL: ${{ vars.PUBLIC_TWITTER_URL }}
+          PUBLIC_TWITTER_HANDLE: ${{ vars.PUBLIC_TWITTER_HANDLE }}
+          PUBLIC_INSTAGRAM_URL: ${{ vars.PUBLIC_INSTAGRAM_URL }}
+          PUBLIC_PROFILE_IMAGE: ${{ vars.PUBLIC_PROFILE_IMAGE }}
+          PUBLIC_PROFILE_IMAGE_WIDTH: ${{ vars.PUBLIC_PROFILE_IMAGE_WIDTH }}
+          PUBLIC_PROFILE_IMAGE_HEIGHT: ${{ vars.PUBLIC_PROFILE_IMAGE_HEIGHT }}
+          PUBLIC_FORMSPREE_ENDPOINT: ${{ secrets.PUBLIC_FORMSPREE_ENDPOINT }}
+          PUBLIC_DEBUG_MODE: ${{ vars.PUBLIC_DEBUG_MODE }}
+          PUBLIC_SITE_VERSION: ${{ vars.PUBLIC_SITE_VERSION }}
 
   deploy:
     needs: build
@@ -59,6 +63,6 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - name: 🚀 Deploy to GitHub Pages
+      - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
