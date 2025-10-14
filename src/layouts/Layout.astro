@@ -60,12 +60,16 @@ const {
 const currentPath = Astro.url.pathname;
 const siteUrl = Astro.site?.toString() || import.meta.env.PUBLIC_SITE_URL;
 // Usar PUBLIC_BASE_PATH explícitamente, con fallback a BASE_URL
-const baseUrl = import.meta.env.PUBLIC_BASE_PATH || import.meta.env.BASE_URL || '';
+const baseUrl =
+  import.meta.env.PUBLIC_BASE_PATH || import.meta.env.BASE_URL || '';
 const hreflangUrls = getHreflangUrls(currentPath);
 
 // Schema.org JSON-LD por defecto
 // Construir URL completa para la imagen de perfil
-const profileImageUrl = new URL(`${baseUrl.replace(/\/$/, '')}/profile-image.jpg`, siteUrl).href;
+const profileImageUrl = new URL(
+  `${baseUrl.replace(/\/$/, '')}/profile-image.jpg`,
+  siteUrl
+).href;
 const defaultStructuredData = {
   '@context': 'https://schema.org',
   '@type': 'Person',
@@ -222,11 +226,32 @@ const localeSpecificMeta =
     />
 
     <!-- Favicon optimizado -->
-    <link rel="icon" type="image/svg+xml" href={`${baseUrl.replace(/\/$/, '')}/favicon.svg`} />
-    <link rel="apple-touch-icon" sizes="180x180" href={`${baseUrl.replace(/\/$/, '')}/apple-touch-icon.png`} />
-    <link rel="icon" type="image/png" sizes="32x32" href={`${baseUrl.replace(/\/$/, '')}/favicon-32x32.png`} />
-    <link rel="icon" type="image/png" sizes="16x16" href={`${baseUrl.replace(/\/$/, '')}/favicon-16x16.png`} />
-    <link rel="manifest" href={`${baseUrl.replace(/\/$/, '')}/site.webmanifest`} />
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href={`${baseUrl.replace(/\/$/, '')}/favicon.svg`}
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href={`${baseUrl.replace(/\/$/, '')}/apple-touch-icon.png`}
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href={`${baseUrl.replace(/\/$/, '')}/favicon-32x32.png`}
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href={`${baseUrl.replace(/\/$/, '')}/favicon-16x16.png`}
+    />
+    <link
+      rel="manifest"
+      href={`${baseUrl.replace(/\/$/, '')}/site.webmanifest`}
+    />
 
     <!-- Preconnect para optimización de performance -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />

@@ -68,7 +68,8 @@ const pageKeywords = t('seo.keywords');
 
 // Build dynamic URLs from environment variables
 const siteUrl = PUBLIC_SITE_URL;
-const baseUrl = import.meta.env.PUBLIC_BASE_PATH || import.meta.env.BASE_URL || '';
+const baseUrl =
+  import.meta.env.PUBLIC_BASE_PATH || import.meta.env.BASE_URL || '';
 const personId = `${siteUrl}/#person`;
 const websiteId = `${siteUrl}/#website`;
 const profileImageUrl = PUBLIC_PROFILE_IMAGE

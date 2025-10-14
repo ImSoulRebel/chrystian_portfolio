@@ -30,8 +30,11 @@ const pageTitle = t('seo.title');
 const pageDescription = t('seo.description');
 const pageKeywords = t('seo.keywords');
 
-const baseUrl = import.meta.env.PUBLIC_BASE_PATH || import.meta.env.BASE_URL || '';
-const siteUrl = Astro.site?.toString() || 'https://imsoulrebel.github.io/chrystian_portfolio/';
+const baseUrl =
+  import.meta.env.PUBLIC_BASE_PATH || import.meta.env.BASE_URL || '';
+const siteUrl =
+  Astro.site?.toString() ||
+  'https://imsoulrebel.github.io/chrystian_portfolio/';
 
 // Structured data for homepage
 const homeStructuredData = {
@@ -54,7 +57,8 @@ const homeStructuredData = {
       url: siteUrl,
       image: {
         '@type': 'ImageObject',
-        url: new URL(`${baseUrl.replace(/\/$/, '')}/profile-image.jpg`, siteUrl).href,
+        url: new URL(`${baseUrl.replace(/\/$/, '')}/profile-image.jpg`, siteUrl)
+          .href,
         width: 400,
         height: 400,
       },
