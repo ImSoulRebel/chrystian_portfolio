@@ -24,7 +24,6 @@ import {
 } from '@utils/i18n';
 
 import '@styles/global.css';
-import {} from 'astro:env/client';
 
 export interface Props {
   title?: string;
@@ -92,51 +91,43 @@ const profileImageUrl = new URL(
   `${baseUrl.replace(/\/$/, '')}${PUBLIC_PROFILE_IMAGE}`,
   siteUrl
 ).href;
+
+// Obtener datos estructurados desde traducciones
+const structuredDataTranslations = t<any>('structuredData.person');
+
 const defaultStructuredData = {
   '@context': 'https://schema.org',
   '@type': 'Person',
-  name: PUBLIC_AUTHOR_GIVEN_NAME,
-  jobTitle:
-    locale === 'es'
-      ? 'Líder Técnico & Arquitecto Flutter'
-      : 'Tech Lead & Flutter Architect',
-  description:
-    locale === 'es'
-      ? 'Líder técnico con más de 5 años construyendo aplicaciones móviles escalables'
-      : 'Technical leader with over 5 years building scalable mobile applications',
+  name: structuredDataTranslations.name || PUBLIC_AUTHOR_GIVEN_NAME,
+  givenName: structuredDataTranslations.givenName,
+  familyName: structuredDataTranslations.familyName,
+  jobTitle: structuredDataTranslations.jobTitle,
+  description: structuredDataTranslations.description,
   url: siteUrl,
   image: profileImageUrl,
   sameAs: [PUBLIC_LINKEDIN_URL, PUBLIC_GITHUB_URL, PUBLIC_TWITTER_URL],
-  knowsAbout: [
-    'Flutter Development',
-    'Dart Programming',
-    'Mobile Architecture',
-    'Technical Leadership',
-    'Clean Architecture',
-    'BLoC Pattern',
-    'Cross-platform Development',
-    'DevOps',
-    'Team Management',
-  ],
+  knowsAbout: structuredDataTranslations.knowsAbout,
   worksFor: {
     '@type': 'Organization',
-    name:
-      locale === 'es'
-        ? 'Consultor Técnico Freelance'
-        : 'Freelance Technical Consultant',
+    name: structuredDataTranslations.worksFor.name,
+    description: structuredDataTranslations.worksFor.description,
   },
   hasOccupation: {
     '@type': 'Occupation',
-    name:
-      locale === 'es'
-        ? 'Líder Técnico & Arquitecto Flutter'
-        : 'Technical Lead & Flutter Architect',
+    name: structuredDataTranslations.occupation.name,
     occupationLocation: {
       '@type': 'Place',
-      name: locale === 'es' ? 'Remoto / España' : 'Remote / Spain',
+      name: structuredDataTranslations.occupation.location,
     },
-    skills:
-      'Flutter, Dart, Technical Leadership, Mobile Architecture, Clean Code',
+    skills: structuredDataTranslations.occupation.skills,
+    experienceRequirements:
+      structuredDataTranslations.occupation.experienceRequirements,
+    responsibilities: structuredDataTranslations.occupation.responsibilities,
+  },
+  seeks: {
+    '@type': 'JobPosting',
+    name: structuredDataTranslations.seeks.name,
+    description: structuredDataTranslations.seeks.description,
   },
 };
 
@@ -187,8 +178,9 @@ const localeSpecificMeta =
     <meta property="og:title" content={ogTitle} />
     <meta property="og:description" content={ogDescription} />
     <meta property="og:image" content={ogImage} />
-    <meta property="og:image:width" content=`${PUBLIC_OG_IMAGE_WIDTH}` />
-    <meta property="og:image:height" content=`${PUBLIC_OG_IMAGE_HEIGHT}` />
+    <meta property="og:image:width" content={String(PUBLIC_OG_IMAGE_WIDTH)} />
+    <meta property="og:image:height" content={String(PUBLIC_OG_IMAGE_HEIGHT)} />
+    <meta property="og:image:alt" content={description} />
     <meta property="og:locale" content={localeSpecificMeta.ogLocale} />
     <meta property="og:site_name" content={PUBLIC_SITE_TITLE} />
 
@@ -198,6 +190,7 @@ const localeSpecificMeta =
     <meta name="twitter:title" content={twitterTitle} />
     <meta name="twitter:description" content={twitterDescription} />
     <meta name="twitter:image" content={twitterImage} />
+    <meta name="twitter:image:alt" content={description} />
     <meta name="twitter:creator" content={PUBLIC_TWITTER_HANDLE} />
     <meta name="twitter:site" content={PUBLIC_TWITTER_URL} />
 
@@ -207,6 +200,7 @@ const localeSpecificMeta =
       content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
     />
     <meta name="googlebot" content="index, follow" />
+    <meta name="bingbot" content="index, follow" />
     <meta name="availability" content="available for hire" />
     <meta name="employment-type" content="full-time, contract, freelance" />
     <meta name="experience-level" content="senior, lead, architect" />
@@ -239,7 +233,11 @@ const localeSpecificMeta =
     <script
       is:inline
       type="application/ld+json"
-      set:html={JSON.stringify(finalStructuredData)}
+      set:html={JSON.stringify(
+        finalStructuredData,
+        null,
+        import.meta.env.DEV ? 2 : 0
+      )}
     />
 
     <!-- Favicon optimizado -->
@@ -274,6 +272,19 @@ const localeSpecificMeta =
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
+    <!-- Preload de fuentes críticas para mejor LCP -->
+    <link
+      rel="preload"
+      as="style"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      media="print"
+      onload="this.media='all'"
+    />
+
     <!-- DNS prefetch para recursos externos -->
     <link rel="dns-prefetch" href="https://linkedin.com" />
     <link rel="dns-prefetch" href="https://github.com" />
@@ -282,6 +293,7 @@ const localeSpecificMeta =
     <title>{title}</title>
 
     <!-- Optimizaciones adicionales -->
+    <meta name="color-scheme" content="light dark" />
     <meta name="theme-color" content="#00d4ff" />
     <meta name="msapplication-TileColor" content="#1a1a2e" />
     <meta name="format-detection" content="telephone=no" />
@@ -290,7 +302,7 @@ const localeSpecificMeta =
     <slot />
 
     <!-- Scripts de optimización -->
-    <script is:inline>
+    <script>
       import { App } from '@scripts';
 
       // Initialize main application
@@ -300,6 +312,11 @@ const localeSpecificMeta =
 </html>
 
 <style>
+  /* Color scheme support para mejor integración con temas del SO */
+  :root {
+    color-scheme: light dark;
+  }
+
   html,
   body {
     margin: 0;
