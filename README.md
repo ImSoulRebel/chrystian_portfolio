@@ -83,6 +83,7 @@ yarn dev
 - **Structured Data**: Schema.org (Person, WebSite, ProfessionalService)
 - **Google Rich Results**: Validado y optimizado para Rich Snippets
 - **Sitemap y Robots**: Configuración automática
+- **OG Images Automáticas**: Generación de imágenes para redes sociales
 
 ### 🔐 Desarrollo
 
@@ -1069,6 +1070,16 @@ yarn preview          # Preview del build
 yarn preview:build    # Build + Preview en un comando
 ```
 
+### Assets y Media
+
+```bash
+yarn generate:og        # Genera imágenes Open Graph
+yarn generate:favicons  # Genera favicons y app icons
+yarn generate:assets    # Genera todos los assets (OG + favicons)
+```
+
+> 💡 **Nota**: Los assets se generan automáticamente antes de cada build gracias al hook `prebuild`
+
 ### Calidad de Código
 
 ```bash
@@ -1113,7 +1124,16 @@ yarn postinstall      # Se ejecuta automáticamente después de yarn install
 ├── 📁 public/                   # Archivos estáticos
 │   ├── profile-image.jpg        # → Reemplaza con tu foto
 │   ├── favicon.svg              # → Reemplaza con tu favicon
+│   ├── og-image.jpg             # ✨ Generado automáticamente
+│   ├── og-image-twitter.jpg     # ✨ Generado automáticamente
+│   ├── og-image-square.jpg      # ✨ Generado automáticamente
+│   ├── apple-touch-icon.png     # ✨ Generado automáticamente
+│   ├── android-chrome-*.png     # ✨ Generado automáticamente
+│   ├── site.webmanifest         # ✨ Generado automáticamente
 │   └── robots.txt
+├── 📁 scripts/
+│   ├── generate-og-images.js    # 🎨 Generador de imágenes OG
+│   └── generate-favicons.js     # 🎨 Generador de favicons
 ├── 📁 src/
 │   ├── 📁 assets/               # Imágenes optimizadas
 │   │   ├── logos/
@@ -1187,7 +1207,161 @@ export class NombreClase {
 
 ---
 
-## 🌐 Internacionalización
+## � Imágenes Open Graph y Favicons
+
+El proyecto incluye un sistema automático de generación de imágenes para redes sociales y favicons.
+
+### 📸 Imágenes Generadas Automáticamente
+
+Cuando ejecutas `yarn build`, se generan automáticamente:
+
+#### Open Graph Images (Redes Sociales)
+- **`og-image.jpg`** (1200x630) - Facebook, LinkedIn, WhatsApp
+- **`og-image-twitter.jpg`** (1200x675) - Twitter Cards
+- **`og-image-square.jpg`** (1200x1200) - Instagram, formato cuadrado
+
+#### Favicons y App Icons
+- **`favicon-16x16.png`** - Favicon estándar
+- **`favicon-32x32.png`** - Favicon retina
+- **`apple-touch-icon.png`** - iOS home screen
+- **`android-chrome-192x192.png`** - Android icon
+- **`android-chrome-512x512.png`** - Android splash
+- **`mstile-150x150.png`** - Windows tile
+- **`site.webmanifest`** - PWA manifest
+- **`browserconfig.xml`** - Windows config
+
+### 🎨 Personalización de Imágenes
+
+Edita `scripts/generate-og-images.js` para cambiar textos y colores:
+
+```javascript
+const CONFIG = {
+  name: 'Tu Nombre',
+  title: 'Tu Título',
+  subtitle: 'Tus Skills',
+
+  colors: {
+    background: '#0f0f23',
+    primary: '#00d4ff',
+    secondary: '#7928ca',
+  },
+};
+```
+
+Edita `scripts/generate-favicons.js` para cambiar iniciales:
+
+```javascript
+const CONFIG = {
+  initials: 'TN',  // Tus iniciales
+};
+```
+
+### 🔄 Regenerar Imágenes
+
+```bash
+# Regenerar todos los assets
+yarn generate:assets
+
+# O individualmente
+yarn generate:og         # Solo OG images
+yarn generate:favicons   # Solo favicons
+```
+
+### ✅ Verificar en Redes Sociales
+
+Una vez desplegado, verifica que las imágenes se muestren correctamente:
+
+- **Facebook**: [Facebook Debugger](https://developers.facebook.com/tools/debug/)
+- **Twitter**: [Twitter Card Validator](https://cards-dev.twitter.com/validator)
+- **LinkedIn**: [Post Inspector](https://www.linkedin.com/post-inspector/)
+
+### � Cómo Funcionan los Scripts
+
+#### Script: `generate-og-images.js`
+
+Genera 3 variantes de imágenes optimizadas para diferentes plataformas:
+
+**Características:**
+- ✨ Diseño con gradiente oscuro profesional
+- 🎨 Foto de perfil circular con borde degradado
+- 📝 Textos personalizables (nombre, título, skills)
+- 🎯 Patrón de puntos decorativo
+- 🌈 Colores del tema del portfolio
+
+**Dimensiones:**
+- **Standard OG** (1200x630) → Facebook, LinkedIn, WhatsApp
+- **Twitter Card** (1200x675) → Twitter con relación 16:9
+- **Square** (1200x1200) → Instagram, previews móviles
+
+#### Script: `generate-favicons.js`
+
+Genera todos los favicons e íconos necesarios:
+
+**Características:**
+- 🔤 Basado en iniciales personalizables
+- 🎨 Diseño coherente con el tema
+- 📱 PWA-ready con manifest
+- 🪟 Soporte para Windows tiles
+
+**Archivos generados:**
+- Favicons para navegadores (16x16, 32x32)
+- Apple Touch Icon (180x180)
+- Android Chrome icons (192x192, 512x512)
+- Windows tile (150x150)
+- Web App Manifest (PWA)
+- Browser config XML
+
+### 📊 Especificaciones Técnicas
+
+| Aspecto | Detalles |
+|---------|----------|
+| **Librería** | Sharp (procesamiento de imágenes) |
+| **Formato OG** | JPEG progresivo, calidad 90% |
+| **Formato Favicons** | PNG optimizado |
+| **Tamaño total** | ~400-500 KB (todos los assets) |
+| **Generación** | Automática en cada build (hook `prebuild`) |
+
+### 🎯 Mejores Prácticas
+
+**✅ Hacer:**
+- Regenerar assets cuando cambies información profesional
+- Probar en múltiples plataformas antes de desplegar
+- Mantener imágenes optimizadas (<300 KB)
+- Usar colores con buen contraste
+
+**❌ Evitar:**
+- Imágenes muy pesadas que ralenticen la carga
+- Texto muy pequeño en las imágenes OG
+- Información sensible en las imágenes
+- Cambiar frecuentemente (afecta cache de redes sociales)
+
+### 🐛 Troubleshooting
+
+**Problema: Las imágenes no se actualizan en Facebook**
+```bash
+# Solución: Forzar re-scrape
+1. Ir a Facebook Debugger
+2. Ingresar tu URL
+3. Click en "Scrape Again"
+```
+
+**Problema: Error al generar imágenes**
+```bash
+# Solución: Verificar que Sharp esté instalado
+yarn install
+yarn generate:assets
+```
+
+**Problema: Imágenes se ven cortadas**
+```bash
+# Solución: Ajustar el layout en los scripts
+# Editar scripts/generate-og-images.js
+# Modificar las constantes de posición en el objeto 'layouts'
+```
+
+---
+
+## �🌐 Internacionalización
 
 ### Idiomas Soportados
 
