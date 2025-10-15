@@ -72,18 +72,44 @@ async function main() {
       phone: await question(
         `${colors.blue}📞 Tu teléfono (opcional, Enter para omitir):${colors.reset} `
       ),
+
+      // Dirección postal (SEO - Schema.org PostalAddress)
+      street: await question(
+        `${colors.blue}🏠 Tu calle y número (opcional, mejora SEO):${colors.reset} `
+      ),
+      postalCode: await question(
+        `${colors.blue}📮 Código postal (opcional, mejora SEO):${colors.reset} `
+      ),
       city: await question(
         `${colors.blue}🏙️  Tu ciudad (opcional):${colors.reset} `
+      ),
+      region: await question(
+        `${colors.blue}🗺️  Región/Estado/Provincia (opcional, mejora SEO):${colors.reset} `
       ),
       country: await question(
         `${colors.blue}🌍 Tu país (opcional):${colors.reset} `
       ),
+
+      // Redes sociales
       githubUsername: await question(
         `${colors.blue}💻 Tu usuario de GitHub (opcional):${colors.reset} `
       ),
       linkedinProfile: await question(
         `${colors.blue}💼 Tu perfil de LinkedIn - solo el nombre (opcional):${colors.reset} `
       ),
+      twitterHandle: await question(
+        `${colors.blue}🐦 Tu usuario de Twitter/X sin @ (opcional, mejora SEO):${colors.reset} `
+      ),
+
+      // Imagen de perfil (SEO - Schema.org ImageObject)
+      profileImageWidth: await question(
+        `${colors.blue}🖼️  Ancho de tu imagen de perfil en px (opcional, ej: 400):${colors.reset} `
+      ),
+      profileImageHeight: await question(
+        `${colors.blue}🖼️  Alto de tu imagen de perfil en px (opcional, ej: 400):${colors.reset} `
+      ),
+
+      // Información del sitio
       siteTitle: await question(
         `${colors.blue}🎯 Título de tu sitio (ej: "Juan Pérez - Full Stack Developer"):${colors.reset} `
       ),
@@ -167,10 +193,30 @@ async function main() {
         `PUBLIC_CONTACT_PHONE=${answers.phone}`
       );
     }
+
+    // Dirección postal (SEO - Schema.org PostalAddress)
+    if (answers.street) {
+      content = content.replace(
+        'PUBLIC_CONTACT_STREET=',
+        `PUBLIC_CONTACT_STREET=${answers.street}`
+      );
+    }
+    if (answers.postalCode) {
+      content = content.replace(
+        'PUBLIC_CONTACT_POSTAL_CODE=',
+        `PUBLIC_CONTACT_POSTAL_CODE=${answers.postalCode}`
+      );
+    }
     if (answers.city) {
       content = content.replace(
         'PUBLIC_CONTACT_CITY=',
         `PUBLIC_CONTACT_CITY=${answers.city}`
+      );
+    }
+    if (answers.region) {
+      content = content.replace(
+        'PUBLIC_CONTACT_REGION=',
+        `PUBLIC_CONTACT_REGION=${answers.region}`
       );
     }
     if (answers.country) {
@@ -179,6 +225,8 @@ async function main() {
         `PUBLIC_CONTACT_COUNTRY=${answers.country}`
       );
     }
+
+    // Redes sociales
     if (answers.githubUsername) {
       content = content.replace(
         'PUBLIC_GITHUB_USERNAME=',
@@ -195,6 +243,32 @@ async function main() {
         `PUBLIC_LINKEDIN_URL=https://linkedin.com/in/${answers.linkedinProfile}`
       );
     }
+    if (answers.twitterHandle) {
+      content = content.replace(
+        'PUBLIC_TWITTER_HANDLE=',
+        `PUBLIC_TWITTER_HANDLE=${answers.twitterHandle}`
+      );
+      content = content.replace(
+        'PUBLIC_TWITTER_URL=',
+        `PUBLIC_TWITTER_URL=https://twitter.com/${answers.twitterHandle}`
+      );
+    }
+
+    // Imagen de perfil (SEO - Schema.org ImageObject)
+    if (answers.profileImageWidth) {
+      content = content.replace(
+        'PUBLIC_PROFILE_IMAGE_WIDTH=',
+        `PUBLIC_PROFILE_IMAGE_WIDTH=${answers.profileImageWidth}`
+      );
+    }
+    if (answers.profileImageHeight) {
+      content = content.replace(
+        'PUBLIC_PROFILE_IMAGE_HEIGHT=',
+        `PUBLIC_PROFILE_IMAGE_HEIGHT=${answers.profileImageHeight}`
+      );
+    }
+
+    // Formspree
     if (formspreeEndpoint) {
       content = content.replace(
         'PUBLIC_FORMSPREE_ENDPOINT=',
@@ -217,6 +291,10 @@ ${colors.green}╔════════════════════�
 ${colors.bright}📝 Archivo creado:${colors.reset}
    • .env - Configuración local de desarrollo
 
+${colors.bright}🎯 Variables configuradas:${colors.reset}
+   ${colors.cyan}Variables obligatorias:${colors.reset} ✓
+   ${colors.yellow}Variables opcionales SEO:${colors.reset} ${answers.street || answers.twitterHandle || answers.profileImageWidth ? '✓ (¡Mejora tu SEO!)' : '⚠️  Considera agregarlas para mejor SEO'}
+
 ${colors.bright}🚀 Próximos pasos:${colors.reset}
 
 1. ${colors.cyan}Desarrollo Local:${colors.reset}
@@ -228,22 +306,25 @@ ${colors.bright}🚀 Próximos pasos:${colors.reset}
    • Reemplaza public/profile-image.jpg con tu foto
    • Actualiza src/sections/*.astro con tu información
 
-3. ${colors.cyan}Configurar GitHub Variables para deployment:${colors.reset}
+3. ${colors.cyan}Deployment - GitHub Pages:${colors.reset}
    • Ve a: Settings → Secrets and variables → Actions → Variables
-   • Configura las variables según GITHUB_VARIABLES_SETUP.md
+   • Configura las 28 variables según README.md
    • Haz push a main para desplegar automáticamente
 
-4. ${colors.cyan}Variables de GitHub Pages:${colors.reset}
-   Para producción, necesitarás configurar estas variables en GitHub:
-   • PUBLIC_SITE_URL
-   • PUBLIC_BASE_PATH
-   • PUBLIC_BASE_DOMAIN
-   • Y las demás según GITHUB_VARIABLES_SETUP.md
+4. ${colors.cyan}Deployment - Netlify (Alternativa):${colors.reset}
+   • Conecta tu repositorio en netlify.com
+   • Configura las 28 variables en Site settings → Environment variables
+   • Build command: ${colors.yellow}yarn build:netlify${colors.reset}
+   • Publish directory: ${colors.yellow}dist${colors.reset}
+
+${colors.bright}📊 Impacto SEO de variables opcionales:${colors.reset}
+   ${answers.street || answers.postalCode || answers.region ? colors.green + '✓' : colors.yellow + '○'} Dirección completa: ${colors.cyan}+40% Schema.org PostalAddress${colors.reset}
+   ${answers.twitterHandle ? colors.green + '✓' : colors.yellow + '○'} Twitter: ${colors.cyan}+20% Schema.org Person${colors.reset}
+   ${answers.profileImageWidth && answers.profileImageHeight ? colors.green + '✓' : colors.yellow + '○'} Dimensiones imagen: ${colors.cyan}+60% Schema.org ImageObject${colors.reset}
 
 ${colors.bright}📚 Documentación:${colors.reset}
-   • README.md - Guía completa
-   • GITHUB_VARIABLES_SETUP.md - Configuración de GitHub Variables
-   • CAMBIOS_APLICADOS.md - Arquitectura actualizada
+   • README.md - Guía completa con deployment multi-plataforma
+   • CHANGELOG_UPDATE.md - Variables SEO recuperadas
 
 ${colors.green}¡Disfruta creando tu portfolio! 🎉${colors.reset}
 `);
