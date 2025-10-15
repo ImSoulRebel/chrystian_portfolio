@@ -7,16 +7,23 @@ import {
   PUBLIC_CONTACT_PHONE,
   PUBLIC_CONTACT_ADDRESS,
 } from 'astro:env/client';
+import {
+  useTranslations,
+  getRelativeLocaleUrl,
+  type Locale,
+} from '@utils/i18n';
 import Icon from './Icon.astro';
-import { useTranslations, type Locale } from '@utils/i18n';
 
-// Recibir locale como prop
 interface Props {
+  hasNavLinks?: boolean;
   locale?: Locale;
 }
 
-const { locale = 'es' } = Astro.props;
+const { locale = 'es' as Locale, hasNavLinks = true } = Astro.props as Props;
+
 const t = useTranslations(locale);
+
+const homeUrl = getRelativeLocaleUrl(locale, '');
 
 const currentYear = new Date().getFullYear();
 
@@ -64,13 +71,34 @@ const socialLinks = [
         <div class="footer-links">
           <div class="footer-section">
             <h4>{t('footer.nav.title')}</h4>
-            <ul>
-              <li><a href="#home">{t('footer.nav.home')}</a></li>
-              <li><a href="#about">{t('footer.nav.about')}</a></li>
-              <li><a href="#projects">{t('footer.nav.projects')}</a></li>
-              <li><a href="#experience">{t('footer.nav.experience')}</a></li>
-              <li><a href="#contact">{t('footer.nav.contact')}</a></li>
-            </ul>
+
+            {
+              hasNavLinks ? (
+                <ul>
+                  <li>
+                    <a href="#home">{t('footer.nav.home')}</a>
+                  </li>
+                  <li>
+                    <a href="#about">{t('footer.nav.about')}</a>
+                  </li>
+                  <li>
+                    <a href="#projects">{t('footer.nav.projects')}</a>
+                  </li>
+                  <li>
+                    <a href="#experience">{t('footer.nav.experience')}</a>
+                  </li>
+                  <li>
+                    <a href="#contact">{t('footer.nav.contact')}</a>
+                  </li>
+                </ul>
+              ) : (
+                <ul>
+                  <li>
+                    <a href={homeUrl}>{t('footer.nav.home')}</a>
+                  </li>
+                </ul>
+              )
+            }
           </div>
 
           <div class="footer-section">

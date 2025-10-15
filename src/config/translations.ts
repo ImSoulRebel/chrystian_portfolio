@@ -14,6 +14,19 @@ export const translations = {
       contact: 'Contacto',
     },
 
+    // Error 404 Page
+    error404: {
+      title: '404 - Página No Encontrada | Chrystian Michell',
+      description:
+        'La página que buscas no existe. Vuelve al portfolio de Chrystian Michell.',
+      heading: '404',
+      subheading: 'Página No Encontrada',
+      message: 'La página que buscas no existe o ha sido movida.',
+      suggestion: 'Quizás lo que buscas está en alguna de estas páginas:',
+      homeButton: 'Volver al Inicio',
+      contactButton: 'Contactar',
+    },
+
     // Hero Section
     hero: {
       greeting: '👋 ¡Hola! Soy',
@@ -187,6 +200,12 @@ export const translations = {
       viewCode: 'Ver Código',
       viewMore: 'Ver Más Proyectos',
       featured: 'Destacado',
+      seo: {
+        title:
+          'Proyectos | Chrystian Michell - Portfolio de Desarrollo Flutter',
+        description:
+          'Explora los proyectos destacados de Chrystian Michell: aplicaciones Flutter multiplataforma, plataformas OTT, Smart TV apps y soluciones móviles innovadoras desplegadas en múltiples países.',
+      },
       list: {
         yuvod: {
           title: 'YUVOD – Plataforma OTT para Hoteles',
@@ -237,6 +256,11 @@ export const translations = {
       subtitle: '¿Listo para transformar tu idea en realidad?',
       description:
         '¿Tienes un proyecto en mente? Me encantaría conocer más sobre tu idea y cómo puedo ayudarte a hacerla realidad.',
+      seo: {
+        title: 'Contacto | Chrystian Michell - Tech Lead & Arquitecto Flutter',
+        description:
+          'Contacta con Chrystian Michell para oportunidades de liderazgo técnico, proyectos de desarrollo Flutter y servicios de consultoría especializada. Disponible para contratación inmediata.',
+      },
       form: {
         subject: 'Nuevo mensaje desde el portfolio',
         title: 'Cuéntame sobre tu proyecto',
@@ -491,6 +515,19 @@ export const translations = {
       contact: 'Contact',
     },
 
+    // Error 404 Page
+    error404: {
+      title: '404 - Page Not Found | Chrystian Michell',
+      description:
+        "The page you're looking for doesn't exist. Return to Chrystian Michell's portfolio homepage.",
+      heading: '404',
+      subheading: 'Page Not Found',
+      message: "The page you're looking for doesn't exist or has been moved.",
+      suggestion: 'Maybe what you are looking for is on one of these pages:',
+      homeButton: 'Back to Home',
+      contactButton: 'Contact Me',
+    },
+
     // Hero Section
     hero: {
       greeting: "👋 Hello! I'm",
@@ -653,6 +690,11 @@ export const translations = {
       viewCode: 'View Code',
       viewMore: 'View More Projects',
       featured: 'Featured',
+      seo: {
+        title: 'Projects | Chrystian Michell - Flutter Development Portfolio',
+        description:
+          "Explore Chrystian Michell's featured projects: cross-platform Flutter applications, OTT platforms, Smart TV apps, and innovative mobile solutions deployed across multiple countries.",
+      },
       list: {
         yuvod: {
           title: 'YUVOD – OTT Platform for Hotels',
@@ -703,6 +745,11 @@ export const translations = {
       subtitle: 'Ready to transform your idea into reality?',
       description:
         'I am available for new technical leadership opportunities, senior development roles, and specialized consulting.',
+      seo: {
+        title: 'Contact | Chrystian Michell - Tech Lead & Flutter Architect',
+        description:
+          'Contact Chrystian Michell for technical leadership opportunities, Flutter development projects, and specialized consulting services. Available for immediate hire.',
+      },
       form: {
         subject: 'New message from portfolio',
         title: 'Tell me about your project',

@@ -1,222 +1,27 @@
 ---
-import { Layout } from '@layouts';
-import { Header, Footer } from '@components';
-import { type Locale, getBasePath } from '@utils/i18n';
+/**
+ * 404 Root Handler
+ * Esta página maneja las solicitudes 404 y redirige al usuario a la versión localizada
+ * basándose en las preferencias de idioma del navegador.
+ *
+ * Las páginas 404 localizadas están en:
+ * - /es/404 para español
+ * - /en/404 para inglés
+ */
 
-// Para una página 404 prerenderizada, usamos español como idioma por defecto
-// El contenido se actualizará dinámicamente en el cliente
-const locale: Locale = 'es';
+import { getRelativeLocaleUrl } from 'astro:i18n';
 
-// Contenido estático en ambos idiomas
-const content = {
-  es: {
-    title: '404 - Página No Encontrada | Chrystian Michell',
-    description:
-      'La página que buscas no existe. Vuelve al portfolio de Chrystian Michell.',
-    heading: '404',
-    subheading: 'Página No Encontrada',
-    message: 'La página que buscas no existe o ha sido movida.',
-    homeButton: 'Volver al Inicio',
-    contactButton: 'Contactar',
-  },
-  en: {
-    title: '404 - Page Not Found | Chrystian Michell',
-    description:
-      "The page you're looking for doesn't exist. Return to Chrystian Michell's portfolio homepage.",
-    heading: '404',
-    subheading: 'Page Not Found',
-    message: "The page you're looking for doesn't exist or has been moved.",
-    homeButton: 'Back to Home',
-    contactButton: 'Contact Me',
-  },
-};
+// Detectar idioma preferido del navegador
+const acceptLanguage = Astro.request.headers.get('accept-language') || '';
+const preferredLocale =
+  acceptLanguage.toLowerCase().includes('en') &&
+  !acceptLanguage.toLowerCase().startsWith('es')
+    ? 'en'
+    : 'es';
 
-const pageContent = content[locale];
-// Usa el base path según la plataforma de deployment
-const base = getBasePath();
-const homeUrl = `${base}/`;
-const contactUrl = `${base}/contact`;
+// Redirigir a la página 404 localizada
+// getRelativeLocaleUrl incluye automáticamente el base path configurado
+// @ts-ignore - TypeScript doesn't detect usage in Astro.redirect return statement
+const redirectUrl = getRelativeLocaleUrl(preferredLocale, '/404');
+return Astro.redirect(redirectUrl, 302);
 ---
-
-<Layout title={pageContent.title} description={pageContent.description}>
-  <Header />
-
-  <main class="error-page">
-    <div class="container">
-      <div class="error-content">
-        <h1 class="error-title">{pageContent.heading}</h1>
-        <h2 class="error-subtitle">{pageContent.subheading}</h2>
-        <p class="error-description">
-          {pageContent.message}
-        </p>
-        <div class="error-actions">
-          <a href={homeUrl} class="btn btn-primary">{pageContent.homeButton}</a>
-          <a href={contactUrl} class="btn btn-outline"
-            >{pageContent.contactButton}</a
-          >
-        </div>
-      </div>
-    </div>
-  </main>
-
-  <Footer />
-</Layout>
-
-<script>
-  // Detectar idioma del lado del cliente y actualizar contenido
-  function detectClientLocale() {
-    // Verificar si hay un idioma guardado en localStorage
-    const savedLocale = localStorage.getItem('preferred-locale');
-    if (savedLocale === 'es' || savedLocale === 'en') {
-      return savedLocale as 'es' | 'en';
-    }
-
-    // Detectar desde la URL actual
-    const path = window.location.pathname;
-    if (path.startsWith('/en/') || path === '/en') {
-      return 'en';
-    }
-    if (path.startsWith('/es/') || path === '/es') {
-      return 'es';
-    }
-
-    // Detectar desde el idioma del navegador
-    const lang = navigator.language.toLowerCase();
-    if (lang.startsWith('en')) return 'en';
-    return 'es'; // Default to Spanish
-  }
-
-  // Actualizar contenido basado en el idioma detectado
-  function updateContent() {
-    const locale = detectClientLocale();
-
-    // Obtener el base path de manera consistente desde el PUBLIC_BASE_PATH
-    const base = import.meta.env.PUBLIC_BASE_PATH || '';
-
-    const content = {
-      es: {
-        title: '404 - Página No Encontrada | Chrystian Michell',
-        heading: '404',
-        subheading: 'Página No Encontrada',
-        message: 'La página que buscas no existe o ha sido movida.',
-        homeButton: 'Volver al Inicio',
-        contactButton: 'Contactar',
-        homeUrl: `${base}/`,
-        contactUrl: `${base}/contact`,
-      },
-      en: {
-        title: '404 - Page Not Found | Chrystian Michell',
-        heading: '404',
-        subheading: 'Page Not Found',
-        message: "The page you're looking for doesn't exist or has been moved.",
-        homeButton: 'Back to Home',
-        contactButton: 'Contact Me',
-        homeUrl: `${base}/en/`,
-        contactUrl: `${base}/en/contact`,
-      },
-    };
-
-    const pageContent = content[locale];
-
-    // Actualizar título de la página
-    document.title = pageContent.title;
-
-    // Actualizar meta description
-    const metaDescription = document.querySelector('meta[name="description"]');
-    if (metaDescription) {
-      metaDescription.setAttribute(
-        'content',
-        locale === 'es'
-          ? 'La página que buscas no existe. Vuelve al portfolio de Chrystian Michell.'
-          : "The page you're looking for doesn't exist. Return to Chrystian Michell's portfolio homepage."
-      );
-    }
-
-    // Actualizar contenido visible
-    const elements = {
-      '.error-title': pageContent.heading,
-      '.error-subtitle': pageContent.subheading,
-      '.error-description': pageContent.message,
-      '.btn-primary': pageContent.homeButton,
-      '.btn-outline': pageContent.contactButton,
-    };
-
-    Object.entries(elements).forEach(([selector, text]) => {
-      const element = document.querySelector(selector);
-      if (element) element.textContent = text;
-    });
-
-    // Actualizar URLs de los botones
-    const homeBtn = document.querySelector('.btn-primary') as HTMLAnchorElement;
-    const contactBtn = document.querySelector(
-      '.btn-outline'
-    ) as HTMLAnchorElement;
-
-    if (homeBtn) homeBtn.href = pageContent.homeUrl;
-    if (contactBtn) contactBtn.href = pageContent.contactUrl;
-  }
-
-  // Ejecutar cuando se carga la página
-  document.addEventListener('DOMContentLoaded', updateContent);
-</script>
-
-<style>
-  .error-page {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 2rem 0;
-  }
-
-  .error-content {
-    text-align: center;
-    max-width: 600px;
-    margin: 0 auto;
-  }
-
-  .error-title {
-    font-size: 8rem;
-    font-weight: 900;
-    color: var(--primary-color);
-    text-shadow: 0 0 30px rgba(0, 212, 255, 0.3);
-    margin: 0;
-    line-height: 1;
-  }
-
-  .error-subtitle {
-    font-size: 2.5rem;
-    color: var(--text-primary);
-    margin: 1rem 0;
-    font-weight: 700;
-  }
-
-  .error-description {
-    font-size: 1.2rem;
-    color: var(--text-secondary);
-    margin: 2rem 0;
-    line-height: 1.6;
-  }
-
-  .error-actions {
-    display: flex;
-    gap: 1rem;
-    justify-content: center;
-    margin-top: 3rem;
-  }
-
-  @media (max-width: 768px) {
-    .error-title {
-      font-size: 6rem;
-    }
-
-    .error-subtitle {
-      font-size: 2rem;
-    }
-
-    .error-actions {
-      flex-direction: column;
-      align-items: center;
-    }
-  }
-</style>
