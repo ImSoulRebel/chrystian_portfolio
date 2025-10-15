@@ -12,48 +12,63 @@ interface Props {
 const { locale = 'es' } = Astro.props;
 const t = useTranslations(locale);
 
+// Tipo para las claves de proyectos
+type ProjectKey = 'yuvod' | 'nextival' | 'stelcamping' | 'bnc10' | 'tookane';
+
+// Tipo para los proyectos combinados
+type Project = {
+  title: string;
+  stack: string;
+  description: string;
+  impact: string;
+  featured: boolean;
+  liveUrl?: string | undefined;
+  githubUrl?: string | undefined;
+  image: any;
+};
+
 // Configuración de proyectos con URLs e imágenes
-const projectsConfig = [
+const projectsConfig: Array<{
+  key: ProjectKey;
+  featured: boolean;
+  liveUrl?: string;
+  githubUrl?: string;
+  image: any;
+}> = [
   {
-    key: 'yuvod' as const,
+    key: 'yuvod',
     featured: true,
     liveUrl: 'https://yuvod.com',
-    githubUrl: undefined,
     image: assets.yuvodLogo,
   },
   {
-    key: 'nextival' as const,
+    key: 'nextival',
     featured: false,
-    liveUrl: undefined,
     githubUrl: 'https://github.com/ImSoulRebel/nextival-cms',
     image: assets.nextivalLogo,
   },
   {
-    key: 'stelcamping' as const,
+    key: 'stelcamping',
     featured: false,
     liveUrl: 'https://stel.es',
-    githubUrl: undefined,
     image: assets.stelLogo,
   },
   {
-    key: 'bnc10' as const,
+    key: 'bnc10',
     featured: false,
-    liveUrl: undefined,
-    githubUrl: undefined,
     image: assets.bnc10Logo,
   },
   {
-    key: 'tookane' as const,
+    key: 'tookane',
     featured: false,
     liveUrl: 'https://tookane.com',
-    githubUrl: undefined,
     image: assets.tookaneLogo,
   },
 ];
 
 // Construir proyectos desde traducciones + configuración
-const projects = projectsConfig.map((config) => {
-  const projectData = translations[locale].projects.list[config.key];
+const projects: Project[] = projectsConfig.map((config) => {
+  const projectData = translations[locale as Locale].projects.list[config.key];
   return {
     title: projectData.title,
     stack: projectData.stack,
@@ -72,7 +87,7 @@ const projects = projectsConfig.map((config) => {
     <h2 class="section-title">{t('projects.title')}</h2>
     <div class="projects-grid">
       {
-        projects.map((project) => (
+        projects.map((project: Project) => (
           <ProjectCard
             title={project.title}
             stack={project.stack}
@@ -82,6 +97,7 @@ const projects = projectsConfig.map((config) => {
             liveUrl={project.liveUrl}
             githubUrl={project.githubUrl}
             image={project.image}
+            locale={locale}
           />
         ))
       }

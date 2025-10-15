@@ -21,7 +21,7 @@ const experiencesConfig = [
 
 // Construir experiencias desde traducciones + configuración
 const experiences = experiencesConfig.map((config) => {
-  const expData = translations[locale].experience.list[config.key];
+  const expData = translations[locale as Locale].experience.list[config.key];
   return {
     title: expData.title,
     company: expData.company,

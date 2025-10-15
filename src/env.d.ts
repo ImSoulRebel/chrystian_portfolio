@@ -1,6 +1,15 @@
 /// <reference types="astro/client" />
 
 // ===========================================
+// DECLARACIONES DE MÓDULOS ASTRO
+// ===========================================
+
+declare module '*.astro' {
+  const component: any;
+  export default component;
+}
+
+// ===========================================
 // TIPOS PARA VARIABLES DE ENTORNO
 // ===========================================
 
@@ -21,6 +30,7 @@ interface ImportMetaEnv {
   readonly PUBLIC_GITHUB_USERNAME?: string;
   readonly PUBLIC_GITHUB_URL?: string;
   readonly PUBLIC_LINKEDIN_URL?: string;
+  readonly PUBLIC_LINKEDIN_USERNAME?: string;
   readonly PUBLIC_TWITTER_URL?: string;
   readonly PUBLIC_TWITTER_HANDLE?: string;
   readonly PUBLIC_INSTAGRAM_URL?: string;
@@ -29,11 +39,11 @@ interface ImportMetaEnv {
   readonly PUBLIC_PROFILE_IMAGE?: string;
   readonly PUBLIC_PROFILE_IMAGE_WIDTH?: number;
   readonly PUBLIC_PROFILE_IMAGE_HEIGHT?: number;
-
+  readonly PUBLIC_OG_IMAGE?: string;
+  readonly PUBLIC_OG_IMAGE_WIDTH?: number;
+  readonly PUBLIC_OG_IMAGE_HEIGHT?: number;
   // SERVICIOS EXTERNOS (Solo disponibles en servidor)
   readonly PUBLIC_FORMSPREE_ENDPOINT?: string;
-  readonly WEBHOOK_URL?: string;
-  readonly ANALYTICS_API_KEY?: string;
 
   // CONFIGURACIÓN DE DESARROLLO
   readonly PUBLIC_DEV_PORT: number;

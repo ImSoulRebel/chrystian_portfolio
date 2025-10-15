@@ -16,8 +16,8 @@ const languageLabels = {
   en: { label: 'EN', name: 'English' },
 };
 
-const currentLang = languageLabels[currentLocale];
-const alternateLang = languageLabels[alternateLocale];
+const currentLang = languageLabels[currentLocale as Locale];
+const alternateLang = languageLabels[alternateLocale as Locale];
 ---
 
 <div class="language-selector">

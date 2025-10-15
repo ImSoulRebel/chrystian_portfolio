@@ -2,13 +2,13 @@ import {
   translations,
   type Locale,
   type TranslationKeyPath,
-} from '../config/translations';
+} from '@config/translations';
 
 // Importar helpers nativos de Astro para i18n
 import { getRelativeLocaleUrl } from 'astro:i18n';
 
 // Re-exportar tipos para facilitar el uso
-export type { Locale } from '../config/translations';
+export type { Locale } from '@config/translations';
 
 // Re-exportar helpers de Astro para consistencia
 export { getRelativeLocaleUrl } from 'astro:i18n';

@@ -1,8 +1,7 @@
 ---
-import { useTranslations, type Locale } from '../utils/i18n';
-import { translations } from '../config/translations';
+import { useTranslations, type Locale } from '@utils/i18n';
+import { translations } from '@config/translations';
 
-// Recibir locale como prop
 interface Props {
   locale?: Locale;
 }
@@ -11,7 +10,7 @@ const { locale = 'es' } = Astro.props;
 const t = useTranslations(locale);
 
 // Obtener highlights directamente del objeto de traducciones
-const highlights = translations[locale].about.highlights.list;
+const highlights = translations[locale as Locale].about.highlights.list;
 ---
 
 <section class="highlights">
@@ -19,7 +18,7 @@ const highlights = translations[locale].about.highlights.list;
     <h2 class="section-title">{t('about.highlights.title')}</h2>
     <div class="highlights-grid">
       {
-        highlights.map((highlight) => (
+        highlights.map((highlight: { emoji: string; text: string }) => (
           <div class="highlight-item">
             <div class="highlight-emoji">{highlight.emoji}</div>
             <p class="highlight-text">{highlight.text}</p>

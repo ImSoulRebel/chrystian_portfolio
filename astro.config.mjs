@@ -126,6 +126,11 @@ export default defineConfig({
         access: 'public',
         optional: true,
       }),
+      PUBLIC_LINKEDIN_USERNAME: envField.string({
+        context: 'client',
+        access: 'public',
+        optional: true,
+      }),
       PUBLIC_TWITTER_URL: envField.string({
         context: 'client',
         access: 'public',
@@ -156,6 +161,21 @@ export default defineConfig({
         optional: true,
       }),
       PUBLIC_PROFILE_IMAGE_HEIGHT: envField.number({
+        context: 'client',
+        access: 'public',
+        optional: true,
+      }),
+      PUBLIC_OG_IMAGE: envField.string({
+        context: 'client',
+        access: 'public',
+        optional: true,
+      }),
+      PUBLIC_OG_IMAGE_WIDTH: envField.number({
+        context: 'client',
+        access: 'public',
+        optional: true,
+      }),
+      PUBLIC_OG_IMAGE_HEIGHT: envField.number({
         context: 'client',
         access: 'public',
         optional: true,
