@@ -21,11 +21,7 @@
       "purpose": "any maskable"
     }
   ],
-  "categories": [
-    "business",
-    "productivity",
-    "technology"
-  ],
+  "categories": ["business", "productivity", "technology"],
   "lang": "es-ES",
   "dir": "ltr",
   "scope": "/"

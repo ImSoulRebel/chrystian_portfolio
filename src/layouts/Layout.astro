@@ -64,7 +64,13 @@ const baseUrl = PUBLIC_BASE_PATH || import.meta.env.BASE_URL || '';
 const hreflangUrls = getHreflangUrls(currentPath);
 
 const ogImageUrl = new URL(
-  `${baseUrl.replace(/\/$/, '')}/${PUBLIC_OG_IMAGE}`,
+  `${baseUrl.replace(/\/$/, '')}${PUBLIC_OG_IMAGE || '/og-image.jpg'}`,
+  siteUrl
+).href;
+
+// Construir URL completa para la imagen de perfil
+const profileImageUrl = new URL(
+  `${baseUrl.replace(/\/$/, '')}${PUBLIC_PROFILE_IMAGE || '/profile-image.jpg'}`,
   siteUrl
 ).href;
 
@@ -86,12 +92,6 @@ const {
 } = Astro.props;
 
 // Schema.org JSON-LD por defecto
-// Construir URL completa para la imagen de perfil
-const profileImageUrl = new URL(
-  `${baseUrl.replace(/\/$/, '')}${PUBLIC_PROFILE_IMAGE}`,
-  siteUrl
-).href;
-
 // Obtener datos estructurados desde traducciones
 const structuredDataTranslations = t<any>('structuredData.person');
 
@@ -178,8 +178,14 @@ const localeSpecificMeta =
     <meta property="og:title" content={ogTitle} />
     <meta property="og:description" content={ogDescription} />
     <meta property="og:image" content={ogImage} />
-    <meta property="og:image:width" content={String(PUBLIC_OG_IMAGE_WIDTH)} />
-    <meta property="og:image:height" content={String(PUBLIC_OG_IMAGE_HEIGHT)} />
+    <meta
+      property="og:image:width"
+      content={String(PUBLIC_OG_IMAGE_WIDTH) || '1200'}
+    />
+    <meta
+      property="og:image:height"
+      content={String(PUBLIC_OG_IMAGE_HEIGHT) || '630'}
+    />
     <meta property="og:image:alt" content={description} />
     <meta property="og:locale" content={localeSpecificMeta.ogLocale} />
     <meta property="og:site_name" content={PUBLIC_SITE_TITLE} />
