@@ -139,7 +139,7 @@ export function getLocalizedPath(
 
   // Remover prefijo de locale /es/ o /en/ (puede estar repetido)
   cleanPath = cleanPath.replace(/^\/(es|en)(\/|$)/, '/');
-  
+
   // Si después de limpiar queda vacío o solo /, normalizar a /
   if (!cleanPath || cleanPath === '' || cleanPath === '/') {
     cleanPath = '/';
@@ -151,7 +151,7 @@ export function getLocalizedPath(
 
   // Usar el helper nativo de Astro que maneja base path automáticamente
   const result = getRelativeLocaleUrl(targetLocale, pathForHelper);
-  
+
   // Normalizar dobles barras
   return result.replace(/\/\//g, '/');
 }
