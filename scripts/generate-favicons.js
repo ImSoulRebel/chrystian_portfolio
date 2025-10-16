@@ -10,6 +10,7 @@ import sharp from 'sharp';
 import { existsSync, mkdirSync, writeFileSync } from 'fs';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
+import prettier from 'prettier';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -100,7 +101,7 @@ async function generateIcon(outputPath, size, format = 'png') {
 /**
  * Genera el manifest para PWA
  */
-function generateWebManifest() {
+async function generateWebManifest() {
   const manifest = {
     name: 'Chrystian Michell - Flutter Developer & Tech Lead',
     short_name: 'Chrystian M.',
@@ -132,8 +133,28 @@ function generateWebManifest() {
   };
 
   const manifestPath = join(CONFIG.publicDir, 'site.webmanifest');
-  writeFileSync(manifestPath, JSON.stringify(manifest, null, 2));
-  console.log(`✅ Generado: ${manifestPath}`);
+
+  try {
+    // Generar JSON y formatear con Prettier
+    const rawJson = JSON.stringify(manifest, null, 2);
+    const formattedJson = await prettier.format(rawJson, {
+      parser: 'json',
+      semi: true,
+      singleQuote: false, // JSON requiere comillas dobles
+      tabWidth: 2,
+      trailingComma: 'none', // JSON no permite trailing commas
+      printWidth: 80,
+      endOfLine: 'lf',
+    });
+
+    writeFileSync(manifestPath, formattedJson);
+    console.log(`✅ Generado: ${manifestPath}`);
+  } catch (error) {
+    console.error(`❌ Error formateando ${manifestPath}:`, error.message);
+    // Fallback: usar JSON básico
+    writeFileSync(manifestPath, JSON.stringify(manifest, null, 2) + '\n');
+    console.log(`⚠️  Generado sin formateo: ${manifestPath}`);
+  }
 }
 
 /**
@@ -184,7 +205,7 @@ async function main() {
   ]);
 
   // Generar manifests
-  generateWebManifest();
+  await generateWebManifest();
   generateBrowserConfig();
 
   console.log(
