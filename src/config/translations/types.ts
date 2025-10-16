@@ -1,5 +1,4 @@
 /**
-import { general } from './general';
  * Tipos TypeScript para el sistema de traducciones
  * Estos tipos garantizan type-safety y autocompletado en toda la aplicación
  */
@@ -31,6 +30,8 @@ export interface NavTranslations {
   experience: string;
   projects: string;
   contact: string;
+  backToHome: string;
+  backToHomeLabel: string;
 }
 
 export interface Error404Translations {

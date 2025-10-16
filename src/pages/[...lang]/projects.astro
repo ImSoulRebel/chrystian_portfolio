@@ -1,8 +1,8 @@
 ---
-import { PUBLIC_AUTHOR_NAME } from 'astro:env/client';
 import { Layout } from '@layouts';
 import { Header, Footer, ProjectCard, BackToHome } from '@components';
-import { useTranslations, type Locale, translations } from '@utils/i18n';
+import { type Locale, translations } from '@utils/i18n';
+import { projectsPage } from '@config/translations';
 import * as assets from '@assets';
 
 // Define static paths for both languages
@@ -16,12 +16,12 @@ export async function getStaticPaths() {
 // Get the language from params
 const { lang } = Astro.params;
 const locale = (lang as Locale) || 'es';
-const t = useTranslations(locale);
+const projectsPageT = projectsPage[locale];
 const hasNavLinks = false;
 
 // SEO content from centralized translations
-const pageTitle = `${t('projects.seo.title')} | ${PUBLIC_AUTHOR_NAME}`;
-const pageDescription = t<string>('projects.seo.description');
+const pageTitle = projectsPageT.seo.title;
+const pageDescription = projectsPageT.seo.description;
 
 // Tipo para las claves de proyectos
 type ProjectKey = 'yuvod' | 'nextival' | 'stelcamping' | 'bnc10' | 'tookane';
@@ -135,10 +135,15 @@ const featuredBusinessProjects = businessProjects.filter((p) => p.featured);
 const regularBusinessProjects = businessProjects.filter((p) => !p.featured);
 ---
 
-<Layout title={pageTitle} description={pageDescription} locale={locale} floatingCTAMode="navigate-to-contact">
+<Layout
+  title={pageTitle}
+  description={pageDescription}
+  locale={locale}
+  floatingCTAMode="navigate-to-contact"
+>
   <!-- Back to Home Button -->
   <BackToHome locale={locale} />
-  
+
   <Header hasNavLinks={hasNavLinks} locale={locale} />
 
   <main class="projects-page">
@@ -147,14 +152,10 @@ const regularBusinessProjects = businessProjects.filter((p) => !p.featured);
       <div class="container">
         <div class="hero-content">
           <h1 class="hero-title">
-            {locale === 'es' ? 'Todos los Proyectos' : 'All Projects'}
+            {projectsPageT.allProjects}
           </h1>
           <p class="hero-description">
-            {
-              locale === 'es'
-                ? 'Portafolio completo de soluciones Flutter multiplataforma, arquitecturas escalables y liderazgo técnico en desarrollo móvil y SmartTV.'
-                : 'Complete portfolio of cross-platform Flutter solutions, scalable architectures, and technical leadership in mobile and SmartTV development.'
-            }
+            {projectsPageT.description}
           </p>
         </div>
       </div>
@@ -165,25 +166,17 @@ const regularBusinessProjects = businessProjects.filter((p) => !p.featured);
       <div class="container">
         <div class="section-header">
           <h2 class="section-title">
-            {
-              locale === 'es'
-                ? 'Proyectos Empresariales B2B'
-                : 'B2B Business Projects'
-            }
+            {projectsPageT.categories.business}
           </h2>
           <p class="section-description">
-            {
-              locale === 'es'
-                ? 'Soluciones Flutter desarrolladas para empresas, con arquitecturas escalables y alto impacto comercial.'
-                : 'Flutter solutions developed for enterprises, featuring scalable architectures and high commercial impact.'
-            }
+            {projectsPageT.categoryDescriptions.business}
           </p>
         </div>
 
         <!-- Featured Business Projects -->
         <div class="subsection">
           <h3 class="subsection-title">
-            {locale === 'es' ? 'Proyectos Destacados' : 'Featured Projects'}
+            {projectsPageT.subcategories.featured}
           </h3>
           <div class="projects-grid featured-grid">
             {
@@ -209,9 +202,7 @@ const regularBusinessProjects = businessProjects.filter((p) => !p.featured);
           regularBusinessProjects.length > 0 && (
             <div class="subsection">
               <h3 class="subsection-title">
-                {locale === 'es'
-                  ? 'Otros Proyectos Empresariales'
-                  : 'Other Business Projects'}
+                {projectsPageT.subcategories.otherBusiness}
               </h3>
               <div class="projects-grid regular-grid">
                 {regularBusinessProjects.map((project: Project) => (
@@ -239,14 +230,10 @@ const regularBusinessProjects = businessProjects.filter((p) => !p.featured);
       <div class="container">
         <div class="section-header">
           <h2 class="section-title">
-            {locale === 'es' ? 'Proyectos Personales' : 'Personal Projects'}
+            {projectsPageT.categories.personal}
           </h2>
           <p class="section-description">
-            {
-              locale === 'es'
-                ? 'Desarrollos propios que demuestran creatividad, experimentación con nuevas tecnologías y pasión por la innovación.'
-                : 'Own developments that showcase creativity, experimentation with new technologies, and passion for innovation.'
-            }
+            {projectsPageT.categoryDescriptions.personal}
           </p>
         </div>
         <div class="projects-grid personal-grid">

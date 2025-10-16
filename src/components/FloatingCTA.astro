@@ -1,6 +1,7 @@
 ---
 import { Icon } from '@components';
-import { useTranslations, type Locale } from '@utils/i18n';
+import { type Locale } from '@utils/i18n';
+import { floatingCTA } from '@config/translations';
 
 interface Props {
   locale?: Locale;
@@ -8,37 +9,39 @@ interface Props {
 }
 
 const { locale = 'es', mode = 'contact' } = Astro.props;
-const t = useTranslations(locale);
+const floatingCTAT = floatingCTA[locale as Locale];
 
 // Determine the action based on mode
 const isContactMode = mode === 'contact';
 const buttonHref = isContactMode ? undefined : `/${locale}/contact`;
-const buttonText = isContactMode ? t('contact.title') : (locale === 'es' ? 'Contactar' : 'Contact');
+const buttonText = floatingCTAT.contact;
 const buttonIcon = isContactMode ? 'email' : 'message-circle';
 ---
 
 <div id="floating-cta" class="floating-cta" data-mode={mode} aria-hidden="true">
-  {isContactMode ? (
-    <button
-      class="floating-cta-btn"
-      aria-label={t('contact.quickLinks.label')}
-      title={buttonText}
-      data-contact-btn
-    >
-      <Icon name={buttonIcon} size={20} color="var(--background-dark)" />
-      <span class="floating-cta-text">{buttonText}</span>
-    </button>
-  ) : (
-    <a
-      href={buttonHref}
-      class="floating-cta-btn"
-      aria-label={locale === 'es' ? 'Ir a la página de contacto' : 'Go to contact page'}
-      title={buttonText}
-    >
-      <Icon name={buttonIcon} size={20} color="var(--background-dark)" />
-      <span class="floating-cta-text">{buttonText}</span>
-    </a>
-  )}
+  {
+    isContactMode ? (
+      <button
+        class="floating-cta-btn"
+        aria-label={floatingCTAT.contactLabel}
+        title={buttonText}
+        data-contact-btn
+      >
+        <Icon name={buttonIcon} size={20} color="var(--background-dark)" />
+        <span class="floating-cta-text">{buttonText}</span>
+      </button>
+    ) : (
+      <a
+        href={buttonHref}
+        class="floating-cta-btn"
+        aria-label={floatingCTAT.goToContactPage}
+        title={buttonText}
+      >
+        <Icon name={buttonIcon} size={20} color="var(--background-dark)" />
+        <span class="floating-cta-text">{buttonText}</span>
+      </a>
+    )
+  }
 </div>
 
 <style>
@@ -141,7 +144,7 @@ const buttonIcon = isContactMode ? 'email' : 'message-circle';
   /* Icon alignment for FloatingCTA */
   .floating-cta-btn :global(svg),
   .floating-cta-btn :global(img),
-  .floating-cta-btn :global(div[style*="width"]) {
+  .floating-cta-btn :global(div[style*='width']) {
     flex-shrink: 0;
     display: inline-flex;
     align-items: center;

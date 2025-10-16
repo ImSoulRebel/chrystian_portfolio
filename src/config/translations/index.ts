@@ -21,3 +21,5 @@ export { seo } from './seo';
 export { recruiterMeta } from './recruiterMeta';
 export { skills } from './skills';
 export { structureData as structure } from './structureData';
+export { floatingCTA } from './floatingCTA';
+export { projectsPage } from './projectsPage';

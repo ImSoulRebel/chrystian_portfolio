@@ -1,5 +1,6 @@
 ---
 import { Icon } from '@components';
+import { useTranslations } from '@utils/i18n';
 import type { Locale } from '@utils/i18n';
 
 interface Props {
@@ -7,18 +8,19 @@ interface Props {
 }
 
 const { locale = 'es' } = Astro.props;
+const t = useTranslations(locale);
 ---
 
 <div class="back-to-home">
-  <a 
-    href={locale === 'es' ? '/' : `/${locale}/`} 
+  <a
+    href={locale === 'es' ? '/' : `/${locale}/`}
     class="back-to-home-btn"
-    aria-label={locale === 'es' ? 'Volver al inicio' : 'Back to home'}
-    title={locale === 'es' ? 'Volver al inicio' : 'Back to home'}
+    aria-label={t('nav.backToHomeLabel')}
+    title={t('nav.backToHomeLabel')}
   >
     <Icon name="arrow-left" size={20} color="var(--primary-color)" />
     <span class="back-to-home-text">
-      {locale === 'es' ? 'Volver al Inicio' : 'Back to Home'}
+      {t('nav.backToHome')}
     </span>
   </a>
 </div>
@@ -60,7 +62,7 @@ const { locale = 'es' } = Astro.props;
     font-size: 0.9rem;
     line-height: 1;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: 
+    box-shadow:
       0 4px 20px rgba(0, 0, 0, 0.3),
       0 2px 8px rgba(0, 212, 255, 0.1);
     position: relative;
@@ -90,7 +92,7 @@ const { locale = 'es' } = Astro.props;
   .back-to-home-btn:hover {
     transform: translateX(5px);
     border-color: var(--primary-color);
-    box-shadow: 
+    box-shadow:
       0 6px 25px rgba(0, 0, 0, 0.4),
       0 4px 15px rgba(0, 212, 255, 0.3);
     background: rgba(26, 26, 46, 0.98);
@@ -116,7 +118,7 @@ const { locale = 'es' } = Astro.props;
   /* Icon alignment */
   .back-to-home-btn :global(svg),
   .back-to-home-btn :global(img),
-  .back-to-home-btn :global(div[style*="width"]) {
+  .back-to-home-btn :global(div[style*='width']) {
     flex-shrink: 0;
     display: inline-flex;
     align-items: center;
@@ -192,7 +194,7 @@ const { locale = 'es' } = Astro.props;
     }
 
     .back-to-home-btn {
-      transition: 
+      transition:
         transform 0.2s ease,
         border-color 0.2s ease;
     }

@@ -8,6 +8,8 @@ export const nav: Record<'es' | 'en', NavTranslations> = {
     experience: 'Experiencia',
     projects: 'Proyectos',
     contact: 'Contacto',
+    backToHome: 'Volver al Inicio',
+    backToHomeLabel: 'Volver al inicio',
   },
   en: {
     home: 'Home',
@@ -16,5 +18,7 @@ export const nav: Record<'es' | 'en', NavTranslations> = {
     experience: 'Experience',
     projects: 'Projects',
     contact: 'Contact',
+    backToHome: 'Back to Home',
+    backToHomeLabel: 'Back to home',
   },
 } as const;
