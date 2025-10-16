@@ -57,8 +57,10 @@
   "optionalDependencies": {
     "@rollup/rollup-win32-arm64-msvc": "^4.52.4"
   },
+  "packageManager": "yarn@1.22.22",
   "engines": {
-    "node": ">=18.0.0"
+    "node": ">=18.0.0",
+    "yarn": ">=1.22.0"
   },
   "keywords": [
     "portfolio",

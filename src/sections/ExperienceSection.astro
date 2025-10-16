@@ -1,7 +1,6 @@
 ---
 import { ExperienceItem } from '@components';
-import { translations } from '@config/translations';
-import { useTranslations, type Locale } from '@utils/i18n';
+import { useTranslations, type Locale, translations } from '@utils/i18n';
 
 // Recibir locale como prop en lugar de detectarlo
 interface Props {
@@ -22,6 +21,9 @@ const experiencesConfig = [
 // Construir experiencias desde traducciones + configuración
 const experiences = experiencesConfig.map((config) => {
   const expData = translations[locale as Locale].experience.list[config.key];
+  if (!expData) {
+    throw new Error(`Missing experience data for key: ${config.key}`);
+  }
   return {
     title: expData.title,
     company: expData.company,

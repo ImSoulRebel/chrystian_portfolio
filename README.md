@@ -14,10 +14,12 @@ Un portfolio profesional y moderno desarrollado con **Astro v5**, completamente 
 
 ## ⚡ Quick Start
 
+> **📦 Gestor de Paquetes:** Este proyecto usa **Yarn** como gestor de paquetes principal. Asegúrate de tenerlo instalado: `npm install -g yarn`
+
 ```bash
 # 1. Clona el repositorio
-git clone https://github.com/tu-usuario/tu-portfolio.git
-cd tu-portfolio
+git clone https://github.com/ImSoulRebel/chrystian_portfolio.git
+cd chrystian_portfolio
 
 # 2. Instala dependencias
 yarn install
@@ -26,7 +28,7 @@ yarn install
 yarn setup
 # O copia manualmente: cp .env.example .env
 
-# 4. Inicia el servidor de desarrollo
+# 5. Inicia el servidor de desarrollo
 yarn dev
 ```
 
@@ -464,7 +466,7 @@ Gracias a la arquitectura con `env.schema`, puedes migrar entre plataformas **si
 
 ### 1. Contenido y Textos
 
-Edita `src/config/translations.ts`:
+Edita los archivos de traducción modular en `src/config/translations/`:
 
 ```typescript
 export const translations = {
@@ -613,7 +615,7 @@ El workflow de GitHub Actions se ejecutará automáticamente y deployará tu sit
 
 ### 1. Contenido y Textos
 
-Edita `src/config/translations.ts`:
+Edita los archivos de traducción modular en `src/config/translations/`:
 
 ```typescript
 export const translations = {
@@ -1146,7 +1148,13 @@ yarn postinstall      # Se ejecuta automáticamente después de yarn install
 │   │   └── ...
 │   ├── 📁 config/               # Configuración
 │   │   ├── site.js              # Config del sitio
-│   │   └── translations.ts      # → Edita tus textos
+│   │   └── translations/        # → Traducciones modulares
+│   │       ├── index.ts         # Archivo de barril
+│   │       ├── types.ts         # Tipos TypeScript
+│   │       ├── nav.ts          # Navegación
+│   │       ├── hero.ts         # Sección principal
+│   │       ├── about.ts        # Sobre mí
+│   │       └── ...             # Más secciones
 │   ├── 📁 layouts/
 │   │   └── Layout.astro         # Layout base
 │   ├── 📁 pages/                # Páginas del sitio
@@ -1363,6 +1371,40 @@ yarn generate:assets
 
 ## �🌐 Internacionalización
 
+### Sistema Modular de Traducciones
+
+El portfolio utiliza un **sistema modular de traducciones** que organiza los textos por secciones, facilitando el mantenimiento y la colaboración.
+
+#### **📁 Estructura:**
+
+```
+src/config/translations/
+├── index.ts          # Archivo de barril - exporta todo
+├── types.ts          # Definiciones de tipos TypeScript
+├── nav.ts           # Navegación del sitio
+├── hero.ts          # Sección principal
+├── about.ts         # Información personal
+├── skills.ts        # Habilidades técnicas
+├── experience.ts    # Experiencia laboral
+├── projects.ts      # Portfolio de proyectos
+├── contact.ts       # Formulario y datos de contacto
+├── footer.ts        # Pie de página
+├── seo.ts          # Meta tags y SEO
+├── error404.ts     # Página de error
+├── general.ts      # Textos generales
+├── language.ts     # Selector de idioma
+├── recruiterMeta.ts # Meta datos para reclutadores
+└── structureData.ts # Datos estructurados (Schema.org)
+```
+
+#### **✨ Beneficios del sistema modular:**
+
+- **🔧 Mantenimiento fácil** - Cada sección en su propio archivo
+- **👥 Colaboración mejorada** - Múltiples desarrolladores pueden trabajar en paralelo
+- **🎯 Type safety** - Tipos TypeScript completos para todas las traducciones
+- **📦 Importaciones optimizadas** - Solo cargar lo necesario
+- **🔄 Reutilización** - Componentes pueden usar secciones específicas
+
 ### Idiomas Soportados
 
 - **Español** (`/es/`) - Idioma por defecto
@@ -1370,25 +1412,20 @@ yarn generate:assets
 
 ### Agregar Nuevo Idioma
 
-1. **Edita `src/config/translations.ts`:**
+1. **Edita cada archivo de traducción en `src/config/translations/`:**
 
 ```typescript
-export const translations = {
-  es: {
-    /* ... */
-  },
-  en: {
-    /* ... */
-  },
+// src/config/translations/nav.ts
+export const nav: Record<'es' | 'en' | 'fr', NavTranslations> = {
+  es: { /* ... */ },
+  en: { /* ... */ },
   fr: {
     // Nuevo idioma
-    nav: {
-      home: 'Accueil',
-      about: 'À propos',
-      // ...
-    },
+    home: 'Accueil',
+    about: 'À propos',
+    // ...
   },
-};
+} as const;
 ```
 
 2. **Actualiza `astro.config.mjs`:**
@@ -1850,7 +1887,7 @@ yarn build:netlify
 - [ ] Eliminar archivos `.env.*` del repositorio Git
 - [ ] Reemplazar imágenes personales con placeholders
 - [ ] Actualizar `package.json` (nombre, autor, repo, homepage)
-- [ ] Revisar `src/config/translations.ts` (poner textos genéricos)
+- [ ] Revisar archivos en `src/config/translations/` (poner textos genéricos)
 - [ ] Revisar `src/sections/*.astro` (contenido de ejemplo)
 - [ ] Verificar que no haya datos hardcodeados en el código
 - [ ] Actualizar URLs en README
@@ -1866,7 +1903,7 @@ Antes de publicar tu portfolio, asegúrate de:
 
 - [ ] Ejecutar `yarn setup` o configurar `.env.*` manualmente
 - [ ] Reemplazar `public/profile-image.jpg` con tu foto
-- [ ] Editar `src/config/translations.ts` con tus textos
+- [ ] Editar archivos en `src/config/translations/` con tus textos
 - [ ] Actualizar proyectos en `ProjectsSection.astro`
 - [ ] Actualizar experiencia en `ExperienceSection.astro`
 - [ ] Actualizar habilidades en `SkillsSection.astro`

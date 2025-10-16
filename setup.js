@@ -302,7 +302,7 @@ ${colors.bright}🚀 Próximos pasos:${colors.reset}
    ${colors.yellow}yarn dev${colors.reset}
 
 2. ${colors.cyan}Personalizar contenido:${colors.reset}
-   • Edita src/config/translations.ts con tus textos
+   • Edita los archivos en src/config/translations/ con tus textos
    • Reemplaza public/profile-image.jpg con tu foto
    • Actualiza src/sections/*.astro con tu información
 

@@ -1,14 +1,83 @@
 import {
-  translations,
+  about,
+  contact,
+  error404,
+  experience,
+  footer,
+  general,
+  hero,
+  language,
+  nav,
+  projects,
+  recruiterMeta,
+  seo,
+  skills,
+  structure,
   type Locale,
-  type TranslationKeyPath,
-} from '@config/translations';
+  type DeepKeyOf,
+} from '@config/translations/';
 
 // Importar helpers nativos de Astro para i18n
 import { getRelativeLocaleUrl } from 'astro:i18n';
 
+// ===========================================
+// TRANSLATIONS OBJECT CONSTRUCTION
+// ===========================================
+
+/**
+ * Construir el objeto de traducciones a partir de los módulos individuales
+ * Esta estructura mantiene compatibilidad con el sistema existente
+ */
+export const translations = {
+  es: {
+    // General
+    welcome: general.es.welcome,
+    and: general.es.and,
+
+    // Secciones
+    nav: nav.es,
+    error404: error404.es,
+    hero: hero.es,
+    about: about.es,
+    skills: skills.es,
+    experience: experience.es,
+    projects: projects.es,
+    contact: contact.es,
+    footer: footer.es,
+    general: general.es,
+    seo: seo.es,
+    structuredData: structure.es,
+    recruiterMeta: recruiterMeta.es,
+    language: language.es,
+  },
+  en: {
+    // General
+    welcome: general.en.welcome,
+    and: general.en.and,
+
+    // Secciones
+    nav: nav.en,
+    error404: error404.en,
+    hero: hero.en,
+    about: about.en,
+    skills: skills.en,
+    experience: experience.en,
+    projects: projects.en,
+    contact: contact.en,
+    footer: footer.en,
+    general: general.en,
+    seo: seo.en,
+    structuredData: structure.en,
+    recruiterMeta: recruiterMeta.en,
+    language: language.en,
+  },
+} as const;
+
+// Tipo para las rutas de traducción (deep keys)
+export type TranslationKeyPath = DeepKeyOf<(typeof translations)['es']>;
+
 // Re-exportar tipos para facilitar el uso
-export type { Locale } from '@config/translations';
+export type { Locale } from '@config/translations/';
 
 // Re-exportar helpers de Astro para consistencia
 export { getRelativeLocaleUrl } from 'astro:i18n';
