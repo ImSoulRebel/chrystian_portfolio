@@ -1,9 +1,9 @@
 ---
 import { PUBLIC_AUTHOR_NAME } from 'astro:env/client';
 import { Layout } from '@layouts';
-import { Header, Footer } from '@components';
-import { ProjectsSection } from '@sections';
-import { useTranslations, type Locale } from '@utils/i18n';
+import { Header, Footer, ProjectCard } from '@components';
+import { useTranslations, type Locale, translations } from '@utils/i18n';
+import * as assets from '@assets';
 
 // Define static paths for both languages
 export async function getStaticPaths() {
@@ -22,14 +22,287 @@ const hasNavLinks = false;
 // SEO content from centralized translations
 const pageTitle = `${t('projects.seo.title')} | ${PUBLIC_AUTHOR_NAME}`;
 const pageDescription = t<string>('projects.seo.description');
+
+// Tipo para las claves de proyectos
+type ProjectKey = 'yuvod' | 'nextival' | 'stelcamping' | 'bnc10' | 'tookane';
+
+// Tipo para los proyectos combinados
+type Project = {
+  title: string;
+  stack: string;
+  description: string;
+  impact: string;
+  featured: boolean;
+  liveUrl?: string | undefined;
+  githubUrl?: string | undefined;
+  image: any;
+};
+
+// Configuración completa de todos los proyectos con orden de relevancia
+const allProjectsConfig: Array<{
+  key: ProjectKey;
+  priority: number;
+  featured: boolean;
+  liveUrl?: string;
+  githubUrl?: string;
+  image: any;
+}> = [
+  {
+    key: 'yuvod',
+    priority: 1,
+    featured: true,
+    liveUrl: 'https://yuvod.com',
+    image: assets.yuvodLogo,
+  },
+  {
+    key: 'bnc10',
+    priority: 2,
+    featured: true,
+    image: assets.bnc10Logo,
+  },
+  {
+    key: 'tookane',
+    priority: 3,
+    featured: true,
+    liveUrl: 'https://tookane.com',
+    image: assets.tookaneLogo,
+  },
+  {
+    key: 'stelcamping',
+    priority: 4,
+    featured: false,
+    liveUrl: 'https://stel.es',
+    image: assets.stelLogo,
+  },
+  {
+    key: 'nextival',
+    priority: 5,
+    featured: false,
+    githubUrl: 'https://github.com/ImSoulRebel/nextival-cms',
+    image: assets.nextivalLogo,
+  },
+];
+
+// Construir todos los proyectos ordenados por relevancia
+const allProjects: Project[] = allProjectsConfig.map((config) => {
+  const projectData = translations[locale as Locale].projects.list[config.key];
+  if (!projectData) {
+    throw new Error(`Missing project data for key: ${config.key}`);
+  }
+  return {
+    title: projectData.title,
+    stack: projectData.stack,
+    description: projectData.description,
+    impact: projectData.impact,
+    featured: config.featured,
+    liveUrl: config.liveUrl,
+    githubUrl: config.githubUrl,
+    image: config.image,
+  };
+});
+
+// Separar proyectos destacados y regulares
+const featuredProjects = allProjects.filter(p => p.featured);
+const regularProjects = allProjects.filter(p => !p.featured);
 ---
 
 <Layout title={pageTitle} description={pageDescription} locale={locale}>
   <Header hasNavLinks={hasNavLinks} locale={locale} />
 
-  <main>
-    <ProjectsSection locale={locale} />
+  <main class="projects-page">
+    <!-- Hero Section -->
+    <section class="projects-hero">
+      <div class="container">
+        <div class="hero-content">
+          <h1 class="hero-title">
+            {locale === 'es' ? 'Todos los Proyectos' : 'All Projects'}
+          </h1>
+          <p class="hero-description">
+            {locale === 'es' 
+              ? 'Portafolio completo de soluciones Flutter multiplataforma, arquitecturas escalables y liderazgo técnico en desarrollo móvil y SmartTV.' 
+              : 'Complete portfolio of cross-platform Flutter solutions, scalable architectures, and technical leadership in mobile and SmartTV development.'
+            }
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Featured Projects -->
+    <section class="featured-projects-section">
+      <div class="container">
+        <h2 class="section-title">
+          {locale === 'es' ? 'Proyectos Destacados' : 'Featured Projects'}
+        </h2>
+        <div class="projects-grid featured-grid">
+          {
+            featuredProjects.map((project: Project) => (
+              <ProjectCard
+                title={project.title}
+                stack={project.stack}
+                description={project.description}
+                impact={project.impact}
+                featured={project.featured}
+                liveUrl={project.liveUrl}
+                githubUrl={project.githubUrl}
+                image={project.image}
+                locale={locale}
+              />
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <!-- All Projects -->
+    <section class="all-projects-section">
+      <div class="container">
+        <h2 class="section-title">
+          {locale === 'es' ? 'Otros Proyectos' : 'Other Projects'}
+        </h2>
+        <div class="projects-grid regular-grid">
+          {
+            regularProjects.map((project: Project) => (
+              <ProjectCard
+                title={project.title}
+                stack={project.stack}
+                description={project.description}
+                impact={project.impact}
+                featured={project.featured}
+                liveUrl={project.liveUrl}
+                githubUrl={project.githubUrl}
+                image={project.image}
+                locale={locale}
+              />
+            ))
+          }
+        </div>
+      </div>
+    </section>
   </main>
 
   <Footer hasNavLinks={hasNavLinks} locale={locale} />
 </Layout>
+
+<style>
+  .projects-page {
+    min-height: 100vh;
+    background: var(--background-dark);
+  }
+
+  /* Hero Section */
+  .projects-hero {
+    padding: 8rem 0 4rem;
+    background: linear-gradient(135deg, var(--background-dark) 0%, var(--accent-color) 100%);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .projects-hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 30% 20%, rgba(0, 212, 255, 0.1) 0%, transparent 50%);
+  }
+
+  .hero-content {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero-title {
+    font-size: clamp(3rem, 6vw, 4.5rem);
+    background: var(--gradient-primary);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 1.5rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+  }
+
+  .hero-description {
+    font-size: 1.3rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: 0;
+  }
+
+  /* Section Styles */
+  .featured-projects-section {
+    padding: 6rem 0;
+  }
+
+  .all-projects-section {
+    padding: 4rem 0 6rem;
+    background: linear-gradient(135deg, transparent 0%, rgba(0, 212, 255, 0.05) 100%);
+  }
+
+  .section-title {
+    font-size: clamp(2.5rem, 4vw, 3rem);
+    text-align: center;
+    margin-bottom: 3rem;
+    color: var(--text-primary);
+    font-weight: 700;
+  }
+
+  /* Grid Layouts */
+  .projects-grid {
+    display: grid;
+    gap: 2.5rem;
+  }
+
+  .featured-grid {
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  }
+
+  .regular-grid {
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  }
+
+  /* Responsive Design */
+  @media (max-width: 1200px) {
+    .featured-grid {
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    }
+    
+    .regular-grid {
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    }
+  }
+
+  @media (max-width: 768px) {
+    .projects-hero {
+      padding: 6rem 0 3rem;
+    }
+
+    .hero-description {
+      font-size: 1.1rem;
+    }
+
+    .featured-projects-section,
+    .all-projects-section {
+      padding: 4rem 0;
+    }
+
+    .projects-grid {
+      grid-template-columns: 1fr;
+      gap: 1.8rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .projects-hero {
+      padding: 5rem 0 2.5rem;
+    }
+
+    .projects-grid {
+      gap: 1.5rem;
+    }
+  }
+</style>
