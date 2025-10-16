@@ -1,0 +1,129 @@
+---
+import {
+  PUBLIC_CONTACT_EMAIL,
+  PUBLIC_CONTACT_PHONE,
+  PUBLIC_GITHUB_USERNAME,
+  PUBLIC_LINKEDIN_URL,
+} from 'astro:env/client';
+import { Icon, ContactForm } from '@components';
+import { useTranslations, type Locale } from '@utils/i18n';
+import styles from './contactSection.module.css';
+
+// Recibir locale como prop en lugar de detectarlo
+interface Props {
+  locale?: Locale;
+}
+
+const { locale = 'es' } = Astro.props;
+const t = useTranslations(locale);
+const contactEmail = PUBLIC_CONTACT_EMAIL;
+const contactPhone = PUBLIC_CONTACT_PHONE;
+const githubUsername = PUBLIC_GITHUB_USERNAME;
+const linkedinUrl = PUBLIC_LINKEDIN_URL;
+---
+
+<section id="contact" class={styles.contact}>
+  <div class="container">
+    <div class={styles.contactWrapper}>
+      <!-- Hero Section -->
+      <div class={styles.contactHero}>
+        <h2 class="section-title">{t('contact.title')}</h2>
+        <p class={styles.heroDescription}>{t('contact.description')}</p>
+      </div>
+
+      <!-- Main Layout: Info + Form -->
+      <div class={styles.contactLayout}>
+        <!-- Left: Info Section -->
+        <div class={styles.contactInfoSection}>
+          <!-- Subtitle -->
+          <div class={styles.formIntro}>
+            <h3 class={styles.formIntroTitle}>{t('contact.form.title')}</h3>
+            <p class={styles.formIntroText}>{t('contact.form.text')}</p>
+          </div>
+
+          <!-- Expectations Cards -->
+          <div class={styles.expectationsGrid}>
+            <div class={styles.expectationCard}>
+              <div class={styles.expectationIcon}>⚡</div>
+              <h4 class={styles.expectationTitle}>
+                {t('contact.expectation.quickResponse.title')}
+              </h4>
+              <p class={styles.expectationText}>
+                {t('contact.expectation.quickResponse.text')}
+              </p>
+            </div>
+
+            <div class={styles.expectationCard}>
+              <div class={styles.expectationIcon}>🤝</div>
+              <h4 class={styles.expectationTitle}>
+                {t('contact.expectation.collaborationOpportunity.title')}
+              </h4>
+              <p class={styles.expectationText}>
+                {t('contact.expectation.collaborationOpportunity.text')}
+              </p>
+            </div>
+
+            <div class={styles.expectationCard}>
+              <div class={styles.expectationIcon}>📊</div>
+              <h4 class={styles.expectationTitle}>
+                {t('contact.expectation.actionPlan.title')}
+              </h4>
+              <p class={styles.expectationText}>
+                {t('contact.expectation.actionPlan.text')}
+              </p>
+            </div>
+          </div>
+
+          <!-- Tip Section -->
+          <div class={styles.tipSection}>
+            <div class={styles.tipHeader}>
+              <span class={styles.tipIcon}>💡</span>
+              <span class={styles.tipLabel}
+                >{t('contact.tipSection.title')}</span
+              >
+            </div>
+            <p class={styles.tipText}>{t('contact.tipSection.description')}</p>
+          </div>
+        </div>
+
+        <!-- Right: Form -->
+        <div class={styles.contactFormSection}>
+          <ContactForm locale={locale} />
+        </div>
+      </div>
+
+      <!-- Contact Quick Links -->
+      <div class={styles.contactQuickLinks}>
+        <p class={styles.quickLinksLabel}>{t('contact.quickLinks.label')}</p>
+        <div class={styles.quickLinksGrid}>
+          <a href={`mailto:${contactEmail}`} class={styles.quickLink}>
+            <Icon name="email" size={20} color="var(--primary-color)" />
+            <span>{t('contact.quickLinks.email')}</span>
+          </a>
+          <a href={`tel:${contactPhone}`} class={styles.quickLink}>
+            <Icon name="phone" size={20} color="var(--primary-color)" />
+            <span>{t('contact.quickLinks.phone')}</span>
+          </a>
+          <a
+            href={linkedinUrl}
+            target="_blank"
+            rel="noopener"
+            class={styles.quickLink}
+          >
+            <Icon name="linkedin" size={20} color="var(--primary-color)" />
+            <span>{t('contact.quickLinks.linkedin')}</span>
+          </a>
+          <a
+            href={`https://github.com/${githubUsername}`}
+            target="_blank"
+            rel="noopener"
+            class={styles.quickLink}
+          >
+            <Icon name="github" size={20} color="var(--primary-color)" />
+            <span>{t('contact.quickLinks.github')}</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

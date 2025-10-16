@@ -19,7 +19,7 @@ export { default as SkillsSection } from './SkillsSection.astro';
 export { default as ExperienceSection } from './ExperienceSection.astro';
 
 // === Contact & Footer Sections ===
-export { default as ContactSection } from './ContactSection.astro';
+export { default as ContactSection } from './ContactSection/ContactSection.astro';
 
 // === Type definitions for section props ===
 export type SectionProps = {
