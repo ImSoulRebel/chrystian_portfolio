@@ -281,6 +281,7 @@ const buttonIcon = isContactMode ? 'email' : 'message-circle';
   class FloatingCTA {
     private floatingCTA: HTMLElement | null;
     private contactSection: HTMLElement | null;
+    private footerSection: HTMLElement | null;
     private isVisible: boolean = false;
     private scrollThreshold: number = 200;
     private mode: string;
@@ -288,6 +289,7 @@ const buttonIcon = isContactMode ? 'email' : 'message-circle';
     constructor() {
       this.floatingCTA = document.getElementById('floating-cta');
       this.contactSection = document.getElementById('contact');
+      this.footerSection = document.querySelector('footer');
       this.mode = this.floatingCTA?.getAttribute('data-mode') || 'contact';
 
       if (this.floatingCTA) {
@@ -298,8 +300,8 @@ const buttonIcon = isContactMode ? 'email' : 'message-circle';
     private init(): void {
       if (this.mode === 'contact') {
         this.setupClickHandler();
-        this.setupIntersectionObserver();
       }
+      this.setupIntersectionObserver();
       this.setupScrollHandler();
 
       // Initial check
@@ -330,25 +332,47 @@ const buttonIcon = isContactMode ? 'email' : 'message-circle';
     }
 
     private setupIntersectionObserver(): void {
-      if (!this.contactSection || this.mode !== 'contact') return;
+      // Observer for contact section (if exists and in contact mode)
+      if (this.contactSection && this.mode === 'contact') {
+        const contactObserver = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                this.hideButton();
+              } else {
+                this.handleScroll();
+              }
+            });
+          },
+          {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px',
+          }
+        );
 
-      const observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              this.hideButton();
-            } else {
-              this.handleScroll();
-            }
-          });
-        },
-        {
-          threshold: 0.1,
-          rootMargin: '0px 0px -100px 0px',
-        }
-      );
+        contactObserver.observe(this.contactSection);
+      }
 
-      observer.observe(this.contactSection);
+      // Observer for footer section (for all modes)
+      if (this.footerSection) {
+        const footerObserver = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                this.hideButton();
+              } else {
+                this.handleScroll();
+              }
+            });
+          },
+          {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px',
+          }
+        );
+
+        footerObserver.observe(this.footerSection);
+      }
     }
 
     private handleScroll(): void {
@@ -358,6 +382,11 @@ const buttonIcon = isContactMode ? 'email' : 'message-circle';
       // For contact mode, hide when contact section is visible
       if (this.mode === 'contact') {
         shouldShow = shouldShow && !this.isContactSectionVisible();
+      }
+
+      // Hide when footer is visible (for all modes)
+      if (this.footerSection) {
+        shouldShow = shouldShow && !this.isFooterSectionVisible();
       }
 
       if (shouldShow && !this.isVisible) {
@@ -374,6 +403,16 @@ const buttonIcon = isContactMode ? 'email' : 'message-circle';
       const windowHeight = window.innerHeight;
 
       return rect.top < windowHeight && rect.bottom > 0;
+    }
+
+    private isFooterSectionVisible(): boolean {
+      if (!this.footerSection) return false;
+
+      const rect = this.footerSection.getBoundingClientRect();
+      const windowHeight = window.innerHeight;
+
+      // Hide FloatingCTA when footer is visible (with some margin)
+      return rect.top < windowHeight + 50;
     }
 
     private showButton(): void {

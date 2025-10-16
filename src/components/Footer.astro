@@ -17,13 +17,24 @@ import Icon from './Icon.astro';
 interface Props {
   hasNavLinks?: boolean;
   locale?: Locale;
+  pageType?: 'home' | 'projects' | 'contact' | '404';
 }
 
-const { locale = 'es' as Locale, hasNavLinks = true } = Astro.props as Props;
+const {
+  locale = 'es' as Locale,
+  hasNavLinks = true,
+  pageType = 'home',
+} = Astro.props as Props;
 
 const t = useTranslations(locale);
 
 const homeUrl = getRelativeLocaleUrl(locale, '');
+
+// Determine contact CTA URL based on page type
+const contactCTAUrl =
+  pageType === 'contact' || pageType === '404' || pageType === 'projects'
+    ? getRelativeLocaleUrl(locale, '/contact')
+    : '#contact';
 
 const currentYear = new Date().getFullYear();
 
@@ -148,7 +159,7 @@ const socialLinks = [
 
         <div class="footer-cta">
           <p>{t('footer.contact.subtitle')}</p>
-          <a href="#contact" class="btn btn-primary btn-sm"
+          <a href={contactCTAUrl} class="btn btn-primary btn-sm"
             >{t('footer.contact.cta')}</a
           >
         </div>
