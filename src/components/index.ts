@@ -15,18 +15,18 @@ export { default as Section } from './Section.astro';
 
 // === UI Components ===
 export { default as Icon } from './Icon.astro';
-export { default as LanguageSelector } from './LanguageSelector.astro';
+export { default as LanguageSelector } from './LanguageSelector/LanguageSelector.astro';
 
 // === Card Components ===
-export { default as ProjectCard } from './ProjectCard.astro';
+export { default as ProjectCard } from './ProjectCard/ProjectCard.astro';
 export { default as SkillCard } from './SkillCard.astro';
 export { default as ExperienceItem } from './ExperienceItem.astro';
 
 // === Form Components ===
-export { default as ContactForm } from './ContactForm.astro';
+export { default as ContactForm } from './ContactForm/ContactForm.astro';
 
 // === Interactive Components ===
-export { default as FloatingCTA } from './FloatingCTA.astro';
+export { default as FloatingCTA } from './FloatingCTA/FloatingCTA.astro';
 export { default as BackToHome } from './BackToHome.astro';
 
 // === Type Definitions (for better TypeScript support) ===

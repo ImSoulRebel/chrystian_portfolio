@@ -1,0 +1,151 @@
+---
+import { getLocalizedPath, getAlternateLocale, type Locale } from '@utils/i18n';
+import styles from './languageSelector.module.css';
+
+interface Props {
+  currentLocale: Locale;
+  currentPath: string;
+}
+
+const { currentLocale, currentPath } = Astro.props;
+
+const alternateLocale = getAlternateLocale(currentLocale);
+const alternatePath = getLocalizedPath(currentPath, alternateLocale);
+
+const languageLabels = {
+  es: { label: 'ES', name: 'Español' },
+  en: { label: 'EN', name: 'English' },
+};
+
+const currentLang = languageLabels[currentLocale as Locale];
+const alternateLang = languageLabels[alternateLocale as Locale];
+---
+
+<div class={styles.languageSelector}>
+  <button
+    class={styles.langToggle}
+    aria-label={`Switch to ${alternateLang.name}`}
+    data-lang-toggle
+    data-current={currentLocale}
+    data-alternate={alternateLocale}
+    data-path={alternatePath}
+  >
+    <div class={styles.langCurrent}>
+      <span class={styles.langLabel}>{currentLang.label}</span>
+    </div>
+    <div class={styles.langDropdown} data-lang-dropdown>
+      <a
+        href={alternatePath}
+        class={styles.langOption}
+        hreflang={alternateLocale}
+      >
+        <span class={styles.langName}>{alternateLang.name}</span>
+      </a>
+    </div>
+    <svg
+      class={styles.langArrow}
+      width="12"
+      height="8"
+      viewBox="0 0 12 8"
+      fill="none"
+    >
+      <path
+        d="M1 1.5L6 6.5L11 1.5"
+        stroke="currentColor"
+        stroke-width="1.5"
+        stroke-linecap="round"
+        stroke-linejoin="round"></path>
+    </svg>
+  </button>
+</div>
+
+<script>
+  class LanguageSelector {
+    private toggle: HTMLButtonElement | null;
+    private dropdown: HTMLElement | null;
+
+    constructor() {
+      this.toggle = document.querySelector(
+        '[data-lang-toggle]'
+      ) as HTMLButtonElement;
+      this.dropdown = document.querySelector(
+        '[data-lang-dropdown]'
+      ) as HTMLElement;
+      this.init();
+    }
+
+    private init() {
+      if (!this.toggle) return;
+
+      // Toggle dropdown
+      this.toggle.addEventListener('click', (e) => {
+        e.stopPropagation();
+        this.toggleDropdown();
+      });
+
+      // Close dropdown when clicking outside
+      document.addEventListener('click', () => {
+        this.closeDropdown();
+      });
+
+      // Handle keyboard navigation
+      this.toggle.addEventListener('keydown', this.handleKeydown.bind(this));
+
+      // Close dropdown on escape
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+          this.closeDropdown();
+        }
+      });
+    }
+
+    private toggleDropdown() {
+      const isActive = this.toggle?.classList.contains('active');
+
+      if (isActive) {
+        this.closeDropdown();
+      } else {
+        this.openDropdown();
+      }
+    }
+
+    private openDropdown() {
+      this.toggle?.classList.add('active');
+      this.toggle?.setAttribute('aria-expanded', 'true');
+    }
+
+    private closeDropdown() {
+      this.toggle?.classList.remove('active');
+      this.toggle?.setAttribute('aria-expanded', 'false');
+    }
+
+    private handleKeydown(e: KeyboardEvent) {
+      switch (e.key) {
+        case 'Enter':
+        case ' ':
+          e.preventDefault();
+          this.toggleDropdown();
+          break;
+        case 'ArrowDown':
+          e.preventDefault();
+          this.openDropdown();
+          // Focus first option
+          const firstOption = this.dropdown?.querySelector(
+            '[hreflang]'
+          ) as HTMLElement;
+          firstOption?.focus();
+          break;
+      }
+    }
+  }
+
+  // Initialize when DOM is loaded
+  document.addEventListener('DOMContentLoaded', () => {
+    new LanguageSelector();
+  });
+
+  // Reinitialize on navigation (for SPA-like behavior)
+  document.addEventListener('astro:page-load', () => {
+    new LanguageSelector();
+  });
+</script>

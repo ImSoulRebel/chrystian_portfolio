@@ -1,0 +1,150 @@
+/* Language Selector - CSS Module */
+
+.languageSelector {
+  position: relative;
+  z-index: 1001;
+}
+
+.langToggle {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(0, 212, 255, 0.2);
+  border-radius: 8px;
+  color: var(--text-primary);
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  user-select: none;
+}
+
+.langToggle:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(0, 212, 255, 0.4);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 212, 255, 0.15);
+}
+
+.langCurrent {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+}
+
+.langFlag {
+  font-size: 1rem;
+  line-height: 1;
+}
+
+.langLabel {
+  font-weight: 600;
+  letter-spacing: 0.025em;
+}
+
+.langArrow {
+  transition: transform 0.3s ease;
+  color: var(--text-secondary);
+}
+
+.langToggle:hover .langArrow {
+  color: var(--primary-color);
+}
+
+.langToggle.active .langArrow {
+  transform: rotate(180deg);
+}
+
+.langDropdown {
+  position: absolute;
+  top: calc(100% + 0.5rem);
+  left: 0;
+  right: auto;
+  background: rgba(15, 15, 35, 0.95);
+  backdrop-filter: blur(15px);
+  border: 1px solid rgba(0, 212, 255, 0.2);
+  border-radius: 8px;
+  padding: 0.5rem;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-0.5rem);
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.langToggle.active .langDropdown {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.langOption {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem;
+  border-radius: 6px;
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: all 0.2s ease;
+  font-size: 0.875rem;
+}
+
+.langOption:hover {
+  background: rgba(0, 212, 255, 0.1);
+  color: var(--text-primary);
+}
+
+.langName {
+  margin: auto;
+  font-size: 0.8rem;
+  opacity: 0.8;
+}
+
+/* Mobile adaptations */
+@media (max-width: 768px) {
+  .languageSelector {
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    z-index: 1002;
+  }
+
+  .langToggle {
+    padding: 0.625rem 0.875rem;
+    font-size: 0.8rem;
+  }
+
+  .langDropdown {
+    left: auto;
+    right: 0;
+    min-width: 140px;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .langToggle {
+    border-color: var(--primary-color);
+    background: rgba(0, 0, 0, 0.8);
+  }
+
+  .langDropdown {
+    background: var(--bg-primary);
+    border-color: var(--primary-color);
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .langToggle,
+  .langDropdown,
+  .langArrow,
+  .langOption {
+    transition: none;
+  }
+}

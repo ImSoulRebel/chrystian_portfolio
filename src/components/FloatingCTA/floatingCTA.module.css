@@ -1,0 +1,480 @@
+/* FloatingCTA CSS Module */
+.floatingCTA {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(100px) scale(0.8);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Removed unused keyframes and classes - now handled by JavaScript */
+
+/* CTA Button */
+.ctaButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 1rem 1.5rem;
+  background: linear-gradient(135deg, var(--primary-color), #0099cc);
+  color: #1a1a2e;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.95rem;
+  line-height: 1;
+  border-radius: 50px;
+  box-shadow:
+    0 8px 25px rgba(0, 212, 255, 0.4),
+    0 4px 15px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(15px);
+  border: 2px solid rgba(0, 212, 255, 0.3);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.ctaButton::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  transition: left 0.6s ease;
+}
+
+.ctaButton:hover::before {
+  left: 100%;
+}
+
+.ctaButton:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow:
+    0 12px 35px rgba(0, 212, 255, 0.5),
+    0 6px 20px rgba(0, 0, 0, 0.4);
+  background: linear-gradient(135deg, #00e6ff, #00b3e6);
+  border-color: var(--primary-color);
+  color: #1a1a2e;
+}
+
+.ctaButton:active {
+  transform: translateY(-1px) scale(1.02);
+  box-shadow:
+    0 6px 20px rgba(0, 212, 255, 0.4),
+    0 2px 10px rgba(0, 0, 0, 0.3);
+  color: #1a1a2e;
+}
+
+/* CTA Icon */
+.ctaIcon {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  transition: transform 0.3s ease;
+}
+
+.ctaButton:hover .ctaIcon {
+  transform: scale(1.1) rotate(5deg);
+}
+
+/* CTA Text */
+.ctaText {
+  font-weight: 600;
+  line-height: 1;
+  transition: color 0.3s ease;
+  display: flex;
+  align-items: center;
+}
+
+/* Pulse Animation */
+.ctaButton.pulse {
+  animation: ctaPulse 2s ease-in-out infinite;
+}
+
+@keyframes ctaPulse {
+  0%,
+  100% {
+    transform: translateY(0) scale(1);
+    box-shadow:
+      0 8px 25px rgba(0, 212, 255, 0.4),
+      0 4px 15px rgba(0, 0, 0, 0.3);
+  }
+  50% {
+    transform: translateY(-2px) scale(1.02);
+    box-shadow:
+      0 12px 35px rgba(0, 212, 255, 0.5),
+      0 6px 20px rgba(0, 0, 0, 0.4);
+  }
+}
+
+/* Notification Badge */
+.notificationBadge {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background: #ff6b6b;
+  color: white;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+  font-weight: 700;
+  animation: notificationPulse 2s ease-in-out infinite;
+  border: 2px solid var(--background-dark);
+}
+
+@keyframes notificationPulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+}
+
+/* Tooltip */
+.tooltip {
+  position: absolute;
+  bottom: calc(100% + 12px);
+  right: 0;
+  background: rgba(26, 26, 46, 0.95);
+  backdrop-filter: blur(15px);
+  color: var(--text-primary);
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  white-space: nowrap;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: all 0.3s ease;
+  border: 1px solid rgba(0, 212, 255, 0.2);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.tooltip::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  right: 20px;
+  border: 6px solid transparent;
+  border-top-color: rgba(26, 26, 46, 0.95);
+}
+
+.ctaButton:hover .tooltip {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+/* Minimized State */
+.floatingCTA.minimized .ctaButton {
+  padding: 1rem;
+  border-radius: 50%;
+  width: 56px;
+  height: 56px;
+}
+
+.floatingCTA.minimized .ctaText {
+  display: none;
+}
+
+.floatingCTA.minimized .ctaIcon {
+  width: 24px;
+  height: 24px;
+}
+
+/* Expand/Collapse Animation */
+.expandable {
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* States for different contexts */
+.ctaButton.urgent {
+  background: linear-gradient(135deg, #ff6b6b, #ff5252);
+  border-color: rgba(255, 107, 107, 0.3);
+  box-shadow:
+    0 8px 25px rgba(255, 107, 107, 0.4),
+    0 4px 15px rgba(0, 0, 0, 0.3);
+  color: #1a1a2e;
+}
+
+.ctaButton.urgent:hover {
+  background: linear-gradient(135deg, #ff8a80, #ff6b6b);
+  box-shadow:
+    0 12px 35px rgba(255, 107, 107, 0.5),
+    0 6px 20px rgba(0, 0, 0, 0.4);
+  color: #1a1a2e;
+}
+
+.ctaButton.success {
+  background: linear-gradient(135deg, #4ecdc4, #26d0ce);
+  border-color: rgba(78, 205, 196, 0.3);
+  box-shadow:
+    0 8px 25px rgba(78, 205, 196, 0.4),
+    0 4px 15px rgba(0, 0, 0, 0.3);
+  color: #1a1a2e;
+}
+
+.ctaButton.success:hover {
+  background: linear-gradient(135deg, #80deea, #4ecdc4);
+  box-shadow:
+    0 12px 35px rgba(78, 205, 196, 0.5),
+    0 6px 20px rgba(0, 0, 0, 0.4);
+  color: #1a1a2e;
+}
+
+/* Progress Indicator */
+.progressIndicator {
+  position: absolute;
+  bottom: -3px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.progressBar {
+  height: 100%;
+  background: linear-gradient(90deg, var(--primary-color), #00e6ff);
+  border-radius: 2px;
+  transition: width 0.3s ease;
+  width: 0%;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .floatingCTA {
+    bottom: 1.5rem;
+    right: 1.5rem;
+  }
+
+  .ctaButton {
+    padding: 0.875rem 1.25rem;
+    font-size: 0.9rem;
+  }
+
+  .tooltip {
+    font-size: 0.8rem;
+    padding: 0.6rem 0.8rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .floatingCTA {
+    bottom: 1.25rem;
+    right: 1.25rem;
+  }
+
+  .ctaButton {
+    padding: 0.8rem 1.1rem;
+    font-size: 0.85rem;
+    gap: 0.6rem;
+  }
+
+  .ctaIcon {
+    width: 18px;
+    height: 18px;
+  }
+
+  .floatingCTA.minimized .ctaButton {
+    width: 52px;
+    height: 52px;
+    padding: 0.9rem;
+  }
+
+  .floatingCTA.minimized .ctaIcon {
+    width: 20px;
+    height: 20px;
+  }
+
+  .notificationBadge {
+    width: 18px;
+    height: 18px;
+    font-size: 0.65rem;
+    top: -6px;
+    right: -6px;
+  }
+}
+
+@media (max-width: 600px) {
+  .floatingCTA {
+    bottom: 1rem;
+    right: 1rem;
+  }
+
+  .ctaButton {
+    padding: 0.75rem 1rem;
+    font-size: 0.8rem;
+    gap: 0.5rem;
+  }
+
+  .ctaIcon {
+    width: 16px;
+    height: 16px;
+  }
+
+  .floatingCTA.minimized .ctaButton {
+    width: 48px;
+    height: 48px;
+    padding: 0.8rem;
+  }
+
+  .floatingCTA.minimized .ctaIcon {
+    width: 18px;
+    height: 18px;
+  }
+
+  .tooltip {
+    bottom: calc(100% + 8px);
+    font-size: 0.75rem;
+    padding: 0.5rem 0.7rem;
+  }
+
+  .tooltip::after {
+    border-width: 4px;
+  }
+}
+
+@media (max-width: 480px) {
+  .floatingCTA {
+    bottom: 0.875rem;
+    right: 0.875rem;
+  }
+
+  .ctaButton {
+    padding: 0.7rem 0.9rem;
+    font-size: 0.75rem;
+  }
+
+  .ctaText {
+    display: none;
+  }
+
+  .ctaButton {
+    border-radius: 50%;
+    width: 48px;
+    height: 48px;
+    padding: 0.8rem;
+  }
+
+  .ctaIcon {
+    width: 18px;
+    height: 18px;
+  }
+}
+
+@media (max-width: 390px) {
+  .floatingCTA {
+    bottom: 0.75rem;
+    right: 0.75rem;
+  }
+
+  .ctaButton {
+    width: 44px;
+    height: 44px;
+    padding: 0.7rem;
+  }
+
+  .ctaIcon {
+    width: 16px;
+    height: 16px;
+  }
+
+  .notificationBadge {
+    width: 16px;
+    height: 16px;
+    font-size: 0.6rem;
+    top: -4px;
+    right: -4px;
+  }
+}
+
+/* Animation timing adjustments for performance */
+@media (prefers-reduced-motion: reduce) {
+  .floatingCTA {
+    animation: none;
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0) scale(1);
+  }
+
+  .ctaButton {
+    transition:
+      transform 0.2s ease,
+      box-shadow 0.2s ease;
+  }
+
+  .ctaButton::before {
+    display: none;
+  }
+
+  .ctaButton.pulse {
+    animation: none;
+  }
+
+  .notificationBadge {
+    animation: none;
+  }
+
+  .ctaButton:hover {
+    transform: none;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .ctaButton {
+    border-width: 3px;
+    border-color: var(--primary-color);
+  }
+
+  .tooltip {
+    border-width: 2px;
+    border-color: var(--primary-color);
+  }
+}
+
+/* Focus states for accessibility */
+.ctaButton:focus {
+  outline: 3px solid rgba(0, 212, 255, 0.5);
+  outline-offset: 2px;
+}
+
+.ctaButton:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* Dark mode considerations */
+@media (prefers-color-scheme: light) {
+  .tooltip {
+    background: rgba(255, 255, 255, 0.95);
+    color: var(--background-dark);
+    border-color: rgba(0, 0, 0, 0.1);
+  }
+
+  .tooltip::after {
+    border-top-color: rgba(255, 255, 255, 0.95);
+  }
+}

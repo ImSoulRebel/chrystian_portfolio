@@ -1,0 +1,238 @@
+---
+import {
+  PUBLIC_CONTACT_EMAIL,
+  PUBLIC_FORMSPREE_ENDPOINT,
+  PUBLIC_SITE_URL,
+} from 'astro:env/client';
+import { useTranslations, type Locale } from '@utils/i18n';
+import styles from './contactForm.module.css';
+
+interface Props {
+  locale?: Locale;
+}
+const { locale = 'es' } = Astro.props;
+const t = useTranslations(locale);
+
+const formAction = PUBLIC_FORMSPREE_ENDPOINT;
+const contactEmail = PUBLIC_CONTACT_EMAIL;
+---
+
+<form
+  class={styles.contactForm}
+  method="POST"
+  action={formAction}
+  id="contact-form"
+>
+  <input type="hidden" name="_to" value={contactEmail} />
+  <input type="hidden" name="_subject" value={t('contact.form.subject')} />
+  <input
+    type="hidden"
+    name="_next"
+    value={`${PUBLIC_SITE_URL}/es/contact?success=true`}
+  />
+
+  <!-- Primera fila: Nombre y Email -->
+  <div class={styles.formRow}>
+    <div class={styles.formGroup}>
+      <label for="name" class={styles.label}>
+        {t('contact.form.name.label')}
+        <span class={styles.required}>*</span>
+      </label>
+      <div class={styles.inputGroup}>
+        <input
+          type="text"
+          id="name"
+          name="name"
+          class={styles.input}
+          placeholder={t('contact.form.name.placeholder')}
+          required
+          autocomplete="name"
+        />
+      </div>
+    </div>
+
+    <div class={styles.formGroup}>
+      <label for="email" class={styles.label}>
+        {t('contact.form.email.label')}
+        <span class={styles.required}>*</span>
+      </label>
+      <div class={styles.inputGroup}>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          class={styles.input}
+          placeholder={t('contact.form.email.placeholder')}
+          required
+          autocomplete="email"
+        />
+      </div>
+    </div>
+  </div>
+
+  <!-- Segunda fila: Empresa y Teléfono -->
+  <div class={styles.formRow}>
+    <div class={styles.formGroup}>
+      <label for="company" class={styles.label}>
+        {t('contact.form.company.label')}
+      </label>
+      <div class={styles.inputGroup}>
+        <input
+          type="text"
+          id="company"
+          name="company"
+          class={styles.input}
+          placeholder={t('contact.form.company.placeholder')}
+          autocomplete="organization"
+        />
+      </div>
+    </div>
+
+    <div class={styles.formGroup}>
+      <label for="phone" class={styles.label}>
+        {t('contact.form.phone.label')}
+      </label>
+      <div class={styles.inputGroup}>
+        <input
+          type="tel"
+          id="phone"
+          name="phone"
+          class={styles.input}
+          placeholder={t('contact.form.phone.placeholder')}
+          autocomplete="tel"
+        />
+      </div>
+    </div>
+  </div>
+
+  <!-- Tipo de proyecto -->
+  <div class={`${styles.formGroup} ${styles.formGroupFull}`}>
+    <label for="project-type" class={styles.label}>
+      {t('contact.form.projectType.label')}
+      <span class={styles.required}>*</span>
+    </label>
+    <div class={styles.inputGroup}>
+      <select
+        id="project-type"
+        name="project-type"
+        class={styles.input}
+        required
+      >
+        <option value="">{t('contact.form.projectType.placeholder')}</option>
+        <option value="app-movil"
+          >{t('contact.form.projectType.options.mobileApp')}</option
+        >
+        <option value="app-web"
+          >{t('contact.form.projectType.options.webApp')}</option
+        >
+        <option value="consultoria"
+          >{t('contact.form.projectType.options.consulting')}</option
+        >
+        <option value="liderazgo"
+          >{t('contact.form.projectType.options.leadership')}</option
+        >
+        <option value="migracion"
+          >{t('contact.form.projectType.options.migration')}</option
+        >
+        <option value="otro"
+          >{t('contact.form.projectType.options.other')}</option
+        >
+      </select>
+    </div>
+  </div>
+
+  <!-- Tercera fila: Presupuesto y Timeline -->
+  <div class={styles.formRow}>
+    <div class={styles.formGroup}>
+      <label for="budget" class={styles.label}>
+        {t('contact.form.budget.label')}
+      </label>
+      <div class={styles.inputGroup}>
+        <select id="budget" name="budget" class={styles.input}>
+          <option value="">{t('contact.form.budget.placeholder')}</option>
+          <option value="5k-15k"
+            >{t('contact.form.budget.options.range1')}</option
+          >
+          <option value="15k-30k"
+            >{t('contact.form.budget.options.range2')}</option
+          >
+          <option value="30k-50k"
+            >{t('contact.form.budget.options.range3')}</option
+          >
+          <option value="50k+">{t('contact.form.budget.options.range4')}</option
+          >
+          <option value="por-definir"
+            >{t('contact.form.budget.options.undefined')}</option
+          >
+        </select>
+      </div>
+    </div>
+
+    <div class={styles.formGroup}>
+      <label for="timeline" class={styles.label}>
+        {t('contact.form.timeline.label')}
+      </label>
+      <div class={styles.inputGroup}>
+        <select id="timeline" name="timeline" class={styles.input}>
+          <option value="">{t('contact.form.timeline.placeholder')}</option>
+          <option value="inmediato"
+            >{t('contact.form.timeline.options.immediate')}</option
+          >
+          <option value="1-3-meses"
+            >{t('contact.form.timeline.options.range1')}</option
+          >
+          <option value="3-6-meses"
+            >{t('contact.form.timeline.options.range2')}</option
+          >
+          <option value="6-12-meses"
+            >{t('contact.form.timeline.options.range3')}</option
+          >
+          <option value="flexible"
+            >{t('contact.form.timeline.options.flexible')}</option
+          >
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <!-- Descripción del proyecto -->
+  <div class={`${styles.formGroup} ${styles.formGroupFull}`}>
+    <label for="message" class={styles.label}>
+      {t('contact.form.message.label')}
+      <span class={styles.required}>*</span>
+    </label>
+    <div class={styles.inputGroup}>
+      <textarea
+        id="message"
+        name="message"
+        class={styles.textarea}
+        placeholder={t('contact.form.message.placeholder')}
+        required
+        rows="7"></textarea>
+    </div>
+  </div>
+
+  <!-- Botón submit -->
+  <div class={styles.submitGroup}>
+    <button type="submit" class={styles.submitButton}>
+      <span class={styles.buttonText}>{t('contact.form.send')}</span>
+      <span class="btn-loading" style="display: none;">
+        <div class={styles.spinner}></div>
+        {t('contact.form.sending')}
+      </span>
+    </button>
+
+    <div class={styles.formFooter}>
+      <p class={styles.privacyNote}>{t('contact.form.notice')}</p>
+    </div>
+  </div>
+
+  <!-- Success/Error Messages -->
+  <div class={styles.statusMessage} id="form-message" style="display: none;">
+  </div>
+</form>
+
+<script>
+  import { ContactForm } from '@scripts/contactForm.js';
+  new ContactForm();
+</script>
