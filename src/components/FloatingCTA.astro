@@ -1,0 +1,388 @@
+---
+import { Icon } from '@components';
+import { useTranslations, type Locale } from '@utils/i18n';
+
+interface Props {
+  locale?: Locale;
+}
+
+const { locale = 'es' } = Astro.props;
+const t = useTranslations(locale);
+---
+
+<div id="floating-cta" class="floating-cta" aria-hidden="true">
+  <button
+    class="floating-cta-btn"
+    aria-label={t('contact.quickLinks.label')}
+    title={t('contact.title')}
+    data-contact-btn
+  >
+    <Icon name="email" size={20} color="var(--background-dark)" />
+    <span class="floating-cta-text">{t('contact.title')}</span>
+  </button>
+</div>
+
+<style>
+  .floating-cta {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(100px) scale(0.8);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    pointer-events: none;
+  }
+
+  .floating-cta.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0) scale(1);
+    pointer-events: all;
+  }
+
+  .floating-cta-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem 1.5rem;
+    background: var(--gradient-primary);
+    color: var(--background-dark);
+    border: none;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+    box-shadow:
+      0 8px 25px rgba(0, 212, 255, 0.3),
+      0 4px 12px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 2px solid transparent;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+    backdrop-filter: blur(10px);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .floating-cta-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.2),
+      transparent
+    );
+    transition: left 0.6s ease;
+  }
+
+  .floating-cta-btn:hover::before {
+    left: 100%;
+  }
+
+  .floating-cta-btn:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow:
+      0 12px 35px rgba(0, 212, 255, 0.4),
+      0 6px 20px rgba(0, 0, 0, 0.3);
+    background: linear-gradient(135deg, #00e6ff 0%, #00b8e6 100%);
+  }
+
+  .floating-cta-btn:active {
+    transform: translateY(-1px) scale(0.98);
+    box-shadow:
+      0 6px 20px rgba(0, 212, 255, 0.3),
+      0 2px 8px rgba(0, 0, 0, 0.2);
+  }
+
+  .floating-cta-btn:focus {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
+  }
+
+  .floating-cta-text {
+    font-weight: 600;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Animation for pulse effect */
+  @keyframes pulse {
+    0%,
+    100% {
+      box-shadow:
+        0 8px 25px rgba(0, 212, 255, 0.3),
+        0 4px 12px rgba(0, 0, 0, 0.2),
+        0 0 0 0 rgba(0, 212, 255, 0.4);
+    }
+    50% {
+      box-shadow:
+        0 8px 25px rgba(0, 212, 255, 0.3),
+        0 4px 12px rgba(0, 0, 0, 0.2),
+        0 0 0 8px rgba(0, 212, 255, 0);
+    }
+  }
+
+  .floating-cta.pulse .floating-cta-btn {
+    animation: pulse 2s infinite;
+  }
+
+  /* Mobile optimizations */
+  @media (max-width: 768px) {
+    .floating-cta {
+      bottom: 16px;
+      right: 16px;
+    }
+
+    .floating-cta-btn {
+      padding: 1rem 1.25rem;
+      font-size: 0.9rem;
+      gap: 0.6rem;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .floating-cta {
+      bottom: 14px;
+      right: 14px;
+    }
+
+    .floating-cta-btn {
+      padding: 0.9rem 1.1rem;
+      font-size: 0.87rem;
+      gap: 0.5rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .floating-cta {
+      bottom: 12px;
+      right: 12px;
+    }
+
+    .floating-cta-text {
+      display: none;
+    }
+
+    .floating-cta-btn {
+      border-radius: 50%;
+      width: 56px;
+      height: 56px;
+      padding: 0;
+      justify-content: center;
+      gap: 0;
+    }
+  }
+
+  @media (max-width: 390px) {
+    .floating-cta {
+      bottom: 10px;
+      right: 10px;
+    }
+
+    .floating-cta-btn {
+      width: 52px;
+      height: 52px;
+    }
+  }
+
+  /* Hide when in contact section */
+  .floating-cta.hidden {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(100px) scale(0.8);
+    pointer-events: none;
+  }
+
+  /* Dark mode considerations */
+  @media (prefers-color-scheme: dark) {
+    .floating-cta-btn {
+      box-shadow:
+        0 8px 25px rgba(0, 212, 255, 0.4),
+        0 4px 12px rgba(0, 0, 0, 0.4);
+    }
+
+    .floating-cta-btn:hover {
+      box-shadow:
+        0 12px 35px rgba(0, 212, 255, 0.5),
+        0 6px 20px rgba(0, 0, 0, 0.5);
+    }
+  }
+
+  /* Reduced motion support */
+  @media (prefers-reduced-motion: reduce) {
+    .floating-cta {
+      transition: opacity 0.3s ease;
+    }
+
+    .floating-cta-btn {
+      transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+    }
+
+    .floating-cta-btn::before {
+      display: none;
+    }
+
+    .floating-cta.pulse .floating-cta-btn {
+      animation: none;
+    }
+  }
+</style>
+
+<script>
+  class FloatingCTA {
+    private floatingCTA: HTMLElement | null;
+    private contactSection: HTMLElement | null;
+    private isVisible: boolean = false;
+    private scrollThreshold: number = 200;
+
+    constructor() {
+      this.floatingCTA = document.getElementById('floating-cta');
+      this.contactSection = document.getElementById('contact');
+
+      if (this.floatingCTA) {
+        this.init();
+      }
+    }
+
+    private init(): void {
+      this.setupClickHandler();
+      this.setupScrollHandler();
+      this.setupIntersectionObserver();
+
+      // Initial check
+      this.handleScroll();
+    }
+
+    private setupClickHandler(): void {
+      const btn = this.floatingCTA?.querySelector('[data-contact-btn]');
+      if (btn) {
+        btn.addEventListener('click', () => {
+          this.scrollToContact();
+        });
+      }
+    }
+
+    private setupScrollHandler(): void {
+      let ticking = false;
+
+      window.addEventListener('scroll', () => {
+        if (!ticking) {
+          requestAnimationFrame(() => {
+            this.handleScroll();
+            ticking = false;
+          });
+          ticking = true;
+        }
+      });
+    }
+
+    private setupIntersectionObserver(): void {
+      if (!this.contactSection) return;
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              this.hideButton();
+            } else {
+              this.handleScroll();
+            }
+          });
+        },
+        {
+          threshold: 0.1,
+          rootMargin: '0px 0px -100px 0px',
+        }
+      );
+
+      observer.observe(this.contactSection);
+    }
+
+    private handleScroll(): void {
+      const currentScrollY = window.scrollY;
+      const shouldShow =
+        currentScrollY > this.scrollThreshold &&
+        !this.isContactSectionVisible();
+
+      if (shouldShow && !this.isVisible) {
+        this.showButton();
+      } else if (!shouldShow && this.isVisible) {
+        this.hideButton();
+      }
+    }
+
+    private isContactSectionVisible(): boolean {
+      if (!this.contactSection) return false;
+
+      const rect = this.contactSection.getBoundingClientRect();
+      const windowHeight = window.innerHeight;
+
+      return rect.top < windowHeight && rect.bottom > 0;
+    }
+
+    private showButton(): void {
+      if (!this.floatingCTA) return;
+
+      this.isVisible = true;
+      this.floatingCTA.classList.add('visible');
+      this.floatingCTA.classList.remove('hidden');
+      this.floatingCTA.setAttribute('aria-hidden', 'false');
+
+      // Add pulse effect after a delay
+      setTimeout(() => {
+        this.floatingCTA?.classList.add('pulse');
+      }, 2000);
+    }
+
+    private hideButton(): void {
+      if (!this.floatingCTA) return;
+
+      this.isVisible = false;
+      this.floatingCTA.classList.remove('visible', 'pulse');
+      this.floatingCTA.classList.add('hidden');
+      this.floatingCTA.setAttribute('aria-hidden', 'true');
+    }
+
+    private scrollToContact(): void {
+      if (!this.contactSection) return;
+
+      // Add a small offset for better visual positioning
+      const offset = 80;
+      const elementPosition = this.contactSection.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - offset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth',
+      });
+
+      // Hide button after click
+      this.hideButton();
+
+      // Optional: Add a temporary pulse to the contact section
+      this.contactSection.style.animation = 'pulse 1s ease-in-out';
+      setTimeout(() => {
+        if (this.contactSection) {
+          this.contactSection.style.animation = '';
+        }
+      }, 1000);
+    }
+  }
+
+  // Initialize when DOM is ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => new FloatingCTA());
+  } else {
+    new FloatingCTA();
+  }
+</script>

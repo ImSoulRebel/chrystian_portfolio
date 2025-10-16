@@ -25,6 +25,9 @@ export { default as ExperienceItem } from './ExperienceItem.astro';
 // === Form Components ===
 export { default as ContactForm } from './ContactForm.astro';
 
+// === Interactive Components ===
+export { default as FloatingCTA } from './FloatingCTA.astro';
+
 // === Type Definitions (for better TypeScript support) ===
 export type ComponentProps = {
   // Define common props that your components might share

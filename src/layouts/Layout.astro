@@ -23,6 +23,7 @@ import {
   type Locale,
 } from '@utils/i18n';
 
+import { FloatingCTA } from '@components';
 import '@styles/global.css';
 
 export interface Props {
@@ -306,6 +307,9 @@ const localeSpecificMeta =
   </head>
   <body>
     <slot />
+
+    <!-- Floating CTA Button -->
+    <FloatingCTA locale={locale} />
 
     <!-- Scripts de optimización -->
     <script>
