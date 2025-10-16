@@ -29,8 +29,20 @@ import '@styles/global.css';
 interface Props {
   title: string;
   description: string;
+  keywords?: string;
   locale?: Locale;
   floatingCTAMode?: 'contact' | 'navigate-to-contact';
+  author?: string;
+  ogTitle?: string;
+  ogDescription?: string;
+  ogImage?: string;
+  ogUrl?: string;
+  twitterTitle?: string;
+  twitterDescription?: string;
+  twitterImage?: string;
+  canonicalUrl?: string;
+  structuredData?: any;
+  additionalMeta?: Array<{ name?: string; property?: string; content: string }>;
 }
 
 // Detectar el locale: usar prop si se pasa, sino detectar de URL

@@ -108,7 +108,7 @@ const projects: Project[] = featuredProjectsConfig.map((config) => {
     </div>
 
     <div class="view-more-container">
-      <a href={`/${locale}/projects`} class="view-more-btn">
+      <a href={`/${locale}/projects`} class="btn btn-primary">
         <span>{t('projects.viewMore')}</span>
         <svg
           width="20"
@@ -132,7 +132,7 @@ const projects: Project[] = featuredProjectsConfig.map((config) => {
 <style>
   .projects {
     padding: 6rem 0;
-    background: var(--background-dark);
+    background: var(--background-card);
     position: relative;
   }
 
@@ -181,7 +181,7 @@ const projects: Project[] = featuredProjectsConfig.map((config) => {
 
   .projects-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
     gap: 2rem;
     margin-bottom: 4rem;
     justify-items: center;
@@ -200,7 +200,7 @@ const projects: Project[] = featuredProjectsConfig.map((config) => {
     gap: 0.75rem;
     padding: 1rem 2rem;
     background: var(--gradient-primary);
-    color: var(--background-dark);
+    color: #1a1a2e;
     border-radius: 50px;
     font-weight: 600;
     font-size: 1.1rem;
@@ -234,7 +234,7 @@ const projects: Project[] = featuredProjectsConfig.map((config) => {
   .view-more-btn:hover {
     transform: translateY(-3px);
     box-shadow: 0 8px 30px rgba(0, 212, 255, 0.4);
-    color: var(--background-dark);
+    color: #1a1a2e;
   }
 
   .view-more-btn svg {
@@ -248,14 +248,14 @@ const projects: Project[] = featuredProjectsConfig.map((config) => {
   /* Responsive Design */
   @media (max-width: 1200px) {
     .projects-grid {
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
       gap: 1.8rem;
     }
   }
 
   @media (max-width: 900px) {
     .projects-grid {
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
       gap: 1.5rem;
     }
   }
