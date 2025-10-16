@@ -1,0 +1,82 @@
+/* ===============================================
+   Skills Section Styles
+   =============================================== */
+
+.skills-carousel {
+  width: 100%;
+  overflow: hidden;
+  margin-top: 3rem;
+  position: relative;
+  mask: linear-gradient(
+    to right,
+    transparent 0%,
+    black 10%,
+    black 90%,
+    transparent 100%
+  );
+  -webkit-mask: linear-gradient(
+    to right,
+    transparent 0%,
+    black 10%,
+    black 90%,
+    transparent 100%
+  );
+}
+
+.skills-track {
+  display: flex;
+  gap: 1rem;
+  will-change: transform;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+}
+
+.skills-track:hover {
+  /* Hover handled by JavaScript */
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0) translateZ(0);
+  }
+  100% {
+    transform: translateX(-33.333%) translateZ(0);
+  }
+}
+
+/* Fallback for older browsers */
+.skill-item {
+  flex-shrink: 0;
+}
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  .skills-track {
+    animation: none;
+  }
+
+  .skills-carousel {
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .skills-track {
+    justify-content: flex-start;
+    padding: 0 1rem;
+  }
+}
+
+.skill-icon {
+  width: 60px;
+  height: 60px;
+  margin: 0 auto 1rem;
+  background: var(--gradient-primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  color: #1a1a2e;
+}
