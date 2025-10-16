@@ -126,7 +126,24 @@ const linkedinUrl = PUBLIC_LINKEDIN_URL;
   <style>
     .contact {
       position: relative;
-      background: var(--background-dark);
+      background: var(--background-card);
+      padding: 6rem 0;
+    }
+
+    .contact::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(
+        90deg,
+        transparent,
+        var(--primary-color),
+        transparent
+      );
+      opacity: 0.3;
     }
 
     .contact-wrapper {

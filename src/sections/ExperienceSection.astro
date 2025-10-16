@@ -54,3 +54,72 @@ const experiences = experiencesConfig.map((config) => {
     </div>
   </div>
 </section>
+
+<style>
+  .experience {
+    padding: 6rem 0;
+    background: var(--background-card);
+    position: relative;
+  }
+
+  .experience::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      var(--primary-color),
+      transparent
+    );
+    opacity: 0.3;
+  }
+
+  .section-title {
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
+    background: var(--gradient-primary);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 4rem;
+    text-align: center;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+
+  .experience-timeline {
+    max-width: 800px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .experience {
+      padding: 4rem 0;
+    }
+
+    .section-title {
+      margin-bottom: 3rem;
+    }
+
+    .experience-timeline {
+      gap: 1.5rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .container {
+      padding: 0 1rem;
+    }
+
+    .experience-timeline {
+      gap: 1.25rem;
+    }
+  }
+</style>
