@@ -365,6 +365,8 @@ const regularBusinessProjects = businessProjects.filter(p => !p.featured);
   .projects-grid {
     display: grid;
     gap: 2.5rem;
+    justify-items: center;
+    align-items: start;
   }
 
   .featured-grid {
@@ -376,8 +378,7 @@ const regularBusinessProjects = businessProjects.filter(p => !p.featured);
   }
 
   .personal-grid {
-    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-    justify-items: center;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
   }
 
   /* Responsive Design */
@@ -389,13 +390,18 @@ const regularBusinessProjects = businessProjects.filter(p => !p.featured);
     
     .regular-grid,
     .personal-grid {
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     }
   }
 
   @media (max-width: 900px) {
     .featured-grid {
       grid-template-columns: repeat(2, 1fr);
+    }
+
+    .regular-grid,
+    .personal-grid {
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     }
   }
 
@@ -425,6 +431,15 @@ const regularBusinessProjects = businessProjects.filter(p => !p.featured);
     .projects-grid {
       grid-template-columns: 1fr;
       gap: 1.8rem;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .featured-grid,
+    .regular-grid,
+    .personal-grid {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
     }
   }
 

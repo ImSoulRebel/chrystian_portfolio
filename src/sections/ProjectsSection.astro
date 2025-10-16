@@ -173,6 +173,8 @@ const projects: Project[] = featuredProjectsConfig.map((config) => {
     grid-template-columns: repeat(3, 1fr);
     gap: 2rem;
     margin-bottom: 4rem;
+    justify-items: center;
+    align-items: start;
   }
 
   .view-more-container {
@@ -238,6 +240,13 @@ const projects: Project[] = featuredProjectsConfig.map((config) => {
   @media (max-width: 900px) {
     .projects-grid {
       grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .projects-grid {
+      grid-template-columns: 1fr;
       gap: 1.5rem;
     }
   }
