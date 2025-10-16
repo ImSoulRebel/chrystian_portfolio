@@ -27,6 +27,7 @@ export { default as ContactForm } from './ContactForm.astro';
 
 // === Interactive Components ===
 export { default as FloatingCTA } from './FloatingCTA.astro';
+export { default as BackToHome } from './BackToHome.astro';
 
 // === Type Definitions (for better TypeScript support) ===
 export type ComponentProps = {

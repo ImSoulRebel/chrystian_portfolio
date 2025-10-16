@@ -123,6 +123,12 @@ const defaultIcons = {
     <path d="M8 6L2 12L8 18" stroke="${color || 'currentColor'}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
     <path d="M16 6L22 12L16 18" stroke="${color || 'currentColor'}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
   </svg>`,
+  'arrow-left': `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M19 12H5M12 19L5 12L12 5" stroke="${color || 'currentColor'}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>`,
+  'message-circle': `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M21 11.5C21 16.7467 16.7467 21 11.5 21C9.84977 21 8.31116 20.5443 7.01352 19.7538L3 21L4.24621 16.9865C3.45574 15.6888 3 14.1502 3 12.5C3 7.25329 7.25329 3 12.5 3C17.7467 3 21 6.25329 21 11.5Z" stroke="${color || 'currentColor'}" stroke-width="2" fill="none"/>
+  </svg>`,
 };
 
 const iconSrc = iconMap[name?.toLowerCase() as keyof typeof iconMap];
@@ -141,7 +147,7 @@ const iconSrc = iconMap[name?.toLowerCase() as keyof typeof iconMap];
     />
   ) : (
     <div
-      class={`inline-flex items-center justify-center ${className}`}
+      class={`icon-container inline-flex items-center justify-center ${className}`}
       style={color ? `color: ${color};` : ''}
       set:html={
         defaultIcons[name?.toLowerCase() as keyof typeof defaultIcons] ||
@@ -153,7 +159,23 @@ const iconSrc = iconMap[name?.toLowerCase() as keyof typeof iconMap];
 
 <style>
   img {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    vertical-align: middle;
+    line-height: 1;
+  }
+
+  /* Ensure consistent sizing and alignment for all icon types */
+  :global(.icon-container) {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+  }
+
+  :global(.icon-container svg) {
+    display: block;
     vertical-align: middle;
   }
 </style>

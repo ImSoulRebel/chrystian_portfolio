@@ -81,13 +81,14 @@ const projects: Project[] = featuredProjectsConfig.map((config) => {
     <div class="projects-header">
       <h2 class="section-title">{t('projects.title')}</h2>
       <p class="section-subtitle">
-        {locale === 'es' 
-          ? 'Los 3 proyectos más destacados que demuestran experiencia en arquitectura Flutter avanzada, liderazgo técnico y soluciones escalables.' 
-          : 'Top 3 standout projects showcasing advanced Flutter architecture, technical leadership, and scalable solutions.'
+        {
+          locale === 'es'
+            ? 'Los 3 proyectos más destacados que demuestran experiencia en arquitectura Flutter avanzada, liderazgo técnico y soluciones escalables.'
+            : 'Top 3 standout projects showcasing advanced Flutter architecture, technical leadership, and scalable solutions.'
         }
       </p>
     </div>
-    
+
     <div class="projects-grid">
       {
         projects.map((project: Project) => (
@@ -109,14 +110,19 @@ const projects: Project[] = featuredProjectsConfig.map((config) => {
     <div class="view-more-container">
       <a href={`/${locale}/projects`} class="view-more-btn">
         <span>{t('projects.viewMore')}</span>
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path 
-            d="M7 17L17 7M17 7H7M17 7V17" 
-            stroke="currentColor" 
-            stroke-width="2" 
-            stroke-linecap="round" 
-            stroke-linejoin="round"
-          />
+        <svg
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M7 17L17 7M17 7H7M17 7V17"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"></path>
         </svg>
       </a>
     </div>
@@ -137,7 +143,12 @@ const projects: Project[] = featuredProjectsConfig.map((config) => {
     left: 0;
     right: 0;
     height: 1px;
-    background: linear-gradient(90deg, transparent, var(--primary-color), transparent);
+    background: linear-gradient(
+      90deg,
+      transparent,
+      var(--primary-color),
+      transparent
+    );
     opacity: 0.3;
   }
 
@@ -207,7 +218,12 @@ const projects: Project[] = featuredProjectsConfig.map((config) => {
     left: -100%;
     width: 100%;
     height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.3),
+      transparent
+    );
     transition: left 0.6s ease;
   }
 

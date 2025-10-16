@@ -4,22 +4,41 @@ import { useTranslations, type Locale } from '@utils/i18n';
 
 interface Props {
   locale?: Locale;
+  mode?: 'contact' | 'navigate-to-contact';
 }
 
-const { locale = 'es' } = Astro.props;
+const { locale = 'es', mode = 'contact' } = Astro.props;
 const t = useTranslations(locale);
+
+// Determine the action based on mode
+const isContactMode = mode === 'contact';
+const buttonHref = isContactMode ? undefined : `/${locale}/contact`;
+const buttonText = isContactMode ? t('contact.title') : (locale === 'es' ? 'Contactar' : 'Contact');
+const buttonIcon = isContactMode ? 'email' : 'message-circle';
 ---
 
-<div id="floating-cta" class="floating-cta" aria-hidden="true">
-  <button
-    class="floating-cta-btn"
-    aria-label={t('contact.quickLinks.label')}
-    title={t('contact.title')}
-    data-contact-btn
-  >
-    <Icon name="email" size={20} color="var(--background-dark)" />
-    <span class="floating-cta-text">{t('contact.title')}</span>
-  </button>
+<div id="floating-cta" class="floating-cta" data-mode={mode} aria-hidden="true">
+  {isContactMode ? (
+    <button
+      class="floating-cta-btn"
+      aria-label={t('contact.quickLinks.label')}
+      title={buttonText}
+      data-contact-btn
+    >
+      <Icon name={buttonIcon} size={20} color="var(--background-dark)" />
+      <span class="floating-cta-text">{buttonText}</span>
+    </button>
+  ) : (
+    <a
+      href={buttonHref}
+      class="floating-cta-btn"
+      aria-label={locale === 'es' ? 'Ir a la página de contacto' : 'Go to contact page'}
+      title={buttonText}
+    >
+      <Icon name={buttonIcon} size={20} color="var(--background-dark)" />
+      <span class="floating-cta-text">{buttonText}</span>
+    </a>
+  )}
 </div>
 
 <style>
@@ -43,8 +62,9 @@ const t = useTranslations(locale);
   }
 
   .floating-cta-btn {
-    display: flex;
+    display: inline-flex;
     align-items: center;
+    justify-content: center;
     gap: 0.75rem;
     padding: 1rem 1.5rem;
     background: var(--gradient-primary);
@@ -53,6 +73,7 @@ const t = useTranslations(locale);
     border-radius: 50px;
     font-weight: 600;
     font-size: 0.95rem;
+    line-height: 1;
     cursor: pointer;
     box-shadow:
       0 8px 25px rgba(0, 212, 255, 0.3),
@@ -65,6 +86,7 @@ const t = useTranslations(locale);
     backdrop-filter: blur(10px);
     position: relative;
     overflow: hidden;
+    text-decoration: none;
   }
 
   .floating-cta-btn::before {
@@ -111,6 +133,20 @@ const t = useTranslations(locale);
     font-weight: 600;
     position: relative;
     z-index: 1;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+  }
+
+  /* Icon alignment for FloatingCTA */
+  .floating-cta-btn :global(svg),
+  .floating-cta-btn :global(img),
+  .floating-cta-btn :global(div[style*="width"]) {
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    vertical-align: middle;
   }
 
   /* Animation for pulse effect */
@@ -244,10 +280,12 @@ const t = useTranslations(locale);
     private contactSection: HTMLElement | null;
     private isVisible: boolean = false;
     private scrollThreshold: number = 200;
+    private mode: string;
 
     constructor() {
       this.floatingCTA = document.getElementById('floating-cta');
       this.contactSection = document.getElementById('contact');
+      this.mode = this.floatingCTA?.getAttribute('data-mode') || 'contact';
 
       if (this.floatingCTA) {
         this.init();
@@ -255,9 +293,11 @@ const t = useTranslations(locale);
     }
 
     private init(): void {
-      this.setupClickHandler();
+      if (this.mode === 'contact') {
+        this.setupClickHandler();
+        this.setupIntersectionObserver();
+      }
       this.setupScrollHandler();
-      this.setupIntersectionObserver();
 
       // Initial check
       this.handleScroll();
@@ -287,7 +327,7 @@ const t = useTranslations(locale);
     }
 
     private setupIntersectionObserver(): void {
-      if (!this.contactSection) return;
+      if (!this.contactSection || this.mode !== 'contact') return;
 
       const observer = new IntersectionObserver(
         (entries) => {
@@ -310,9 +350,12 @@ const t = useTranslations(locale);
 
     private handleScroll(): void {
       const currentScrollY = window.scrollY;
-      const shouldShow =
-        currentScrollY > this.scrollThreshold &&
-        !this.isContactSectionVisible();
+      let shouldShow = currentScrollY > this.scrollThreshold;
+
+      // For contact mode, hide when contact section is visible
+      if (this.mode === 'contact') {
+        shouldShow = shouldShow && !this.isContactSectionVisible();
+      }
 
       if (shouldShow && !this.isVisible) {
         this.showButton();
@@ -322,7 +365,7 @@ const t = useTranslations(locale);
     }
 
     private isContactSectionVisible(): boolean {
-      if (!this.contactSection) return false;
+      if (!this.contactSection || this.mode !== 'contact') return false;
 
       const rect = this.contactSection.getBoundingClientRect();
       const windowHeight = window.innerHeight;

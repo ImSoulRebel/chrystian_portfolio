@@ -26,28 +26,20 @@ import {
 import { FloatingCTA } from '@components';
 import '@styles/global.css';
 
-export interface Props {
-  title?: string;
-  description?: string;
-  keywords?: string;
-  author?: string;
-  ogTitle?: string;
-  ogDescription?: string;
-  ogImage?: string;
-  ogUrl?: string;
-  twitterTitle?: string;
-  twitterDescription?: string;
-  twitterImage?: string;
-  canonicalUrl?: string;
-  structuredData?: any;
-  additionalMeta?: Array<{ name?: string; property?: string; content: string }>;
+interface Props {
+  title: string;
+  description: string;
   locale?: Locale;
+  floatingCTAMode?: 'contact' | 'navigate-to-contact';
 }
 
 // Detectar el locale: usar prop si se pasa, sino detectar de URL
 const propsLocale = Astro.props.locale;
 const locale = propsLocale || getLocaleFromUrl(Astro.url);
 const t = useTranslations(locale);
+
+// Configurar el modo del FloatingCTA
+const { floatingCTAMode } = Astro.props;
 
 // Obtener traducciones por defecto
 const defaultSeoTranslations = {
@@ -309,7 +301,7 @@ const localeSpecificMeta =
     <slot />
 
     <!-- Floating CTA Button -->
-    <FloatingCTA locale={locale} />
+    <FloatingCTA locale={locale} mode={floatingCTAMode} />
 
     <!-- Scripts de optimización -->
     <script>

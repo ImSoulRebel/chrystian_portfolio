@@ -1,0 +1,204 @@
+---
+import { Icon } from '@components';
+import type { Locale } from '@utils/i18n';
+
+interface Props {
+  locale?: Locale;
+}
+
+const { locale = 'es' } = Astro.props;
+---
+
+<div class="back-to-home">
+  <a 
+    href={locale === 'es' ? '/' : `/${locale}/`} 
+    class="back-to-home-btn"
+    aria-label={locale === 'es' ? 'Volver al inicio' : 'Back to home'}
+    title={locale === 'es' ? 'Volver al inicio' : 'Back to home'}
+  >
+    <Icon name="arrow-left" size={20} color="var(--primary-color)" />
+    <span class="back-to-home-text">
+      {locale === 'es' ? 'Volver al Inicio' : 'Back to Home'}
+    </span>
+  </a>
+</div>
+
+<style>
+  .back-to-home {
+    position: fixed;
+    top: 100px;
+    left: 20px;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(-100px);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    animation: slideInFromLeft 0.6s ease-out 0.5s forwards;
+  }
+
+  @keyframes slideInFromLeft {
+    to {
+      opacity: 1;
+      visibility: visible;
+      transform: translateX(0);
+    }
+  }
+
+  .back-to-home-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    padding: 0.875rem 1.5rem;
+    background: rgba(26, 26, 46, 0.95);
+    backdrop-filter: blur(15px);
+    border: 2px solid rgba(0, 212, 255, 0.2);
+    border-radius: 50px;
+    color: var(--text-primary);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    line-height: 1;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 
+      0 4px 20px rgba(0, 0, 0, 0.3),
+      0 2px 8px rgba(0, 212, 255, 0.1);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .back-to-home-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(0, 212, 255, 0.1),
+      transparent
+    );
+    transition: left 0.6s ease;
+  }
+
+  .back-to-home-btn:hover::before {
+    left: 100%;
+  }
+
+  .back-to-home-btn:hover {
+    transform: translateX(5px);
+    border-color: var(--primary-color);
+    box-shadow: 
+      0 6px 25px rgba(0, 0, 0, 0.4),
+      0 4px 15px rgba(0, 212, 255, 0.3);
+    background: rgba(26, 26, 46, 0.98);
+  }
+
+  .back-to-home-btn:hover .back-to-home-text {
+    color: var(--primary-color);
+  }
+
+  .back-to-home-btn:active {
+    transform: translateX(2px) scale(0.98);
+  }
+
+  .back-to-home-text {
+    font-weight: 600;
+    transition: color 0.3s ease;
+    white-space: nowrap;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+  }
+
+  /* Icon alignment */
+  .back-to-home-btn :global(svg),
+  .back-to-home-btn :global(img),
+  .back-to-home-btn :global(div[style*="width"]) {
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    vertical-align: middle;
+  }
+
+  /* Mobile optimizations */
+  @media (max-width: 768px) {
+    .back-to-home {
+      top: 90px;
+      left: 16px;
+    }
+
+    .back-to-home-btn {
+      padding: 0.75rem 1.25rem;
+      font-size: 0.85rem;
+      gap: 0.6rem;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .back-to-home {
+      top: 85px;
+      left: 14px;
+    }
+
+    .back-to-home-btn {
+      padding: 0.7rem 1rem;
+      font-size: 0.8rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .back-to-home {
+      top: 80px;
+      left: 12px;
+    }
+
+    .back-to-home-text {
+      display: none;
+    }
+
+    .back-to-home-btn {
+      border-radius: 50%;
+      width: 48px;
+      height: 48px;
+      padding: 0;
+      justify-content: center;
+      gap: 0;
+    }
+  }
+
+  @media (max-width: 390px) {
+    .back-to-home {
+      top: 75px;
+      left: 10px;
+    }
+
+    .back-to-home-btn {
+      width: 44px;
+      height: 44px;
+    }
+  }
+
+  /* Reduced motion support */
+  @media (prefers-reduced-motion: reduce) {
+    .back-to-home {
+      animation: none;
+      opacity: 1;
+      visibility: visible;
+      transform: translateX(0);
+    }
+
+    .back-to-home-btn {
+      transition: 
+        transform 0.2s ease,
+        border-color 0.2s ease;
+    }
+
+    .back-to-home-btn::before {
+      display: none;
+    }
+  }
+</style>

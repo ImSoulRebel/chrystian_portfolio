@@ -221,7 +221,9 @@ const techStack = typeof stack === 'string' ? stack.split(' · ') : stack || [];
     padding: 2px;
     background: var(--gradient-primary);
     border-radius: 20px;
-    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask:
+      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
     mask-composite: exclude;
     opacity: 0;
     transition: opacity 0.4s ease;
