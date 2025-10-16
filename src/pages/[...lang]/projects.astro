@@ -38,8 +38,8 @@ type Project = {
   image: any;
 };
 
-// Configuración completa de todos los proyectos con orden de relevancia
-const allProjectsConfig: Array<{
+// Configuración de proyectos empresariales B2B
+const businessProjectsConfig: Array<{
   key: ProjectKey;
   priority: number;
   featured: boolean;
@@ -74,17 +74,28 @@ const allProjectsConfig: Array<{
     liveUrl: 'https://stel.es',
     image: assets.stelLogo,
   },
+];
+
+// Configuración de proyectos personales
+const personalProjectsConfig: Array<{
+  key: ProjectKey;
+  priority: number;
+  featured: boolean;
+  liveUrl?: string;
+  githubUrl?: string;
+  image: any;
+}> = [
   {
     key: 'nextival',
-    priority: 5,
+    priority: 1,
     featured: false,
     githubUrl: 'https://github.com/ImSoulRebel/nextival-cms',
     image: assets.nextivalLogo,
   },
 ];
 
-// Construir todos los proyectos ordenados por relevancia
-const allProjects: Project[] = allProjectsConfig.map((config) => {
+// Construir proyectos empresariales
+const businessProjects: Project[] = businessProjectsConfig.map((config) => {
   const projectData = translations[locale as Locale].projects.list[config.key];
   if (!projectData) {
     throw new Error(`Missing project data for key: ${config.key}`);
@@ -101,9 +112,27 @@ const allProjects: Project[] = allProjectsConfig.map((config) => {
   };
 });
 
-// Separar proyectos destacados y regulares
-const featuredProjects = allProjects.filter(p => p.featured);
-const regularProjects = allProjects.filter(p => !p.featured);
+// Construir proyectos personales
+const personalProjects: Project[] = personalProjectsConfig.map((config) => {
+  const projectData = translations[locale as Locale].projects.list[config.key];
+  if (!projectData) {
+    throw new Error(`Missing project data for key: ${config.key}`);
+  }
+  return {
+    title: projectData.title,
+    stack: projectData.stack,
+    description: projectData.description,
+    impact: projectData.impact,
+    featured: config.featured,
+    liveUrl: config.liveUrl,
+    githubUrl: config.githubUrl,
+    image: config.image,
+  };
+});
+
+// Separar proyectos destacados empresariales
+const featuredBusinessProjects = businessProjects.filter(p => p.featured);
+const regularBusinessProjects = businessProjects.filter(p => !p.featured);
 ---
 
 <Layout title={pageTitle} description={pageDescription} locale={locale}>
@@ -127,41 +156,90 @@ const regularProjects = allProjects.filter(p => !p.featured);
       </div>
     </section>
 
-    <!-- Featured Projects -->
-    <section class="featured-projects-section">
+    <!-- Business Projects B2B -->
+    <section class="business-projects-section">
       <div class="container">
-        <h2 class="section-title">
-          {locale === 'es' ? 'Proyectos Destacados' : 'Featured Projects'}
-        </h2>
-        <div class="projects-grid featured-grid">
-          {
-            featuredProjects.map((project: Project) => (
-              <ProjectCard
-                title={project.title}
-                stack={project.stack}
-                description={project.description}
-                impact={project.impact}
-                featured={project.featured}
-                liveUrl={project.liveUrl}
-                githubUrl={project.githubUrl}
-                image={project.image}
-                locale={locale}
-              />
-            ))
-          }
+        <div class="section-header">
+          <h2 class="section-title">
+            {locale === 'es' ? 'Proyectos Empresariales B2B' : 'B2B Business Projects'}
+          </h2>
+          <p class="section-description">
+            {locale === 'es' 
+              ? 'Soluciones Flutter desarrolladas para empresas, con arquitecturas escalables y alto impacto comercial.' 
+              : 'Flutter solutions developed for enterprises, featuring scalable architectures and high commercial impact.'
+            }
+          </p>
         </div>
+
+        <!-- Featured Business Projects -->
+        <div class="subsection">
+          <h3 class="subsection-title">
+            {locale === 'es' ? 'Proyectos Destacados' : 'Featured Projects'}
+          </h3>
+          <div class="projects-grid featured-grid">
+            {
+              featuredBusinessProjects.map((project: Project) => (
+                <ProjectCard
+                  title={project.title}
+                  stack={project.stack}
+                  description={project.description}
+                  impact={project.impact}
+                  featured={project.featured}
+                  liveUrl={project.liveUrl}
+                  githubUrl={project.githubUrl}
+                  image={project.image}
+                  locale={locale}
+                />
+              ))
+            }
+          </div>
+        </div>
+
+        <!-- Other Business Projects -->
+        {regularBusinessProjects.length > 0 && (
+          <div class="subsection">
+            <h3 class="subsection-title">
+              {locale === 'es' ? 'Otros Proyectos Empresariales' : 'Other Business Projects'}
+            </h3>
+            <div class="projects-grid regular-grid">
+              {
+                regularBusinessProjects.map((project: Project) => (
+                  <ProjectCard
+                    title={project.title}
+                    stack={project.stack}
+                    description={project.description}
+                    impact={project.impact}
+                    featured={project.featured}
+                    liveUrl={project.liveUrl}
+                    githubUrl={project.githubUrl}
+                    image={project.image}
+                    locale={locale}
+                  />
+                ))
+              }
+            </div>
+          </div>
+        )}
       </div>
     </section>
 
-    <!-- All Projects -->
-    <section class="all-projects-section">
+    <!-- Personal Projects -->
+    <section class="personal-projects-section">
       <div class="container">
-        <h2 class="section-title">
-          {locale === 'es' ? 'Otros Proyectos' : 'Other Projects'}
-        </h2>
-        <div class="projects-grid regular-grid">
+        <div class="section-header">
+          <h2 class="section-title">
+            {locale === 'es' ? 'Proyectos Personales' : 'Personal Projects'}
+          </h2>
+          <p class="section-description">
+            {locale === 'es' 
+              ? 'Desarrollos propios que demuestran creatividad, experimentación con nuevas tecnologías y pasión por la innovación.' 
+              : 'Own developments that showcase creativity, experimentation with new technologies, and passion for innovation.'
+            }
+          </p>
+        </div>
+        <div class="projects-grid personal-grid">
           {
-            regularProjects.map((project: Project) => (
+            personalProjects.map((project: Project) => (
               <ProjectCard
                 title={project.title}
                 stack={project.stack}
@@ -234,21 +312,53 @@ const regularProjects = allProjects.filter(p => !p.featured);
   }
 
   /* Section Styles */
-  .featured-projects-section {
+  .business-projects-section {
     padding: 6rem 0;
+    background: linear-gradient(135deg, transparent 0%, rgba(0, 212, 255, 0.03) 100%);
   }
 
-  .all-projects-section {
+  .personal-projects-section {
     padding: 4rem 0 6rem;
-    background: linear-gradient(135deg, transparent 0%, rgba(0, 212, 255, 0.05) 100%);
+    background: linear-gradient(135deg, rgba(0, 212, 255, 0.05) 0%, transparent 100%);
+    border-top: 1px solid rgba(0, 212, 255, 0.1);
+  }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: 4rem;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
   }
 
   .section-title {
     font-size: clamp(2.5rem, 4vw, 3rem);
-    text-align: center;
-    margin-bottom: 3rem;
+    margin-bottom: 1.5rem;
     color: var(--text-primary);
     font-weight: 700;
+  }
+
+  .section-description {
+    font-size: 1.2rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: 0;
+  }
+
+  .subsection {
+    margin-bottom: 4rem;
+  }
+
+  .subsection:last-child {
+    margin-bottom: 0;
+  }
+
+  .subsection-title {
+    font-size: 1.8rem;
+    color: var(--primary-color);
+    margin-bottom: 2rem;
+    text-align: center;
+    font-weight: 600;
   }
 
   /* Grid Layouts */
@@ -258,21 +368,34 @@ const regularProjects = allProjects.filter(p => !p.featured);
   }
 
   .featured-grid {
-    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    grid-template-columns: repeat(3, 1fr);
   }
 
   .regular-grid {
     grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
   }
 
+  .personal-grid {
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    justify-items: center;
+  }
+
   /* Responsive Design */
   @media (max-width: 1200px) {
     .featured-grid {
-      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
     }
     
-    .regular-grid {
+    .regular-grid,
+    .personal-grid {
       grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    }
+  }
+
+  @media (max-width: 900px) {
+    .featured-grid {
+      grid-template-columns: repeat(2, 1fr);
     }
   }
 
@@ -281,13 +404,22 @@ const regularProjects = allProjects.filter(p => !p.featured);
       padding: 6rem 0 3rem;
     }
 
-    .hero-description {
+    .hero-description,
+    .section-description {
       font-size: 1.1rem;
     }
 
-    .featured-projects-section,
-    .all-projects-section {
+    .business-projects-section,
+    .personal-projects-section {
       padding: 4rem 0;
+    }
+
+    .section-header {
+      margin-bottom: 3rem;
+    }
+
+    .subsection {
+      margin-bottom: 3rem;
     }
 
     .projects-grid {
@@ -303,6 +435,10 @@ const regularProjects = allProjects.filter(p => !p.featured);
 
     .projects-grid {
       gap: 1.5rem;
+    }
+
+    .subsection-title {
+      font-size: 1.5rem;
     }
   }
 </style>
