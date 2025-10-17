@@ -75,6 +75,15 @@ export const contact: Record<'es' | 'en', ContactTranslations> = {
       success: '¡Mensaje enviado correctamente!',
       error: 'Error al enviar el mensaje. Inténtalo de nuevo.',
       notice: 'Te responderé en menos de 24 horas',
+      validation: {
+        required: 'Este campo es requerido',
+        completeRequired:
+          'Por favor, completa todos los campos requeridos antes de enviar.',
+        submitSuccess:
+          '¡Gracias! Tu mensaje ha sido enviado correctamente. Te responderé lo antes posible.',
+        submitError:
+          'Hubo un error al enviar el mensaje. Por favor, intenta nuevamente o contacta directamente por email.',
+      },
     },
     expectation: {
       quickResponse: {
@@ -183,6 +192,15 @@ export const contact: Record<'es' | 'en', ContactTranslations> = {
       success: 'Message sent successfully!',
       error: 'Error sending message. Please try again.',
       notice: 'I will respond within 24 hours',
+      validation: {
+        required: 'This field is required',
+        completeRequired:
+          'Please complete all required fields before submitting.',
+        submitSuccess:
+          'Thank you! Your message has been sent successfully. I will respond as soon as possible.',
+        submitError:
+          'There was an error sending the message. Please try again or contact directly via email.',
+      },
     },
     expectation: {
       quickResponse: {

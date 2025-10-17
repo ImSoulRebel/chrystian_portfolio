@@ -215,7 +215,9 @@ const contactEmail = PUBLIC_CONTACT_EMAIL;
   <!-- Botón submit -->
   <div class={styles.submitGroup}>
     <button type="submit" class={styles.submitButton}>
-      <span class={styles.buttonText}>{t('contact.form.send')}</span>
+      <span class={`${styles.buttonText} btn-text`}
+        >{t('contact.form.send')}</span
+      >
       <span class="btn-loading" style="display: none;">
         <div class={styles.spinner}></div>
         {t('contact.form.sending')}
@@ -228,11 +230,26 @@ const contactEmail = PUBLIC_CONTACT_EMAIL;
   </div>
 
   <!-- Success/Error Messages -->
-  <div class={styles.statusMessage} id="form-message" style="display: none;">
+  <div
+    class={`${styles.statusMessage} status-message`}
+    id="form-message"
+    style="display: none;"
+  >
   </div>
 </form>
 
-<script>
+<script
+  define:vars={{
+    translations: {
+      validation: {
+        required: t('contact.form.validation.required'),
+        completeRequired: t('contact.form.validation.completeRequired'),
+        submitSuccess: t('contact.form.validation.submitSuccess'),
+        submitError: t('contact.form.validation.submitError'),
+      },
+    },
+  }}
+>
   import { ContactForm } from '@scripts/contactForm.js';
-  new ContactForm();
+  new ContactForm(translations);
 </script>

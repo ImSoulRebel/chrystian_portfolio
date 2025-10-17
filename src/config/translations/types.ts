@@ -190,6 +190,12 @@ export interface ContactTranslations {
     success: string;
     error: string;
     notice: string;
+    validation: {
+      required: string;
+      completeRequired: string;
+      submitSuccess: string;
+      submitError: string;
+    };
   };
   expectation: {
     quickResponse: { title: string; text: string };
