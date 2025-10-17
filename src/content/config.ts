@@ -49,13 +49,67 @@ const projectSchema = z.object({
   updatedAt: z.string().datetime().default(new Date().toISOString()),
 });
 
-// Tipo exportado para uso en TypeScript
+// Schema para skills con validación completa
+const skillSchema = z.object({
+  // Identificación
+  id: z.string().min(1, 'ID es requerido'),
+  name: z.string().min(1, 'Nombre de skill es requerido'),
+
+  // Categorización
+  category: z.enum(
+    ['mobile', 'frontend', 'backend', 'devops', 'leadership', 'tools'],
+    {
+      errorMap: () => ({
+        message:
+          'Categoría debe ser una de: mobile, frontend, backend, devops, leadership, tools',
+      }),
+    }
+  ),
+
+  // Información de experiencia
+  level: z
+    .enum(['beginner', 'intermediate', 'advanced', 'expert'], {
+      errorMap: () => ({
+        message: 'Nivel debe ser: beginner, intermediate, advanced, expert',
+      }),
+    })
+    .default('intermediate'),
+
+  years: z.number().min(0).max(20).default(1),
+
+  // Metadatos de visualización
+  icon: z.string().min(1, 'Icono es requerido'),
+  featured: z.boolean().default(false),
+  priority: z.number().min(1).max(100).default(50),
+
+  // Información adicional opcional
+  description: z
+    .object({
+      es: z.string().optional(),
+      en: z.string().optional(),
+    })
+    .optional(),
+
+  // Control de estado
+  status: z.enum(['active', 'archived', 'learning']).default('active'),
+
+  // Timestamps
+  createdAt: z.string().datetime().default(new Date().toISOString()),
+  updatedAt: z.string().datetime().default(new Date().toISOString()),
+});
+
+// Tipos exportados para uso en TypeScript
 export type ProjectData = z.infer<typeof projectSchema>;
+export type SkillData = z.infer<typeof skillSchema>;
 
 // Definición de las colecciones
 export const collections = {
   projects: defineCollection({
     loader: file('src/content/data/projects.json'),
     schema: projectSchema,
+  }),
+  skills: defineCollection({
+    loader: file('src/content/data/skills.json'),
+    schema: skillSchema,
   }),
 };

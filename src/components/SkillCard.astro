@@ -1,9 +1,14 @@
 ---
 import Icon from './Icon.astro';
 
-const { name } = Astro.props;
+interface Props {
+  name: string;
+  icon?: string; // URL del icono o nombre del icono
+}
 
-// Mapeo de nombres de skills a iconos
+const { name, icon } = Astro.props;
+
+// Mapeo de nombres de skills a iconos (fallback para compatibilidad)
 const iconMapping = {
   Flutter: 'flutter',
   Dart: 'dart',
@@ -39,13 +44,32 @@ const iconMapping = {
   Netlify: 'cloud',
 };
 
-const iconName =
-  iconMapping[name as keyof typeof iconMapping] || name?.toLowerCase();
+// Determinar si el icon es una URL completa o un nombre de icono
+const isIconUrl =
+  icon &&
+  (icon.startsWith('http') || icon.startsWith('/') || icon.includes('.svg'));
+const iconName = isIconUrl
+  ? null
+  : icon ||
+    iconMapping[name as keyof typeof iconMapping] ||
+    name?.toLowerCase();
 ---
 
 <div class="skill-item">
   <div class="skill-icon">
-    <Icon name={iconName} size={40} />
+    {
+      isIconUrl ? (
+        <img
+          src={icon}
+          alt={`${name} logo`}
+          width="40"
+          height="40"
+          loading="lazy"
+        />
+      ) : (
+        <Icon name={iconName} size={40} />
+      )
+    }
   </div>
   <h4 class="skill-name">{name}</h4>
 </div>
@@ -109,6 +133,14 @@ const iconName =
     box-shadow: 0 4px 15px rgba(0, 212, 255, 0.2);
     backdrop-filter: blur(5px);
     border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .skill-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    filter: brightness(1.1) contrast(1.1);
+    transition: var(--transition);
   }
 
   .skill-item:hover .skill-icon {

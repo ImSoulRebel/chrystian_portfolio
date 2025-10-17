@@ -1,6 +1,7 @@
 ---
 import { SkillCard } from '@components';
 import { useTranslations, type Locale } from '../utils/i18n';
+import { getAllSkills } from '../utils/skillsManager';
 
 // Recibir locale como prop en lugar de detectarlo
 interface Props {
@@ -10,40 +11,11 @@ interface Props {
 const { locale = 'es' } = Astro.props;
 const t = useTranslations(locale);
 
-const skills = [
-  { name: 'Flutter', icon: 'flutter' },
-  { name: 'Dart', icon: 'dart' },
-  { name: 'Clean Architecture', icon: 'code' },
-  { name: 'BLoC Pattern', icon: 'react' },
-  { name: 'GetX', icon: 'react' },
-  { name: 'Riverpod', icon: 'react' },
-  { name: 'Provider', icon: 'react' },
-  { name: 'Firebase', icon: 'firebase' },
-  { name: 'auto_route', icon: 'code' },
-  { name: 'get_it', icon: 'code' },
-  { name: 'dio', icon: 'api' },
-  { name: 'TypeScript', icon: 'typescript' },
-  { name: 'JavaScript', icon: 'javascript' },
-  { name: 'Astro', icon: 'astro' },
-  { name: 'SolidJS', icon: 'javascript' },
-  { name: 'React', icon: 'react' },
-  { name: 'Node.js', icon: 'nodejs' },
-  { name: 'TailwindCSS', icon: 'css' },
-  { name: 'CSS Modules', icon: 'css' },
-  { name: 'PWA', icon: 'web' },
-  { name: 'Netlify', icon: 'cloud' },
-  { name: 'Video.js', icon: 'video' },
-  { name: 'WebSockets', icon: 'websocket' },
-  { name: 'Docker', icon: 'docker' },
-  { name: 'GitHub Actions', icon: 'cicd' },
-  { name: 'AWS', icon: 'aws' },
-  { name: 'Hive', icon: 'database' },
-  { name: 'SharedPreferences', icon: 'storage' },
-  { name: 'Sentry', icon: 'monitoring' },
-  { name: 'JWT', icon: 'security' },
-  { name: 'Git', icon: 'git' },
-  { name: 'CI/CD', icon: 'cicd' },
-];
+// Obtener skills desde Content Collections
+const skills = await getAllSkills();
+
+// Para el carrusel, triplicar las skills para efecto infinito
+const skillsForCarousel = [...skills, ...skills, ...skills];
 ---
 
 <section id="skills" class="skills">
@@ -52,8 +24,8 @@ const skills = [
     <div class="skills-carousel">
       <div class="skills-track">
         {
-          [...skills, ...skills, ...skills].map((skill) => (
-            <SkillCard name={skill.name} icon={skill.icon} />
+          skillsForCarousel.map((skill) => (
+            <SkillCard name={skill.name} icon={skill.iconUrl} />
           ))
         }
       </div>

@@ -1,0 +1,580 @@
+[
+  {
+    "id": "flutter",
+    "name": "Flutter",
+    "category": "mobile",
+    "level": "expert",
+    "years": 5,
+    "icon": "flutter",
+    "featured": true,
+    "priority": 1,
+    "description": {
+      "es": "Framework de desarrollo multiplataforma de Google para crear aplicaciones nativas de alta calidad",
+      "en": "Google's cross-platform framework for building high-quality native applications"
+    },
+    "status": "active",
+    "createdAt": "2020-01-01T00:00:00.000Z",
+    "updatedAt": "2024-10-17T00:00:00.000Z"
+  },
+  {
+    "id": "dart",
+    "name": "Dart",
+    "category": "mobile",
+    "level": "expert",
+    "years": 5,
+    "icon": "dart",
+    "featured": true,
+    "priority": 2,
+    "description": {
+      "es": "Lenguaje de programación optimizado para el desarrollo de aplicaciones en múltiples plataformas",
+      "en": "Programming language optimized for building apps on multiple platforms"
+    },
+    "status": "active",
+    "createdAt": "2020-01-01T00:00:00.000Z",
+    "updatedAt": "2024-10-17T00:00:00.000Z"
+  },
+  {
+    "id": "clean-architecture",
+    "name": "Clean Architecture",
+    "category": "mobile",
+    "level": "expert",
+    "years": 4,
+    "icon": "code",
+    "featured": true,
+    "priority": 3,
+    "description": {
+      "es": "Arquitectura de software que separa las preocupaciones en capas bien definidas",
+      "en": "Software architecture that separates concerns into well-defined layers"
+    },
+    "status": "active",
+    "createdAt": "2021-01-01T00:00:00.000Z",
+    "updatedAt": "2024-10-17T00:00:00.000Z"
+  },
+  {
+    "id": "bloc",
+    "name": "BLoC Pattern",
+    "category": "mobile",
+    "level": "expert",
+    "years": 4,
+    "icon": "react",
+    "featured": true,
+    "priority": 4,
+    "description": {
+      "es": "Patrón de gestión de estado predictible y testeable para aplicaciones Flutter",
+      "en": "Predictable and testable state management pattern for Flutter applications"
+    },
+    "status": "active",
+    "createdAt": "2021-01-01T00:00:00.000Z",
+    "updatedAt": "2024-10-17T00:00:00.000Z"
+  },
+  {
+    "id": "getx",
+    "name": "GetX",
+    "category": "mobile",
+    "level": "advanced",
+    "years": 3,
+    "icon": "react",
+    "featured": false,
+    "priority": 20,
+    "description": {
+      "es": "Framework Flutter para gestión de estado, dependencias y routing",
+      "en": "Flutter framework for state management, dependency injection and routing"
+    },
+    "status": "active",
+    "createdAt": "2022-01-01T00:00:00.000Z",
+    "updatedAt": "2024-10-17T00:00:00.000Z"
+  },
+  {
+    "id": "riverpod",
+    "name": "Riverpod",
+    "category": "mobile",
+    "level": "advanced",
+    "years": 2,
+    "icon": "react",
+    "featured": false,
+    "priority": 21,
+    "description": {
+      "es": "Provider mejorado para gestión de estado en Flutter con compile-time safety",
+      "en": "Enhanced Provider for state management in Flutter with compile-time safety"
+    },
+    "status": "active",
+    "createdAt": "2023-01-01T00:00:00.000Z",
+    "updatedAt": "2024-10-17T00:00:00.000Z"
+  },
+  {
+    "id": "provider",
+    "name": "Provider",
+    "category": "mobile",
+    "level": "advanced",
+    "years": 3,
+    "icon": "react",
+    "featured": false,
+    "priority": 22,
+    "description": {
+      "es": "Wrapper alrededor de InheritedWidget para facilitar la gestión de estado",
+      "en": "Wrapper around InheritedWidget to make state management easier"
+    },
+    "status": "active",
+    "createdAt": "2022-01-01T00:00:00.000Z",
+    "updatedAt": "2024-10-17T00:00:00.000Z"
+  },
+  {
+    "id": "auto-route",
+    "name": "auto_route",
+    "category": "mobile",
+    "level": "advanced",
+    "years": 3,
+    "icon": "code",
+    "featured": false,
+    "priority": 25,
+    "description": {
+      "es": "Generador de rutas automático para Flutter con type safety",
+      "en": "Automatic route generator for Flutter with type safety"
+    },
+    "status": "active",
+    "createdAt": "2022-01-01T00:00:00.000Z",
+    "updatedAt": "2024-10-17T00:00:00.000Z"
+  },
+  {
+    "id": "get-it",
+    "name": "get_it",
+    "category": "mobile",
+    "level": "advanced",
+    "years": 3,
+    "icon": "code",
+    "featured": false,
+    "priority": 26,
+    "description": {
+      "es": "Service locator simple para inyección de dependencias en Flutter",
+      "en": "Simple service locator for dependency injection in Flutter"
+    },
+    "status": "active",
+    "createdAt": "2022-01-01T00:00:00.000Z",
+    "updatedAt": "2024-10-17T00:00:00.000Z"
+  },
+  {
+    "id": "dio",
+    "name": "dio",
+    "category": "mobile",
+    "level": "advanced",
+    "years": 3,
+    "icon": "api",
+    "featured": false,
+    "priority": 27,
+    "description": {
+      "es": "Cliente HTTP potente para Dart/Flutter con interceptors y manejo de errores",
+      "en": "Powerful HTTP client for Dart/Flutter with interceptors and error handling"
+    },
+    "status": "active",
+    "createdAt": "2022-01-01T00:00:00.000Z",
+    "updatedAt": "2024-10-17T00:00:00.000Z"
+  },
+  {
+    "id": "typescript",
+    "name": "TypeScript",
+    "category": "frontend",
+    "level": "expert",
+    "years": 4,
+    "icon": "typescript",
+    "featured": true,
+    "priority": 5,
+    "description": {
+      "es": "Superset tipado de JavaScript que compila a JavaScript plano",
+      "en": "Typed superset of JavaScript that compiles to plain JavaScript"
+    },
+    "status": "active",
+    "createdAt": "2021-01-01T00:00:00.000Z",
+    "updatedAt": "2024-10-17T00:00:00.000Z"
+  },
+  {
+    "id": "javascript",
+    "name": "JavaScript",
+    "category": "frontend",
+    "level": "expert",
+    "years": 6,
+    "icon": "javascript",
+    "featured": true,
+    "priority": 6,
+    "description": {
+      "es": "Lenguaje de programación esencial para desarrollo web moderno",
+      "en": "Essential programming language for modern web development"
+    },
+    "status": "active",
+    "createdAt": "2019-01-01T00:00:00.000Z",
+    "updatedAt": "2024-10-17T00:00:00.000Z"
+  },
+  {
+    "id": "astro",
+    "name": "Astro",
+    "category": "frontend",
+    "level": "advanced",
+    "years": 1,
+    "icon": "astro",
+    "featured": true,
+    "priority": 7,
+    "description": {
+      "es": "Framework moderno para construir sitios web rápidos y centrados en el contenido",
+      "en": "Modern framework for building fast, content-focused websites"
+    },
+    "status": "active",
+    "createdAt": "2024-01-01T00:00:00.000Z",
+    "updatedAt": "2024-10-17T00:00:00.000Z"
+  },
+  {
+    "id": "solidjs",
+    "name": "SolidJS",
+    "category": "frontend",
+    "level": "intermediate",
+    "years": 1,
+    "icon": "javascript",
+    "featured": false,
+    "priority": 30,
+    "description": {
+      "es": "Framework reactivo simple y performante para construir interfaces de usuario",
+      "en": "Simple and performant reactive framework for building user interfaces"
+    },
+    "status": "active",
+    "createdAt": "2024-01-01T00:00:00.000Z",
+    "updatedAt": "2024-10-17T00:00:00.000Z"
+  },
+  {
+    "id": "react",
+    "name": "React",
+    "category": "frontend",
+    "level": "advanced",
+    "years": 3,
+    "icon": "react",
+    "featured": true,
+    "priority": 8,
+    "description": {
+      "es": "Biblioteca JavaScript para construir interfaces de usuario componetizadas",
+      "en": "JavaScript library for building component-based user interfaces"
+    },
+    "status": "active",
+    "createdAt": "2022-01-01T00:00:00.000Z",
+    "updatedAt": "2024-10-17T00:00:00.000Z"
+  },
+  {
+    "id": "css-modules",
+    "name": "CSS Modules",
+    "category": "frontend",
+    "level": "advanced",
+    "years": 2,
+    "icon": "css",
+    "featured": false,
+    "priority": 32,
+    "description": {
+      "es": "Sistema de scoping automático para CSS que evita colisiones de nombres",
+      "en": "Automatic scoping system for CSS that prevents naming collisions"
+    },
+    "status": "active",
+    "createdAt": "2022-01-01T00:00:00.000Z",
+    "updatedAt": "2024-10-17T00:00:00.000Z"
+  },
+  {
+    "id": "tailwindcss",
+    "name": "TailwindCSS",
+    "category": "frontend",
+    "level": "advanced",
+    "years": 2,
+    "icon": "css",
+    "featured": false,
+    "priority": 31,
+    "description": {
+      "es": "Framework CSS utility-first para desarrollo rápido de interfaces",
+      "en": "Utility-first CSS framework for rapid interface development"
+    },
+    "status": "active",
+    "createdAt": "2022-01-01T00:00:00.000Z",
+    "updatedAt": "2024-10-17T00:00:00.000Z"
+  },
+  {
+    "id": "pwa",
+    "name": "PWA",
+    "category": "frontend",
+    "level": "intermediate",
+    "years": 2,
+    "icon": "web",
+    "featured": false,
+    "priority": 33,
+    "description": {
+      "es": "Aplicaciones web progresivas que ofrecen experiencia similar a apps nativas",
+      "en": "Progressive web applications that offer native app-like experience"
+    },
+    "status": "active",
+    "createdAt": "2022-01-01T00:00:00.000Z",
+    "updatedAt": "2024-10-17T00:00:00.000Z"
+  },
+  {
+    "id": "nodejs",
+    "name": "Node.js",
+    "category": "backend",
+    "level": "advanced",
+    "years": 3,
+    "icon": "nodejs",
+    "featured": true,
+    "priority": 9,
+    "description": {
+      "es": "Runtime de JavaScript construido sobre el motor V8 de Chrome para servidor",
+      "en": "JavaScript runtime built on Chrome's V8 engine for server-side development"
+    },
+    "status": "active",
+    "createdAt": "2022-01-01T00:00:00.000Z",
+    "updatedAt": "2024-10-17T00:00:00.000Z"
+  },
+  {
+    "id": "firebase",
+    "name": "Firebase",
+    "category": "backend",
+    "level": "expert",
+    "years": 4,
+    "icon": "firebase",
+    "featured": true,
+    "priority": 10,
+    "description": {
+      "es": "Plataforma de desarrollo de aplicaciones backend-as-a-service de Google",
+      "en": "Google's backend-as-a-service platform for application development"
+    },
+    "status": "active",
+    "createdAt": "2021-01-01T00:00:00.000Z",
+    "updatedAt": "2024-10-17T00:00:00.000Z"
+  },
+  {
+    "id": "websockets",
+    "name": "WebSockets",
+    "category": "backend",
+    "level": "advanced",
+    "years": 3,
+    "icon": "websocket",
+    "featured": true,
+    "priority": 11,
+    "description": {
+      "es": "Protocolo de comunicación bidireccional en tiempo real entre cliente y servidor",
+      "en": "Bidirectional real-time communication protocol between client and server"
+    },
+    "status": "active",
+    "createdAt": "2022-01-01T00:00:00.000Z",
+    "updatedAt": "2024-10-17T00:00:00.000Z"
+  },
+  {
+    "id": "jwt",
+    "name": "JWT",
+    "category": "backend",
+    "level": "advanced",
+    "years": 3,
+    "icon": "security",
+    "featured": false,
+    "priority": 35,
+    "description": {
+      "es": "Estándar para transmitir información de forma segura entre partes como token",
+      "en": "Standard for securely transmitting information between parties as a token"
+    },
+    "status": "active",
+    "createdAt": "2022-01-01T00:00:00.000Z",
+    "updatedAt": "2024-10-17T00:00:00.000Z"
+  },
+  {
+    "id": "hive",
+    "name": "Hive",
+    "category": "backend",
+    "level": "intermediate",
+    "years": 2,
+    "icon": "database",
+    "featured": false,
+    "priority": 36,
+    "description": {
+      "es": "Base de datos NoSQL ligera y rápida escrita en Dart para Flutter",
+      "en": "Lightweight and fast NoSQL database written in Dart for Flutter"
+    },
+    "status": "active",
+    "createdAt": "2022-01-01T00:00:00.000Z",
+    "updatedAt": "2024-10-17T00:00:00.000Z"
+  },
+  {
+    "id": "sharedpreferences",
+    "name": "SharedPreferences",
+    "category": "backend",
+    "level": "intermediate",
+    "years": 3,
+    "icon": "storage",
+    "featured": false,
+    "priority": 37,
+    "description": {
+      "es": "Almacenamiento de datos clave-valor persistente en dispositivos móviles",
+      "en": "Persistent key-value data storage on mobile devices"
+    },
+    "status": "active",
+    "createdAt": "2022-01-01T00:00:00.000Z",
+    "updatedAt": "2024-10-17T00:00:00.000Z"
+  },
+  {
+    "id": "docker",
+    "name": "Docker",
+    "category": "devops",
+    "level": "advanced",
+    "years": 3,
+    "icon": "docker",
+    "featured": true,
+    "priority": 12,
+    "description": {
+      "es": "Plataforma de contenedorización para crear, desplegar y gestionar aplicaciones",
+      "en": "Containerization platform for creating, deploying and managing applications"
+    },
+    "status": "active",
+    "createdAt": "2022-01-01T00:00:00.000Z",
+    "updatedAt": "2024-10-17T00:00:00.000Z"
+  },
+  {
+    "id": "github-actions",
+    "name": "GitHub Actions",
+    "category": "devops",
+    "level": "advanced",
+    "years": 3,
+    "icon": "cicd",
+    "featured": true,
+    "priority": 13,
+    "description": {
+      "es": "Platform de automatización y CI/CD integrada en GitHub",
+      "en": "Automation and CI/CD platform integrated into GitHub"
+    },
+    "status": "active",
+    "createdAt": "2022-01-01T00:00:00.000Z",
+    "updatedAt": "2024-10-17T00:00:00.000Z"
+  },
+  {
+    "id": "aws",
+    "name": "AWS",
+    "category": "devops",
+    "level": "intermediate",
+    "years": 2,
+    "icon": "aws",
+    "featured": true,
+    "priority": 14,
+    "description": {
+      "es": "Plataforma de servicios en la nube de Amazon Web Services",
+      "en": "Amazon Web Services cloud platform"
+    },
+    "status": "active",
+    "createdAt": "2022-01-01T00:00:00.000Z",
+    "updatedAt": "2024-10-17T00:00:00.000Z"
+  },
+  {
+    "id": "netlify",
+    "name": "Netlify",
+    "category": "devops",
+    "level": "intermediate",
+    "years": 2,
+    "icon": "cloud",
+    "featured": false,
+    "priority": 38,
+    "description": {
+      "es": "Plataforma de desarrollo web con hosting y CI/CD automático",
+      "en": "Web development platform with hosting and automatic CI/CD"
+    },
+    "status": "active",
+    "createdAt": "2022-01-01T00:00:00.000Z",
+    "updatedAt": "2024-10-17T00:00:00.000Z"
+  },
+  {
+    "id": "cicd",
+    "name": "CI/CD",
+    "category": "devops",
+    "level": "advanced",
+    "years": 3,
+    "icon": "cicd",
+    "featured": false,
+    "priority": 39,
+    "description": {
+      "es": "Prácticas de integración y despliegue continuo para automatizar releases",
+      "en": "Continuous integration and deployment practices to automate releases"
+    },
+    "status": "active",
+    "createdAt": "2022-01-01T00:00:00.000Z",
+    "updatedAt": "2024-10-17T00:00:00.000Z"
+  },
+  {
+    "id": "technical-leadership",
+    "name": "Technical Leadership",
+    "category": "leadership",
+    "level": "expert",
+    "years": 3,
+    "icon": "leadership",
+    "featured": true,
+    "priority": 15,
+    "description": {
+      "es": "Liderazgo de equipos técnicos y toma de decisiones arquitectónicas",
+      "en": "Technical team leadership and architectural decision making"
+    },
+    "status": "active",
+    "createdAt": "2022-01-01T00:00:00.000Z",
+    "updatedAt": "2024-10-17T00:00:00.000Z"
+  },
+  {
+    "id": "team-management",
+    "name": "Team Management",
+    "category": "leadership",
+    "level": "advanced",
+    "years": 4,
+    "icon": "team",
+    "featured": true,
+    "priority": 16,
+    "description": {
+      "es": "Gestión y coordinación de equipos multidisciplinares de desarrollo",
+      "en": "Management and coordination of multidisciplinary development teams"
+    },
+    "status": "active",
+    "createdAt": "2021-01-01T00:00:00.000Z",
+    "updatedAt": "2024-10-17T00:00:00.000Z"
+  },
+  {
+    "id": "git",
+    "name": "Git",
+    "category": "tools",
+    "level": "expert",
+    "years": 6,
+    "icon": "git",
+    "featured": true,
+    "priority": 17,
+    "description": {
+      "es": "Sistema de control de versiones distribuido para gestión de código fuente",
+      "en": "Distributed version control system for source code management"
+    },
+    "status": "active",
+    "createdAt": "2019-01-01T00:00:00.000Z",
+    "updatedAt": "2024-10-17T00:00:00.000Z"
+  },
+  {
+    "id": "video-js",
+    "name": "Video.js",
+    "category": "tools",
+    "level": "advanced",
+    "years": 2,
+    "icon": "video",
+    "featured": false,
+    "priority": 40,
+    "description": {
+      "es": "Reproductor de video HTML5 personalizable y extensible",
+      "en": "Customizable and extensible HTML5 video player"
+    },
+    "status": "active",
+    "createdAt": "2023-01-01T00:00:00.000Z",
+    "updatedAt": "2024-10-17T00:00:00.000Z"
+  },
+  {
+    "id": "sentry",
+    "name": "Sentry",
+    "category": "tools",
+    "level": "intermediate",
+    "years": 2,
+    "icon": "monitoring",
+    "featured": false,
+    "priority": 41,
+    "description": {
+      "es": "Plataforma de monitoreo de errores y rendimiento de aplicaciones",
+      "en": "Application error and performance monitoring platform"
+    },
+    "status": "active",
+    "createdAt": "2022-01-01T00:00:00.000Z",
+    "updatedAt": "2024-10-17T00:00:00.000Z"
+  }
+]
