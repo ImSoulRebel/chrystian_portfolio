@@ -84,7 +84,7 @@ export { default as optimusLogo } from './projects/optimus_apps_lab_logo.svg';
 export { default as stelLogo } from './projects/stel_logo.svg';
 export { default as tookaneLogo } from './projects/tookane_logo.svg';
 export { default as yuvodLogo } from './projects/yuvod_logo.svg';
-export { default as projectPlaceholder } from './projects/placeholder.svg';
+export { default as projectPlaceholder } from './placeholder.svg';
 
 // ============================================
 // OTROS ASSETS

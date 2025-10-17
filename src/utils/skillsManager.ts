@@ -79,10 +79,15 @@ const genericIconMap: Record<string, string> = {
 
 /**
  * Obtiene la URL del icono para una skill
- * @param iconName - Nombre del icono (ej: 'flutter', 'react', 'code')
+ * @param iconName - Nombre del icono (ej: 'flutter', 'react', 'code') o undefined
  * @returns URL del icono o placeholder si no existe
  */
-export function getSkillIcon(iconName: string): string {
+export function getSkillIcon(iconName?: string): string {
+  // Si no hay iconName, devolver placeholder directamente
+  if (!iconName || iconName.trim() === '') {
+    return projectPlaceholder.src;
+  }
+
   try {
     // Buscar icono específico primero (ej: flutter_logo.svg)
     const specificIconPath = `/src/assets/logos/${iconName}_logo.svg`;

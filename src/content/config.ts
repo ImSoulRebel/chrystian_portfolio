@@ -78,7 +78,7 @@ const skillSchema = z.object({
   years: z.number().min(0).max(20).default(1),
 
   // Metadatos de visualización
-  icon: z.string().min(1, 'Icono es requerido'),
+  icon: z.string().min(1).optional(),
   featured: z.boolean().default(false),
   priority: z.number().min(1).max(100).default(50),
 
