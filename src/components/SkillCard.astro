@@ -4,9 +4,10 @@ import Icon from './Icon.astro';
 interface Props {
   name: string;
   icon?: string; // URL del icono o nombre del icono
+  url?: string | undefined; // URL oficial de la skill (opcional)
 }
 
-const { name, icon } = Astro.props;
+const { name, icon, url } = Astro.props;
 
 // Mapeo de nombres de skills a iconos (fallback para compatibilidad)
 const iconMapping = {
@@ -55,7 +56,10 @@ const iconName = isIconUrl
     name?.toLowerCase();
 ---
 
-<div class="skill-item">
+<div
+  class={`skill-item ${url ? 'skill-clickable' : ''}`}
+  data-skill-url={url || ''}
+>
   <div class="skill-icon">
     {
       isIconUrl ? (
@@ -72,6 +76,27 @@ const iconName = isIconUrl
     }
   </div>
   <h4 class="skill-name">{name}</h4>
+  {
+    url && (
+      <div class="skill-link-indicator" aria-hidden="true">
+        <svg
+          width="14"
+          height="14"
+          viewBox="0 0 24 24"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M7 17L17 7M17 7H7M17 7V17"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+      </div>
+    )
+  }
 </div>
 
 <style>
@@ -91,6 +116,38 @@ const iconName = isIconUrl
     overflow: hidden;
     margin: 0 0.5rem;
     cursor: pointer;
+  }
+
+  .skill-clickable {
+    cursor: pointer;
+  }
+
+  .skill-clickable:focus {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
+  }
+
+  .skill-link-indicator {
+    position: absolute;
+    top: 0.75rem;
+    right: 0.75rem;
+    color: var(--primary-color);
+    opacity: 0.6;
+    transition: all 0.3s ease;
+    background: rgba(0, 212, 255, 0.1);
+    border-radius: 50%;
+    padding: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(5px);
+  }
+
+  .skill-clickable:hover .skill-link-indicator {
+    opacity: 1;
+    transform: scale(1.1) rotate(12deg);
+    background: rgba(0, 212, 255, 0.2);
+    box-shadow: 0 2px 8px rgba(0, 212, 255, 0.3);
   }
 
   .skill-item::before {
