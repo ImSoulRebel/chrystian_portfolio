@@ -8,6 +8,7 @@
     "icon": "flutter",
     "featured": true,
     "priority": 1,
+    "url": "https://flutter.dev",
     "description": {
       "es": "Framework de desarrollo multiplataforma de Google para crear aplicaciones nativas de alta calidad",
       "en": "Google's cross-platform framework for building high-quality native applications"
@@ -25,6 +26,7 @@
     "icon": "dart",
     "featured": true,
     "priority": 2,
+    "url": "https://dart.dev",
     "description": {
       "es": "Lenguaje de programación optimizado para el desarrollo de aplicaciones en múltiples plataformas",
       "en": "Programming language optimized for building apps on multiple platforms"
@@ -39,7 +41,7 @@
     "category": "mobile",
     "level": "expert",
     "years": 4,
-    "icon": "code",
+    "icon": "clean_architecture",
     "featured": true,
     "priority": 3,
     "description": {
@@ -56,7 +58,7 @@
     "category": "mobile",
     "level": "expert",
     "years": 4,
-    "icon": "react",
+    "icon": "bloc",
     "featured": true,
     "priority": 4,
     "description": {
@@ -65,7 +67,8 @@
     },
     "status": "active",
     "createdAt": "2021-01-01T00:00:00.000Z",
-    "updatedAt": "2024-10-17T00:00:00.000Z"
+    "updatedAt": "2024-10-17T00:00:00.000Z",
+    "url": "https://bloclibrary.dev"
   },
   {
     "id": "getx",
@@ -73,7 +76,7 @@
     "category": "mobile",
     "level": "advanced",
     "years": 3,
-    "icon": "react",
+    "icon": "getx",
     "featured": false,
     "priority": 20,
     "description": {
@@ -82,7 +85,8 @@
     },
     "status": "active",
     "createdAt": "2022-01-01T00:00:00.000Z",
-    "updatedAt": "2024-10-17T00:00:00.000Z"
+    "updatedAt": "2024-10-17T00:00:00.000Z",
+    "url": "https://pub.dev/packages/get"
   },
   {
     "id": "riverpod",
@@ -90,7 +94,7 @@
     "category": "mobile",
     "level": "advanced",
     "years": 2,
-    "icon": "react",
+    "icon": "riverpod",
     "featured": false,
     "priority": 21,
     "description": {
@@ -99,7 +103,8 @@
     },
     "status": "active",
     "createdAt": "2023-01-01T00:00:00.000Z",
-    "updatedAt": "2024-10-17T00:00:00.000Z"
+    "updatedAt": "2024-10-17T00:00:00.000Z",
+    "url": "https://riverpod.dev"
   },
   {
     "id": "provider",
@@ -107,7 +112,7 @@
     "category": "mobile",
     "level": "advanced",
     "years": 3,
-    "icon": "react",
+    "icon": "flutter_favorite",
     "featured": false,
     "priority": 22,
     "description": {
@@ -124,7 +129,7 @@
     "category": "mobile",
     "level": "advanced",
     "years": 3,
-    "icon": "code",
+    "icon": "auto_route",
     "featured": false,
     "priority": 25,
     "description": {
@@ -141,7 +146,7 @@
     "category": "mobile",
     "level": "advanced",
     "years": 3,
-    "icon": "code",
+    "icon": "flutter_favorite",
     "featured": false,
     "priority": 26,
     "description": {
@@ -158,7 +163,7 @@
     "category": "mobile",
     "level": "advanced",
     "years": 3,
-    "icon": "api",
+    "icon": "flutter_favorite",
     "featured": false,
     "priority": 27,
     "description": {
@@ -178,6 +183,7 @@
     "icon": "typescript",
     "featured": true,
     "priority": 5,
+    "url": "https://www.typescriptlang.org",
     "description": {
       "es": "Superset tipado de JavaScript que compila a JavaScript plano",
       "en": "Typed superset of JavaScript that compiles to plain JavaScript"
@@ -195,6 +201,7 @@
     "icon": "javascript",
     "featured": true,
     "priority": 6,
+    "url": "https://developer.mozilla.org/docs/Web/JavaScript",
     "description": {
       "es": "Lenguaje de programación esencial para desarrollo web moderno",
       "en": "Essential programming language for modern web development"
@@ -212,6 +219,7 @@
     "icon": "astro",
     "featured": true,
     "priority": 7,
+    "url": "https://astro.build",
     "description": {
       "es": "Framework moderno para construir sitios web rápidos y centrados en el contenido",
       "en": "Modern framework for building fast, content-focused websites"
@@ -226,7 +234,7 @@
     "category": "frontend",
     "level": "intermediate",
     "years": 1,
-    "icon": "javascript",
+    "icon": "solidjs",
     "featured": false,
     "priority": 30,
     "description": {
@@ -235,7 +243,8 @@
     },
     "status": "active",
     "createdAt": "2024-01-01T00:00:00.000Z",
-    "updatedAt": "2024-10-17T00:00:00.000Z"
+    "updatedAt": "2024-10-17T00:00:00.000Z",
+    "url": "https://www.solidjs.com"
   },
   {
     "id": "react",
@@ -246,6 +255,7 @@
     "icon": "react",
     "featured": true,
     "priority": 8,
+    "url": "https://react.dev",
     "description": {
       "es": "Biblioteca JavaScript para construir interfaces de usuario componetizadas",
       "en": "JavaScript library for building component-based user interfaces"
@@ -277,7 +287,7 @@
     "category": "frontend",
     "level": "advanced",
     "years": 2,
-    "icon": "css",
+    "icon": "tailwind_css",
     "featured": false,
     "priority": 31,
     "description": {
@@ -286,7 +296,8 @@
     },
     "status": "active",
     "createdAt": "2022-01-01T00:00:00.000Z",
-    "updatedAt": "2024-10-17T00:00:00.000Z"
+    "updatedAt": "2024-10-17T00:00:00.000Z",
+    "url": "https://tailwindcss.com"
   },
   {
     "id": "pwa",
@@ -294,7 +305,7 @@
     "category": "frontend",
     "level": "intermediate",
     "years": 2,
-    "icon": "web",
+    "icon": "pwa",
     "featured": false,
     "priority": 33,
     "description": {
@@ -320,7 +331,8 @@
     },
     "status": "active",
     "createdAt": "2022-01-01T00:00:00.000Z",
-    "updatedAt": "2024-10-17T00:00:00.000Z"
+    "updatedAt": "2024-10-17T00:00:00.000Z",
+    "url": "https://nodejs.org"
   },
   {
     "id": "firebase",
@@ -337,7 +349,8 @@
     },
     "status": "active",
     "createdAt": "2021-01-01T00:00:00.000Z",
-    "updatedAt": "2024-10-17T00:00:00.000Z"
+    "updatedAt": "2024-10-17T00:00:00.000Z",
+    "url": "https://firebase.google.com"
   },
   {
     "id": "websockets",
@@ -354,7 +367,8 @@
     },
     "status": "active",
     "createdAt": "2022-01-01T00:00:00.000Z",
-    "updatedAt": "2024-10-17T00:00:00.000Z"
+    "updatedAt": "2024-10-17T00:00:00.000Z",
+    "url": "https://developer.mozilla.org/docs/Web/API/WebSocket"
   },
   {
     "id": "jwt",
@@ -362,7 +376,7 @@
     "category": "backend",
     "level": "advanced",
     "years": 3,
-    "icon": "security",
+    "icon": "jwt",
     "featured": false,
     "priority": 35,
     "description": {
@@ -379,7 +393,7 @@
     "category": "backend",
     "level": "intermediate",
     "years": 2,
-    "icon": "database",
+    "icon": "hive",
     "featured": false,
     "priority": 36,
     "description": {
@@ -396,7 +410,7 @@
     "category": "backend",
     "level": "intermediate",
     "years": 3,
-    "icon": "storage",
+    "icon": "flutter_favorite",
     "featured": false,
     "priority": 37,
     "description": {
@@ -422,7 +436,8 @@
     },
     "status": "active",
     "createdAt": "2022-01-01T00:00:00.000Z",
-    "updatedAt": "2024-10-17T00:00:00.000Z"
+    "updatedAt": "2024-10-17T00:00:00.000Z",
+    "url": "https://www.docker.com"
   },
   {
     "id": "github-actions",
@@ -430,7 +445,7 @@
     "category": "devops",
     "level": "advanced",
     "years": 3,
-    "icon": "cicd",
+    "icon": "github",
     "featured": true,
     "priority": 13,
     "description": {
@@ -439,7 +454,8 @@
     },
     "status": "active",
     "createdAt": "2022-01-01T00:00:00.000Z",
-    "updatedAt": "2024-10-17T00:00:00.000Z"
+    "updatedAt": "2024-10-17T00:00:00.000Z",
+    "url": "https://github.com/features/actions"
   },
   {
     "id": "aws",
@@ -456,7 +472,8 @@
     },
     "status": "active",
     "createdAt": "2022-01-01T00:00:00.000Z",
-    "updatedAt": "2024-10-17T00:00:00.000Z"
+    "updatedAt": "2024-10-17T00:00:00.000Z",
+    "url": "https://aws.amazon.com"
   },
   {
     "id": "netlify",
@@ -464,7 +481,7 @@
     "category": "devops",
     "level": "intermediate",
     "years": 2,
-    "icon": "cloud",
+    "icon": "netlify",
     "featured": false,
     "priority": 38,
     "description": {
@@ -498,7 +515,7 @@
     "category": "leadership",
     "level": "expert",
     "years": 3,
-    "icon": "leadership",
+    "icon": "tech_lead",
     "featured": true,
     "priority": 15,
     "description": {
@@ -515,7 +532,7 @@
     "category": "leadership",
     "level": "advanced",
     "years": 4,
-    "icon": "team",
+    "icon": "team_management",
     "featured": true,
     "priority": 16,
     "description": {
@@ -541,7 +558,8 @@
     },
     "status": "active",
     "createdAt": "2019-01-01T00:00:00.000Z",
-    "updatedAt": "2024-10-17T00:00:00.000Z"
+    "updatedAt": "2024-10-17T00:00:00.000Z",
+    "url": "https://git-scm.com"
   },
   {
     "id": "video-js",
@@ -549,7 +567,7 @@
     "category": "tools",
     "level": "advanced",
     "years": 2,
-    "icon": "video",
+    "icon": "videojs",
     "featured": false,
     "priority": 40,
     "description": {
@@ -566,12 +584,47 @@
     "category": "tools",
     "level": "intermediate",
     "years": 2,
-    "icon": "monitoring",
+    "icon": "sentry",
     "featured": false,
     "priority": 41,
     "description": {
       "es": "Plataforma de monitoreo de errores y rendimiento de aplicaciones",
       "en": "Application error and performance monitoring platform"
+    },
+    "status": "active",
+    "createdAt": "2022-01-01T00:00:00.000Z",
+    "updatedAt": "2024-10-17T00:00:00.000Z"
+  },
+  {
+    "id": "postman",
+    "name": "Postman",
+    "category": "tools",
+    "level": "intermediate",
+    "years": 3,
+    "icon": "postman",
+    "featured": false,
+    "priority": 41,
+    "description": {
+      "es": "Plataforma para pruebas de API y colaboración en equipo",
+      "en": "API testing and team collaboration platform"
+    },
+    "status": "active",
+    "createdAt": "2022-01-01T00:00:00.000Z",
+    "updatedAt": "2024-10-17T00:00:00.000Z",
+    "url": "https://www.postman.com"
+  },
+  {
+    "id": "json",
+    "name": "JSON",
+    "category": "tools",
+    "level": "intermediate",
+    "years": 2,
+    "icon": "json",
+    "featured": false,
+    "priority": 41,
+    "description": {
+      "es": "Formato ligero de intercambio de datos fácil de leer y escribir",
+      "en": "Lightweight data interchange format that's easy to read and write"
     },
     "status": "active",
     "createdAt": "2022-01-01T00:00:00.000Z",

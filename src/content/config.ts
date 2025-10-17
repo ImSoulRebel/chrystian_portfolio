@@ -83,6 +83,7 @@ const skillSchema = z.object({
   priority: z.number().min(1).max(100).default(50),
 
   // Información adicional opcional
+  url: z.string().url('URL oficial debe ser válida').optional(),
   description: z
     .object({
       es: z.string().optional(),

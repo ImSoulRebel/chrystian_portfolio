@@ -292,6 +292,23 @@ export function clearSkillsCache(): void {
   skillsCache.clear();
 }
 
+/**
+ * Obtiene skills que tienen URLs oficiales
+ */
+export async function getSkillsWithUrls(): Promise<ProcessedSkill[]> {
+  const allSkills = await getAllSkills();
+  return allSkills.filter((skill) => skill.url);
+}
+
+/**
+ * Obtiene la URL oficial de una skill específica
+ */
+export async function getSkillUrl(skillId: string): Promise<string | null> {
+  const allSkills = await getAllSkills();
+  const skill = allSkills.find((s) => s.id === skillId);
+  return skill?.url || null;
+}
+
 // ===========================================
 // EXPORTS
 // ===========================================
@@ -305,4 +322,6 @@ export default {
   getSkillsStats,
   getSkillIcon,
   clearSkillsCache,
+  getSkillsWithUrls,
+  getSkillUrl,
 };
