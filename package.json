@@ -40,7 +40,8 @@
     "postinstall": "astro sync",
     "generate:og": "node scripts/generate-og-images.js",
     "generate:favicons": "node scripts/generate-favicons.js",
-    "generate:assets": "yarn run generate:favicons && yarn run generate:og",
+    "generate:icons": "node scripts/generate-icon-types.js",
+    "generate:assets": "yarn run generate:favicons && yarn run generate:og && yarn run generate:icons",
     "prebuild": "yarn run generate:assets"
   },
   "dependencies": {
