@@ -5,10 +5,14 @@ export class SkillsCarousel {
     this.skillsCarousel = null;
     this.isDragging = false;
     this.startX = 0;
+    this.startY = 0;
     this.currentTranslate = 0;
     this.animationFrame = 0;
     this.isPaused = false;
     this.hasInteracted = false;
+    this.dragThreshold = 5; // Minimum pixels to consider it a drag
+    this.startTime = 0;
+    this.clickTime = 200; // Maximum time for a click (ms)
 
     this.init();
   }
@@ -29,6 +33,7 @@ export class SkillsCarousel {
     if (!this.skillsTrack || !this.skillsCarousel) return;
 
     this.bindEvents();
+    this.setupSkillClicks();
     this.startAnimation();
   }
 
@@ -87,11 +92,14 @@ export class SkillsCarousel {
 
   // Start drag functionality
   startDrag(e) {
-    this.isDragging = true;
+    this.isDragging = false; // Will be set to true only if we actually drag
     this.pauseAnimation();
 
     const clientX = 'touches' in e ? e.touches[0].clientX : e.clientX;
+    const clientY = 'touches' in e ? e.touches[0].clientY : e.clientY;
     this.startX = clientX;
+    this.startY = clientY;
+    this.startTime = Date.now();
 
     this.skillsCarousel.style.cursor = 'grabbing';
     e.preventDefault();
@@ -99,24 +107,46 @@ export class SkillsCarousel {
 
   // Handle drag movement
   drag(e) {
-    if (!this.isDragging) return;
+    if (!this.startX) return; // No drag started
 
     e.preventDefault();
     const clientX = 'touches' in e ? e.touches[0].clientX : e.clientX;
+    const clientY = 'touches' in e ? e.touches[0].clientY : e.clientY;
+
     const deltaX = clientX - this.startX;
+    const deltaY = clientY - this.startY;
+    const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
 
-    this.currentTranslate += deltaX;
-    this.startX = clientX;
+    // If movement exceeds threshold, consider it a drag
+    if (distance > this.dragThreshold && !this.isDragging) {
+      this.isDragging = true;
+    }
 
-    this.skillsTrack.style.transform = `translateX(${this.currentTranslate}px)`;
-    this.resetPositionIfNeeded();
+    if (this.isDragging) {
+      this.currentTranslate += deltaX;
+      this.startX = clientX;
+
+      this.skillsTrack.style.transform = `translateX(${this.currentTranslate}px)`;
+      this.resetPositionIfNeeded();
+    }
   }
 
   // End drag functionality
-  endDrag() {
-    if (!this.isDragging) return;
+  endDrag(e) {
+    if (!this.startX) return; // No drag started
+
+    const wasDragging = this.isDragging;
+    const timeElapsed = Date.now() - this.startTime;
+
+    // If it wasn't a drag and was quick enough, it might be a click
+    if (!wasDragging && timeElapsed < this.clickTime) {
+      this.handlePotentialClick(e);
+    }
 
     this.isDragging = false;
+    this.startX = 0;
+    this.startY = 0;
+    this.startTime = 0;
     this.skillsCarousel.style.cursor = 'grab';
 
     // Resume animation after a short delay
@@ -125,6 +155,101 @@ export class SkillsCarousel {
         this.resumeAnimation();
       }
     }, 1000);
+  }
+
+  // Handle potential click on skill
+  handlePotentialClick(e) {
+    const target = e.target.closest('.skill-item');
+    if (target && target.classList.contains('skill-clickable')) {
+      const url = target.dataset.skillUrl;
+      if (url) {
+        this.openSkillUrl(url, target);
+      }
+    }
+  }
+
+  // Open skill URL
+  openSkillUrl(url, skillElement) {
+    // Add visual feedback
+    this.addClickFeedback(skillElement);
+
+    // Open URL in new tab
+    window.open(url, '_blank', 'noopener,noreferrer');
+
+    // Track click for analytics
+    this.trackSkillClick(skillElement, url);
+  }
+
+  // Add visual feedback for click
+  addClickFeedback(skillElement) {
+    skillElement.style.transform = 'translateY(-8px) scale(1.05)';
+    skillElement.style.transition = 'transform 0.2s ease';
+
+    setTimeout(() => {
+      skillElement.style.transform = '';
+      skillElement.style.transition = '';
+    }, 200);
+  }
+
+  // Track skill click for analytics
+  trackSkillClick(skillElement, url) {
+    const skillName =
+      skillElement.querySelector('.skill-name')?.textContent || 'unknown';
+
+    // Send analytics event if gtag is available
+    if (typeof gtag !== 'undefined') {
+      gtag('event', 'skill_click', {
+        event_category: 'Skills',
+        event_label: skillName,
+        value: url,
+      });
+    }
+
+    // Dispatch custom event for other tracking systems
+    window.dispatchEvent(
+      new CustomEvent('skillClicked', {
+        detail: {
+          skillName,
+          url,
+          timestamp: new Date().toISOString(),
+        },
+      })
+    );
+  }
+
+  // Setup skill click handlers
+  setupSkillClicks() {
+    const skillItems = this.skillsTrack.querySelectorAll('.skill-clickable');
+
+    skillItems.forEach((skillItem) => {
+      // Make focusable for accessibility
+      if (!skillItem.hasAttribute('tabindex')) {
+        skillItem.setAttribute('tabindex', '0');
+      }
+
+      // Add aria-label for accessibility
+      const skillName =
+        skillItem.querySelector('.skill-name')?.textContent || 'skill';
+      const url = skillItem.dataset.skillUrl;
+      if (url) {
+        skillItem.setAttribute(
+          'aria-label',
+          `Abrir sitio web de ${skillName} en nueva pestaña`
+        );
+      }
+
+      // Handle keyboard navigation
+      skillItem.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          e.stopPropagation();
+          const url = skillItem.dataset.skillUrl;
+          if (url) {
+            this.openSkillUrl(url, skillItem);
+          }
+        }
+      });
+    });
   }
 
   // Hide interaction indicator
@@ -155,7 +280,7 @@ export class SkillsCarousel {
       this.hideIndicator();
     });
     document.addEventListener('mousemove', (e) => this.drag(e));
-    document.addEventListener('mouseup', () => this.endDrag());
+    document.addEventListener('mouseup', (e) => this.endDrag(e));
 
     // Touch events
     this.skillsCarousel.addEventListener(
@@ -169,7 +294,7 @@ export class SkillsCarousel {
     document.addEventListener('touchmove', (e) => this.drag(e), {
       passive: false,
     });
-    document.addEventListener('touchend', () => this.endDrag());
+    document.addEventListener('touchend', (e) => this.endDrag(e));
 
     // Prevent context menu
     this.skillsCarousel.addEventListener('contextmenu', (e) =>

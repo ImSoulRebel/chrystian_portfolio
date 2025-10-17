@@ -25,7 +25,7 @@ const skillsForCarousel = [...skills, ...skills, ...skills];
       <div class="skills-track">
         {
           skillsForCarousel.map((skill) => (
-            <SkillCard name={skill.name} icon={skill.iconUrl} />
+            <SkillCard name={skill.name} icon={skill.iconUrl} url={skill.url} />
           ))
         }
       </div>
