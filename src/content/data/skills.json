@@ -121,7 +121,8 @@
     },
     "status": "active",
     "createdAt": "2022-01-01T00:00:00.000Z",
-    "updatedAt": "2024-10-17T00:00:00.000Z"
+    "updatedAt": "2024-10-17T00:00:00.000Z",
+    "url": "https://pub.dev/packages/provider"
   },
   {
     "id": "auto-route",
@@ -138,7 +139,8 @@
     },
     "status": "active",
     "createdAt": "2022-01-01T00:00:00.000Z",
-    "updatedAt": "2024-10-17T00:00:00.000Z"
+    "updatedAt": "2024-10-17T00:00:00.000Z",
+    "url": "https://pub.dev/packages/auto_route"
   },
   {
     "id": "get-it",
@@ -155,7 +157,8 @@
     },
     "status": "active",
     "createdAt": "2022-01-01T00:00:00.000Z",
-    "updatedAt": "2024-10-17T00:00:00.000Z"
+    "updatedAt": "2024-10-17T00:00:00.000Z",
+    "url": "https://pub.dev/packages/get_it"
   },
   {
     "id": "dio",
@@ -172,7 +175,8 @@
     },
     "status": "active",
     "createdAt": "2022-01-01T00:00:00.000Z",
-    "updatedAt": "2024-10-17T00:00:00.000Z"
+    "updatedAt": "2024-10-17T00:00:00.000Z",
+    "url": "https://pub.dev/packages/dio"
   },
   {
     "id": "typescript",
@@ -288,8 +292,8 @@
     "level": "advanced",
     "years": 2,
     "icon": "tailwind_css",
-    "featured": false,
-    "priority": 31,
+    "featured": true,
+    "priority": 24,
     "description": {
       "es": "Framework CSS utility-first para desarrollo rápido de interfaces",
       "en": "Utility-first CSS framework for rapid interface development"
@@ -402,7 +406,8 @@
     },
     "status": "active",
     "createdAt": "2022-01-01T00:00:00.000Z",
-    "updatedAt": "2024-10-17T00:00:00.000Z"
+    "updatedAt": "2024-10-17T00:00:00.000Z",
+    "url": "https://pub.dev/packages/hive"
   },
   {
     "id": "sharedpreferences",
@@ -419,7 +424,8 @@
     },
     "status": "active",
     "createdAt": "2022-01-01T00:00:00.000Z",
-    "updatedAt": "2024-10-17T00:00:00.000Z"
+    "updatedAt": "2024-10-17T00:00:00.000Z",
+    "url": "https://pub.dev/packages/shared_preferences"
   },
   {
     "id": "docker",
@@ -490,7 +496,8 @@
     },
     "status": "active",
     "createdAt": "2022-01-01T00:00:00.000Z",
-    "updatedAt": "2024-10-17T00:00:00.000Z"
+    "updatedAt": "2024-10-17T00:00:00.000Z",
+    "url": "https://www.netlify.com"
   },
   {
     "id": "cicd",
@@ -499,8 +506,8 @@
     "level": "advanced",
     "years": 3,
     "icon": "cicd",
-    "featured": false,
-    "priority": 39,
+    "featured": true,
+    "priority": 18,
     "description": {
       "es": "Prácticas de integración y despliegue continuo para automatizar releases",
       "en": "Continuous integration and deployment practices to automate releases"
@@ -576,7 +583,8 @@
     },
     "status": "active",
     "createdAt": "2023-01-01T00:00:00.000Z",
-    "updatedAt": "2024-10-17T00:00:00.000Z"
+    "updatedAt": "2024-10-17T00:00:00.000Z",
+    "url": "https://videojs.com"
   },
   {
     "id": "sentry",
@@ -586,14 +594,15 @@
     "years": 2,
     "icon": "sentry",
     "featured": false,
-    "priority": 41,
+    "priority": 34,
     "description": {
       "es": "Plataforma de monitoreo de errores y rendimiento de aplicaciones",
       "en": "Application error and performance monitoring platform"
     },
     "status": "active",
     "createdAt": "2022-01-01T00:00:00.000Z",
-    "updatedAt": "2024-10-17T00:00:00.000Z"
+    "updatedAt": "2024-10-17T00:00:00.000Z",
+    "url": "https://sentry.io"
   },
   {
     "id": "postman",
@@ -621,13 +630,86 @@
     "years": 2,
     "icon": "json",
     "featured": false,
-    "priority": 41,
+    "priority": 29,
     "description": {
       "es": "Formato ligero de intercambio de datos fácil de leer y escribir",
       "en": "Lightweight data interchange format that's easy to read and write"
     },
     "status": "active",
     "createdAt": "2022-01-01T00:00:00.000Z",
-    "updatedAt": "2024-10-17T00:00:00.000Z"
+    "updatedAt": "2024-10-17T00:00:00.000Z",
+    "url": "https://www.json.org"
+  },
+  {
+    "id": "go-router",
+    "name": "go_router",
+    "category": "mobile",
+    "level": "intermediate",
+    "years": 2,
+    "icon": "flutter_favorite",
+    "featured": false,
+    "priority": 28,
+    "description": {
+      "es": "Paquete de enrutamiento declarativo para Flutter que simplifica la navegación",
+      "en": "Declarative routing package for Flutter that simplifies navigation"
+    },
+    "status": "active",
+    "createdAt": "2022-01-01T00:00:00.000Z",
+    "updatedAt": "2024-10-17T00:00:00.000Z",
+    "url": "https://pub.dev/packages/go_router"
+  },
+  {
+    "id": "figma",
+    "name": "Figma",
+    "category": "tools",
+    "level": "intermediate",
+    "years": 2,
+    "icon": "figma",
+    "featured": false,
+    "priority": 42,
+    "description": {
+      "es": "Herramienta de diseño y prototipado colaborativo basada en la nube",
+      "en": "Cloud-based collaborative design and prototyping tool"
+    },
+    "status": "active",
+    "createdAt": "2022-01-01T00:00:00.000Z",
+    "updatedAt": "2024-10-17T00:00:00.000Z",
+    "url": "https://www.figma.com"
+  },
+  {
+    "id": "shaka-player",
+    "name": "Shaka Player",
+    "category": "tools",
+    "level": "intermediate",
+    "years": 1,
+    "icon": "shaka_player",
+    "featured": false,
+    "priority": 43,
+    "description": {
+      "es": "Reproductor de video HTML5 de código abierto para transmisión adaptativa",
+      "en": "Open-source HTML5 video player for adaptive streaming"
+    },
+    "status": "active",
+    "createdAt": "2023-01-01T00:00:00.000Z",
+    "updatedAt": "2024-10-17T00:00:00.000Z",
+    "url": "https://shaka-player-demo.appspot.com"
+  },
+  {
+    "id": "sqlite-flutter",
+    "name": "sqflite",
+    "category": "backend",
+    "level": "intermediate",
+    "years": 2,
+    "icon": "sqlite",
+    "featured": false,
+    "priority": 44,
+    "description": {
+      "es": "Plugin SQLite para Flutter para almacenamiento de datos local",
+      "en": "SQLite plugin for Flutter for local data storage"
+    },
+    "status": "active",
+    "createdAt": "2022-01-01T00:00:00.000Z",
+    "updatedAt": "2024-10-17T00:00:00.000Z",
+    "url": "https://pub.dev/packages/sqflite"
   }
 ]
