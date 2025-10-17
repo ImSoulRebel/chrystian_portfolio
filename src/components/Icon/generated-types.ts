@@ -1,7 +1,7 @@
 // 🤖 Auto-generated - Do not edit manually
 // Run: node scripts/generate-icon-types.js
 
-export type AvailableIcon = 
+export type AvailableIcon =
   | 'android'
   | 'astro'
   | 'astro-large'
@@ -47,7 +47,7 @@ export type AvailableIcon =
   | 'tech-lead'
   | 'typescript'
   | 'videojs'
-  | 'websocket'
+  | 'websocket';
 
 export const AVAILABLE_ICONS = [
   'android',
@@ -96,7 +96,7 @@ export const AVAILABLE_ICONS = [
   'typescript',
   'videojs',
   'websocket',
-] as const
+] as const;
 
 // Mapeo de nombres amigables a archivos
 export const ICON_FILE_MAP: Record<string, string> = {
@@ -146,4 +146,4 @@ export const ICON_FILE_MAP: Record<string, string> = {
   'typescript': 'typescript_logo.svg',
   'videojs': 'videojs_logo.svg',
   'websocket': 'websocket_logo.svg',
-}
+};

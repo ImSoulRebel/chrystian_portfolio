@@ -55,21 +55,21 @@ async function generateIconTypes() {
     const iconNames = Array.from(iconMap.keys()).sort();
     const iconEntries = iconNames.map((name) => [name, iconMap.get(name)]);
 
-    // Generar tipo TypeScript
+    // Generar tipo TypeScript con formato Prettier
     const typeDefinition = `// 🤖 Auto-generated - Do not edit manually
 // Run: node scripts/generate-icon-types.js
 
-export type AvailableIcon = 
-${iconNames.map((name) => `  | '${name}'`).join('\n')}
+export type AvailableIcon =
+${iconNames.map((name) => `  | '${name}'`).join('\n')};
 
 export const AVAILABLE_ICONS = [
 ${iconNames.map((name) => `  '${name}',`).join('\n')}
-] as const
+] as const;
 
 // Mapeo de nombres amigables a archivos
 export const ICON_FILE_MAP: Record<string, string> = {
 ${iconEntries.map(([name, file]) => `  '${name}': '${file}',`).join('\n')}
-}
+};
 `;
 
     await writeFile(OUTPUT_FILE, typeDefinition);
