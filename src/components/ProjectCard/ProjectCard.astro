@@ -100,7 +100,7 @@ const techStack = typeof stack === 'string' ? stack.split(' · ') : stack || [];
         liveUrl && (
           <div class={styles.statItem}>
             <span class={styles.statIcon}>🌐</span>
-            <span>En Producción</span>
+            <span>{t('projects.stats.inProduction')}</span>
           </div>
         )
       }
@@ -108,7 +108,7 @@ const techStack = typeof stack === 'string' ? stack.split(' · ') : stack || [];
         featured && (
           <div class={styles.statItem}>
             <span class={styles.statIcon}>⭐</span>
-            <span>Proyecto Destacado</span>
+            <span>{t('projects.stats.featuredProject')}</span>
           </div>
         )
       }
@@ -116,7 +116,7 @@ const techStack = typeof stack === 'string' ? stack.split(' · ') : stack || [];
         githubUrl && (
           <div class={styles.statItem}>
             <span class={styles.statIcon}>💻</span>
-            <span>Código Disponible</span>
+            <span>{t('projects.stats.codeAvailable')}</span>
           </div>
         )
       }
@@ -132,8 +132,8 @@ const techStack = typeof stack === 'string' ? stack.split(' · ') : stack || [];
               class={`${styles.actionButton} ${styles.actionSecondary}`}
               target="_blank"
               rel="noopener noreferrer"
-              title="Visitar sitio web"
-              aria-label="Visitar sitio web del proyecto"
+              title={t('projects.actions.visitWebsite')}
+              aria-label={t('projects.actions.visitWebsiteLabel')}
             >
               <svg
                 width="20"
@@ -173,8 +173,8 @@ const techStack = typeof stack === 'string' ? stack.split(' · ') : stack || [];
               class={`${styles.actionButton} ${styles.actionSecondary}`}
               target="_blank"
               rel="noopener noreferrer"
-              title="Ver código en GitHub"
-              aria-label="Ver código en GitHub"
+              title={t('projects.actions.viewGithub')}
+              aria-label={t('projects.actions.viewGithubLabel')}
             >
               <svg
                 width="20"

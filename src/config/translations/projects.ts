@@ -7,6 +7,17 @@ export const projects: Record<'es' | 'en', ProjectsTranslations> = {
     viewCode: 'Ver Código',
     viewMore: 'Ver Más Proyectos',
     featured: 'Destacado',
+    stats: {
+      inProduction: 'En Producción',
+      featuredProject: 'Proyecto Destacado',
+      codeAvailable: 'Código Disponible',
+    },
+    actions: {
+      visitWebsite: 'Visitar sitio web',
+      visitWebsiteLabel: 'Visitar sitio web del proyecto',
+      viewGithub: 'Ver código en GitHub',
+      viewGithubLabel: 'Ver código en GitHub',
+    },
     seo: {
       title: 'Proyectos | Chrystian Michell - Portfolio de Desarrollo Flutter',
       description:
@@ -75,6 +86,17 @@ export const projects: Record<'es' | 'en', ProjectsTranslations> = {
     viewCode: 'View Code',
     viewMore: 'View More Projects',
     featured: 'Featured',
+    stats: {
+      inProduction: 'In Production',
+      featuredProject: 'Featured Project',
+      codeAvailable: 'Code Available',
+    },
+    actions: {
+      visitWebsite: 'Visit website',
+      visitWebsiteLabel: 'Visit project website',
+      viewGithub: 'View code on GitHub',
+      viewGithubLabel: 'View code on GitHub',
+    },
     seo: {
       title: 'Projects | Chrystian Michell - Flutter Development Portfolio',
       description:

@@ -109,6 +109,17 @@ export interface ProjectsTranslations {
   viewCode: string;
   viewMore: string;
   featured: string;
+  stats: {
+    inProduction: string;
+    featuredProject: string;
+    codeAvailable: string;
+  };
+  actions: {
+    visitWebsite: string;
+    visitWebsiteLabel: string;
+    viewGithub: string;
+    viewGithubLabel: string;
+  };
   seo: {
     title: string;
     description: string;

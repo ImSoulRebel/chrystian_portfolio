@@ -11,6 +11,135 @@ import { join, parse } from 'path';
 const LOGOS_DIR = './src/assets/logos';
 const OUTPUT_FILE = './src/components/Icon/generated-types.ts';
 
+/**
+ * Genera código TypeScript compatible con Prettier
+ * Respeta exactamente el formato que Prettier aplica
+ */
+function generatePrettierCompatibleCode(iconNames, iconEntries) {
+  const header = `// 🤖 Auto-generated - Do not edit manually
+// Run: node scripts/generate-icon-types.js
+
+`;
+
+  // Generar tipo union (Prettier mantiene cada item en su línea)
+  const typeLines = ['export type AvailableIcon ='];
+  iconNames.forEach((name, index) => {
+    const isLast = index === iconNames.length - 1;
+    typeLines.push(`  | '${name}'${isLast ? ';' : ''}`);
+  });
+  const typeDefinition = typeLines.join('\n') + '\n\n';
+
+  // Generar array (Prettier prefiere cada item en su línea para arrays largos)
+  const arrayLines = ['export const AVAILABLE_ICONS = ['];
+  iconNames.forEach((name, index) => {
+    const isLast = index === iconNames.length - 1;
+    arrayLines.push(`  '${name}',`);
+  });
+  arrayLines.push('] as const;');
+  const arrayDefinition = arrayLines.join('\n') + '\n\n';
+
+  // Generar mapeo de archivos (sin comillas en keys cuando no son necesarias)
+  const mapLines = [
+    '// Mapeo de nombres amigables a archivos',
+    'export const ICON_FILE_MAP: Record<string, string> = {',
+  ];
+
+  iconEntries.forEach(([name, file]) => {
+    // Prettier omite comillas en keys que son identificadores válidos
+    const needsQuotes = !isValidIdentifier(name);
+    const keyName = needsQuotes ? `'${name}'` : name;
+    mapLines.push(`  ${keyName}: '${file}',`);
+  });
+
+  mapLines.push('};');
+  const mapDefinition = mapLines.join('\n') + '\n';
+
+  return header + typeDefinition + arrayDefinition + mapDefinition;
+}
+
+/**
+ * Verifica si un string es un identificador válido de JavaScript/TypeScript
+ */
+function isValidIdentifier(str) {
+  // Regex para identificadores válidos: puede empezar con letra, $, o _
+  // seguido de letras, números, $, o _
+  const identifierRegex = /^[a-zA-Z_$][a-zA-Z0-9_$]*$/;
+  return identifierRegex.test(str) && !isReservedWord(str);
+}
+
+/**
+ * Lista de palabras reservadas en JavaScript/TypeScript
+ */
+function isReservedWord(str) {
+  const reserved = [
+    'abstract',
+    'arguments',
+    'await',
+    'boolean',
+    'break',
+    'byte',
+    'case',
+    'catch',
+    'char',
+    'class',
+    'const',
+    'continue',
+    'debugger',
+    'default',
+    'delete',
+    'do',
+    'double',
+    'else',
+    'enum',
+    'eval',
+    'export',
+    'extends',
+    'false',
+    'final',
+    'finally',
+    'float',
+    'for',
+    'function',
+    'goto',
+    'if',
+    'implements',
+    'import',
+    'in',
+    'instanceof',
+    'int',
+    'interface',
+    'let',
+    'long',
+    'native',
+    'new',
+    'null',
+    'package',
+    'private',
+    'protected',
+    'public',
+    'return',
+    'short',
+    'static',
+    'super',
+    'switch',
+    'synchronized',
+    'this',
+    'throw',
+    'throws',
+    'transient',
+    'true',
+    'try',
+    'typeof',
+    'var',
+    'void',
+    'volatile',
+    'while',
+    'with',
+    'yield',
+  ];
+  return reserved.includes(str);
+}
+
 async function generateIconTypes() {
   try {
     // Leer archivos SVG
@@ -55,22 +184,11 @@ async function generateIconTypes() {
     const iconNames = Array.from(iconMap.keys()).sort();
     const iconEntries = iconNames.map((name) => [name, iconMap.get(name)]);
 
-    // Generar tipo TypeScript con formato Prettier
-    const typeDefinition = `// 🤖 Auto-generated - Do not edit manually
-// Run: node scripts/generate-icon-types.js
-
-export type AvailableIcon =
-${iconNames.map((name) => `  | '${name}'`).join('\n')};
-
-export const AVAILABLE_ICONS = [
-${iconNames.map((name) => `  '${name}',`).join('\n')}
-] as const;
-
-// Mapeo de nombres amigables a archivos
-export const ICON_FILE_MAP: Record<string, string> = {
-${iconEntries.map(([name, file]) => `  '${name}': '${file}',`).join('\n')}
-};
-`;
+    // Generar tipo TypeScript con formato Prettier-compatible
+    const typeDefinition = generatePrettierCompatibleCode(
+      iconNames,
+      iconEntries
+    );
 
     await writeFile(OUTPUT_FILE, typeDefinition);
     console.log(
