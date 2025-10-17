@@ -15,43 +15,57 @@ export const projects: Record<'es' | 'en', ProjectsTranslations> = {
     list: {
       yuvod: {
         title: 'YUVOD – Plataforma OTT para Hoteles',
-        stack: 'Flutter · BLoC · WebSockets · Video.js · Docker · AWS',
+        stack:
+          'Flutter · BLoC · auto_route · get_it · Video.js · Docker · GitHub Actions · WebSockets',
         description:
-          'Plataforma de streaming multiplataforma para SmartTVs, móviles y web con navegación espacial custom, reproductor modular con DRM y subtítulos dinámicos. Arquitectura multientrada con selección dinámica de UI para diferentes dispositivos.',
+          'Plataforma de streaming multiplataforma para SmartTVs, móviles y web con arquitectura multientrada y selección dinámica de UI. Navegación espacial avanzada con NavigationHandlerBloc, soporte para menús anidados, grids y carruseles. Reproductor modular con DRM, subtítulos dinámicos, autenticación por token y pantalla completa. DevOps con RPS en pubspec.yaml, Docker Compose y Git Hooks en Dart.',
         impact:
-          'Desplegada en +30 hoteles en Europa y LATAM. Mejora del 35% en satisfacción de huéspedes según encuestas post-estancia.',
+          'Desplegada en +30 hoteles en Europa y LATAM. Experiencia fluida en SmartTV, despliegues confiables y arquitectura extensible. Mejora del 35% en satisfacción de huéspedes según encuestas post-estancia.',
       },
       nextival: {
         title: 'Nextival CMS – Gestión de Festivales',
-        stack: 'Astro · SolidJS · TailwindCSS · Node.js · WebSockets',
+        stack:
+          'Astro · SolidJS · TypeScript · TailwindCSS · WebSockets · JWT · Spotify API',
         description:
-          'Sistema de gestión de contenido para festivales musicales con renderizado híbrido SSR/SSG, Clean Architecture con Repository Pattern, integración con Spotify Web API y editor WYSIWYG. WebSockets para notificaciones en tiempo real.',
+          'Sistema de gestión de contenido para festivales musicales con Clean Architecture y Repository Pattern. API RESTful con Server Actions y middleware JWT. Integración con Spotify Web API y Geocoding API. Editor WYSIWYG (Quill.js) para gestión avanzada de artistas y escenarios. WebSockets para notificaciones y mensajería en tiempo real.',
         impact:
-          'Tiempos de carga <1.5s, optimización SEO completa. Entregado en 4 meses como proyecto funcional para producción.',
+          'Tiempos de carga <1.5s con renderizado híbrido SSR/SSG, optimización SEO completa. Entregado en 4 meses como proyecto funcional para producción.',
       },
       stelcamping: {
         title: 'STELCAMPING – Gestión de Campings',
-        stack: 'Flutter · Firebase · GetX · REST APIs · Push Notifications',
+        stack:
+          'Flutter · Firebase · GetX/BLoC · dio · StringLocalizations · REST APIs',
         description:
-          'Aplicación integral para gestión de campings con sistema de reservas, calendario de actividades, notificaciones push, chat en tiempo real y panel administrativo. Arquitectura modular con clase base BaseState<T> para centralizar utilidades.',
+          'Aplicación integral para gestión de campings con clase base BaseState<T> para centralizar diálogos, localización, foco y utilidades de UI. Sistema de registro, autenticación, reservas, calendario de actividades, notificaciones y perfil. Integración con APIs REST (auth, reservas, actividades, notificaciones, perfil). Arquitectura modular con separación clara entre presentación, lógica de negocio y datos.',
         impact:
-          'Más de 1,000 usuarios activos. Automatizó procesos que antes requerían 3 personas, reduciendo costes operativos en 40%.',
+          'Más de 1,000 usuarios activos. Reutilización de código, consistencia en UX y escalabilidad. Automatizó procesos que antes requerían 3 personas, reduciendo costes operativos en 40%.',
       },
       bnc10: {
-        title: 'BNC10 – Aplicación Neobanca',
-        stack: 'Flutter · GetX · Firebase · Biometric Auth · Secure Storage',
+        title: 'BNC10 – Neobanco Frontend',
+        stack:
+          'Flutter · GetX · Firebase · GetStorage · responsive_framework · Sentry',
         description:
-          'App de neobanca social con P2P, gestión de cuentas y analytics financieras. Implementé seguridad bancaria (biometric auth, encrypted storage), responsive avanzado con responsive_framework y monitoreo con Sentry.',
+          'Frontend de neobanco con responsive avanzado usando responsive_framework. Theming diferenciado para web y móvil. Monitoreo de errores en producción con Sentry. Modularización en core, resources, routing y commons. Buenas prácticas de UI/UX: orientación fija, control de escala, transiciones animadas. Seguridad bancaria con autenticación biométrica y storage encriptado.',
         impact:
-          '500+ usuarios activos, rating 4.7⭐, 99.5% de sesiones sin crashes. Reducción del 60% en fricción de autenticación.',
+          '500+ usuarios activos, rating 4.7⭐, 99.5% de sesiones sin crashes. Reducción del 60% en fricción de autenticación. Experiencia fluida cross-platform.',
       },
       tookane: {
-        title: 'TOOKANE – Seguimiento Logístico',
-        stack: 'Flutter · Riverpod · Supabase · Geolocalización Real-Time',
+        title: 'TOOKANE – App Multipropósito',
+        stack:
+          'Flutter · Provider · Riverpod · BLoC · Firebase · Hive · SharedPreferences',
         description:
-          'Sistema de tracking en tiempo real con offline-first architecture para zonas con conectividad limitada. Clean Architecture + MVVM + Repository Pattern con optimización de batería reduciendo consumo en 40%.',
+          'Aplicación multipropósito con Clean Architecture + MVVM + Repository Pattern. Autenticación multiplataforma (correo, Google, Facebook), gestión de usuarios y perfiles, consumo de APIs externas y visualización de datos. Notificaciones push, soporte offline-first con Hive/SharedPreferences, internacionalización multiidioma, animaciones y transiciones personalizadas. CI/CD para despliegues automatizados.',
         impact:
-          'Mejora del 30% en eficiencia de entregas mediante optimización de rutas basada en datos reales de geolocalización.',
+          'Buenas prácticas con linter, análisis estático, pruebas unitarias y de widgets, documentación clara y CI/CD. Mejora del 30% en eficiencia mediante optimización basada en datos reales.',
+      },
+      portfolio: {
+        title: 'Portfolio Personal – Chrystian Michell',
+        stack:
+          'Astro · TypeScript · CSS Modules · GitHub Actions · Netlify · PWA',
+        description:
+          'Portfolio personal moderno y responsive desarrollado con Astro para renderizado estático optimizado. Arquitectura modular con TypeScript, sistema de traducciones i18n, SEO avanzado con structured data, PWA con manifest y service worker. Optimización de performance con lazy loading, code splitting y compresión de assets. Deployment automatizado con GitHub Actions.',
+        impact:
+          'Lighthouse score 100/100 en todas las métricas. Tiempo de carga <1s, SEO optimizado para posicionamiento profesional. Internacionalización ES/EN completa.',
       },
     },
   },
@@ -69,43 +83,57 @@ export const projects: Record<'es' | 'en', ProjectsTranslations> = {
     list: {
       yuvod: {
         title: 'YUVOD – OTT Platform for Hotels',
-        stack: 'Flutter · BLoC · WebSockets · Video.js · Docker · AWS',
+        stack:
+          'Flutter · BLoC · auto_route · get_it · Video.js · Docker · GitHub Actions · WebSockets',
         description:
-          'Cross-platform streaming platform for SmartTVs, mobile, and web with custom spatial navigation, modular player with DRM and dynamic subtitles. Multi-entry architecture with dynamic UI selection for different devices.',
+          'Cross-platform streaming platform for SmartTVs, mobile, and web with multi-entry architecture and dynamic UI selection. Advanced spatial navigation with NavigationHandlerBloc, support for nested menus, grids, and carousels. Modular player with DRM, dynamic subtitles, token authentication, and fullscreen. DevOps with RPS in pubspec.yaml, Docker Compose, and Git Hooks in Dart.',
         impact:
-          'Deployed in +30 hotels across Europe and LATAM. 35% improvement in guest satisfaction according to post-stay surveys.',
+          'Deployed in +30 hotels across Europe and LATAM. Smooth SmartTV experience, reliable deployments, and extensible architecture. 35% improvement in guest satisfaction according to post-stay surveys.',
       },
       nextival: {
         title: 'Nextival CMS – Festival Management',
-        stack: 'Astro · SolidJS · TailwindCSS · Node.js · WebSockets',
+        stack:
+          'Astro · SolidJS · TypeScript · TailwindCSS · WebSockets · JWT · Spotify API',
         description:
-          'Content management system for music festivals with hybrid SSR/SSG rendering, Clean Architecture with Repository Pattern, Spotify Web API integration, and WYSIWYG editor. WebSockets for real-time notifications.',
+          'Content management system for music festivals with Clean Architecture and Repository Pattern. RESTful API with Server Actions and JWT middleware. Integration with Spotify Web API and Geocoding API. WYSIWYG editor (Quill.js) for advanced artist and stage management. WebSockets for real-time notifications and messaging.',
         impact:
-          'Load times <1.5s, complete SEO optimization. Delivered in 4 months as a production-ready project.',
+          'Load times <1.5s with hybrid SSR/SSG rendering, complete SEO optimization. Delivered in 4 months as a production-ready project.',
       },
       stelcamping: {
         title: 'STELCAMPING – Camping Management',
-        stack: 'Flutter · Firebase · GetX · REST APIs · Push Notifications',
+        stack:
+          'Flutter · Firebase · GetX/BLoC · dio · StringLocalizations · REST APIs',
         description:
-          'Comprehensive camping management application with booking system, activities calendar, push notifications, real-time chat, and admin panel. Modular architecture with BaseState<T> base class to centralize utilities.',
+          'Comprehensive camping management application with BaseState<T> base class to centralize dialogs, localization, focus, and UI utilities. Registration, authentication, reservations, activities calendar, notifications, and profile system. Integration with REST APIs (auth, reservations, activities, notifications, profile). Modular architecture with clear separation between presentation, business logic, and data layers.',
         impact:
-          'More than 1,000 active users. Automated processes that previously required 3 people, reducing operational costs by 40%.',
+          'More than 1,000 active users. Code reusability, UX consistency, and scalability. Automated processes that previously required 3 people, reducing operational costs by 40%.',
       },
       bnc10: {
-        title: 'BNC10 – Neobanking App',
-        stack: 'Flutter · GetX · Firebase · Biometric Auth · Secure Storage',
+        title: 'BNC10 – Neobanking Frontend',
+        stack:
+          'Flutter · GetX · Firebase · GetStorage · responsive_framework · Sentry',
         description:
-          'Social neobanking app with P2P, account management, and financial analytics. Implemented banking security (biometric auth, encrypted storage), advanced responsive design with responsive_framework, and monitoring with Sentry.',
+          'Neobanking frontend with advanced responsive design using responsive_framework. Differentiated theming for web and mobile. Production error monitoring with Sentry. Modularization in core, resources, routing, and commons. UI/UX best practices: fixed orientation, scale control, animated transitions. Banking security with biometric authentication and encrypted storage.',
         impact:
-          '500+ active users, 4.7⭐ rating, 99.5% crash-free sessions. 60% reduction in authentication friction.',
+          '500+ active users, 4.7⭐ rating, 99.5% crash-free sessions. 60% reduction in authentication friction. Smooth cross-platform experience.',
       },
       tookane: {
-        title: 'TOOKANE – Logistics Tracking',
-        stack: 'Flutter · Riverpod · Supabase · Real-Time Geolocation',
+        title: 'TOOKANE – Multipurpose App',
+        stack:
+          'Flutter · Provider · Riverpod · BLoC · Firebase · Hive · SharedPreferences',
         description:
-          'Real-time tracking system with offline-first architecture for areas with limited connectivity. Clean Architecture + MVVM + Repository Pattern with battery optimization reducing consumption by 40%.',
+          'Multipurpose application with Clean Architecture + MVVM + Repository Pattern. Cross-platform authentication (email, Google, Facebook), user and profile management, external API consumption and data visualization. Push notifications, offline-first support with Hive/SharedPreferences, multi-language internationalization, custom animations and transitions. CI/CD for automated deployments.',
         impact:
-          '30% improvement in delivery efficiency through route optimization based on real geolocation data.',
+          'Best practices with linter, static analysis, unit and widget tests, clear documentation and CI/CD. 30% improvement in efficiency through real data-based optimization.',
+      },
+      portfolio: {
+        title: 'Personal Portfolio – Chrystian Michell',
+        stack:
+          'Astro · TypeScript · CSS Modules · GitHub Actions · Netlify · PWA',
+        description:
+          'Modern and responsive personal portfolio developed with Astro for optimized static rendering. Modular architecture with TypeScript, i18n translation system, advanced SEO with structured data, PWA with manifest and service worker. Performance optimization with lazy loading, code splitting, and asset compression. Automated deployment with GitHub Actions.',
+        impact:
+          'Lighthouse score 100/100 in all metrics. Load time <1s, SEO optimized for professional positioning. Complete ES/EN internationalization.',
       },
     },
   },

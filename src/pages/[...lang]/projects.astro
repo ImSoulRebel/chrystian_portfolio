@@ -24,7 +24,13 @@ const pageTitle = projectsPageT.seo.title;
 const pageDescription = projectsPageT.seo.description;
 
 // Tipo para las claves de proyectos
-type ProjectKey = 'yuvod' | 'nextival' | 'stelcamping' | 'bnc10' | 'tookane';
+type ProjectKey =
+  | 'yuvod'
+  | 'nextival'
+  | 'stelcamping'
+  | 'bnc10'
+  | 'tookane'
+  | 'portfolio';
 
 // Tipo para los proyectos combinados
 type Project = {
@@ -86,8 +92,16 @@ const personalProjectsConfig: Array<{
   image: any;
 }> = [
   {
-    key: 'nextival',
+    key: 'portfolio',
     priority: 1,
+    featured: true,
+    liveUrl: 'https://chrystianmichell.com',
+    githubUrl: 'https://github.com/ImSoulRebel/chrystian_portfolio',
+    image: assets.astroLogo,
+  },
+  {
+    key: 'nextival',
+    priority: 2,
     featured: false,
     githubUrl: 'https://github.com/ImSoulRebel/nextival-cms',
     image: assets.nextivalLogo,

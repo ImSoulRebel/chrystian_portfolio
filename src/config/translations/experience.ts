@@ -13,7 +13,7 @@ export const experience: Record<'es' | 'en', ExperienceTranslations> = {
         period: 'Enero 2023 – Enero 2025',
         location: 'Remoto desde Madrid para empresa en Valencia, España',
         description:
-          'Lideré la estrategia técnica de una plataforma OTT (streaming de contenidos) para el sector hotelero desplegada en más de 30 hoteles en Europa y LATAM. Gestioné equipos multidisciplinares de hasta 9 personas, implementé arquitecturas escalables con Clean Architecture y BLoC, y establecí pipelines CI/CD que redujeron el tiempo de despliegue en 40%. Logré mejoras de rendimiento del 60% en Smart TVs de gama baja.',
+          'Lideré la estrategia técnica de una plataforma OTT (streaming de contenidos) para el sector hotelero desplegada en más de 30 hoteles en Europa y LATAM. Gestioné equipos multidisciplinares de hasta 9 personas, implementé arquitecturas escalables con Clean Architecture y BLoC, y establecí pipelines CI/CD que redujeron el tiempo de despliegue en 40%. Logré mejoras de rendimiento del 60% en Smart TVs de gama baja mediante navegación espacial avanzada y reproductor modular con DRM. Integración exitosa con +10 sistemas PMS hoteleros (Oracle OPERA, Mews, Cloudbeds).',
         skills: [
           'Flutter',
           'Dart',
@@ -25,6 +25,8 @@ export const experience: Record<'es' | 'en', ExperienceTranslations> = {
           'AWS',
           'GitHub Actions',
           'WebSockets',
+          'auto_route',
+          'get_it',
         ],
       },
       nextival: {
@@ -92,7 +94,7 @@ export const experience: Record<'es' | 'en', ExperienceTranslations> = {
         period: 'January 2023 – January 2025',
         location: 'Remote from Madrid for company in Valencia, Spain',
         description:
-          'Led technical strategy for an OTT platform (content streaming) for the hotel sector deployed in over 30 hotels across Europe and LATAM. Managed multidisciplinary teams of up to 9 people, implemented scalable architectures with Clean Architecture and BLoC, and established CI/CD pipelines that reduced deployment time by 40%. Achieved 60% performance improvements on low-end Smart TVs.',
+          'Led technical strategy for an OTT platform (content streaming) for the hotel sector deployed in over 30 hotels across Europe and LATAM. Managed multidisciplinary teams of up to 9 people, implemented scalable architectures with Clean Architecture and BLoC, and established CI/CD pipelines that reduced deployment time by 40%. Achieved 60% performance improvements on low-end Smart TVs through advanced spatial navigation and modular player with DRM. Successful integration with +10 hotel PMS systems (Oracle OPERA, Mews, Cloudbeds).',
         skills: [
           'Flutter',
           'Dart',
@@ -104,6 +106,8 @@ export const experience: Record<'es' | 'en', ExperienceTranslations> = {
           'AWS',
           'GitHub Actions',
           'WebSockets',
+          'auto_route',
+          'get_it',
         ],
       },
       nextival: {

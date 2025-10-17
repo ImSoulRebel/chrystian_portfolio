@@ -37,7 +37,7 @@ export const SITE_CONFIG = {
 
   // SEO Keywords
   keywords:
-    'Flutter Developer, Dart, Tech Lead, Clean Architecture, BLoC Pattern, Desarrollo Multiplataforma, Apps Móviles, Smart TV, OTT Platform, Liderazgo Técnico',
+    'Flutter Senior Engineer, Dart, Arquitecto de Software, Tech Lead, Clean Architecture, BLoC Pattern, Desarrollo Multiplataforma, Apps Móviles, Smart TV, OTT Platform, Liderazgo Técnico, Optimización de Rendimiento, Pixel-Perfect, Firebase, Docker, AWS, GitHub Actions, WebSockets, Full-Stack Web Developer',
 
   // Información de contacto
   contact: {

@@ -3,18 +3,18 @@ import type { SEOTranslations } from './types';
 export const seo: Record<'es' | 'en', SEOTranslations> = {
   es: {
     title:
-      'Chrystian Michell | Líder Técnico & Arquitecto Flutter - Desarrollador Senior Disponible',
+      'Chrystian Michell | Senior Flutter Engineer & Arquitecto de Software - Tech Lead Disponible',
     description:
-      'Líder Técnico & Arquitecto Flutter especializado en desarrollo multiplataforma. Más de 5 años de experiencia, 10+ apps en producción en 11 países. Disponible para roles de liderazgo técnico, CTO, Tech Lead y proyectos de consultoría empresarial.',
+      'Senior Flutter Engineer especializado en arquitectura limpia, optimización de rendimiento y diseño pixel-perfect. Más de 5 años de experiencia liderando equipos técnicos, 10+ apps multiplataforma en producción desplegadas en 11 países (iOS, Android, Web, SmartTV). Especialista en plataformas OTT, navegación espacial y DevOps con Docker y GitHub Actions.',
     keywords:
-      'Flutter Developer, Dart Expert, Tech Lead, CTO, Arquitecto Software, Senior Developer, Clean Architecture, BLoC Pattern, Desarrollo Multiplataforma, Apps Móviles, Smart TV, OTT Platform, Liderazgo Técnico, Consultoría Tecnológica, Remote Work, Hiring, Available for Hire, Head Hunter, Technical Recruitment',
+      'Senior Flutter Engineer, Dart, Arquitecto de Software, Tech Lead, Clean Architecture, BLoC Pattern, Optimización de Rendimiento, Pixel-Perfect, Smart TV, OTT Platform, DevOps, Docker, GitHub Actions, Firebase, AWS, WebSockets, auto_route, get_it, Video.js, Navegación Espacial, Liderazgo Técnico, Available for Hire',
   },
   en: {
     title:
-      'Chrystian Michell | Tech Lead & Flutter Architect - Senior Developer Available',
+      'Chrystian Michell | Senior Flutter Engineer & Software Architect - Tech Lead Available',
     description:
-      'Tech Lead & Flutter Architect specialized in cross-platform development. Over 5 years of experience, 10+ production apps in 11 countries. Available for technical leadership roles, CTO, Tech Lead and enterprise consulting projects.',
+      'Senior Flutter Engineer specialized in clean architecture, performance optimization, and pixel-perfect design. Over 5 years of experience leading technical teams, 10+ cross-platform production apps deployed in 11 countries (iOS, Android, Web, SmartTV). Specialist in OTT platforms, spatial navigation, and DevOps with Docker and GitHub Actions.',
     keywords:
-      'Flutter Developer, Dart Expert, Tech Lead, CTO, Software Architect, Senior Developer, Clean Architecture, BLoC Pattern, Cross-platform Development, Mobile Apps, Smart TV, OTT Platform, Technical Leadership, Technology Consulting, Remote Work, Hiring, Available for Hire, Head Hunter, Technical Recruitment',
+      'Senior Flutter Engineer, Dart, Software Architect, Tech Lead, Clean Architecture, BLoC Pattern, Performance Optimization, Pixel-Perfect, Smart TV, OTT Platform, DevOps, Docker, GitHub Actions, Firebase, AWS, WebSockets, auto_route, get_it, Video.js, Spatial Navigation, Technical Leadership, Available for Hire',
   },
 } as const;
