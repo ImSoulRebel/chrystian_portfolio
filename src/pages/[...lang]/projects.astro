@@ -1,9 +1,12 @@
 ---
 import { Layout } from '@layouts';
 import { Header, Footer, ProjectCard, BackToHome } from '@components';
-import { type Locale, translations } from '@utils/i18n';
+import { type Locale } from '@utils/i18n';
 import { projectsPage } from '@config/translations';
-import * as assets from '@assets';
+import {
+  getProjectsByCategory,
+  type ProcessedProject,
+} from '@utils/projectsManager';
 
 // Define static paths for both languages
 export async function getStaticPaths() {
@@ -23,126 +26,9 @@ const hasNavLinks = false;
 const pageTitle = projectsPageT.seo.title;
 const pageDescription = projectsPageT.seo.description;
 
-// Tipo para las claves de proyectos
-type ProjectKey =
-  | 'yuvod'
-  | 'nextival'
-  | 'stelcamping'
-  | 'bnc10'
-  | 'tookane'
-  | 'portfolio';
-
-// Tipo para los proyectos combinados
-type Project = {
-  title: string;
-  stack: string;
-  description: string;
-  impact: string;
-  featured: boolean;
-  liveUrl?: string | undefined;
-  githubUrl?: string | undefined;
-  image: any;
-};
-
-// Configuración de proyectos empresariales B2B
-const businessProjectsConfig: Array<{
-  key: ProjectKey;
-  priority: number;
-  featured: boolean;
-  liveUrl?: string;
-  githubUrl?: string;
-  image: any;
-}> = [
-  {
-    key: 'yuvod',
-    priority: 1,
-    featured: true,
-    liveUrl: 'https://yuvod.com',
-    image: assets.yuvodLogo,
-  },
-  {
-    key: 'bnc10',
-    priority: 2,
-    featured: true,
-    image: assets.bnc10Logo,
-  },
-  {
-    key: 'tookane',
-    priority: 3,
-    featured: true,
-    liveUrl: 'https://tookane.com',
-    image: assets.tookaneLogo,
-  },
-  {
-    key: 'stelcamping',
-    priority: 4,
-    featured: false,
-    liveUrl: 'https://stel.es',
-    image: assets.stelLogo,
-  },
-];
-
-// Configuración de proyectos personales
-const personalProjectsConfig: Array<{
-  key: ProjectKey;
-  priority: number;
-  featured: boolean;
-  liveUrl?: string;
-  githubUrl?: string;
-  image: any;
-}> = [
-  {
-    key: 'portfolio',
-    priority: 1,
-    featured: true,
-    liveUrl: 'https://chrystianmichell.com',
-    githubUrl: 'https://github.com/ImSoulRebel/chrystian_portfolio',
-    image: assets.astroLogo,
-  },
-  {
-    key: 'nextival',
-    priority: 2,
-    featured: false,
-    githubUrl: 'https://github.com/ImSoulRebel/nextival-cms',
-    image: assets.nextivalLogo,
-  },
-];
-
-// Construir proyectos empresariales
-const businessProjects: Project[] = businessProjectsConfig.map((config) => {
-  const projectData = translations[locale as Locale].projects.list[config.key];
-  if (!projectData) {
-    throw new Error(`Missing project data for key: ${config.key}`);
-  }
-  return {
-    title: projectData.title,
-    stack: projectData.stack,
-    description: projectData.description,
-    impact: projectData.impact,
-    featured: config.featured,
-    liveUrl: config.liveUrl,
-    githubUrl: config.githubUrl,
-    image: config.image,
-  };
-});
-
-// Construir proyectos personales
-const personalProjects: Project[] = personalProjectsConfig.map((config) => {
-  const projectData = translations[locale as Locale].projects.list[config.key];
-  if (!projectData) {
-    throw new Error(`Missing project data for key: ${config.key}`);
-  }
-  return {
-    title: projectData.title,
-    stack: projectData.stack,
-    description: projectData.description,
-    impact: projectData.impact,
-    featured: config.featured,
-    liveUrl: config.liveUrl,
-    githubUrl: config.githubUrl,
-    image: config.image,
-  };
-});
+// Obtener proyectos usando Content Collections
+const businessProjects = await getProjectsByCategory('business', locale);
+const personalProjects = await getProjectsByCategory('personal', locale);
 
 // Separar proyectos destacados empresariales
 const featuredBusinessProjects = businessProjects.filter((p) => p.featured);
@@ -194,10 +80,10 @@ const regularBusinessProjects = businessProjects.filter((p) => !p.featured);
           </h3>
           <div class="projects-grid featured-grid">
             {
-              featuredBusinessProjects.map((project: Project) => (
+              featuredBusinessProjects.map((project: ProcessedProject) => (
                 <ProjectCard
                   title={project.title}
-                  stack={project.stack}
+                  stack={project.stack.join(' · ')}
                   description={project.description}
                   impact={project.impact}
                   featured={project.featured}
@@ -219,10 +105,10 @@ const regularBusinessProjects = businessProjects.filter((p) => !p.featured);
                 {projectsPageT.subcategories.otherBusiness}
               </h3>
               <div class="projects-grid regular-grid">
-                {regularBusinessProjects.map((project: Project) => (
+                {regularBusinessProjects.map((project: ProcessedProject) => (
                   <ProjectCard
                     title={project.title}
-                    stack={project.stack}
+                    stack={project.stack.join(' · ')}
                     description={project.description}
                     impact={project.impact}
                     featured={project.featured}
@@ -252,10 +138,10 @@ const regularBusinessProjects = businessProjects.filter((p) => !p.featured);
         </div>
         <div class="projects-grid personal-grid">
           {
-            personalProjects.map((project: Project) => (
+            personalProjects.map((project: ProcessedProject) => (
               <ProjectCard
                 title={project.title}
-                stack={project.stack}
+                stack={project.stack.join(' · ')}
                 description={project.description}
                 impact={project.impact}
                 featured={project.featured}
