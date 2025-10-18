@@ -1,5 +1,5 @@
 // Main application scripts coordinator
-import { PageInteractions } from './interactions.js';
+import { PageInteractions } from './interactions';
 
 // Main app class to coordinate all page functionality
 export class App {

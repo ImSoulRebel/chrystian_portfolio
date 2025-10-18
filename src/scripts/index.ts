@@ -12,14 +12,13 @@
 export * from './app.js';
 
 // === Form Handling ===
-export * from './contactForm.js';
-export { ContactForm as ModernContactForm } from './contactFormModern.js';
+export { ContactForm } from './contactForm';
 
 // === UI Interactions ===
-export * from './interactions.js';
+export * from './interactions';
 
 // === Component-specific Scripts ===
-export * from './skillsCarousel.js';
+export * from './skillsCarousel';
 
 // === Type definitions for script functions ===
 export type ScriptFunction = () => void | Promise<void>;
