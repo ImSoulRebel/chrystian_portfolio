@@ -424,6 +424,10 @@
   .textarea {
     padding: 0.75rem;
     font-size: 0.9rem;
+    /* Mejora para móviles: botones más grandes para tocar */
+    min-height: 44px;
+    -webkit-appearance: none;
+    appearance: none;
   }
 
   .textarea {
@@ -433,11 +437,24 @@
   .submitButton {
     width: 100%;
     padding: 0.875rem 1.5rem;
+    /* Altura mínima recomendada para botones táctiles */
+    min-height: 44px;
+    /* Prevenir zoom en iOS */
+    touch-action: manipulation;
+    -webkit-user-select: none;
+    user-select: none;
   }
 
   .statusMessage {
     padding: 0.875rem;
     font-size: 0.9rem;
+  }
+
+  /* Mejora de UX en móviles: estado focused más visible */
+  .input:focus,
+  .textarea:focus {
+    transform: translateY(-1px);
+    box-shadow: 0 0 0 3px rgba(0, 212, 255, 0.2);
   }
 }
 
@@ -479,11 +496,34 @@
   .input,
   .textarea {
     padding: 0.65rem;
+    /* Mantener altura mínima para facilidad de toque */
+    min-height: 44px;
   }
 
   .submitButton {
     padding: 0.75rem 1rem;
     font-size: 0.9rem;
     min-width: 140px;
+    /* Altura mínima para botones en pantallas muy pequeñas */
+    min-height: 48px;
+  }
+
+  /* Mejorar visibilidad de mensajes de estado en pantallas pequeñas */
+  .statusMessage {
+    padding: 1rem;
+    font-size: 0.85rem;
+    border-radius: 8px;
+  }
+
+  /* Optimizar el espaciado del formulario en móviles pequeños */
+  .contactForm {
+    gap: 1rem;
+    padding: 0 0.5rem;
+  }
+
+  /* Hacer que los labels sean más legibles en pantallas pequeñas */
+  .label {
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
   }
 }

@@ -1,12 +1,13 @@
 // Contact form functionality
 export class ContactForm {
-  constructor(translations = {}) {
+  constructor(translations = {}, cssClasses = {}) {
     this.form = null;
     this.message = null;
     this.submitBtn = null;
     this.btnText = null;
     this.btnLoading = null;
     this.translations = translations;
+    this.cssClasses = cssClasses;
 
     this.init();
   }
@@ -24,13 +25,32 @@ export class ContactForm {
     this.form = document.getElementById('contact-form');
     this.message = document.getElementById('form-message');
 
-    if (!this.form) return;
+    if (!this.form) {
+      console.error(
+        'ContactForm: Form element with id "contact-form" not found'
+      );
+      return;
+    }
+
+    if (!this.message) {
+      console.error(
+        'ContactForm: Message element with id "form-message" not found'
+      );
+      return;
+    }
 
     this.submitBtn = this.form.querySelector('button[type="submit"]');
     this.btnText = this.submitBtn?.querySelector('.btn-text');
     this.btnLoading = this.submitBtn?.querySelector('.btn-loading');
 
-    // ContactForm initialized successfully
+    if (!this.submitBtn) {
+      console.error('ContactForm: Submit button not found');
+      return;
+    }
+
+    // Log successful initialization
+    console.log('ContactForm: Initialized successfully');
+    console.log('Form action:', this.form.action);
 
     this.bindEvents();
     this.setupMessageObserver();
@@ -54,7 +74,9 @@ export class ContactForm {
   validateField(field) {
     const isValid = field.checkValidity();
     const fieldContainer =
-      field.closest('.formGroup') || field.closest('[class*="formGroup"]');
+      field.closest(`[class*="${this.cssClasses.formGroup}"]`) ||
+      field.closest('.formGroup') ||
+      field.closest('[class*="formGroup"]');
 
     if (!isValid) {
       field.classList.add('invalid');
@@ -72,7 +94,9 @@ export class ContactForm {
   clearFieldError(field) {
     field.classList.remove('invalid');
     const fieldContainer =
-      field.closest('.formGroup') || field.closest('[class*="formGroup"]');
+      field.closest(`[class*="${this.cssClasses.formGroup}"]`) ||
+      field.closest('.formGroup') ||
+      field.closest('[class*="formGroup"]');
     this.hideFieldError(fieldContainer);
   }
 
@@ -119,15 +143,32 @@ export class ContactForm {
 
   async handleSubmit(e) {
     e.preventDefault();
+    console.log('ContactForm: Form submission started');
+
     if (!this.form || !this.submitBtn) {
+      console.error('ContactForm: Form or submit button not available');
       return;
     }
 
+    // Check if form action is available
+    if (!this.form.action || this.form.action === '') {
+      console.error('ContactForm: Form action is not set');
+      this.showErrorMessage(
+        'Form configuration error. Please contact the administrator.'
+      );
+      return;
+    }
+
+    console.log('Form action URL:', this.form.action);
+
     // Validate form before submission
     if (!this.validateForm()) {
+      console.log('ContactForm: Form validation failed');
       this.showValidationError();
       return;
     }
+
+    console.log('ContactForm: Form validation passed');
 
     // Hide any previous messages
     if (this.message) {
@@ -135,12 +176,11 @@ export class ContactForm {
     }
 
     // Show loading state
-    if (this.btnText) this.btnText.style.display = 'none';
-    if (this.btnLoading) this.btnLoading.style.display = 'flex';
-    this.submitBtn.disabled = true;
+    this.setLoadingState(true);
 
     try {
       const formData = new FormData(this.form);
+      console.log('ContactForm: Sending request to:', this.form.action);
 
       const response = await fetch(this.form.action, {
         method: 'POST',
@@ -150,18 +190,38 @@ export class ContactForm {
         },
       });
 
+      console.log('ContactForm: Response status:', response.status);
+
       if (response.ok) {
+        console.log('ContactForm: Form submitted successfully');
         this.showSuccessMessage();
         this.form.reset();
         // Clear validation states after reset
         this.clearAllValidation();
       } else {
-        throw new Error(`Error en el envío: ${response.status}`);
+        const errorText = await response.text();
+        console.error('ContactForm: Server error:', response.status, errorText);
+        throw new Error(`Server error: ${response.status}`);
       }
     } catch (error) {
+      console.error('ContactForm: Submission error:', error);
       this.showErrorMessage();
     } finally {
-      this.resetButtonState();
+      this.setLoadingState(false);
+    }
+  }
+
+  setLoadingState(isLoading) {
+    if (!this.submitBtn) return;
+
+    if (isLoading) {
+      if (this.btnText) this.btnText.style.display = 'none';
+      if (this.btnLoading) this.btnLoading.style.display = 'flex';
+      this.submitBtn.disabled = true;
+    } else {
+      if (this.btnText) this.btnText.style.display = 'block';
+      if (this.btnLoading) this.btnLoading.style.display = 'none';
+      this.submitBtn.disabled = false;
     }
   }
 
@@ -196,27 +256,26 @@ export class ContactForm {
     this.message.style.display = 'flex';
   }
 
-  showErrorMessage() {
+  showErrorMessage(customMessage = null) {
     if (!this.message) return;
+    const errorMessage =
+      customMessage ||
+      this.translations?.validation?.submitError ||
+      'There was an error sending the message. Please try again or contact directly via email.';
+
     this.message.innerHTML = `
       <span class="statusIcon">⚠</span>
-      ${this.translations?.validation?.submitError || 'There was an error sending the message. Please try again or contact directly via email.'}
+      ${errorMessage}
     `;
     this.message.className = 'status-message error';
     this.message.style.display = 'flex';
-  }
-
-  resetButtonState() {
-    if (this.btnText) this.btnText.style.display = 'block';
-    if (this.btnLoading) this.btnLoading.style.display = 'none';
-    if (this.submitBtn) this.submitBtn.disabled = false;
   }
 
   hideMessage() {
     if (!this.message) return;
 
     setTimeout(() => {
-      if (this.message.style.display === 'block') {
+      if (this.message.style.display === 'flex') {
         this.message.style.display = 'none';
       }
     }, 5000);
@@ -232,7 +291,7 @@ export class ContactForm {
           mutation.type === 'attributes' &&
           mutation.attributeName === 'style'
         ) {
-          if (this.message.style.display === 'block') {
+          if (this.message.style.display === 'flex') {
             this.hideMessage();
           }
         }

@@ -13,6 +13,7 @@ export * from './app.js';
 
 // === Form Handling ===
 export * from './contactForm.js';
+export { ContactForm as ModernContactForm } from './contactFormModern.js';
 
 // === UI Interactions ===
 export * from './interactions.js';
