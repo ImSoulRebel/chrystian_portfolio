@@ -66,7 +66,9 @@ const navLinks = [
       }
 
       <!-- Language Selector -->
-      <LanguageSelector currentLocale={locale} currentPath={currentPath} />
+      <div class="nav-lang-selector">
+        <LanguageSelector currentLocale={locale} currentPath={currentPath} />
+      </div>
     </nav>
   </div>
 </header>
@@ -90,13 +92,20 @@ const navLinks = [
   }
 
   .nav {
-      display: flex;
-      justify-content: flex-start;
-      align-items: center;
-      padding: 1rem 0;
-      position: relative;
-      gap: 2rem;
-    }
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 1rem 0;
+    position: relative;
+    gap: 2rem;
+    width: 100%;
+  }
+
+  .nav-lang-selector {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+  }
 
     .nav-toggle {
       order: 0;
