@@ -25,7 +25,7 @@ export class PageInteractions {
       animationDuration: 0.6,
       ...config,
     };
-    
+
     this.init();
   }
 
@@ -36,22 +36,23 @@ export class PageInteractions {
 
   // Smooth scrolling for anchor links
   private initSmoothScrolling(): void {
-    const anchors = document.querySelectorAll<HTMLAnchorElement>('a[href^="#"]');
-    
+    const anchors =
+      document.querySelectorAll<HTMLAnchorElement>('a[href^="#"]');
+
     anchors.forEach((anchor) => {
       anchor.addEventListener('click', (e: Event) => {
         e.preventDefault();
-        
+
         const href = anchor.getAttribute('href');
         if (!href) return;
-        
+
         const target = document.querySelector<HTMLElement>(href);
         if (target) {
           target.scrollIntoView({
             behavior: 'smooth',
             block: 'start',
           });
-          
+
           // Optional: Update URL hash without jumping
           if (history.replaceState) {
             history.replaceState(null, '', href);
@@ -68,13 +69,16 @@ export class PageInteractions {
       rootMargin: this.config.rootMargin,
     };
 
-    this.observer = new IntersectionObserver((entries: IntersectionObserverEntry[]) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          this.animateElement(entry.target as HTMLElement);
-        }
-      });
-    }, observerOptions);
+    this.observer = new IntersectionObserver(
+      (entries: IntersectionObserverEntry[]) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            this.animateElement(entry.target as HTMLElement);
+          }
+        });
+      },
+      observerOptions
+    );
 
     this.setupAnimationElements();
   }
@@ -85,11 +89,13 @@ export class PageInteractions {
       '.skill-item',
       '.experience-item',
       '.highlight-item',
-      '.stat-item'
+      '.stat-item',
     ];
-    
-    const elements = document.querySelectorAll<HTMLElement>(selectors.join(', '));
-    
+
+    const elements = document.querySelectorAll<HTMLElement>(
+      selectors.join(', ')
+    );
+
     elements.forEach((element) => {
       this.setupElementForAnimation(element);
       this.observer?.observe(element);

@@ -8,7 +8,11 @@ interface SkillElement extends Element {
   style: CSSStyleDeclaration;
   hasAttribute(name: string): boolean;
   setAttribute(name: string, value: string): void;
-  addEventListener(type: string, listener: EventListener, options?: AddEventListenerOptions | boolean): void;
+  addEventListener(
+    type: string,
+    listener: EventListener,
+    options?: AddEventListenerOptions | boolean
+  ): void;
 }
 
 interface CarouselConfig {
@@ -21,7 +25,11 @@ interface CarouselConfig {
 
 declare global {
   interface Window {
-    gtag?: (command: string, action: string, parameters: Record<string, any>) => void;
+    gtag?: (
+      command: string,
+      action: string,
+      parameters: Record<string, any>
+    ) => void;
   }
 }
 
@@ -64,7 +72,8 @@ export class SkillsCarousel {
 
   private setupCarousel(): void {
     this.skillsTrack = document.querySelector<HTMLElement>('.skills-track');
-    this.skillsCarousel = document.querySelector<HTMLElement>('.skills-carousel');
+    this.skillsCarousel =
+      document.querySelector<HTMLElement>('.skills-carousel');
 
     if (!this.skillsTrack || !this.skillsCarousel) {
       console.warn('SkillsCarousel: Required elements not found');
@@ -140,8 +149,8 @@ export class SkillsCarousel {
     this.isDragging = false; // Will be set to true only if we actually drag
     this.pauseAnimation();
 
-    const clientX = 'touches' in e ? e.touches[0]?.clientX ?? 0 : e.clientX;
-    const clientY = 'touches' in e ? e.touches[0]?.clientY ?? 0 : e.clientY;
+    const clientX = 'touches' in e ? (e.touches[0]?.clientX ?? 0) : e.clientX;
+    const clientY = 'touches' in e ? (e.touches[0]?.clientY ?? 0) : e.clientY;
     this.startX = clientX;
     this.startY = clientY;
     this.startTime = Date.now();
@@ -157,8 +166,8 @@ export class SkillsCarousel {
     if (!this.startX) return; // No drag started
 
     e.preventDefault();
-    const clientX = 'touches' in e ? e.touches[0]?.clientX ?? 0 : e.clientX;
-    const clientY = 'touches' in e ? e.touches[0]?.clientY ?? 0 : e.clientY;
+    const clientX = 'touches' in e ? (e.touches[0]?.clientX ?? 0) : e.clientX;
+    const clientY = 'touches' in e ? (e.touches[0]?.clientY ?? 0) : e.clientY;
 
     const deltaX = clientX - this.startX;
     const deltaY = clientY - this.startY;
@@ -194,7 +203,7 @@ export class SkillsCarousel {
     this.startX = 0;
     this.startY = 0;
     this.startTime = 0;
-    
+
     if (this.skillsCarousel) {
       this.skillsCarousel.style.cursor = 'grab';
     }
@@ -209,7 +218,9 @@ export class SkillsCarousel {
 
   // Handle potential click on skill
   private handlePotentialClick(e: MouseEvent | TouchEvent): void {
-    const target = (e.target as Element)?.closest('.skill-item') as SkillElement;
+    const target = (e.target as Element)?.closest(
+      '.skill-item'
+    ) as SkillElement;
     if (target?.classList.contains('skill-clickable')) {
       const url = target.dataset.skillUrl;
       if (url) {
@@ -271,7 +282,8 @@ export class SkillsCarousel {
   private setupSkillClicks(): void {
     if (!this.skillsTrack) return;
 
-    const skillItems = this.skillsTrack.querySelectorAll<SkillElement>('.skill-clickable');
+    const skillItems =
+      this.skillsTrack.querySelectorAll<SkillElement>('.skill-clickable');
 
     skillItems.forEach((skillItem) => {
       // Make focusable for accessibility
@@ -309,7 +321,8 @@ export class SkillsCarousel {
   private hideIndicator(): void {
     if (!this.hasInteracted) {
       this.hasInteracted = true;
-      const indicatorText = document.querySelector<HTMLElement>('.indicator-text');
+      const indicatorText =
+        document.querySelector<HTMLElement>('.indicator-text');
       if (indicatorText) {
         indicatorText.style.opacity = '0';
         indicatorText.style.transition = 'opacity 0.5s ease';
@@ -323,8 +336,12 @@ export class SkillsCarousel {
 
     // Mouse hover events
     if (this.config.pauseOnHover) {
-      this.skillsCarousel.addEventListener('mouseenter', () => this.pauseAnimation());
-      this.skillsCarousel.addEventListener('mouseleave', () => this.resumeAnimation());
+      this.skillsCarousel.addEventListener('mouseenter', () =>
+        this.pauseAnimation()
+      );
+      this.skillsCarousel.addEventListener('mouseleave', () =>
+        this.resumeAnimation()
+      );
     }
 
     // Mouse drag events
@@ -348,10 +365,14 @@ export class SkillsCarousel {
     document.addEventListener('touchend', this.endDrag);
 
     // Prevent context menu
-    this.skillsCarousel.addEventListener('contextmenu', (e) => e.preventDefault());
+    this.skillsCarousel.addEventListener('contextmenu', (e) =>
+      e.preventDefault()
+    );
 
     // Accessibility events
-    this.skillsCarousel.addEventListener('focusin', () => this.pauseAnimation());
+    this.skillsCarousel.addEventListener('focusin', () =>
+      this.pauseAnimation()
+    );
     this.skillsCarousel.addEventListener('focusout', () => {
       if (!this.isDragging) this.resumeAnimation();
     });
@@ -380,7 +401,7 @@ export class SkillsCarousel {
     if (this.animationFrame) {
       cancelAnimationFrame(this.animationFrame);
     }
-    
+
     // Remove event listeners
     document.removeEventListener('mousemove', this.drag);
     document.removeEventListener('mouseup', this.endDrag);
