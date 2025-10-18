@@ -49,7 +49,21 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 4rem;
-  align-items: start;
+  align-items: end;
+}
+
+/* Invertir el orden en mobile */
+@media (max-width: 1024px) {
+  .contactLayout {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+  .contactFormSection {
+    order: 1;
+  }
+  .contactInfoSection {
+    order: 2;
+  }
 }
 
 /* Info Section */

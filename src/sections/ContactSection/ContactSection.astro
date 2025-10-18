@@ -33,7 +33,11 @@ const linkedinUrl = PUBLIC_LINKEDIN_URL;
 
       <!-- Main Layout: Info + Form -->
       <div class={styles.contactLayout}>
-        <!-- Left: Info Section -->
+        <!-- Left: Form (desktop), Top: Form (mobile) -->
+        <div class={styles.contactFormSection}>
+          <ContactForm locale={locale} />
+        </div>
+        <!-- Right: Info (desktop), Bottom: Info (mobile) -->
         <div class={styles.contactInfoSection}>
           <!-- Subtitle -->
           <div class={styles.formIntro}>
@@ -84,11 +88,6 @@ const linkedinUrl = PUBLIC_LINKEDIN_URL;
             </div>
             <p class={styles.tipText}>{t('contact.tipSection.description')}</p>
           </div>
-        </div>
-
-        <!-- Right: Form -->
-        <div class={styles.contactFormSection}>
-          <ContactForm locale={locale} />
         </div>
       </div>
 
