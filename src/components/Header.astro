@@ -1,5 +1,6 @@
 ---
 import LanguageSelector from './LanguageSelector/LanguageSelector.astro';
+import BackToHome from './BackToHome.astro';
 import {
   useTranslations,
   getRelativeLocaleUrl,
@@ -16,6 +17,9 @@ const { hasNavLinks = true, locale = 'es' as Locale } = Astro.props as Props;
 
 const t = useTranslations(locale);
 const currentPath = Astro.url.pathname;
+
+// Detectar si estamos en la página de projects o contact
+const isProjectOrContactPage = currentPath.includes('/projects') || currentPath.includes('/contact');
 
 // Obtener la URL base localizada (home page del idioma actual)
 const homeUrl = getRelativeLocaleUrl(locale, '');
@@ -34,6 +38,15 @@ const navLinks = [
 <header class="header" id="header">
   <div class="container">
     <nav class="nav">
+      {isProjectOrContactPage ? (
+        <BackToHome locale={locale} />
+      ) : (
+        <div class="nav-toggle" id="nav-toggle">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      )}
       <a href={homeUrl} class="logo">
         <span class="logo-text">Chrystian</span>
         <span class="logo-accent">Michell</span>
@@ -54,12 +67,6 @@ const navLinks = [
 
       <!-- Language Selector -->
       <LanguageSelector currentLocale={locale} currentPath={currentPath} />
-
-      <div class="nav-toggle" id="nav-toggle">
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
     </nav>
   </div>
 </header>
@@ -83,12 +90,20 @@ const navLinks = [
   }
 
   .nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem 0;
-    position: relative;
-    gap: 2rem;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      padding: 1rem 0;
+      position: relative;
+      gap: 2rem;
+    }
+
+    .nav-toggle {
+      order: 0;
+      margin: 0;
+      /* Sin margen para que esté pegado al logo */
+    }
+    }
   }
 
   .logo {
