@@ -23,6 +23,7 @@ const buttonIcon = isContactMode ? 'email' : 'message-circle';
   id="floating-cta"
   class={styles.floatingCTA}
   data-mode={mode}
+  data-locale={locale}
   aria-hidden="true"
 >
   {
@@ -91,7 +92,14 @@ const buttonIcon = isContactMode ? 'email' : 'message-circle';
       const btn = this.floatingCTA?.querySelector('[data-contact-btn]');
       if (btn) {
         btn.addEventListener('click', () => {
-          this.scrollToContact();
+          if (this.contactSection) {
+            this.scrollToContact(true);
+          } else {
+            // Redirigir a la página de contacto si no existe el elemento
+            const locale =
+              this.floatingCTA?.getAttribute('data-locale') || 'es';
+            window.location.href = `/${locale}/contact`;
+          }
         });
       }
     }
@@ -231,7 +239,7 @@ const buttonIcon = isContactMode ? 'email' : 'message-circle';
       }
     }
 
-    private scrollToContact(): void {
+    private scrollToContact(applyPulse = false): void {
       if (!this.contactSection) return;
 
       // Add a small offset for better visual positioning
@@ -247,13 +255,15 @@ const buttonIcon = isContactMode ? 'email' : 'message-circle';
       // Hide button after click
       this.hideButton();
 
-      // Optional: Add a temporary pulse to the contact section
-      this.contactSection.style.animation = 'pulse 1s ease-in-out';
-      setTimeout(() => {
-        if (this.contactSection) {
-          this.contactSection.style.animation = '';
-        }
-      }, 1000);
+      // Optional: Add a temporary pulse to the contact section solo si se hace scroll
+      if (applyPulse) {
+        this.contactSection.style.animation = 'pulse 1s ease-in-out';
+        setTimeout(() => {
+          if (this.contactSection) {
+            this.contactSection.style.animation = '';
+          }
+        }, 1000);
+      }
     }
   }
 
