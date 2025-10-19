@@ -19,7 +19,8 @@ const t = useTranslations(locale);
 const currentPath = Astro.url.pathname;
 
 // Detectar si estamos en la página de projects o contact
-const isProjectOrContactPage = currentPath.includes('/projects') || currentPath.includes('/contact');
+const isProjectOrContactPage =
+  currentPath.includes('/projects') || currentPath.includes('/contact');
 
 // Obtener la URL base localizada (home page del idioma actual)
 const homeUrl = getRelativeLocaleUrl(locale, '');
@@ -38,15 +39,17 @@ const navLinks = [
 <header class="header" id="header">
   <div class="container">
     <nav class="nav">
-      {isProjectOrContactPage ? (
-        <BackToHome locale={locale} />
-      ) : (
-        <div class="nav-toggle" id="nav-toggle">
-          <span></span>
-          <span></span>
-          <span></span>
-        </div>
-      )}
+      {
+        isProjectOrContactPage ? (
+          <BackToHome locale={locale} />
+        ) : (
+          <div class="nav-toggle" id="nav-toggle">
+            <span />
+            <span />
+            <span />
+          </div>
+        )
+      }
       <a href={homeUrl} class="logo">
         <span class="logo-text">Chrystian</span>
         <span class="logo-accent">Michell</span>
@@ -107,12 +110,10 @@ const navLinks = [
     align-items: center;
   }
 
-    .nav-toggle {
-      order: 0;
-      margin: 0;
-      /* Sin margen para que esté pegado al logo */
-    }
-    }
+  .nav-toggle {
+    order: 0;
+    margin: 0;
+    /* Sin margen para que esté pegado al logo */
   }
 
   .logo {
@@ -273,25 +274,26 @@ const navLinks = [
   navToggle?.addEventListener('click', () => {
     navToggle.classList.toggle('active');
     navMenu?.classList.toggle('active');
-      if (navMenu?.classList.contains('active')) {
-        document.body.addEventListener('click', closeMenuOnOutsideClick, true);
-      } else {
-        document.body.removeEventListener('click', closeMenuOnOutsideClick, true);
-      }
+    if (navMenu?.classList.contains('active')) {
+      document.body.addEventListener('click', closeMenuOnOutsideClick, true);
+    } else {
+      document.body.removeEventListener('click', closeMenuOnOutsideClick, true);
+    }
   });
 
-    // Función para cerrar el menú si se hace clic fuera
-    function closeMenuOnOutsideClick(e: MouseEvent) {
-      if (
-        navMenu?.classList.contains('active') &&
-        !navMenu.contains(e.target as Node) &&
-        navToggle && !navToggle.contains(e.target as Node)
-      ) {
-        navToggle.classList.remove('active');
-        navMenu.classList.remove('active');
-        document.body.removeEventListener('click', closeMenuOnOutsideClick, true);
-      }
+  // Función para cerrar el menú si se hace clic fuera
+  function closeMenuOnOutsideClick(e: MouseEvent) {
+    if (
+      navMenu?.classList.contains('active') &&
+      !navMenu.contains(e.target as Node) &&
+      navToggle &&
+      !navToggle.contains(e.target as Node)
+    ) {
+      navToggle.classList.remove('active');
+      navMenu.classList.remove('active');
+      document.body.removeEventListener('click', closeMenuOnOutsideClick, true);
     }
+  }
 
   // Close mobile menu when clicking on a link
   const navLinks = document.querySelectorAll('.nav-link');
