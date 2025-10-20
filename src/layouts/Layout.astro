@@ -24,13 +24,14 @@ import {
 } from '@utils/i18n';
 
 import FloatingCTA from '@/components/FloatingCTA/FloatingCTA.astro';
+import Header from '@/components/Header.astro';
+import Footer from '@/components/Footer.astro';
 import '@styles/global.css';
 
 interface Props {
   title: string;
   description: string;
   keywords?: string;
-  locale?: Locale;
   floatingCTAMode?: 'contact' | 'navigate-to-contact';
   author?: string;
   ogTitle?: string;
@@ -43,11 +44,16 @@ interface Props {
   canonicalUrl?: string;
   structuredData?: any;
   additionalMeta?: Array<{ name?: string; property?: string; content: string }>;
+  layoutContext?: {
+    locale: Locale;
+    hasNavLinks: boolean;
+    pageType?: string;
+  };
 }
 
-// Detectar el locale: usar prop si se pasa, sino detectar de URL
-const propsLocale = Astro.props.locale;
-const locale = propsLocale || getLocaleFromUrl(Astro.url);
+// Detectar el locale desde layoutContext o fallback
+const layoutContext = Astro.props.layoutContext || {};
+const locale = layoutContext.locale || getLocaleFromUrl(Astro.url);
 const t = useTranslations(locale);
 
 // Configurar el modo del FloatingCTA
@@ -306,9 +312,15 @@ const localeSpecificMeta =
     <meta name="format-detection" content="telephone=no" />
   </head>
   <body>
+    <Header hasNavLinks={layoutContext.hasNavLinks} locale={locale} />
     <main id="main-content">
       <slot />
     </main>
+    <Footer
+      locale={locale}
+      hasNavLinks={layoutContext.hasNavLinks}
+      pageType={layoutContext.pageType}
+    />
     <!-- Floating CTA Button -->
     <FloatingCTA locale={locale} mode={floatingCTAMode} />
   </body>
