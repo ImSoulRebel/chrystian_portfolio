@@ -1,0 +1,121 @@
+---
+import PostCard from '@components/PostCard.astro';
+
+import type { BlogPostData } from '@content/config';
+const { sortedPosts, lang, blogTranslations } = Astro.props;
+---
+
+<section class="blog-section">
+  <div class="container">
+    <h1 id="blog-heading" class="section-title">{blogTranslations.heading}</h1>
+
+    {
+      sortedPosts.length === 0 ? (
+        <p class="no-posts">{blogTranslations.noPosts}</p>
+      ) : (
+        <div class="posts-grid" role="list">
+          {sortedPosts.map((post: { id: string; data: BlogPostData }) => {
+            const title =
+              typeof post.data.title === 'object'
+                ? (post.data.title?.[lang as 'es' | 'en'] ?? 'Sin título')
+                : (post.data.title ?? 'Sin título');
+            const description =
+              typeof post.data.description === 'object'
+                ? (post.data.description?.[lang as 'es' | 'en'] ?? '')
+                : (post.data.description ?? '');
+            return (
+              <PostCard
+                title={title}
+                description={description}
+                author={post.data.author}
+                date={post.data.createdAt}
+                tags={post.data.tags}
+                href={`/${lang}/blog/${post.id}`}
+              />
+            );
+          })}
+        </div>
+      )
+    }
+  </div>
+</section>
+
+<style>
+  .blog-section {
+    padding: 6rem 0;
+    background: var(--background-card, transparent);
+    position: relative;
+  }
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+  .section-title {
+    text-align: center;
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
+    margin-bottom: 2.5rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    background: var(--gradient-primary);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .posts-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    margin-bottom: 4rem;
+    align-items: stretch;
+  }
+  .no-posts {
+    text-align: center;
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    margin: 2rem 0 4rem 0;
+  }
+  @media (max-width: 1200px) {
+    .container {
+      padding: 0 1.5rem;
+    }
+    .posts-grid {
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1.8rem;
+    }
+  }
+  @media (max-width: 900px) {
+    .posts-grid {
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+  }
+  @media (max-width: 768px) {
+    .blog-section {
+      padding: 4rem 0;
+    }
+    .section-title {
+      font-size: 2rem;
+      margin-bottom: 2rem;
+    }
+    .posts-grid {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+      margin-bottom: 3rem;
+    }
+    .container {
+      padding: 0 1rem;
+    }
+  }
+  @media (max-width: 480px) {
+    .container {
+      padding: 0 0.5rem;
+    }
+    .section-title {
+      font-size: 1.5rem;
+    }
+    .posts-grid {
+      gap: 1.25rem;
+    }
+  }
+</style>

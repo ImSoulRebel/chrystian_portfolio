@@ -4,7 +4,7 @@ import Layout from '@/layouts/Layout.astro';
 import { Locale } from '@config/translations';
 import { useTranslations } from '@utils/i18n';
 import { BackToHome } from '@components';
-import { BlogsSection } from '@sections';
+import { BlogListSection } from '@sections';
 
 export async function getStaticPaths() {
   return [{ params: { lang: 'es' } }, { params: { lang: 'en' } }];
@@ -38,7 +38,7 @@ const sortedPosts = allPosts.sort(
 >
   <BackToHome locale={locale} />
 
-  <BlogsSection
+  <BlogListSection
     sortedPosts={sortedPosts}
     lang={lang}
     blogTranslations={blogTranslations}

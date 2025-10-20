@@ -17,7 +17,7 @@ tags:
     'Portfolio',
   ]
 author: 'Chrystian Michell Álvarez Sánchez'
-image: 'assets/blog/flutter-smart-tv.png'
+image: 'flutter-smart-tv.png'
 featured: true
 priority: 10
 status: 'published'
@@ -27,67 +27,261 @@ updatedAt: '2025-10-19T00:00:00.000Z'
 
 import { Highlight, Quote } from '@components';
 
-# 🚀 Flutter en Smart TVs: de pionero a tendencia global
+export const content = {
+  es: (
+    <>
+      <h1>🚀 Flutter en Smart TVs: de pionero a tendencia global</h1>
+      <p>
+        La reciente adopción de{' '}
+        <strong>
+          Flutter por parte de LG para su nueva generación de webOS
+        </strong>{' '}
+        marca un punto de inflexión en el desarrollo multiplataforma.
+        <br />
+        Flutter ya no es solo mobile: ahora impulsa interfaces en{' '}
+        <strong>Smart TVs, electrodomésticos y sistemas embebidos</strong>.
+      </p>
+      <h2>🧠 ¿Por qué LG apostó por Flutter?</h2>
+      <p>
+        LG venía utilizando React para sus apps en webOS, pero enfrentaba
+        problemas de rendimiento: tiempos de arranque lentos, consumo elevado de
+        memoria y baja respuesta en dispositivos con recursos limitados.
+        <br />
+        Flutter, con su motor de renderizado <strong>Skia</strong>, ofreció una
+        solución más eficiente, fluida y escalable.
+      </p>
+      <Quote>
+        "Flutter nos permitió mejorar el rendimiento de arranque y la
+        experiencia de usuario en nuestros televisores webOS." — LG webOS
+        Developer Team
+      </Quote>
+      <h2>📺 Mi experiencia en Flutter para Smart TVs</h2>
+      <p>
+        Como desarrollador que ha trabajado en{' '}
+        <strong>OTT multiplataforma</strong>, he enfrentado los retos de llevar
+        Flutter a entornos como <strong>webOS, Tizen y Android TV</strong>{' '}
+        cuando apenas existía documentación.
+        <br />
+        Estas son algunas de las soluciones que implementé:
+      </p>
+      <ul>
+        <li>
+          <strong>Navegación espacial</strong> adaptada a control remoto, con
+          foco visual y transiciones suaves.
+        </li>
+        <li>
+          <strong>Arquitectura modular</strong> que permite compartir lógica
+          entre móvil y TV.
+        </li>
+        <li>
+          <strong>CI/CD automatizado</strong> para despliegues en múltiples
+          plataformas.
+        </li>
+        <li>
+          <strong>Optimización de rendimiento</strong> en dispositivos con GPU
+          limitada, aprovechando Skia y técnicas de lazy rendering.
+        </li>
+      </ul>
+      <Highlight>
+        Flutter permite mantener una única base de código para múltiples
+        plataformas, sin sacrificar UX ni rendimiento.
+      </Highlight>
+      <h2>🔍 Flutter en sistemas embebidos y appliances</h2>
+      <p>
+        Más allá de las Smart TVs, Flutter está siendo adoptado en{' '}
+        <strong>sistemas embebidos industriales</strong>, como los paneles HMI
+        de Toyota y BMW.
+        <br />
+        Gracias a su arquitectura por capas y la portabilidad de Dart, es
+        posible crear embedders personalizados para hardware específico.
+      </p>
+      <h3>Casos de uso emergentes:</h3>
+      <ul>
+        <li>
+          Interfaces para refrigeradores, lavadoras y hornos inteligentes.
+        </li>
+        <li>Dashboards industriales con visualización en tiempo real.</li>
+        <li>Sistemas de control en automoción y domótica.</li>
+      </ul>
+      <h2>🌐 Un framework universal para interfaces modernas</h2>
+      <p>Flutter ofrece una experiencia consistente en:</p>
+      <ul>
+        <li>
+          <strong>Móvil</strong> (iOS, Android)
+        </li>
+        <li>
+          <strong>Web</strong>
+        </li>
+        <li>
+          <strong>Desktop</strong> (Windows, macOS, Linux)
+        </li>
+        <li>
+          <strong>Smart TVs</strong> (webOS, Tizen, Android TV)
+        </li>
+        <li>
+          <strong>Embedded</strong> (RISC-V, ARM, HMI)
+        </li>
+      </ul>
+      <p>
+        Esto lo convierte en una opción ideal para productos conectados, donde
+        la <strong>coherencia visual y funcional</strong> es clave.
+      </p>
+      <h2>🎯 Conclusión</h2>
+      <p>
+        La apuesta de LG por Flutter valida lo que muchos desarrolladores ya
+        veníamos explorando.
+        <br />
+        Flutter es más que un framework mobile. Es una{' '}
+        <strong>
+          plataforma universal para construir experiencias modernas
+        </strong>
+        , fluidas y escalables.
+      </p>
+      <p>
+        Como pionero en Flutter para Smart TVs, me alegra ver cómo esta
+        tecnología se consolida en el mercado y abre nuevas oportunidades para
+        equipos técnicos, diseñadores y empresas.
+      </p>
+      <hr />
+      <p>
+        <strong>
+          ¿Te interesa aplicar Flutter en tu empresa, proyecto o equipo?
+        </strong>
+        <br />
+        ¡Conversemos! <a href="/es/contact">Contáctame aquí</a> para enviarme tu
+        consulta directamente.
+        <br />O si prefieres,{' '}
+        <a href="/">descubre mi portfolio completo aquí</a>.
+      </p>
+    </>
+  ),
+  en: (
+    <>
+      <h1>🚀 Flutter on Smart TVs: From Pioneer to Global Trend</h1>
+      <p>
+        The recent adoption of{' '}
+        <strong>Flutter by LG for its new generation of webOS</strong> marks a
+        turning point in cross-platform development.
+        <br />
+        Flutter is no longer just mobile: it now powers interfaces in{' '}
+        <strong>Smart TVs, appliances, and embedded systems</strong>.
+      </p>
+      <h2>🧠 Why did LG choose Flutter?</h2>
+      <p>
+        LG had been using React for its webOS apps, but faced performance
+        issues: slow boot times, high memory consumption, and poor
+        responsiveness on limited-resource devices.
+        <br />
+        Flutter, with its <strong>Skia</strong> rendering engine, provided a
+        more efficient, smooth, and scalable solution.
+      </p>
+      <Quote>
+        "Flutter allowed us to improve boot performance and user experience on
+        our webOS TVs." — LG webOS Developer Team
+      </Quote>
+      <h2>📺 My experience with Flutter for Smart TVs</h2>
+      <p>
+        As a developer who has worked on <strong>multi-platform OTT</strong>,
+        I've faced the challenges of bringing Flutter to environments like{' '}
+        <strong>webOS, Tizen, and Android TV</strong> when documentation was
+        scarce.
+        <br />
+        Here are some solutions I implemented:
+      </p>
+      <ul>
+        <li>
+          <strong>Spatial navigation</strong> adapted to remote control, with
+          visual focus and smooth transitions.
+        </li>
+        <li>
+          <strong>Modular architecture</strong> that allows sharing logic
+          between mobile and TV.
+        </li>
+        <li>
+          <strong>Automated CI/CD</strong> for deployments on multiple
+          platforms.
+        </li>
+        <li>
+          <strong>Performance optimization</strong> on devices with limited GPU,
+          leveraging Skia and lazy rendering techniques.
+        </li>
+      </ul>
+      <Highlight>
+        Flutter lets you maintain a single codebase for multiple platforms,
+        without sacrificing UX or performance.
+      </Highlight>
+      <h2>🔍 Flutter in embedded systems and appliances</h2>
+      <p>
+        Beyond Smart TVs, Flutter is being adopted in{' '}
+        <strong>industrial embedded systems</strong>, such as HMI panels from
+        Toyota and BMW.
+        <br />
+        Thanks to its layered architecture and Dart's portability, it's possible
+        to create custom embedders for specific hardware.
+      </p>
+      <h3>Emerging use cases:</h3>
+      <ul>
+        <li>
+          Interfaces for refrigerators, washing machines, and smart ovens.
+        </li>
+        <li>Industrial dashboards with real-time visualization.</li>
+        <li>Control systems in automotive and home automation.</li>
+      </ul>
+      <h2>🌐 A universal framework for modern interfaces</h2>
+      <p>Flutter offers a consistent experience on:</p>
+      <ul>
+        <li>
+          <strong>Mobile</strong> (iOS, Android)
+        </li>
+        <li>
+          <strong>Web</strong>
+        </li>
+        <li>
+          <strong>Desktop</strong> (Windows, macOS, Linux)
+        </li>
+        <li>
+          <strong>Smart TVs</strong> (webOS, Tizen, Android TV)
+        </li>
+        <li>
+          <strong>Embedded</strong> (RISC-V, ARM, HMI)
+        </li>
+      </ul>
+      <p>
+        This makes it an ideal choice for connected products, where{' '}
+        <strong>visual and functional consistency</strong> is key.
+      </p>
+      <h2>🎯 Conclusion</h2>
+      <p>
+        LG's bet on Flutter validates what many developers had already been
+        exploring.
+        <br />
+        Flutter is more than a mobile framework. It's a{' '}
+        <strong>
+          universal platform for building modern, fluid, and scalable
+          experiences
+        </strong>
+        .
+      </p>
+      <p>
+        As a pioneer in Flutter for Smart TVs, I'm glad to see this technology
+        consolidating in the market and opening new opportunities for technical
+        teams, designers, and companies.
+      </p>
+      <hr />
+      <p>
+        <strong>
+          Interested in applying Flutter in your company, project, or team?
+        </strong>
+        <br />
+        Let's talk! <a href="/en/contact">Contact me</a> to send me your inquiry
+        directly.
+        <br />
+        Or if you prefer, <a href="/">discover my full portfolio here</a>.
+      </p>
+    </>
+  ),
+};
 
-La reciente adopción de **Flutter por parte de LG para su nueva generación de webOS** marca un punto de inflexión en el desarrollo multiplataforma.  
-Flutter ya no es solo mobile: ahora impulsa interfaces en **Smart TVs, electrodomésticos y sistemas embebidos**.
-
-## 🧠 ¿Por qué LG apostó por Flutter?
-
-LG venía utilizando React para sus apps en webOS, pero enfrentaba problemas de rendimiento: tiempos de arranque lentos, consumo elevado de memoria y baja respuesta en dispositivos con recursos limitados.  
-Flutter, con su motor de renderizado **Skia**, ofreció una solución más eficiente, fluida y escalable.
-
-<Quote>
-  "Flutter nos permitió mejorar el rendimiento de arranque y la experiencia de
-  usuario en nuestros televisores webOS." — LG webOS Developer Team
-</Quote>
-
-## 📺 Mi experiencia en Flutter para Smart TVs
-
-Como desarrollador que ha trabajado en **OTT multiplataforma**, he enfrentado los retos de llevar Flutter a entornos como **webOS, Tizen y Android TV** cuando apenas existía documentación.  
-Estas son algunas de las soluciones que implementé:
-
-- **Navegación espacial** adaptada a control remoto, con foco visual y transiciones suaves.
-- **Arquitectura modular** que permite compartir lógica entre móvil y TV.
-- **CI/CD automatizado** para despliegues en múltiples plataformas.
-- **Optimización de rendimiento** en dispositivos con GPU limitada, aprovechando Skia y técnicas de lazy rendering.
-
-<Highlight>
-  Flutter permite mantener una única base de código para múltiples plataformas,
-  sin sacrificar UX ni rendimiento.
-</Highlight>
-
-## 🔍 Flutter en sistemas embebidos y appliances
-
-Más allá de las Smart TVs, Flutter está siendo adoptado en **sistemas embebidos industriales**, como los paneles HMI de Toyota y BMW.  
-Gracias a su arquitectura por capas y la portabilidad de Dart, es posible crear embedders personalizados para hardware específico.
-
-### Casos de uso emergentes:
-
-- Interfaces para refrigeradores, lavadoras y hornos inteligentes.
-- Dashboards industriales con visualización en tiempo real.
-- Sistemas de control en automoción y domótica.
-
-## 🌐 Un framework universal para interfaces modernas
-
-Flutter ofrece una experiencia consistente en:
-
-- **Móvil** (iOS, Android)
-- **Web**
-- **Desktop** (Windows, macOS, Linux)
-- **Smart TVs** (webOS, Tizen, Android TV)
-- **Embedded** (RISC-V, ARM, HMI)
-
-Esto lo convierte en una opción ideal para productos conectados, donde la **coherencia visual y funcional** es clave.
-
-## 🎯 Conclusión
-
-La apuesta de LG por Flutter valida lo que muchos desarrolladores ya veníamos explorando:  
-Flutter es más que un framework mobile. Es una **plataforma universal para construir experiencias modernas**, fluidas y escalables.
-
-Como pionero en Flutter para Smart TVs, me alegra ver cómo esta tecnología se consolida en el mercado y abre nuevas oportunidades para equipos técnicos, diseñadores y empresas.
-
----
-
-¿Quieres saber más sobre cómo diseñar interfaces para TV con Flutter, o cómo adaptar tu arquitectura para escalar a embedded?  
-[Contáctame aquí](mailto:chrystian@flutterux.dev) o visita mi [portfolio técnico](/portfolio).
+export default function BlogContent({ lang }) {
+  return content[lang] || content['es'];
+}

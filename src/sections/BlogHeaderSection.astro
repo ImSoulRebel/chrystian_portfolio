@@ -9,14 +9,14 @@ interface BlogHeaderSectionProps {
   createdAt: string;
   updatedAt?: string;
   lang: 'es' | 'en';
+  image?: string;
 }
 
-const { title, description, author, tags, createdAt, updatedAt, lang } =
+const { title, description, author, tags, createdAt, updatedAt, lang, image } =
   Astro.props as BlogHeaderSectionProps;
 
 const t = useTranslations(lang);
 const backToBlogLabel = t('blog.blogHeader.backToBlogLabel');
-const authorLabel = t('blog.blogHeader.authorLabel');
 const updatedLabel = t('blog.blogHeader.updatedLabel');
 const formattedCreatedAt = formatDate(new Date(createdAt), lang, {
   year: 'numeric',
@@ -39,6 +39,19 @@ const formattedUpdatedAt =
       {backToBlogLabel}
     </a>
   </nav>
+  <!-- Imagen destacada arriba si existe -->
+  {
+    image && (
+      <figure class="featured-image-wrapper">
+        <img
+          src={`/images/blog/${image}`}
+          alt={title[lang]}
+          class="featured-image"
+          itemprop="image"
+        />
+      </figure>
+    )
+  }
   <h1 itemprop="headline" class="blog-title">{title[lang]}</h1>
   {
     description?.[lang] && (
@@ -47,7 +60,8 @@ const formattedUpdatedAt =
       </p>
     )
   }
-  <div class="post-meta">
+  <!-- Agrupar autor y fecha en una sola línea -->
+  <div class="post-meta-group">
     {
       author && (
         <span
@@ -56,26 +70,31 @@ const formattedUpdatedAt =
           itemscope
           itemtype="https://schema.org/Person"
         >
-          {authorLabel} <strong itemprop="name">{author}</strong>
+          <strong itemprop="name">{author}</strong>
         </span>
       )
     }
+    <span class="dot">·</span>
     <time datetime={createdAt} itemprop="datePublished">
       {formattedCreatedAt}
     </time>
     {
       formattedUpdatedAt && (
-        <span class="updated" itemprop="dateModified">
-          {updatedLabel} {formattedUpdatedAt}
-        </span>
+        <>
+          <span class="dot">·</span>
+          <span class="updated" itemprop="dateModified">
+            {updatedLabel} {formattedUpdatedAt}
+          </span>
+        </>
       )
     }
   </div>
+  <!-- Tags al final, estilo Medium -->
   {
     Array.isArray(tags) && tags.length > 0 && (
-      <ul class="tags" itemprop="keywords">
+      <ul class="post-tags" itemprop="keywords">
         {tags.map((tag) => (
-          <li class="tag">{tag}</li>
+          <li class="tech-tag">{tag}</li>
         ))}
       </ul>
     )
@@ -83,8 +102,47 @@ const formattedUpdatedAt =
 </header>
 
 <style>
+  .featured-image-wrapper {
+    margin-bottom: 1em;
+    text-align: center;
+  }
+  .featured-image {
+    max-width: 320px;
+    max-height: 320px;
+    width: 100%;
+    height: auto;
+    border-radius: 0.5em;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    object-fit: contain;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .post-tags {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 0.7rem;
+    margin-top: 1.2rem;
+    margin-bottom: 0.5rem;
+    padding: 0;
+    list-style: none;
+    align-items: center;
+  }
+  .tech-tag {
+    background: rgba(0, 212, 255, 0.1);
+    color: var(--primary-color);
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    display: inline-block;
+    margin: 0;
+    border: none;
+  }
+
   .blog-header {
-    margin-bottom: 1rem;
+    margin-bottom: 0.25rem;
     margin-top: 0.5rem;
     z-index: 2;
     position: relative;
@@ -98,23 +156,26 @@ const formattedUpdatedAt =
   }
   .blog-link {
     font-size: 0.8em;
-    color: var(--color-accent, #0077cc);
+    color: var(--primary-color);
     text-decoration: none;
-    background: none;
+    background: var(--accent-color);
     border: none;
-    padding: 0.2em 0.1em;
-    border-radius: 0.2em;
-    transition:
-      color 0.2s,
-      background 0.2s;
+    padding: 0.3em 0.7em;
+    border-radius: 0.5em;
+    transition: var(--transition);
     cursor: pointer;
+    font-weight: 600;
+    box-shadow: var(--shadow-light);
+    outline: none;
   }
-  .blog-link:hover {
-    color: var(--color-accent-hover, #005fa3);
-    background: var(--primary-color, #0077cc);
+  .blog-link:hover,
+  .blog-link:focus {
+    color: var(--text-primary);
+    background: var(--primary-color);
     text-decoration: none;
     transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(0, 212, 255, 0.13);
+    box-shadow: var(--shadow-dark);
+    outline: 2px solid var(--primary-color);
   }
   .blog-title {
     font-size: 1.2rem;
@@ -124,7 +185,7 @@ const formattedUpdatedAt =
   .blog-description {
     font-size: 0.8em;
     margin-bottom: 1.5em;
-    color: var(--color-secondary, #444);
+    color: var(--color-secondary, #666);
     .post-meta {
       margin-bottom: 1em;
       color: #666;

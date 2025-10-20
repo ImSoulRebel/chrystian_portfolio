@@ -1,4 +1,5 @@
 ---
+import '@styles/blog-post.css';
 interface BlogContentSectionProps {
   image?: string;
   title: Record<string, string>;
@@ -6,25 +7,12 @@ interface BlogContentSectionProps {
   Content: any;
 }
 
-const { image, title, lang, Content } = Astro.props as BlogContentSectionProps;
-import '@styles/blog-post.css';
+const { Content } = Astro.props as BlogContentSectionProps;
 ---
 
-{
-  image && (
-    <figure class="featured-image-wrapper">
-      <img
-        src={`/images/blog/${image}`}
-        alt={title[lang]}
-        class="featured-image"
-        itemprop="image"
-      />
-    </figure>
-  )
-}
 <div class="prose">
   <section class="content" itemprop="articleBody">
-    <Content />
+    <Content lang={Astro.props.lang} />
   </section>
 </div>
 <style>
@@ -41,7 +29,8 @@ import '@styles/blog-post.css';
   .content {
     font-size: 1.1rem;
     line-height: 1.7;
-    margin-bottom: 2.5em;
+    margin-bottom: 1.2em;
+    margin-top: 0;
     color: var(--color-text, #222);
   }
   .content :global(h2) {

@@ -29,11 +29,11 @@ const { title, description, author, date, tags, href } = Astro.props;
       {description && <p class="post-description">{description}</p>}
       {
         Array.isArray(tags) && tags.length > 0 && (
-          <div class="post-tags">
+          <ul class="post-tags">
             {tags.map((tag: string) => (
-              <span class="tag-badge">{tag}</span>
+              <li class="tech-tag">{tag}</li>
             ))}
-          </div>
+          </ul>
         )
       }
     </div>
@@ -41,6 +41,28 @@ const { title, description, author, date, tags, href } = Astro.props;
 </div>
 
 <style>
+  .post-tags {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 0.7rem;
+    margin-top: 1.2rem;
+    margin-bottom: 0.5rem;
+    padding: 0;
+    list-style: none;
+    align-items: center;
+  }
+  .tech-tag {
+    background: rgba(0, 212, 255, 0.1);
+    color: var(--primary-color);
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    display: inline-block;
+    margin: 0;
+    border: none;
+  }
   .post-card-component {
     position: relative;
     padding-left: 3rem;
