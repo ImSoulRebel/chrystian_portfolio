@@ -23,7 +23,7 @@ import {
   type Locale,
 } from '@utils/i18n';
 
-import { FloatingCTA } from '@components';
+import FloatingCTA from '@/components/FloatingCTA/FloatingCTA.astro';
 import '@styles/global.css';
 
 interface Props {
@@ -65,7 +65,7 @@ const currentPath = Astro.url.pathname;
 const siteUrl = Astro.site?.toString() || PUBLIC_SITE_URL;
 // Usar PUBLIC_BASE_PATH explícitamente, con fallback a BASE_URL
 
-const baseUrl = PUBLIC_BASE_PATH || import.meta.env.BASE_URL || '';
+const baseUrl = PUBLIC_BASE_PATH || Astro.base || '';
 const hreflangUrls = getHreflangUrls(currentPath);
 
 const ogImageUrl = new URL(
@@ -244,11 +244,7 @@ const localeSpecificMeta =
     <script
       is:inline
       type="application/ld+json"
-      set:html={JSON.stringify(
-        finalStructuredData,
-        null,
-        import.meta.env.DEV ? 2 : 0
-      )}
+      set:html={JSON.stringify(finalStructuredData, null, Astro.dev ? 2 : 0)}
     />
 
     <!-- Favicon optimizado -->
@@ -310,18 +306,11 @@ const localeSpecificMeta =
     <meta name="format-detection" content="telephone=no" />
   </head>
   <body>
-    <slot />
-
+    <main id="main-content">
+      <slot />
+    </main>
     <!-- Floating CTA Button -->
     <FloatingCTA locale={locale} mode={floatingCTAMode} />
-
-    <!-- Scripts de optimización -->
-    <script>
-      import { App } from '@scripts';
-
-      // Initialize main application
-      new App();
-    </script>
   </body>
 </html>
 
