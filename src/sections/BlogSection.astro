@@ -1,0 +1,41 @@
+---
+import BlogHeaderSection from './BlogHeaderSection.astro';
+import BlogContentSection from './BlogContentSection.astro';
+const {
+  title,
+  description,
+  author,
+  tags,
+  createdAt,
+  updatedAt,
+  image,
+  lang,
+  Content,
+} = Astro.props;
+---
+
+<article class="blog-post" itemscope itemtype="https://schema.org/BlogPosting">
+  <BlogHeaderSection
+    title={title}
+    description={description}
+    author={author}
+    tags={tags}
+    createdAt={createdAt}
+    updatedAt={updatedAt}
+    lang={lang}
+  />
+  <BlogContentSection
+    image={image}
+    title={title}
+    lang={lang}
+    Content={Content}
+  />
+</article>
+<style>
+  .blog-post {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem;
+    margin-top: 3.5rem;
+  }
+</style>

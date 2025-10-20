@@ -18,6 +18,7 @@ export { default as ProjectsSection } from './ProjectsSection.astro';
 export { default as SkillsSection } from './SkillsSection.astro';
 export { default as ExperienceSection } from './ExperienceSection.astro';
 export { default as BlogsSection } from './BlogsSection.astro';
+export { default as BlogSection } from './BlogSection.astro';
 
 // === Contact & Footer Sections ===
 export { default as ContactSection } from './ContactSection/ContactSection.astro';

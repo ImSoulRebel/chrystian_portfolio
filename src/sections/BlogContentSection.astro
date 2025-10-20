@@ -1,0 +1,58 @@
+---
+const { image, title, lang, Content } = Astro.props;
+---
+
+{
+  image && (
+    <figure class="featured-image-wrapper">
+      <img
+        src={`/images/blog/${image}`}
+        alt={title[lang]}
+        class="featured-image"
+        itemprop="image"
+      />
+    </figure>
+  )
+}
+<section class="content" itemprop="articleBody">
+  <Content />
+</section>
+<style>
+  .featured-image-wrapper {
+    margin-bottom: 1em;
+    text-align: center;
+  }
+  .featured-image {
+    max-width: 320px;
+    width: 100%;
+    border-radius: 0.5em;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  }
+  .content {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    margin-bottom: 2.5em;
+    color: var(--color-text, #222);
+  }
+  .content :global(h2) {
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+  }
+  .content :global(p) {
+    margin-bottom: 1.5rem;
+  }
+  .content :global(code) {
+    background: #f5f5f5;
+    padding: 0.2rem 0.4rem;
+    border-radius: 3px;
+    font-size: 0.9em;
+  }
+  .content :global(pre) {
+    background: #1e1e1e;
+    color: #d4d4d4;
+    padding: 1.5rem;
+    border-radius: 8px;
+    overflow-x: auto;
+    margin: 2rem 0;
+  }
+</style>
