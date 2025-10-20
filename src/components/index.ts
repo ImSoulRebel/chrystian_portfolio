@@ -21,6 +21,7 @@ export { default as LanguageSelector } from './LanguageSelector/LanguageSelector
 export { default as ProjectCard } from './ProjectCard/ProjectCard.astro';
 export { default as SkillCard } from './SkillCard.astro';
 export { default as ExperienceItem } from './ExperienceItem.astro';
+export { default as PostCard } from './PostCard.astro';
 
 // === Form Components ===
 export { default as ContactForm } from './ContactForm/ContactForm.astro';

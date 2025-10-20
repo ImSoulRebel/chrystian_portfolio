@@ -318,6 +318,15 @@ export interface LanguageTranslations {
 }
 
 // Tipo completo para todas las traducciones de un locale
+export interface BlogTranslations {
+  title: string;
+  heading: string;
+  seo: {
+    description: string;
+  };
+  noPosts: string;
+}
+
 export interface LocaleTranslations {
   welcome: string;
   and: string;
@@ -335,6 +344,7 @@ export interface LocaleTranslations {
   structuredData: StructuredDataTranslations;
   recruiterMeta: RecruiterMetaTranslations;
   language: LanguageTranslations;
+  blog: BlogTranslations;
 }
 
 // Tipo para el objeto de traducciones completo
