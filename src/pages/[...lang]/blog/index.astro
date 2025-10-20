@@ -3,7 +3,8 @@ import { getCollection } from 'astro:content';
 import Layout from '@/layouts/Layout.astro';
 import { Locale } from '@config/translations';
 import { useTranslations } from '@utils/i18n';
-import { BackToHome, Header, PostCard, Footer } from '@components';
+import { BackToHome } from '@components';
+import { BlogsSection } from '@sections';
 
 export async function getStaticPaths() {
   return [{ params: { lang: 'es' } }, { params: { lang: 'en' } }];
@@ -32,135 +33,14 @@ const sortedPosts = allPosts.sort(
 <Layout
   title={pageTitle}
   description={pageDescription}
-  locale={locale}
   floatingCTAMode="contact"
+  layoutContext={{ locale, hasNavLinks, pageType: 'blog' }}
 >
   <BackToHome locale={locale} />
-  <Header hasNavLinks={hasNavLinks} locale={locale} />
-  <main class="blog-main">
-    <h1>{blogTranslations.heading}</h1>
-    {
-      sortedPosts.length === 0 ? (
-        <p class="no-posts">{blogTranslations.noPosts}</p>
-      ) : (
-        <div class="posts-grid">
-          {sortedPosts.map((post) => {
-            const title =
-              typeof post.data.title === 'object' &&
-              post.data.title?.[lang as 'es' | 'en']
-                ? post.data.title[lang as 'es' | 'en']
-                : typeof post.data.title === 'string'
-                  ? post.data.title
-                  : 'Sin título';
-            const description =
-              typeof post.data.description === 'object' &&
-              post.data.description?.[lang as 'es' | 'en']
-                ? post.data.description[lang as 'es' | 'en']
-                : typeof post.data.description === 'string'
-                  ? post.data.description
-                  : '';
-            return (
-              <PostCard
-                title={title}
-                description={description}
-                author={post.data.author}
-                date={post.data.createdAt}
-                tags={post.data.tags}
-                href={`/${lang}/blog/${post.id}`}
-              />
-            );
-          })}
-        </div>
-      )
-    }
-  </main>
-  <Footer locale={locale} hasNavLinks={hasNavLinks} />
-  <style>
-    .blog-main {
-      max-width: 1200px;
-      margin: 0 auto;
-      margin-top: 5.5rem;
-      margin-bottom: 4.5rem;
-      padding: 2rem 1rem 3rem 1rem;
-      display: flex;
-      flex-direction: column;
-      gap: 2rem;
-    }
-    .blog-main h1 {
-      font-size: 2.5rem;
-      margin-bottom: 1.5rem;
-      text-align: left;
-    }
-    .no-posts {
-      text-align: center;
-      font-size: 1.2rem;
-      color: #888;
-      margin-top: 2rem;
-    }
-    .posts-grid {
-      display: flex;
-      flex-direction: column;
-      gap: 2rem;
-      width: 100%;
-    }
-    .post-card {
-      background: #fff;
-      border-radius: 1rem;
-      box-shadow: 0 2px 16px 0 rgba(0, 0, 0, 0.08);
-      padding: 2rem 1.5rem;
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-      transition: box-shadow 0.2s;
-    }
-    .post-card:hover {
-      box-shadow: 0 4px 24px 0 rgba(0, 0, 0, 0.12);
-    }
-    .post-card h2 {
-      font-size: 1.5rem;
-      margin: 0 0 0.5rem 0;
-    }
-    .post-card .description {
-      font-size: 1.1rem;
-      color: #444;
-      margin-bottom: 0.5rem;
-    }
-    .post-meta {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      font-size: 0.95rem;
-      color: #666;
-    }
-    .tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-      margin-top: 0.5rem;
-    }
-    .tag {
-      background: #e0f7fa;
-      color: #00796b;
-      border-radius: 0.5rem;
-      padding: 0.25rem 0.75rem;
-      font-size: 0.9rem;
-      font-weight: 500;
-    }
-    @media (max-width: 600px) {
-      .blog-main {
-        margin-top: 4.5rem;
-        margin-bottom: 3rem;
-        padding: 1rem 0.5rem 2rem 0.5rem;
-      }
-      .posts-grid {
-        gap: 1rem;
-      }
-      .post-card {
-        padding: 1rem;
-      }
-      .blog-main h1 {
-        font-size: 2rem;
-      }
-    }
-  </style>
+
+  <BlogsSection
+    sortedPosts={sortedPosts}
+    lang={lang}
+    blogTranslations={blogTranslations}
+  />
 </Layout>
