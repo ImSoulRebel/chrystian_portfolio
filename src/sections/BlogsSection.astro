@@ -1,6 +1,7 @@
 ---
 import PostCard from '@components/PostCard.astro';
 
+import type { BlogPostData } from '@content/config';
 const { sortedPosts, lang, blogTranslations } = Astro.props;
 ---
 
@@ -13,7 +14,7 @@ const { sortedPosts, lang, blogTranslations } = Astro.props;
         <p class="no-posts">{blogTranslations.noPosts}</p>
       ) : (
         <div class="posts-grid" role="list">
-          {sortedPosts.map((post) => {
+          {sortedPosts.map((post: { id: string; data: BlogPostData }) => {
             const title =
               typeof post.data.title === 'object'
                 ? (post.data.title?.[lang as 'es' | 'en'] ?? 'Sin título')

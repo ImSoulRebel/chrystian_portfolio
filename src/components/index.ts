@@ -30,6 +30,10 @@ export { default as ContactForm } from './ContactForm/ContactForm.astro';
 export { default as FloatingCTA } from './FloatingCTA/FloatingCTA.astro';
 export { default as BackToHome } from './BackToHome.astro';
 
+// === MDX Components ===
+export { default as Quote } from './Quote.astro';
+export { default as Highlight } from './Highlight.astro';
+
 // === Type Definitions (for better TypeScript support) ===
 export type ComponentProps = {
   // Define common props that your components might share
