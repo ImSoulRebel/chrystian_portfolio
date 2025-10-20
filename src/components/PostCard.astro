@@ -1,0 +1,201 @@
+---
+// Componente PostCard basado en ExperienceItem, adaptado para posts de blog
+const { title, description, author, date, tags, href } = Astro.props;
+---
+
+<div class="post-card-component">
+  <a href={href} class="post-card-link" aria-label={title} tabindex="0">
+    <div class="timeline-marker">
+      <div class="timeline-dot"></div>
+    </div>
+    <div class="post-content">
+      <div class="post-header">
+        <h2 class="post-title">{title}</h2>
+        <div class="post-meta">
+          {author && <span class="author">🖊️ {author}</span>}
+          {
+            date && (
+              <span class="date">
+                {new Date(date).toLocaleDateString('es-ES', {
+                  year: 'numeric',
+                  month: 'long',
+                  day: 'numeric',
+                })}
+              </span>
+            )
+          }
+        </div>
+      </div>
+      {description && <p class="post-description">{description}</p>}
+      {
+        Array.isArray(tags) && tags.length > 0 && (
+          <div class="post-tags">
+            {tags.map((tag: string) => (
+              <span class="tag-badge">{tag}</span>
+            ))}
+          </div>
+        )
+      }
+    </div>
+  </a>
+</div>
+
+<style>
+  .post-card-component {
+    position: relative;
+    padding-left: 3rem;
+    margin-bottom: 3rem;
+  }
+  .post-card-component:last-child {
+    margin-bottom: 0;
+  }
+  .timeline-marker {
+    position: absolute;
+    left: 0;
+    top: 1rem;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .timeline-marker::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 40px;
+    width: 2px;
+    height: calc(100% + 2rem);
+    background: rgba(0, 212, 255, 0.18);
+    transform: translateX(-50%);
+  }
+  .post-card-component:last-child .timeline-marker::before {
+    display: none;
+  }
+  .timeline-dot {
+    width: 16px;
+    height: 16px;
+    background: var(--gradient-primary);
+    border-radius: 50%;
+    border: 3px solid var(--background-dark);
+    box-shadow: 0 0 0 3px rgba(0, 212, 255, 0.18);
+    transition: var(--transition);
+  }
+  .post-card-component:hover .timeline-dot {
+    transform: scale(1.2);
+    box-shadow: 0 0 0 6px rgba(0, 212, 255, 0.12);
+  }
+  .post-card-link {
+    display: flex;
+    align-items: stretch;
+    text-decoration: none;
+    color: inherit;
+    position: relative;
+  }
+  .post-content {
+    background: var(--background-card);
+    padding: 2rem;
+    border-radius: var(--border-radius);
+    border: 1px solid rgba(0, 212, 255, 0.1);
+    transition: var(--transition);
+    position: relative;
+    flex: 1;
+    z-index: 1;
+  }
+  .post-content::before {
+    content: '';
+    position: absolute;
+    left: -12px;
+    top: 2rem;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 8px 12px 8px 0;
+    border-color: transparent var(--background-card) transparent transparent;
+  }
+  .post-card-component:hover .post-content {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-light);
+    border-color: var(--primary-color);
+  }
+  .post-header {
+    margin-bottom: 1.2rem;
+  }
+  .post-title {
+    color: var(--text-primary);
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 0.3rem;
+  }
+  .post-meta {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-size: 0.95rem;
+    color: #666;
+    margin-bottom: 0.5rem;
+  }
+  .author {
+    color: var(--primary-color);
+    font-weight: 500;
+    font-size: 1rem;
+  }
+  .date {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    background: rgba(0, 212, 255, 0.08);
+    padding: 0.2rem 0.7rem;
+    border-radius: 12px;
+    border: 1px solid rgba(0, 212, 255, 0.12);
+  }
+  .post-description {
+    color: var(--text-secondary);
+    line-height: 1.7;
+    margin-bottom: 1rem;
+  }
+  .post-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+  }
+  .tag-badge {
+    background: rgba(0, 212, 255, 0.12);
+    color: #00796b;
+    border-radius: 0.5rem;
+    padding: 0.25rem 0.75rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+    border: 1px solid rgba(0, 212, 255, 0.18);
+    transition: var(--transition);
+  }
+  .tag-badge:hover {
+    background: rgba(0, 212, 255, 0.22);
+    transform: translateY(-1px);
+  }
+  @media (max-width: 768px) {
+    .post-card-component {
+      padding-left: 2rem;
+    }
+    .timeline-marker {
+      width: 30px;
+      height: 30px;
+    }
+    .timeline-dot {
+      width: 12px;
+      height: 12px;
+    }
+    .post-content {
+      padding: 1.5rem;
+    }
+    .post-content::before {
+      left: -8px;
+      border-width: 6px 8px 6px 0;
+    }
+    .post-meta {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.5rem;
+    }
+  }
+</style>

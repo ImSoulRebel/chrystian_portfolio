@@ -3,7 +3,7 @@ import { getCollection } from 'astro:content';
 import Layout from '@/layouts/Layout.astro';
 import { Locale } from '@config/translations';
 import { useTranslations } from '@utils/i18n';
-import { BackToHome, Header } from '@components';
+import { BackToHome, Header, PostCard, Footer } from '@components';
 
 export async function getStaticPaths() {
   return [{ params: { lang: 'es' } }, { params: { lang: 'en' } }];
@@ -14,8 +14,10 @@ const locale = (lang as Locale) || 'es';
 const t = useTranslations(locale);
 const hasNavLinks = false;
 
-const pageTitle = lang === 'es' ? 'Blog' : 'Blog';
-const pageDescription = t<string>('contact.seo.description');
+const blogTranslations = t('blog');
+const pageTitle = blogTranslations.title || 'Blog';
+const pageDescription =
+  blogTranslations.seo?.description || t('seo').description;
 
 const allPosts = await getCollection(
   'blog',
@@ -36,73 +38,49 @@ const sortedPosts = allPosts.sort(
   <BackToHome locale={locale} />
   <Header hasNavLinks={hasNavLinks} locale={locale} />
   <main class="blog-main">
-    <h1>{lang === 'es' ? 'Artículos del Blog' : 'Blog Posts'}</h1>
+    <h1>{blogTranslations.heading}</h1>
     {
       sortedPosts.length === 0 ? (
-        <p class="no-posts">
-          {lang === 'es'
-            ? 'No hay artículos publicados aún.'
-            : 'No published posts yet.'}
-        </p>
+        <p class="no-posts">{blogTranslations.noPosts}</p>
       ) : (
         <div class="posts-grid">
-          {sortedPosts.map((post) => (
-            <article class="post-card">
-              {(() => {
-                const title =
-                  typeof post.data.title === 'object' &&
-                  post.data.title?.[lang as 'es' | 'en']
-                    ? post.data.title[lang as 'es' | 'en']
-                    : typeof post.data.title === 'string'
-                      ? post.data.title
-                      : 'Sin título';
-                const description =
-                  typeof post.data.description === 'object' &&
-                  post.data.description?.[lang as 'es' | 'en']
-                    ? post.data.description[lang as 'es' | 'en']
-                    : typeof post.data.description === 'string'
-                      ? post.data.description
-                      : '';
-                return (
-                  <>
-                    <h2>
-                      <a href={`/${lang}/blog/${post.id}`}>{title}</a>
-                    </h2>
-                    {description && <p class="description">{description}</p>}
-                  </>
-                );
-              })()}
-              <div class="post-meta">
-                {post.data.author && (
-                  <span class="author">
-                    {lang === 'es' ? 'Por' : 'By'} {post.data.author}
-                  </span>
-                )}
-                <time datetime={post.data.createdAt}>
-                  {new Date(post.data.createdAt).toLocaleDateString(
-                    lang === 'es' ? 'es-ES' : 'en-US',
-                    { year: 'numeric', month: 'long', day: 'numeric' }
-                  )}
-                </time>
-              </div>
-              {Array.isArray(post.data.tags) && post.data.tags.length > 0 && (
-                <div class="tags">
-                  {post.data.tags.map((tag) => (
-                    <span class="tag">{tag}</span>
-                  ))}
-                </div>
-              )}
-            </article>
-          ))}
+          {sortedPosts.map((post) => {
+            const title =
+              typeof post.data.title === 'object' &&
+              post.data.title?.[lang as 'es' | 'en']
+                ? post.data.title[lang as 'es' | 'en']
+                : typeof post.data.title === 'string'
+                  ? post.data.title
+                  : 'Sin título';
+            const description =
+              typeof post.data.description === 'object' &&
+              post.data.description?.[lang as 'es' | 'en']
+                ? post.data.description[lang as 'es' | 'en']
+                : typeof post.data.description === 'string'
+                  ? post.data.description
+                  : '';
+            return (
+              <PostCard
+                title={title}
+                description={description}
+                author={post.data.author}
+                date={post.data.createdAt}
+                tags={post.data.tags}
+                href={`/${lang}/blog/${post.id}`}
+              />
+            );
+          })}
         </div>
       )
     }
   </main>
+  <Footer locale={locale} hasNavLinks={hasNavLinks} />
   <style>
     .blog-main {
       max-width: 1200px;
       margin: 0 auto;
       margin-top: 5.5rem;
+      margin-bottom: 4.5rem;
       padding: 2rem 1rem 3rem 1rem;
       display: flex;
       flex-direction: column;
@@ -120,8 +98,8 @@ const sortedPosts = allPosts.sort(
       margin-top: 2rem;
     }
     .posts-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      display: flex;
+      flex-direction: column;
       gap: 2rem;
       width: 100%;
     }
@@ -171,6 +149,7 @@ const sortedPosts = allPosts.sort(
     @media (max-width: 600px) {
       .blog-main {
         margin-top: 4.5rem;
+        margin-bottom: 3rem;
         padding: 1rem 0.5rem 2rem 0.5rem;
       }
       .posts-grid {
