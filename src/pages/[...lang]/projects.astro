@@ -1,6 +1,6 @@
 ---
 import { Layout } from '@layouts';
-import { Header, Footer, ProjectCard, BackToHome } from '@components';
+import { ProjectCard, BackToHome } from '@components';
 import { type Locale } from '@utils/i18n';
 import { projectsPage } from '@config/translations';
 import {
@@ -38,14 +38,11 @@ const regularBusinessProjects = businessProjects.filter((p) => !p.featured);
 <Layout
   title={pageTitle}
   description={pageDescription}
-  locale={locale}
   floatingCTAMode="contact"
+  layoutContext={{ locale, hasNavLinks, pageType: 'projects' }}
 >
   <!-- Back to Home Button -->
   <BackToHome locale={locale} />
-
-  <Header hasNavLinks={hasNavLinks} locale={locale} />
-
   <main class="projects-page">
     <!-- Hero Section -->
     <section class="projects-hero">
@@ -156,28 +153,9 @@ const regularBusinessProjects = businessProjects.filter((p) => !p.featured);
       </div>
     </section>
   </main>
-
-  <Footer hasNavLinks={hasNavLinks} locale={locale} pageType="projects" />
 </Layout>
 
 <style>
-  .projects-page {
-    min-height: 100vh;
-    background: var(--background-dark);
-  }
-
-  /* Hero Section */
-  .projects-hero {
-    padding: 8rem 0 4rem;
-    background: linear-gradient(
-      135deg,
-      var(--background-dark) 0%,
-      var(--accent-color) 100%
-    );
-    position: relative;
-    overflow: hidden;
-  }
-
   .projects-hero::before {
     content: '';
     position: absolute;
