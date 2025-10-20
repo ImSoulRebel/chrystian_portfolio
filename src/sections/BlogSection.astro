@@ -1,6 +1,19 @@
 ---
 import BlogHeaderSection from './BlogHeaderSection.astro';
 import BlogContentSection from './BlogContentSection.astro';
+
+interface BlogSectionProps {
+  title: Record<string, string>;
+  description?: Record<string, string>;
+  author?: string;
+  tags?: string[];
+  createdAt: string;
+  updatedAt?: string;
+  image?: string;
+  lang: 'es' | 'en';
+  Content: any;
+}
+
 const {
   title,
   description,
@@ -11,7 +24,7 @@ const {
   image,
   lang,
   Content,
-} = Astro.props;
+} = Astro.props as BlogSectionProps;
 ---
 
 <article class="blog-post" itemscope itemtype="https://schema.org/BlogPosting">

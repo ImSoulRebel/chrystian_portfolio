@@ -7,6 +7,11 @@ export const blog = {
         'Explora artículos, tutoriales y novedades sobre desarrollo, tecnología y proyectos personales.',
     },
     noPosts: 'No hay artículos publicados aún.',
+    blogHeader: {
+      backToBlogLabel: '← Ver todos los blogs',
+      authorLabel: 'Por',
+      updatedLabel: 'Actualizado:',
+    },
   },
   en: {
     title: 'Blog',
@@ -16,5 +21,10 @@ export const blog = {
         'Explore articles, tutorials and news about development, technology and personal projects.',
     },
     noPosts: 'No published posts yet.',
+    blogHeader: {
+      backToBlogLabel: '← All posts',
+      authorLabel: 'By',
+      updatedLabel: 'Updated:',
+    },
   },
 };

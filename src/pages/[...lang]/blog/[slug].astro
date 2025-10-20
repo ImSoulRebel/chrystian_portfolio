@@ -27,6 +27,8 @@ const { post, lang } = Astro.props;
 const { title, description, author, tags, createdAt, updatedAt, image } =
   post.data;
 const { Content } = await post.render();
+
+// Instanciar helper de traducción para textos fijos
 ---
 
 <Layout

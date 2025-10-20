@@ -1,5 +1,12 @@
 ---
-const { image, title, lang, Content } = Astro.props;
+interface BlogContentSectionProps {
+  image?: string;
+  title: Record<string, string>;
+  lang: 'es' | 'en';
+  Content: any;
+}
+
+const { image, title, lang, Content } = Astro.props as BlogContentSectionProps;
 ---
 
 {
