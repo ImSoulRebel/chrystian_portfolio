@@ -1,0 +1,23 @@
+.nav-menu {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.nav-link {
+  display: inline-block;
+  max-width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  vertical-align: bottom;
+}
+
+.nav-item {
+  max-width: 120px;
+}
+
+@media (max-width: 1080px) {
+  .nav-item {
+    max-width: 80px;
+  }
+}

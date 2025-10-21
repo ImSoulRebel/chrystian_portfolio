@@ -4,6 +4,7 @@
 @import './layout/_container.css';
 @import './layout/_sections.css';
 @import './components/_buttons.css';
+@import './components/_header.css';
 @import './sections/_hero.css';
 @import './sections/_about.css';
 @import './sections/_skills.css';
