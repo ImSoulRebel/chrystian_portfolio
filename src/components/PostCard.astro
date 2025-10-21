@@ -1,6 +1,16 @@
 ---
 // Componente PostCard basado en ExperienceItem, adaptado para posts de blog
-const { title, description, author, date, tags, href } = Astro.props;
+interface PostCardProps {
+  title: string;
+  description?: string;
+  author?: string;
+  date?: string;
+  tags?: string[];
+  href: string;
+}
+
+const { title, description, author, date, tags, href } =
+  Astro.props as PostCardProps;
 ---
 
 <div class="post-card-component">

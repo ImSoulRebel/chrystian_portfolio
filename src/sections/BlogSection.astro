@@ -1,46 +1,31 @@
 ---
 import BlogHeaderSection from './BlogHeaderSection.astro';
 import BlogContentSection from './BlogContentSection.astro';
+import type { CollectionEntry } from 'astro:content';
 
 interface BlogSectionProps {
-  title: Record<string, string>;
-  description?: Record<string, string>;
-  author?: string;
-  tags?: string[];
-  createdAt: string;
-  updatedAt?: string;
-  image?: string;
+  post: CollectionEntry<'blog'>;
   lang: 'es' | 'en';
-  Content: any;
+  Content: (props: { lang: 'es' | 'en' }) => any;
 }
 
-const {
-  title,
-  description,
-  author,
-  tags,
-  createdAt,
-  updatedAt,
-  image,
-  lang,
-  Content,
-} = Astro.props as BlogSectionProps;
+const { post, lang, Content } = Astro.props as BlogSectionProps;
 ---
 
 <article class="blog-post" itemscope itemtype="https://schema.org/BlogPosting">
   <BlogHeaderSection
-    title={title}
-    description={description}
-    author={author}
-    tags={tags}
-    createdAt={createdAt}
-    updatedAt={updatedAt}
+    title={post.data.title}
+    description={post.data.description}
+    author={post.data.author}
+    tags={post.data.tags}
+    createdAt={post.data.createdAt}
+    updatedAt={post.data.updatedAt}
     lang={lang}
-    image={image}
+    image={post.data.image}
   />
   <BlogContentSection
-    image={image}
-    title={title}
+    image={post.data.image}
+    title={post.data.title}
     lang={lang}
     Content={Content}
   />

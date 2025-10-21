@@ -3,7 +3,11 @@ import { getCollection, type CollectionEntry } from 'astro:content';
 import BlogCard from '@components/BlogCard.astro';
 import { useTranslations, type Locale } from '@utils/i18n';
 
-const { locale } = Astro.props as { locale: Locale };
+interface BlogPreviewSectionProps {
+  locale: 'es' | 'en';
+}
+
+const { locale } = Astro.props as BlogPreviewSectionProps;
 const t = useTranslations(locale);
 
 const allPosts = await getCollection(

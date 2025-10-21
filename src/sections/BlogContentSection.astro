@@ -1,18 +1,19 @@
 ---
 import '@styles/blog-post.css';
+
 interface BlogContentSectionProps {
   image?: string;
-  title: Record<string, string>;
+  title: { es: string; en: string };
   lang: 'es' | 'en';
-  Content: any;
+  Content: (props: { lang: 'es' | 'en' }) => any;
 }
 
-const { Content } = Astro.props as BlogContentSectionProps;
+const { Content, lang } = Astro.props as BlogContentSectionProps;
 ---
 
 <div class="prose">
   <section class="content" itemprop="articleBody">
-    <Content lang={Astro.props.lang} />
+    <Content lang={lang} />
   </section>
 </div>
 <style>

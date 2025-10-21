@@ -2,8 +2,8 @@
 import { formatDate, useTranslations } from '@utils/i18n';
 
 interface BlogHeaderSectionProps {
-  title: Record<string, string>;
-  description?: Record<string, string>;
+  title: { es: string; en: string };
+  description?: { es?: string; en?: string };
   author?: string;
   tags?: string[];
   createdAt: string;

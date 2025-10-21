@@ -2,7 +2,15 @@
 import PostCard from '@components/PostCard.astro';
 
 import type { BlogPostData } from '@content/config';
-const { sortedPosts, lang, blogTranslations } = Astro.props;
+
+interface BlogListSectionProps {
+  sortedPosts: { id: string; data: BlogPostData }[];
+  lang: 'es' | 'en';
+  blogTranslations: Record<string, string>;
+}
+
+const { sortedPosts, lang, blogTranslations } =
+  Astro.props as BlogListSectionProps;
 ---
 
 <section class="blog-section">

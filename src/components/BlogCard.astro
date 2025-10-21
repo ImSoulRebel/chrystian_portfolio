@@ -1,7 +1,18 @@
 ---
 // BlogCard.astro: Tarjeta de blog con el mismo diseño que ProjectCard
 import styles from './BlogCard.module.css';
-const { title, description, author, date, tags, href } = Astro.props;
+
+interface BlogCardProps {
+  title: string;
+  description?: string;
+  author?: string;
+  date?: string;
+  tags?: string[];
+  href: string;
+}
+
+const { title, description, author, date, tags, href } =
+  Astro.props as BlogCardProps;
 ---
 
 <a href={href} class={styles.blogCard} aria-label={title} tabindex="0">
