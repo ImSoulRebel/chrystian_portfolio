@@ -20,7 +20,7 @@ const skillsForCarousel = [...skills, ...skills, ...skills];
 
 <section id="skills" class="skills">
   <div class="container">
-    <h2 class="section-title">{t('skills.title')}</h2>
+    <h2 class="section-title skills-title">{t('skills.title')}</h2>
     <div class="skills-carousel">
       <div class="skills-track">
         {
@@ -35,6 +35,18 @@ const skillsForCarousel = [...skills, ...skills, ...skills];
 </section>
 
 <style>
+  .skills-title {
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
+    background: var(--gradient-primary);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 4rem;
+    text-align: center;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+
   .indicator-text {
     text-align: center;
     color: var(--text-muted);

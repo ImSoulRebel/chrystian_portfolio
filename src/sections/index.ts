@@ -22,6 +22,7 @@ export { default as BlogSection } from './BlogSection.astro';
 
 // === Contact & Footer Sections ===
 export { default as ContactSection } from './ContactSection/ContactSection.astro';
+export { default as BlogPreviewSection } from './BlogPreviewSection.astro';
 
 // === Type definitions for section props ===
 export type SectionProps = {
