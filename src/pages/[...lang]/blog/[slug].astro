@@ -1,5 +1,6 @@
 ---
 import { getCollection, type CollectionEntry } from 'astro:content';
+import type { BlogPostData } from '@content/config';
 import { BlogSection } from '@sections';
 import { Layout } from '@layouts';
 
@@ -18,35 +19,24 @@ export async function getStaticPaths() {
   ]);
 }
 
-type Props = {
-  post: CollectionEntry<'blog'>;
+interface BlogPageProps {
+  post: CollectionEntry<'blog'> & { data: BlogPostData };
   lang: 'es' | 'en';
-};
+}
 
-const { post, lang } = Astro.props;
-const { title, description, author, tags, createdAt, updatedAt, image } =
-  post.data;
+const { post, lang } = Astro.props as BlogPageProps;
+// ...existing code...
 const { Content } = await post.render();
 
 // Instanciar helper de traducción para textos fijos
 ---
 
 <Layout
-  title={title[lang]}
-  description={description?.[lang]}
+  title={post.data.title[lang]}
+  description={post.data.description?.[lang] ?? ''}
   layoutContext={{ locale: lang, hasNavLinks: false, pageType: 'blog' }}
 >
   <!-- <BackToHome locale={lang} /> -->
 
-  <BlogSection
-    title={title}
-    description={description}
-    author={author}
-    tags={tags}
-    createdAt={createdAt}
-    updatedAt={updatedAt}
-    image={image}
-    lang={lang}
-    Content={Content}
-  />
+  <BlogSection post={post} lang={lang} Content={Content} />
 </Layout>
