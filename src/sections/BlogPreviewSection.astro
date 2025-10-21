@@ -61,11 +61,7 @@ const previewPosts: CollectionEntry<'blog'>[] = [...featured, ...recent].slice(
     }
     <div class="view-more-container">
       <a href={`/${locale}/blog`} class="btn btn-primary">
-        <span
-          >{
-            t('blog.viewAll') ?? (locale === 'es' ? 'Ver todos' : 'See all')
-          }</span
-        >
+        <span>{t('blog.viewAll')}</span>
         <svg
           width="20"
           height="20"
