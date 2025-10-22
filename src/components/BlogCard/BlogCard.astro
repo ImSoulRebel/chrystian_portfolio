@@ -9,13 +9,26 @@ interface BlogCardProps {
   date?: string;
   tags?: string[];
   href: string;
+  fullWidth?: boolean;
 }
 
-const { title, description, author, date, tags, href } =
-  Astro.props as BlogCardProps;
+const {
+  title,
+  description,
+  author,
+  date,
+  tags,
+  href,
+  fullWidth = false,
+} = Astro.props as BlogCardProps;
 ---
 
-<a href={href} class={styles.blogCard} aria-label={title} tabindex="0">
+<a
+  href={href}
+  class={`${styles.blogCard}${fullWidth ? ' full-width' : ''}`}
+  aria-label={title}
+  tabindex="0"
+>
   <div class={styles.blogCardContent}>
     <h3 class={styles.blogCardTitle}>{title}</h3>
     <div class={styles.blogCardMeta}>
@@ -44,3 +57,10 @@ const { title, description, author, date, tags, href } =
     }
   </div>
 </a>
+
+<style>
+  .full-width {
+    max-width: none !important;
+    width: 100% !important;
+  }
+</style>

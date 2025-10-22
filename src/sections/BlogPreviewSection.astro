@@ -1,7 +1,7 @@
 ---
-import { getCollection, type CollectionEntry } from 'astro:content';
-import BlogCard from '@components/BlogCard.astro';
+import { getSortedBlogPosts } from '@utils/blogManager';
 import { useTranslations, type Locale } from '@utils/i18n';
+import { BlogCard } from '@components';
 
 interface BlogPreviewSectionProps {
   locale: 'es' | 'en';
@@ -10,24 +10,7 @@ interface BlogPreviewSectionProps {
 const { locale } = Astro.props as BlogPreviewSectionProps;
 const t = useTranslations(locale);
 
-const allPosts = await getCollection(
-  'blog',
-  (entry) => entry.data.status === 'published'
-);
-const featured = allPosts
-  .filter((p) => p.data.featured)
-  .sort((a, b) => (b.data.priority ?? 0) - (a.data.priority ?? 0));
-const recent = allPosts
-  .filter((p) => !p.data.featured)
-  .sort(
-    (a, b) =>
-      new Date(b.data.createdAt).getTime() -
-      new Date(a.data.createdAt).getTime()
-  );
-const previewPosts: CollectionEntry<'blog'>[] = [...featured, ...recent].slice(
-  0,
-  3
-);
+const previewPosts = await getSortedBlogPosts(locale, { limit: 3 });
 ---
 
 <section id="blog" class="blog-preview-section">
@@ -41,13 +24,13 @@ const previewPosts: CollectionEntry<'blog'>[] = [...featured, ...recent].slice(
       previewPosts.length === 0 ? (
         <p class="no-posts">{t('blog.noPosts')}</p>
       ) : (
-        <div class="blog-preview-grid">
+        <div class="blog-preview-grid" role="list">
           {previewPosts.map((post) => (
             <BlogCard
               title={
                 typeof post.data.title === 'object'
-                  ? (post.data.title?.[locale as Locale] ?? 'Sin título')
-                  : (post.data.title ?? 'Sin título')
+                  ? (post.data.title?.[locale as Locale] ?? t('blog.noTitle'))
+                  : (post.data.title ?? t('blog.noTitle'))
               }
               description={
                 typeof post.data.description === 'object'

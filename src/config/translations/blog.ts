@@ -7,6 +7,7 @@ export const blog = {
         'Explora artículos, tutoriales y novedades sobre desarrollo, tecnología y proyectos personales.',
     },
     noPosts: 'No hay artículos publicados aún.',
+    noTitle: 'Sin título',
     previewSubtitle:
       'Últimos artículos y reflexiones sobre desarrollo, arquitectura de software y experiencias en el mundo tech. Descubre ideas, aprendizajes y tendencias.',
     viewAll: 'Explorar más artículos',
@@ -24,6 +25,7 @@ export const blog = {
         'Explore articles, tutorials and news about development, technology and personal projects.',
     },
     noPosts: 'No published posts yet.',
+    noTitle: 'Untitled',
     previewSubtitle:
       'Latest articles and insights on development, software architecture, and tech experiences. Discover ideas, lessons learned, and trends.',
     viewAll: 'Explore more posts',

@@ -1,44 +1,45 @@
 ---
-import PostCard from '@components/PostCard.astro';
-
-import type { BlogPostData } from '@content/config';
+import { BlogCard } from '@components';
+import { getSortedBlogPosts } from '@utils/blogManager';
+import { useTranslations } from '@utils/i18n';
 
 interface BlogListSectionProps {
-  sortedPosts: { id: string; data: BlogPostData }[];
   lang: 'es' | 'en';
-  blogTranslations: Record<string, string>;
 }
 
-const { sortedPosts, lang, blogTranslations } =
-  Astro.props as BlogListSectionProps;
+const { lang } = Astro.props as BlogListSectionProps;
+const t = useTranslations(lang);
+
+const sortedPosts = await getSortedBlogPosts(lang);
 ---
 
 <section class="blog-section">
   <div class="container">
-    <h1 id="blog-heading" class="section-title">{blogTranslations.heading}</h1>
+    <h1 id="blog-heading" class="section-title">{t('blog.heading')}</h1>
 
     {
       sortedPosts.length === 0 ? (
-        <p class="no-posts">{blogTranslations.noPosts}</p>
+        <p class="no-posts">{t('blog.noPosts')}</p>
       ) : (
         <div class="posts-grid" role="list">
-          {sortedPosts.map((post: { id: string; data: BlogPostData }) => {
+          {sortedPosts.map((post) => {
             const title =
               typeof post.data.title === 'object'
-                ? (post.data.title?.[lang as 'es' | 'en'] ?? 'Sin título')
-                : (post.data.title ?? 'Sin título');
+                ? (post.data.title?.[lang] ?? t('blog.noTitle'))
+                : (post.data.title ?? t('blog.noTitle'));
             const description =
               typeof post.data.description === 'object'
-                ? (post.data.description?.[lang as 'es' | 'en'] ?? '')
+                ? (post.data.description?.[lang] ?? '')
                 : (post.data.description ?? '');
             return (
-              <PostCard
+              <BlogCard
                 title={title}
                 description={description}
                 author={post.data.author}
                 date={post.data.createdAt}
                 tags={post.data.tags}
                 href={`/${lang}/blog/${post.id}`}
+                fullWidth={true}
               />
             );
           })}

@@ -1,3 +1,9 @@
+/* Permite que la tarjeta ocupe todo el ancho del padre en BlogListSection */
+.full-width {
+  max-width: 100% !important;
+  width: 100% !important;
+  margin: 0 !important;
+}
 /* Blog Card (Preview) - copia de ProjectCard.module.css para blog */
 .blogCard {
   background: linear-gradient(
@@ -154,4 +160,10 @@
     padding: 0.2rem 0.4rem;
     font-size: 0.7rem;
   }
+}
+
+.full-width {
+  max-width: 100% !important;
+  width: 100% !important;
+  margin: 0 !important;
 }
