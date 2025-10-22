@@ -11,13 +11,14 @@ const {
   tags,
   href,
   fullWidth = false,
+  'aria-label': ariaLabel,
 } = Astro.props as BlogCardProps;
 ---
 
 <a
   href={href}
   class={`${styles.blogCard}${fullWidth ? ' full-width' : ''}`}
-  aria-label={title}
+  aria-label={ariaLabel ?? title}
   tabindex="0"
 >
   <div class={styles.blogCardContent}>

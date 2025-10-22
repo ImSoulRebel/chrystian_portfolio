@@ -2,15 +2,19 @@
 import BlogHeaderSection from './BlogHeaderSection.astro';
 import BlogContentSection from './BlogContentSection.astro';
 import type { BlogSectionProps } from '@content/types/blog';
+import { useTranslations } from '@utils/i18n';
 
 const { post, lang, Content } = Astro.props as BlogSectionProps;
+const t = useTranslations(lang);
 ---
 
 <article
   class="blog-post"
   itemscope=""
   itemtype="https://schema.org/BlogPosting"
-  aria-label={String(post.data.title ?? 'Título del blog')}
+  aria-label={typeof post.data.title === 'object'
+    ? (post.data.title?.[lang] ?? t('blog.noTitle'))
+    : (post.data.title ?? t('blog.noTitle'))}
   itemprop="blogPost"
 >
   <BlogHeaderSection
