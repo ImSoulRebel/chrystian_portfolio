@@ -2,6 +2,7 @@
 import { ProjectCard } from '@components';
 import { useTranslations, type Locale, translations } from '@utils/i18n';
 import * as assets from '@assets';
+import { getCollection } from 'astro:content';
 
 // Recibir locale como prop en lugar de detectarlo
 interface Props {
@@ -11,69 +12,37 @@ interface Props {
 const { locale = 'es' } = Astro.props;
 const t = useTranslations(locale);
 
-// Tipo para las claves de proyectos
-type ProjectKey = 'yuvod' | 'nextival' | 'stelcamping' | 'bnc10' | 'tookane';
-
-// Tipo para los proyectos combinados
-type Project = {
-  title: string;
-  stack: string;
-  description: string;
-  impact: string;
-  featured: boolean;
-  liveUrl?: string | undefined;
-  githubUrl?: string | undefined;
-  image: any;
+// Relacionar ids con assets locales si aplica
+const projectImages: Record<string, any> = {
+  yuvod: assets.yuvodLogo,
+  bnc10: assets.bnc10Logo,
+  tookane: assets.tookaneLogo,
+  stelcamping: assets.stelLogo,
+  nextival: assets.nextivalLogo,
+  portfolio: assets.projectPlaceholder,
 };
 
-// Top 3 proyectos más relevantes para Flutter Senior Architect & Tech Lead
-const featuredProjectsConfig: Array<{
-  key: ProjectKey;
-  priority: number; // Orden de relevancia técnica
-  featured: boolean;
-  liveUrl?: string;
-  githubUrl?: string;
-  image: any;
-}> = [
-  {
-    key: 'yuvod',
-    priority: 1, // Arquitectura multiplataforma avanzada + SmartTV
-    featured: true,
-    liveUrl: 'https://yuvod.com',
-    image: assets.yuvodLogo,
-  },
-  {
-    key: 'bnc10',
-    priority: 2, // Seguridad bancaria + Clean Architecture
-    featured: true,
-    image: assets.bnc10Logo,
-  },
-  {
-    key: 'tookane',
-    priority: 3, // Offline-first + Optimización avanzada
-    featured: true,
-    liveUrl: 'https://tookane.com',
-    image: assets.tookaneLogo,
-  },
-];
-
-// Construir solo los 3 proyectos más relevantes desde traducciones + configuración
-const projects: Project[] = featuredProjectsConfig.map((config) => {
-  const projectData = translations[locale as Locale].projects.list[config.key];
-  if (!projectData) {
-    throw new Error(`Missing project data for key: ${config.key}`);
-  }
-  return {
-    title: projectData.title,
-    stack: projectData.stack,
-    description: projectData.description,
-    impact: projectData.impact,
-    featured: config.featured,
-    liveUrl: config.liveUrl,
-    githubUrl: config.githubUrl,
-    image: config.image,
-  };
-});
+// Filtrar y ordenar los proyectos destacados (top 3)
+const allProjects = await getCollection('projects');
+const projects = allProjects
+  .filter((p) => p.data.featured)
+  .sort((a, b) => (a.data.priority ?? 99) - (b.data.priority ?? 99))
+  .slice(0, 3)
+  .map((p) => {
+    const projectT = translations[locale as Locale].projects.list[p.data.id];
+    if (!projectT)
+      throw new Error(`Missing translations for project: ${p.data.id}`);
+    return {
+      title: projectT.title,
+      stack: projectT.stack,
+      description: projectT.description,
+      impact: projectT.impact,
+      featured: p.data.featured,
+      liveUrl: p.data.liveUrl,
+      githubUrl: p.data.githubUrl,
+      image: projectImages[p.data.id] || null,
+    };
+  });
 ---
 
 <section id="projects" class="projects">
@@ -85,7 +54,7 @@ const projects: Project[] = featuredProjectsConfig.map((config) => {
 
     <div class="projects-grid">
       {
-        projects.map((project: Project) => (
+        projects.map((project) => (
           <ProjectCard
             title={project.title}
             stack={project.stack}
