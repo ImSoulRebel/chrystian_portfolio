@@ -105,6 +105,7 @@ export interface ExperienceTranslations {
 
 export interface ProjectsTranslations {
   title: string;
+  subtitle: string;
   viewDemo: string;
   viewCode: string;
   viewMore: string;

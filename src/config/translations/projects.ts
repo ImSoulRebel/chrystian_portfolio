@@ -3,6 +3,8 @@ import type { ProjectsTranslations } from './types';
 export const projects: Record<'es' | 'en', ProjectsTranslations> = {
   es: {
     title: 'Proyectos Destacados',
+    subtitle:
+      'Los 3 proyectos más destacados que demuestran experiencia en arquitectura Flutter avanzada, liderazgo técnico y soluciones escalables.',
     viewDemo: 'Ver Demo',
     viewCode: 'Ver Código',
     viewMore: 'Ver Más Proyectos',
@@ -82,6 +84,8 @@ export const projects: Record<'es' | 'en', ProjectsTranslations> = {
   },
   en: {
     title: 'Featured Projects',
+    subtitle:
+      'Top 3 standout projects showcasing advanced Flutter architecture, technical leadership, and scalable solutions.',
     viewDemo: 'View Demo',
     viewCode: 'View Code',
     viewMore: 'View More Projects',
