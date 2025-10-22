@@ -2,10 +2,7 @@
 import { getSortedBlogPosts } from '@utils/blogManager';
 import { useTranslations, type Locale } from '@utils/i18n';
 import { BlogCard } from '@components';
-
-interface BlogPreviewSectionProps {
-  locale: 'es' | 'en';
-}
+import type { BlogPreviewSectionProps } from '@content/types/blog';
 
 const { locale } = Astro.props as BlogPreviewSectionProps;
 const t = useTranslations(locale);

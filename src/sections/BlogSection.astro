@@ -1,13 +1,7 @@
 ---
-import type { CollectionEntry } from 'astro:content';
 import BlogHeaderSection from './BlogHeaderSection.astro';
 import BlogContentSection from './BlogContentSection.astro';
-
-interface BlogSectionProps {
-  post: CollectionEntry<'blog'>;
-  lang: 'es' | 'en';
-  Content: any; // Según recomendación Astro 5.x para contenido estático
-}
+import type { BlogSectionProps } from '@content/types/blog';
 
 const { post, lang, Content } = Astro.props as BlogSectionProps;
 ---

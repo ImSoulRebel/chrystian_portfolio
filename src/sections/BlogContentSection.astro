@@ -1,12 +1,7 @@
 ---
 import '@styles/blog-post.css';
 
-interface BlogContentSectionProps {
-  image?: string;
-  title: { es: string; en: string };
-  lang: 'es' | 'en';
-  Content: any; // Según recomendación Astro 5.x para contenido estático
-}
+import type { BlogContentSectionProps } from '@content/types/blog';
 
 const { Content, lang } = Astro.props as BlogContentSectionProps;
 ---
