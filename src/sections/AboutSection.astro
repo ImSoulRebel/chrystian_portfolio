@@ -1,5 +1,6 @@
 ---
 import { useTranslations, type Locale } from '@utils/i18n';
+import aboutStats from '@content/data/aboutStats.json';
 
 // Recibir locale como prop en lugar de detectarlo
 interface Props {
@@ -9,18 +10,10 @@ interface Props {
 const { locale = 'es' } = Astro.props;
 const t = useTranslations(locale);
 
-const stats = [
-  { number: t('about.stats.apps.value'), label: t('about.stats.apps.label') },
-  {
-    number: t('about.stats.experience.value'),
-    label: t('about.stats.experience.label'),
-  },
-  { number: t('about.stats.users.value'), label: t('about.stats.users.label') },
-  {
-    number: t('about.stats.countries.value'),
-    label: t('about.stats.countries.label'),
-  },
-];
+const stats = (aboutStats as Array<{ key: string }>).map(({ key }) => ({
+  number: t(`about.stats.${key}.value` as any),
+  label: t(`about.stats.${key}.label` as any),
+}));
 ---
 
 <section id="about" class="about" aria-labelledby="about-title" role="region">

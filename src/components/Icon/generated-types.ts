@@ -141,7 +141,7 @@ export const ICON_FILE_MAP: Record<string, string> = {
   sqlite: 'sqlite_logo.svg',
   'tailwind-css': 'tailwind_css_logo.svg',
   'team-leader': 'team_leader_logo.svg',
-  'team-management': 'team_management.svg',
+  'team-management': 'team_management_logo.svg',
   'tech-lead': 'tech_lead_logo.svg',
   typescript: 'typescript_logo.svg',
   videojs: 'videojs_logo.svg',

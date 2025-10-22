@@ -7,23 +7,31 @@ const projectSchema = z.object({
   id: z.string().min(1, 'ID es requerido'),
 
   // Contenido multiidioma
-  title: z.object({
-    es: z.string().min(1, 'Título en español es requerido'),
-    en: z.string().min(1, 'Título en inglés es requerido'),
-  }),
 
-  description: z.object({
-    es: z.string().min(1, 'Descripción en español es requerida'),
-    en: z.string().min(1, 'Descripción en inglés es requerida'),
-  }),
+  // Campos multiidioma opcionales (desacoplados, gestionados por traducciones)
+  title: z
+    .object({
+      es: z.string().optional(),
+      en: z.string().optional(),
+    })
+    .optional(),
 
-  impact: z.object({
-    es: z.string().min(1, 'Impacto en español es requerido'),
-    en: z.string().min(1, 'Impacto en inglés es requerido'),
-  }),
+  description: z
+    .object({
+      es: z.string().optional(),
+      en: z.string().optional(),
+    })
+    .optional(),
 
-  // Información técnica
-  stack: z.array(z.string()).min(1, 'Al menos una tecnología es requerida'),
+  impact: z
+    .object({
+      es: z.string().optional(),
+      en: z.string().optional(),
+    })
+    .optional(),
+
+  // Información técnica opcional
+  stack: z.array(z.string()).optional(),
 
   // Metadatos del proyecto
   category: z.enum(['business', 'personal'], {

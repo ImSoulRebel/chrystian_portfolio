@@ -85,6 +85,12 @@ export interface SkillsTranslations {
     leadership: string;
     tools: string;
   };
+  list?: {
+    [key: string]: {
+      name: string;
+      description: string;
+    };
+  };
 }
 
 export interface ExperienceTranslations {
