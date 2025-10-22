@@ -11,6 +11,7 @@ export const blog = {
     previewSubtitle:
       'Últimos artículos y reflexiones sobre desarrollo, arquitectura de software y experiencias en el mundo tech. Descubre ideas, aprendizajes y tendencias.',
     viewAll: 'Explorar más artículos',
+    viewPostAria: 'Ver artículo: {title}',
     blogHeader: {
       backToBlogLabel: '← Ver todos los blogs',
       authorLabel: 'Por',
@@ -29,6 +30,7 @@ export const blog = {
     previewSubtitle:
       'Latest articles and insights on development, software architecture, and tech experiences. Discover ideas, lessons learned, and trends.',
     viewAll: 'Explore more posts',
+    viewPostAria: 'View post: {title}',
     blogHeader: {
       backToBlogLabel: '← All posts',
       authorLabel: 'By',

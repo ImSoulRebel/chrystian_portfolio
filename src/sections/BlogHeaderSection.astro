@@ -232,4 +232,25 @@ const formattedUpdatedAt =
     color: var(--color-tag-hover-text, var(--color-on-secondary, #fff));
     outline: none;
   }
+  .blog-header-section {
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto 2.5rem auto;
+    padding: 0 1.5rem;
+    text-align: center;
+  }
+  @media (max-width: 900px) {
+    .blog-header-section {
+      max-width: 100%;
+      padding: 0 1rem;
+      margin-bottom: 2rem;
+    }
+  }
+  @media (max-width: 600px) {
+    .blog-header-section {
+      padding: 0 0.5rem;
+      margin-bottom: 1.25rem;
+    }
+  }
+  /* Fin de optimización visual y responsiva para la cabecera de blog */
 </style>

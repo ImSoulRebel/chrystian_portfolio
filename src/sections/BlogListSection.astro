@@ -22,29 +22,33 @@ const sortedPosts = await getSortedBlogPosts(lang);
         <p class="no-posts">{t('blog.noPosts')}</p>
       ) : (
         <div class="posts-grid" role="list">
-          {sortedPosts.map((post) => {
-            const title =
-              typeof post.data.title === 'object'
-                ? (post.data.title?.[lang] ?? t('blog.noTitle'))
-                : (post.data.title ?? t('blog.noTitle'));
-            const description =
-              typeof post.data.description === 'object'
-                ? (post.data.description?.[lang] ?? '')
-                : (post.data.description ?? '');
-            return (
-              <div role="listitem">
-                <BlogCard
-                  title={title}
-                  description={description}
-                  author={post.data.author}
-                  date={post.data.createdAt}
-                  tags={post.data.tags}
-                  href={`/${lang}/blog/${post.id}`}
-                  fullWidth={true}
-                />
-              </div>
-            );
-          })}
+          {sortedPosts.map((post) => (
+            <BlogCard
+              title={
+                typeof post.data.title === 'object'
+                  ? (post.data.title?.[lang] ?? t('blog.noTitle'))
+                  : (post.data.title ?? t('blog.noTitle'))
+              }
+              description={
+                typeof post.data.description === 'object'
+                  ? (post.data.description?.[lang] ?? '')
+                  : (post.data.description ?? '')
+              }
+              author={post.data.author}
+              date={post.data.createdAt}
+              tags={post.data.tags}
+              href={`/${lang}/blog/${post.id}`}
+              fullWidth={true}
+              lang={lang}
+              aria-label={t('blog.viewPostAria').replace(
+                '{title}',
+                typeof post.data.title === 'object'
+                  ? (post.data.title?.[lang] ?? t('blog.noTitle'))
+                  : (post.data.title ?? t('blog.noTitle'))
+              )}
+              key={post.id}
+            />
+          ))}
         </div>
       )
     }
@@ -77,8 +81,8 @@ const sortedPosts = await getSortedBlogPosts(lang);
     display: flex;
     flex-direction: column;
     gap: 2rem;
+    width: 100%;
     margin-bottom: 4rem;
-    align-items: stretch;
   }
   .no-posts {
     text-align: center;
@@ -97,25 +101,14 @@ const sortedPosts = await getSortedBlogPosts(lang);
   }
   @media (max-width: 900px) {
     .posts-grid {
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 1.5rem;
-    }
-  }
-  @media (max-width: 768px) {
-    .blog-section {
-      padding: 4rem 0;
-    }
-    .section-title {
-      font-size: 2rem;
-      margin-bottom: 2rem;
-    }
-    .posts-grid {
-      grid-template-columns: 1fr;
       gap: 1.5rem;
       margin-bottom: 3rem;
     }
-    .container {
-      padding: 0 1rem;
+  }
+  @media (max-width: 600px) {
+    .posts-grid {
+      gap: 1.1rem;
+      margin-bottom: 2rem;
     }
   }
   @media (max-width: 480px) {

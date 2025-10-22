@@ -49,4 +49,31 @@ const { post, lang, Content } = Astro.props as BlogSectionProps;
     border-radius: var(--border-radius);
     box-shadow: var(--shadow-light);
   }
+  .blog-section {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto 4rem auto;
+    padding: 0 1.5rem;
+  }
+  @media (max-width: 900px) {
+    .blog-section {
+      max-width: 100%;
+      padding: 0 1rem;
+      margin-bottom: 3rem;
+    }
+  }
+  @media (max-width: 600px) {
+    .blog-section {
+      padding: 0 0.5rem;
+      margin-bottom: 2rem;
+    }
+  }
+  /*
+    Optimización visual y responsiva:
+    - Grid responsivo para listas de posts
+    - Consistencia en paddings, márgenes y breakpoints
+    - Uso de CSS Modules en tarjetas
+    - Accesibilidad: outline visible, contraste y focus
+    - Comentarios para facilitar mantenimiento
+  */
 </style>
