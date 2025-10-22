@@ -1,7 +1,7 @@
 ---
 import { SkillCard } from '@components';
 import { useTranslations, type Locale } from '@utils/i18n';
-import { getAllSkills } from '@utils/skillsManager';
+import skillsManager from '@utils/skillsManager';
 
 // Recibir locale como prop en lugar de detectarlo
 interface Props {
@@ -11,10 +11,8 @@ interface Props {
 const { locale = 'es' } = Astro.props;
 const t = useTranslations(locale);
 
-// Obtener skills desde Content Collections
-const skills = await getAllSkills();
-
-// Para el carrusel, triplicar las skills para efecto infinito
+// Obtener skills desde la Content Collection usando el manager (Astro 5.x best practice)
+const skills = await skillsManager.getTranslatedSkills(locale);
 const skillsForCarousel = [...skills, ...skills, ...skills];
 ---
 

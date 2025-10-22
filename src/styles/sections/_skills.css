@@ -4,9 +4,12 @@
 
 .skills-carousel {
   width: 100%;
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: visible;
   margin-top: 3rem;
   position: relative;
+  padding-top: 24px;
+  padding-bottom: 24px;
   mask: linear-gradient(
     to right,
     transparent 0%,
