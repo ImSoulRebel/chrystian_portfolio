@@ -325,6 +325,15 @@ export interface BlogTranslations {
     description: string;
   };
   noPosts: string;
+  noTitle?: string;
+  previewSubtitle?: string;
+  viewAll?: string;
+  viewAllAria?: string;
+  blogHeader?: {
+    backToBlogLabel?: string;
+    authorLabel?: string;
+    updatedLabel?: string;
+  };
 }
 
 export interface LocaleTranslations {

@@ -26,28 +26,34 @@ const previewPosts = await getSortedBlogPosts(locale, { limit: 3 });
       ) : (
         <div class="blog-preview-grid" role="list">
           {previewPosts.map((post) => (
-            <BlogCard
-              title={
-                typeof post.data.title === 'object'
-                  ? (post.data.title?.[locale as Locale] ?? t('blog.noTitle'))
-                  : (post.data.title ?? t('blog.noTitle'))
-              }
-              description={
-                typeof post.data.description === 'object'
-                  ? (post.data.description?.[locale as Locale] ?? '')
-                  : (post.data.description ?? '')
-              }
-              author={post.data.author}
-              date={post.data.createdAt}
-              tags={post.data.tags}
-              href={`/${locale}/blog/${post.id}`}
-            />
+            <div role="listitem">
+              <BlogCard
+                title={
+                  typeof post.data.title === 'object'
+                    ? (post.data.title?.[locale as Locale] ?? t('blog.noTitle'))
+                    : (post.data.title ?? t('blog.noTitle'))
+                }
+                description={
+                  typeof post.data.description === 'object'
+                    ? (post.data.description?.[locale as Locale] ?? '')
+                    : (post.data.description ?? '')
+                }
+                author={post.data.author}
+                date={post.data.createdAt}
+                tags={post.data.tags}
+                href={`/${locale}/blog/${post.id}`}
+              />
+            </div>
           ))}
         </div>
       )
     }
     <div class="view-more-container">
-      <a href={`/${locale}/blog`} class="btn btn-primary">
+      <a
+        href={`/${locale}/blog`}
+        class="btn btn-primary"
+        aria-label={t('blog')['viewAllAria']}
+      >
         <span>{t('blog.viewAll')}</span>
         <svg
           width="20"

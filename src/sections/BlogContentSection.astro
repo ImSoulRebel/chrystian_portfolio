@@ -5,7 +5,7 @@ interface BlogContentSectionProps {
   image?: string;
   title: { es: string; en: string };
   lang: 'es' | 'en';
-  Content: (props: { lang: 'es' | 'en' }) => any;
+  Content: any; // Según recomendación Astro 5.x para contenido estático
 }
 
 const { Content, lang } = Astro.props as BlogContentSectionProps;

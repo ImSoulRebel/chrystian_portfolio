@@ -32,15 +32,17 @@ const sortedPosts = await getSortedBlogPosts(lang);
                 ? (post.data.description?.[lang] ?? '')
                 : (post.data.description ?? '');
             return (
-              <BlogCard
-                title={title}
-                description={description}
-                author={post.data.author}
-                date={post.data.createdAt}
-                tags={post.data.tags}
-                href={`/${lang}/blog/${post.id}`}
-                fullWidth={true}
-              />
+              <div role="listitem">
+                <BlogCard
+                  title={title}
+                  description={description}
+                  author={post.data.author}
+                  date={post.data.createdAt}
+                  tags={post.data.tags}
+                  href={`/${lang}/blog/${post.id}`}
+                  fullWidth={true}
+                />
+              </div>
             );
           })}
         </div>

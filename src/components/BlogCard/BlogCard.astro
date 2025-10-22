@@ -1,5 +1,4 @@
 ---
-// BlogCard.astro: Tarjeta de blog con el mismo diseño que ProjectCard
 import styles from './BlogCard.module.css';
 
 interface BlogCardProps {
@@ -26,16 +25,19 @@ const {
 <a
   href={href}
   class={`${styles.blogCard}${fullWidth ? ' full-width' : ''}`}
-  aria-label={title}
+  aria-label={`Ir al post: ${title}`}
   tabindex="0"
+  itemprop="url"
+  role="article"
+  rel="bookmark"
 >
   <div class={styles.blogCardContent}>
-    <h3 class={styles.blogCardTitle}>{title}</h3>
+    <h3 class={styles.blogCardTitle} itemprop="name headline">{title}</h3>
     <div class={styles.blogCardMeta}>
       {author && <span class={styles.blogCardAuthor}>🖊️ {author}</span>}
       {
         date && (
-          <span class={styles.blogCardDate}>
+          <span class={styles.blogCardDate} itemprop="datePublished">
             {new Date(date).toLocaleDateString('es-ES', {
               year: 'numeric',
               month: 'long',
@@ -45,12 +47,20 @@ const {
         )
       }
     </div>
-    {description && <p class={styles.blogCardDescription}>{description}</p>}
+    {
+      description && (
+        <p class={styles.blogCardDescription} itemprop="description">
+          {description}
+        </p>
+      )
+    }
     {
       Array.isArray(tags) && tags.length > 0 && (
         <div class={styles.blogCardTags}>
-          {tags.map((tag) => (
-            <span class={styles.blogCardTag}>{tag}</span>
+          {(tags as string[]).map((tag: string) => (
+            <span class={styles.blogCardTag} itemprop="keywords">
+              {tag}
+            </span>
           ))}
         </div>
       )

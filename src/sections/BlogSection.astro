@@ -1,18 +1,24 @@
 ---
+import type { CollectionEntry } from 'astro:content';
 import BlogHeaderSection from './BlogHeaderSection.astro';
 import BlogContentSection from './BlogContentSection.astro';
-import type { CollectionEntry } from 'astro:content';
 
 interface BlogSectionProps {
   post: CollectionEntry<'blog'>;
   lang: 'es' | 'en';
-  Content: (props: { lang: 'es' | 'en' }) => any;
+  Content: any; // Según recomendación Astro 5.x para contenido estático
 }
 
 const { post, lang, Content } = Astro.props as BlogSectionProps;
 ---
 
-<article class="blog-post" itemscope itemtype="https://schema.org/BlogPosting">
+<article
+  class="blog-post"
+  itemscope=""
+  itemtype="https://schema.org/BlogPosting"
+  aria-label={String(post.data.title ?? 'Título del blog')}
+  itemprop="blogPost"
+>
   <BlogHeaderSection
     title={post.data.title}
     description={post.data.description}
@@ -22,12 +28,14 @@ const { post, lang, Content } = Astro.props as BlogSectionProps;
     updatedAt={post.data.updatedAt}
     lang={lang}
     image={post.data.image}
+    itemprop="headline"
   />
   <BlogContentSection
     image={post.data.image}
     title={post.data.title}
     lang={lang}
     Content={Content}
+    itemprop="articleBody"
   />
 </article>
 <style>
