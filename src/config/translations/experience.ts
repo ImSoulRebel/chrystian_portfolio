@@ -3,6 +3,7 @@ import type { ExperienceTranslations } from './types';
 export const experience: Record<'es' | 'en', ExperienceTranslations> = {
   es: {
     title: 'Experiencia Profesional',
+    subtitle: 'Trayectoria, roles clave y logros en empresas y proyectos.',
     current: 'Actual',
     months: 'meses',
     years: 'años',
@@ -84,6 +85,8 @@ export const experience: Record<'es' | 'en', ExperienceTranslations> = {
   },
   en: {
     title: 'Professional Experience',
+    subtitle:
+      'Career path, key roles and achievements in companies and projects.',
     current: 'Current',
     months: 'months',
     years: 'years',

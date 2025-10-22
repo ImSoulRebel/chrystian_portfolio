@@ -23,19 +23,27 @@ const stats = [
 ];
 ---
 
-<section id="about" class="about">
+<section id="about" class="about" aria-labelledby="about-title" role="region">
   <div class="container">
-    <h2 class="section-title">{t('about.title')}</h2>
-    <div class="about-content">
-      <div class="about-text">
+    <h2 class="section-title" id="about-title">{t('about.title')}</h2>
+    <p class="section-subtitle" id="about-desc">
+      {t('about.highlights.subtitle')}
+    </p>
+    <div class="about-content" role="group" aria-label={t('about.title')}>
+      <div class="about-text" aria-describedby="about-desc">
         <p set:html={t('about.description1')} />
         <p set:html={t('about.description2')} />
         <p set:html={t('about.description3')} />
       </div>
-      <div class="stats">
+      <div class="stats" role="list" aria-label="Estadísticas personales">
         {
-          stats.map((stat) => (
-            <div class="stat-item">
+          stats.map((stat, idx) => (
+            <div
+              class="stat-item stat-fadein"
+              style={`animation-delay: ${0.1 + idx * 0.12}s`}
+              role="listitem"
+              aria-label={`${stat.number} ${stat.label}`}
+            >
               <div class="stat-number">{stat.number}</div>
               <div class="stat-label">{stat.label}</div>
             </div>
@@ -44,4 +52,52 @@ const stats = [
       </div>
     </div>
   </div>
+  <style>
+    .section-subtitle {
+      text-align: center;
+      margin: 0 auto 2.5rem auto;
+      color: var(--text-secondary);
+      font-size: 1.15rem;
+      font-weight: 400;
+      line-height: 1.6;
+      max-width: 600px;
+    }
+    .stat-fadein {
+      opacity: 0;
+      transform: translateY(40px);
+      animation: fadeInStat 0.9s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    }
+    @keyframes fadeInStat {
+      to {
+        opacity: 1;
+        transform: none;
+      }
+    }
+    @media (max-width: 900px) {
+      .about-content {
+        flex-direction: column;
+        gap: 2rem;
+      }
+      .section-title {
+        font-size: 2.2rem;
+      }
+      .section-subtitle {
+        font-size: 1rem;
+      }
+    }
+    @media (max-width: 600px) {
+      .about {
+        padding: 3.5rem 0;
+      }
+      .section-title {
+        font-size: 1.5rem;
+      }
+      .section-subtitle {
+        font-size: 0.95rem;
+      }
+      .stats {
+        gap: 0.5rem;
+      }
+    }
+  </style>
 </section>

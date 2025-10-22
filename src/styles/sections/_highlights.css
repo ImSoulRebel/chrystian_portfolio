@@ -1,3 +1,12 @@
+/* Centrado del subtítulo de la sección highlights */
+.section-subtitle {
+  text-align: center;
+  margin: 0 auto 2rem auto;
+  color: var(--text-secondary);
+  font-size: 1.15rem;
+  font-weight: 400;
+  line-height: 1.6;
+}
 /* ===============================================
    Highlights Section Styles
    =============================================== */

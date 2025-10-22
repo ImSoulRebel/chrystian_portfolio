@@ -69,6 +69,7 @@ export interface AboutTranslations {
   };
   highlights: {
     title: string;
+    subtitle: string;
     list: Array<{ emoji: string; text: string }>;
   };
 }
@@ -88,6 +89,7 @@ export interface SkillsTranslations {
 
 export interface ExperienceTranslations {
   title: string;
+  subtitle: string;
   current: string;
   months: string;
   years: string;
