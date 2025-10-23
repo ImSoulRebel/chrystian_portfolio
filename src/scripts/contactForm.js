@@ -70,9 +70,6 @@ export class ContactForm {
       return;
     }
 
-    this.log('info', 'Form initialized successfully');
-    this.log('info', `Form action: ${this.elements.form.action}`);
-
     this.bindEvents();
     this.setupMessageObserver();
   }

@@ -1,7 +1,7 @@
 ---
 import { SkillCard } from '@components';
-import { useTranslations, type Locale } from '../utils/i18n';
-import { getAllSkills } from '../utils/skillsManager';
+import { useTranslations, type Locale } from '@utils/i18n';
+import skillsManager from '@utils/skillsManager';
 
 // Recibir locale como prop en lugar de detectarlo
 interface Props {
@@ -11,16 +11,14 @@ interface Props {
 const { locale = 'es' } = Astro.props;
 const t = useTranslations(locale);
 
-// Obtener skills desde Content Collections
-const skills = await getAllSkills();
-
-// Para el carrusel, triplicar las skills para efecto infinito
+// Obtener skills desde la Content Collection usando el manager (Astro 5.x best practice)
+const skills = await skillsManager.getTranslatedSkills(locale);
 const skillsForCarousel = [...skills, ...skills, ...skills];
 ---
 
 <section id="skills" class="skills">
   <div class="container">
-    <h2 class="section-title">{t('skills.title')}</h2>
+    <h2 class="section-title skills-title">{t('skills.title')}</h2>
     <div class="skills-carousel">
       <div class="skills-track">
         {
@@ -35,6 +33,18 @@ const skillsForCarousel = [...skills, ...skills, ...skills];
 </section>
 
 <style>
+  .skills-title {
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
+    background: var(--gradient-primary);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 4rem;
+    text-align: center;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+
   .indicator-text {
     text-align: center;
     color: var(--text-muted);

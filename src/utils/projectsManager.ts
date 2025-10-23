@@ -1,5 +1,6 @@
 import { getCollection, type CollectionEntry } from 'astro:content';
 import { projectPlaceholder } from '@assets';
+import { projects as projectsTranslations } from '@config/translations/projects';
 
 // Tipos para el proyecto procesado
 export interface ProcessedProject {
@@ -90,13 +91,28 @@ export async function processProject(
   locale: 'es' | 'en' = 'es'
 ): Promise<ProcessedProject> {
   const image = await getProjectImage(project.data.image);
+  const translations = projectsTranslations[locale]?.list?.[project.data.id];
 
   return {
     id: project.data.id,
-    title: project.data.title[locale],
-    description: project.data.description[locale],
-    impact: project.data.impact[locale],
-    stack: project.data.stack,
+    title:
+      (project.data.title && project.data.title[locale]) ||
+      translations?.title ||
+      '',
+    description:
+      (project.data.description && project.data.description[locale]) ||
+      translations?.description ||
+      '',
+    impact:
+      (project.data.impact && project.data.impact[locale]) ||
+      translations?.impact ||
+      '',
+    stack:
+      project.data.stack && project.data.stack.length > 0
+        ? project.data.stack
+        : translations?.stack
+          ? translations.stack.split(' · ')
+          : [],
     category: project.data.category,
     featured: project.data.featured,
     priority: project.data.priority,

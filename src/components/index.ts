@@ -21,13 +21,18 @@ export { default as LanguageSelector } from './LanguageSelector/LanguageSelector
 export { default as ProjectCard } from './ProjectCard/ProjectCard.astro';
 export { default as SkillCard } from './SkillCard.astro';
 export { default as ExperienceItem } from './ExperienceItem.astro';
+export { default as BlogCard } from './BlogCard/BlogCard.astro';
 
 // === Form Components ===
 export { default as ContactForm } from './ContactForm/ContactForm.astro';
 
 // === Interactive Components ===
 export { default as FloatingCTA } from './FloatingCTA/FloatingCTA.astro';
-export { default as BackToHome } from './BackToHome.astro';
+export { default as BackButton } from './BackButton.astro';
+
+// === MDX Components ===
+export { default as Quote } from './Quote.astro';
+export { default as Highlight } from './Highlight.astro';
 
 // === Type Definitions (for better TypeScript support) ===
 export type ComponentProps = {

@@ -9,10 +9,6 @@
     "featured": true,
     "priority": 1,
     "url": "https://flutter.dev",
-    "description": {
-      "es": "Framework de desarrollo multiplataforma de Google para crear aplicaciones nativas de alta calidad",
-      "en": "Google's cross-platform framework for building high-quality native applications"
-    },
     "status": "active",
     "createdAt": "2020-01-01T00:00:00.000Z",
     "updatedAt": "2024-10-17T00:00:00.000Z"
@@ -27,10 +23,6 @@
     "featured": true,
     "priority": 2,
     "url": "https://dart.dev",
-    "description": {
-      "es": "Lenguaje de programación optimizado para el desarrollo de aplicaciones en múltiples plataformas",
-      "en": "Programming language optimized for building apps on multiple platforms"
-    },
     "status": "active",
     "createdAt": "2020-01-01T00:00:00.000Z",
     "updatedAt": "2024-10-17T00:00:00.000Z"
@@ -44,10 +36,6 @@
     "icon": "clean_architecture",
     "featured": true,
     "priority": 3,
-    "description": {
-      "es": "Arquitectura de software que separa las preocupaciones en capas bien definidas",
-      "en": "Software architecture that separates concerns into well-defined layers"
-    },
     "status": "active",
     "createdAt": "2021-01-01T00:00:00.000Z",
     "updatedAt": "2024-10-17T00:00:00.000Z"
@@ -61,10 +49,6 @@
     "icon": "bloc",
     "featured": true,
     "priority": 4,
-    "description": {
-      "es": "Patrón de gestión de estado predictible y testeable para aplicaciones Flutter",
-      "en": "Predictable and testable state management pattern for Flutter applications"
-    },
     "status": "active",
     "createdAt": "2021-01-01T00:00:00.000Z",
     "updatedAt": "2024-10-17T00:00:00.000Z",
@@ -79,10 +63,6 @@
     "icon": "getx",
     "featured": false,
     "priority": 20,
-    "description": {
-      "es": "Framework Flutter para gestión de estado, dependencias y routing",
-      "en": "Flutter framework for state management, dependency injection and routing"
-    },
     "status": "active",
     "createdAt": "2022-01-01T00:00:00.000Z",
     "updatedAt": "2024-10-17T00:00:00.000Z",
@@ -97,10 +77,6 @@
     "icon": "riverpod",
     "featured": false,
     "priority": 21,
-    "description": {
-      "es": "Provider mejorado para gestión de estado en Flutter con compile-time safety",
-      "en": "Enhanced Provider for state management in Flutter with compile-time safety"
-    },
     "status": "active",
     "createdAt": "2023-01-01T00:00:00.000Z",
     "updatedAt": "2024-10-17T00:00:00.000Z",
@@ -115,10 +91,6 @@
     "icon": "flutter_favorite",
     "featured": false,
     "priority": 22,
-    "description": {
-      "es": "Wrapper alrededor de InheritedWidget para facilitar la gestión de estado",
-      "en": "Wrapper around InheritedWidget to make state management easier"
-    },
     "status": "active",
     "createdAt": "2022-01-01T00:00:00.000Z",
     "updatedAt": "2024-10-17T00:00:00.000Z",
@@ -133,10 +105,6 @@
     "icon": "auto_route",
     "featured": false,
     "priority": 25,
-    "description": {
-      "es": "Generador de rutas automático para Flutter con type safety",
-      "en": "Automatic route generator for Flutter with type safety"
-    },
     "status": "active",
     "createdAt": "2022-01-01T00:00:00.000Z",
     "updatedAt": "2024-10-17T00:00:00.000Z",
@@ -151,10 +119,6 @@
     "icon": "flutter_favorite",
     "featured": false,
     "priority": 26,
-    "description": {
-      "es": "Service locator simple para inyección de dependencias en Flutter",
-      "en": "Simple service locator for dependency injection in Flutter"
-    },
     "status": "active",
     "createdAt": "2022-01-01T00:00:00.000Z",
     "updatedAt": "2024-10-17T00:00:00.000Z",
@@ -169,10 +133,6 @@
     "icon": "flutter_favorite",
     "featured": false,
     "priority": 27,
-    "description": {
-      "es": "Cliente HTTP potente para Dart/Flutter con interceptors y manejo de errores",
-      "en": "Powerful HTTP client for Dart/Flutter with interceptors and error handling"
-    },
     "status": "active",
     "createdAt": "2022-01-01T00:00:00.000Z",
     "updatedAt": "2024-10-17T00:00:00.000Z",
@@ -188,10 +148,6 @@
     "featured": true,
     "priority": 5,
     "url": "https://www.typescriptlang.org",
-    "description": {
-      "es": "Superset tipado de JavaScript que compila a JavaScript plano",
-      "en": "Typed superset of JavaScript that compiles to plain JavaScript"
-    },
     "status": "active",
     "createdAt": "2021-01-01T00:00:00.000Z",
     "updatedAt": "2024-10-17T00:00:00.000Z"
@@ -206,10 +162,6 @@
     "featured": true,
     "priority": 6,
     "url": "https://developer.mozilla.org/docs/Web/JavaScript",
-    "description": {
-      "es": "Lenguaje de programación esencial para desarrollo web moderno",
-      "en": "Essential programming language for modern web development"
-    },
     "status": "active",
     "createdAt": "2019-01-01T00:00:00.000Z",
     "updatedAt": "2024-10-17T00:00:00.000Z"
@@ -224,10 +176,6 @@
     "featured": true,
     "priority": 7,
     "url": "https://astro.build",
-    "description": {
-      "es": "Framework moderno para construir sitios web rápidos y centrados en el contenido",
-      "en": "Modern framework for building fast, content-focused websites"
-    },
     "status": "active",
     "createdAt": "2024-01-01T00:00:00.000Z",
     "updatedAt": "2024-10-17T00:00:00.000Z"
@@ -241,10 +189,6 @@
     "icon": "solidjs",
     "featured": false,
     "priority": 30,
-    "description": {
-      "es": "Framework reactivo simple y performante para construir interfaces de usuario",
-      "en": "Simple and performant reactive framework for building user interfaces"
-    },
     "status": "active",
     "createdAt": "2024-01-01T00:00:00.000Z",
     "updatedAt": "2024-10-17T00:00:00.000Z",
@@ -260,10 +204,6 @@
     "featured": true,
     "priority": 8,
     "url": "https://react.dev",
-    "description": {
-      "es": "Biblioteca JavaScript para construir interfaces de usuario componetizadas",
-      "en": "JavaScript library for building component-based user interfaces"
-    },
     "status": "active",
     "createdAt": "2022-01-01T00:00:00.000Z",
     "updatedAt": "2024-10-17T00:00:00.000Z"
@@ -277,10 +217,6 @@
     "icon": "css",
     "featured": false,
     "priority": 32,
-    "description": {
-      "es": "Sistema de scoping automático para CSS que evita colisiones de nombres",
-      "en": "Automatic scoping system for CSS that prevents naming collisions"
-    },
     "status": "active",
     "createdAt": "2022-01-01T00:00:00.000Z",
     "updatedAt": "2024-10-17T00:00:00.000Z"
@@ -294,10 +230,6 @@
     "icon": "tailwind_css",
     "featured": true,
     "priority": 24,
-    "description": {
-      "es": "Framework CSS utility-first para desarrollo rápido de interfaces",
-      "en": "Utility-first CSS framework for rapid interface development"
-    },
     "status": "active",
     "createdAt": "2022-01-01T00:00:00.000Z",
     "updatedAt": "2024-10-17T00:00:00.000Z",
@@ -312,10 +244,6 @@
     "icon": "pwa",
     "featured": false,
     "priority": 33,
-    "description": {
-      "es": "Aplicaciones web progresivas que ofrecen experiencia similar a apps nativas",
-      "en": "Progressive web applications that offer native app-like experience"
-    },
     "status": "active",
     "createdAt": "2022-01-01T00:00:00.000Z",
     "updatedAt": "2024-10-17T00:00:00.000Z"
@@ -329,10 +257,6 @@
     "icon": "nodejs",
     "featured": true,
     "priority": 9,
-    "description": {
-      "es": "Runtime de JavaScript construido sobre el motor V8 de Chrome para servidor",
-      "en": "JavaScript runtime built on Chrome's V8 engine for server-side development"
-    },
     "status": "active",
     "createdAt": "2022-01-01T00:00:00.000Z",
     "updatedAt": "2024-10-17T00:00:00.000Z",
@@ -347,10 +271,6 @@
     "icon": "firebase",
     "featured": true,
     "priority": 10,
-    "description": {
-      "es": "Plataforma de desarrollo de aplicaciones backend-as-a-service de Google",
-      "en": "Google's backend-as-a-service platform for application development"
-    },
     "status": "active",
     "createdAt": "2021-01-01T00:00:00.000Z",
     "updatedAt": "2024-10-17T00:00:00.000Z",
@@ -365,10 +285,6 @@
     "icon": "websocket",
     "featured": true,
     "priority": 11,
-    "description": {
-      "es": "Protocolo de comunicación bidireccional en tiempo real entre cliente y servidor",
-      "en": "Bidirectional real-time communication protocol between client and server"
-    },
     "status": "active",
     "createdAt": "2022-01-01T00:00:00.000Z",
     "updatedAt": "2024-10-17T00:00:00.000Z",
@@ -383,10 +299,6 @@
     "icon": "jwt",
     "featured": false,
     "priority": 35,
-    "description": {
-      "es": "Estándar para transmitir información de forma segura entre partes como token",
-      "en": "Standard for securely transmitting information between parties as a token"
-    },
     "status": "active",
     "createdAt": "2022-01-01T00:00:00.000Z",
     "updatedAt": "2024-10-17T00:00:00.000Z"
@@ -400,10 +312,6 @@
     "icon": "hive",
     "featured": false,
     "priority": 36,
-    "description": {
-      "es": "Base de datos NoSQL ligera y rápida escrita en Dart para Flutter",
-      "en": "Lightweight and fast NoSQL database written in Dart for Flutter"
-    },
     "status": "active",
     "createdAt": "2022-01-01T00:00:00.000Z",
     "updatedAt": "2024-10-17T00:00:00.000Z",
@@ -418,10 +326,6 @@
     "icon": "flutter_favorite",
     "featured": false,
     "priority": 37,
-    "description": {
-      "es": "Almacenamiento de datos clave-valor persistente en dispositivos móviles",
-      "en": "Persistent key-value data storage on mobile devices"
-    },
     "status": "active",
     "createdAt": "2022-01-01T00:00:00.000Z",
     "updatedAt": "2024-10-17T00:00:00.000Z",
@@ -436,10 +340,6 @@
     "icon": "docker",
     "featured": true,
     "priority": 12,
-    "description": {
-      "es": "Plataforma de contenedorización para crear, desplegar y gestionar aplicaciones",
-      "en": "Containerization platform for creating, deploying and managing applications"
-    },
     "status": "active",
     "createdAt": "2022-01-01T00:00:00.000Z",
     "updatedAt": "2024-10-17T00:00:00.000Z",
@@ -454,10 +354,6 @@
     "icon": "github",
     "featured": true,
     "priority": 13,
-    "description": {
-      "es": "Platform de automatización y CI/CD integrada en GitHub",
-      "en": "Automation and CI/CD platform integrated into GitHub"
-    },
     "status": "active",
     "createdAt": "2022-01-01T00:00:00.000Z",
     "updatedAt": "2024-10-17T00:00:00.000Z",
@@ -472,10 +368,6 @@
     "icon": "aws",
     "featured": true,
     "priority": 14,
-    "description": {
-      "es": "Plataforma de servicios en la nube de Amazon Web Services",
-      "en": "Amazon Web Services cloud platform"
-    },
     "status": "active",
     "createdAt": "2022-01-01T00:00:00.000Z",
     "updatedAt": "2024-10-17T00:00:00.000Z",
@@ -490,10 +382,6 @@
     "icon": "netlify",
     "featured": false,
     "priority": 38,
-    "description": {
-      "es": "Plataforma de desarrollo web con hosting y CI/CD automático",
-      "en": "Web development platform with hosting and automatic CI/CD"
-    },
     "status": "active",
     "createdAt": "2022-01-01T00:00:00.000Z",
     "updatedAt": "2024-10-17T00:00:00.000Z",
@@ -508,10 +396,6 @@
     "icon": "cicd",
     "featured": true,
     "priority": 18,
-    "description": {
-      "es": "Prácticas de integración y despliegue continuo para automatizar releases",
-      "en": "Continuous integration and deployment practices to automate releases"
-    },
     "status": "active",
     "createdAt": "2022-01-01T00:00:00.000Z",
     "updatedAt": "2024-10-17T00:00:00.000Z"
@@ -525,10 +409,6 @@
     "icon": "tech_lead",
     "featured": true,
     "priority": 15,
-    "description": {
-      "es": "Liderazgo de equipos técnicos y toma de decisiones arquitectónicas",
-      "en": "Technical team leadership and architectural decision making"
-    },
     "status": "active",
     "createdAt": "2022-01-01T00:00:00.000Z",
     "updatedAt": "2024-10-17T00:00:00.000Z"
@@ -542,10 +422,6 @@
     "icon": "team_management",
     "featured": true,
     "priority": 16,
-    "description": {
-      "es": "Gestión y coordinación de equipos multidisciplinares de desarrollo",
-      "en": "Management and coordination of multidisciplinary development teams"
-    },
     "status": "active",
     "createdAt": "2021-01-01T00:00:00.000Z",
     "updatedAt": "2024-10-17T00:00:00.000Z"
@@ -559,10 +435,6 @@
     "icon": "git",
     "featured": true,
     "priority": 17,
-    "description": {
-      "es": "Sistema de control de versiones distribuido para gestión de código fuente",
-      "en": "Distributed version control system for source code management"
-    },
     "status": "active",
     "createdAt": "2019-01-01T00:00:00.000Z",
     "updatedAt": "2024-10-17T00:00:00.000Z",
@@ -577,10 +449,6 @@
     "icon": "videojs",
     "featured": false,
     "priority": 40,
-    "description": {
-      "es": "Reproductor de video HTML5 personalizable y extensible",
-      "en": "Customizable and extensible HTML5 video player"
-    },
     "status": "active",
     "createdAt": "2023-01-01T00:00:00.000Z",
     "updatedAt": "2024-10-17T00:00:00.000Z",
@@ -595,10 +463,6 @@
     "icon": "sentry",
     "featured": false,
     "priority": 34,
-    "description": {
-      "es": "Plataforma de monitoreo de errores y rendimiento de aplicaciones",
-      "en": "Application error and performance monitoring platform"
-    },
     "status": "active",
     "createdAt": "2022-01-01T00:00:00.000Z",
     "updatedAt": "2024-10-17T00:00:00.000Z",
@@ -613,10 +477,6 @@
     "icon": "postman",
     "featured": false,
     "priority": 41,
-    "description": {
-      "es": "Plataforma para pruebas de API y colaboración en equipo",
-      "en": "API testing and team collaboration platform"
-    },
     "status": "active",
     "createdAt": "2022-01-01T00:00:00.000Z",
     "updatedAt": "2024-10-17T00:00:00.000Z",
@@ -631,10 +491,6 @@
     "icon": "json",
     "featured": false,
     "priority": 29,
-    "description": {
-      "es": "Formato ligero de intercambio de datos fácil de leer y escribir",
-      "en": "Lightweight data interchange format that's easy to read and write"
-    },
     "status": "active",
     "createdAt": "2022-01-01T00:00:00.000Z",
     "updatedAt": "2024-10-17T00:00:00.000Z",
@@ -649,10 +505,6 @@
     "icon": "flutter_favorite",
     "featured": false,
     "priority": 28,
-    "description": {
-      "es": "Paquete de enrutamiento declarativo para Flutter que simplifica la navegación",
-      "en": "Declarative routing package for Flutter that simplifies navigation"
-    },
     "status": "active",
     "createdAt": "2022-01-01T00:00:00.000Z",
     "updatedAt": "2024-10-17T00:00:00.000Z",
@@ -667,10 +519,6 @@
     "icon": "figma",
     "featured": false,
     "priority": 42,
-    "description": {
-      "es": "Herramienta de diseño y prototipado colaborativo basada en la nube",
-      "en": "Cloud-based collaborative design and prototyping tool"
-    },
     "status": "active",
     "createdAt": "2022-01-01T00:00:00.000Z",
     "updatedAt": "2024-10-17T00:00:00.000Z",
@@ -685,10 +533,6 @@
     "icon": "shaka_player",
     "featured": false,
     "priority": 43,
-    "description": {
-      "es": "Reproductor de video HTML5 de código abierto para transmisión adaptativa",
-      "en": "Open-source HTML5 video player for adaptive streaming"
-    },
     "status": "active",
     "createdAt": "2023-01-01T00:00:00.000Z",
     "updatedAt": "2024-10-17T00:00:00.000Z",
@@ -703,10 +547,6 @@
     "icon": "sqlite",
     "featured": false,
     "priority": 44,
-    "description": {
-      "es": "Plugin SQLite para Flutter para almacenamiento de datos local",
-      "en": "SQLite plugin for Flutter for local data storage"
-    },
     "status": "active",
     "createdAt": "2022-01-01T00:00:00.000Z",
     "updatedAt": "2024-10-17T00:00:00.000Z",

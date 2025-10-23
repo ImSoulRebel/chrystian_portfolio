@@ -1,0 +1,135 @@
+/* Depuración: Forzar color rojo en .highlight dentro de .prose */
+/* Forzar color en todos los hijos de .highlight para evitar sobrescritura por --text-secondary */
+/* Color definitivo: usar --secondary-color para texto en highlight */
+.prose .highlight,
+.highlight,
+.highlight * {
+  color: var(--secondary-color, #1a1a2e) !important;
+}
+/* Forzar color blanco en .highlight y .quote incluso dentro de .prose */
+.prose .quote,
+.quote {
+  color: #fff !important;
+}
+:root {
+  --blog-title: var(--color-text, #f4f4f4);
+  --blog-primary: var(--color-primary, #0077ff);
+  --blog-secondary: var(--color-secondary, #f4f4f4);
+  --blog-bg: var(--background-card, #fff);
+}
+
+@media (prefers-color-scheme: dark) {
+  .prose {
+    --blog-text: var(--color-text, #f4f4f4);
+  }
+}
+.prose {
+  background: var(--blog-bg);
+  color: var(--blog-text, var(--color-text, #222));
+  border-radius: 1.2em;
+  padding: 2.5rem 2rem;
+  box-shadow: 0 2px 24px rgba(0, 0, 0, 0.04);
+  max-width: 800px;
+  margin: 0 auto 3rem auto;
+}
+
+.prose h1 {
+  font-size: 2.5rem;
+  color: var(--blog-title);
+  font-weight: 800;
+  margin-bottom: 1.2em;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+.prose h2 {
+  font-size: 1.7rem;
+  color: var(--primary-color);
+  font-weight: 700;
+  margin-top: 2.2em;
+  margin-bottom: 0.8em;
+  line-height: 1.18;
+}
+.prose h3 {
+  font-size: 1.2rem;
+  color: var(--blog-secondary, var(--blog-text, #f4f4f4));
+  font-weight: 600;
+  margin-top: 1.8em;
+  margin-bottom: 0.6em;
+  line-height: 1.18;
+}
+.prose h4 {
+  font-size: 1.05rem;
+  color: var(--blog-secondary);
+  font-weight: 600;
+  margin-top: 1.5em;
+  margin-bottom: 0.5em;
+  line-height: 1.18;
+}
+.prose p,
+.prose ul,
+.prose ol {
+  font-size: 1.08rem;
+  margin-bottom: 1.5em;
+  line-height: 1.7;
+}
+.prose ul,
+.prose ol {
+  padding-left: 1.5em;
+  color: var(--blog-text, var(--color-text, #222));
+}
+.prose li {
+  margin-bottom: 0.5em;
+  color: var(--blog-text, var(--color-text, #222));
+}
+.prose a {
+  color: var(--blog-primary);
+  text-decoration: underline;
+  transition: color 0.2s;
+}
+.prose a:hover,
+.prose a:focus {
+  color: var(--color-accent-hover, #005fa3);
+  outline: none;
+}
+
+.prose code {
+  background: #f5f5f5;
+  padding: 0.2rem 0.4rem;
+  border-radius: 3px;
+  font-size: 0.98em;
+}
+.prose pre {
+  background: #1e1e1e;
+  color: #d4d4d4;
+  padding: 1.5rem;
+  border-radius: 8px;
+  overflow-x: auto;
+  margin-bottom: 2em;
+}
+
+/* Mejora contraste y sintaxis en bloques de código markdown */
+.prose pre,
+.prose pre code {
+  background: #1e1e1e !important;
+  color: #e6e6e6 !important;
+}
+
+.prose pre .token.comment,
+.prose pre .token.prolog,
+.prose pre .token.doctype,
+.prose pre .token.cdata {
+  color: #8b949e !important;
+}
+.prose pre .token.keyword {
+  color: #ff7b72 !important;
+}
+.prose pre .token.string {
+  color: #a5d6ff !important;
+}
+.prose pre .token.function {
+  color: #d2a8ff !important;
+}
+.prose pre .token.number {
+  color: #f2cc60 !important;
+}

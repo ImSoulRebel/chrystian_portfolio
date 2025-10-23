@@ -13,6 +13,7 @@ import {
   seo,
   skills,
   structure,
+  blog,
   type Locale,
   type DeepKeyOf,
 } from '@config/translations/';
@@ -49,6 +50,7 @@ export const translations = {
     structuredData: structure.es,
     recruiterMeta: recruiterMeta.es,
     language: language.es,
+    blog: blog.es,
   },
   en: {
     // General
@@ -70,6 +72,7 @@ export const translations = {
     structuredData: structure.en,
     recruiterMeta: recruiterMeta.en,
     language: language.en,
+    blog: blog.en,
   },
 } as const;
 

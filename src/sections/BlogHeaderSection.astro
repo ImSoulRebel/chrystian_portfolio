@@ -1,0 +1,223 @@
+---
+import { BackButton } from '@components';
+import { formatDate, useTranslations } from '@utils/i18n';
+
+interface BlogHeaderSectionProps {
+  title: { es: string; en: string };
+  description?: { es?: string; en?: string };
+  author?: string;
+  tags?: string[];
+  createdAt: string;
+  updatedAt?: string;
+  lang: 'es' | 'en';
+  image?: string;
+}
+
+const { title, description, author, tags, createdAt, updatedAt, lang, image } =
+  Astro.props as BlogHeaderSectionProps;
+
+const t = useTranslations(lang);
+const backToBlogLabel = t('blog.blogHeader.backToBlogLabel');
+const updatedLabel = t('blog.blogHeader.updatedLabel');
+const formattedCreatedAt = formatDate(new Date(createdAt), lang, {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+const formattedUpdatedAt =
+  updatedAt && updatedAt !== createdAt
+    ? formatDate(new Date(updatedAt), lang, {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+      })
+    : null;
+---
+
+<header class="blog-header">
+  <BackButton label={backToBlogLabel} link={`/${lang}/blog`} />
+  {
+    image && (
+      <figure class="featured-image-wrapper">
+        <img
+          src={`/images/blog/${image}`}
+          alt={title[lang]}
+          class="featured-image"
+          itemprop="image"
+        />
+      </figure>
+    )
+  }
+  <h1 itemprop="headline" class="blog-title">{title[lang]}</h1>
+  {
+    description?.[lang] && (
+      <p class="lead blog-description" itemprop="description">
+        {description[lang]}
+      </p>
+    )
+  }
+  <!-- Agrupar autor y fecha en una sola línea -->
+  <div class="post-meta-group">
+    {
+      author && (
+        <span
+          class="author"
+          itemprop="author"
+          itemscope
+          itemtype="https://schema.org/Person"
+        >
+          <strong itemprop="name">{author}</strong>
+        </span>
+      )
+    }
+    <span class="dot">·</span>
+    <time datetime={createdAt} itemprop="datePublished">
+      {formattedCreatedAt}
+    </time>
+    {
+      formattedUpdatedAt && (
+        <>
+          <span class="dot">·</span>
+          <span class="updated" itemprop="dateModified">
+            {updatedLabel} {formattedUpdatedAt}
+          </span>
+        </>
+      )
+    }
+  </div>
+  <!-- Tags al final, estilo Medium -->
+  {
+    Array.isArray(tags) && tags.length > 0 && (
+      <ul class="post-tags" itemprop="keywords">
+        {tags.map((tag) => (
+          <li class="tech-tag">{tag}</li>
+        ))}
+      </ul>
+    )
+  }
+</header>
+
+<style>
+  .featured-image-wrapper {
+    margin-bottom: 1em;
+    text-align: center;
+  }
+  .featured-image {
+    max-width: 320px;
+    max-height: 320px;
+    width: 100%;
+    height: auto;
+    border-radius: 0.5em;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    object-fit: contain;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .post-tags {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 0.7rem;
+    margin-top: 1.2rem;
+    margin-bottom: 0.5rem;
+    padding: 0;
+    list-style: none;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+  }
+  .tech-tag {
+    background: rgba(0, 212, 255, 0.1);
+    color: var(--primary-color);
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    display: inline-block;
+    margin: 0;
+    border: none;
+  }
+
+  .blog-header {
+    margin-bottom: 0.25rem;
+    margin-top: 0.5rem;
+    z-index: 2;
+    position: relative;
+    background: transparent;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+  }
+  .post-meta-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.7em;
+    align-items: center;
+    justify-content: center;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+    width: 100%;
+  }
+
+  .blog-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 0.5em;
+    text-align: center;
+    width: 100%;
+    display: block;
+  }
+  .blog-description {
+    font-size: 0.8em;
+    margin-bottom: 1.5em;
+    color: var(--color-secondary, #666);
+    width: 100%;
+    text-align: center;
+  }
+  .tag {
+    background: var(--color-tag-bg, var(--color-primary, #0077ff));
+    color: var(--color-tag-text, var(--color-on-primary, #fff));
+    border-radius: 0.5em;
+    padding: 0.25em 0.9em;
+    font-size: 0.8em;
+    font-weight: 500;
+    letter-spacing: 0.03em;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.07);
+    transition:
+      background 0.2s,
+      color 0.2s;
+    display: inline-block;
+    margin-right: 0.5em;
+    margin-bottom: 0.3em;
+  }
+  .tag:hover,
+  .tag:focus {
+    background: var(--color-tag-hover, var(--color-secondary, #005bb5));
+    color: var(--color-tag-hover-text, var(--color-on-secondary, #fff));
+    outline: none;
+  }
+  .blog-header-section {
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto 2.5rem auto;
+    padding: 0 1.5rem;
+    text-align: center;
+  }
+  @media (max-width: 900px) {
+    .blog-header-section {
+      max-width: 100%;
+      padding: 0 1rem;
+      margin-bottom: 2rem;
+    }
+  }
+  @media (max-width: 600px) {
+    .blog-header-section {
+      padding: 0 0.5rem;
+      margin-bottom: 1.25rem;
+    }
+  }
+  /* Fin de optimización visual y responsiva para la cabecera de blog */
+</style>

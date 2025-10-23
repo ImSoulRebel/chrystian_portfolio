@@ -45,6 +45,7 @@
     "prebuild": "yarn run generate:assets"
   },
   "dependencies": {
+    "@astrojs/mdx": "4.3.7",
     "astro": "^5.14.4"
   },
   "devDependencies": {

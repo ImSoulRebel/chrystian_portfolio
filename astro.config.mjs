@@ -1,4 +1,5 @@
 import { defineConfig, envField } from 'astro/config';
+import mdx from '@astrojs/mdx';
 
 // Obtener valores de configuración de process.env
 // Estos valores se cargan desde:
@@ -12,6 +13,7 @@ export default defineConfig({
   output: 'static',
   site: siteUrl,
   base: basePath,
+  integrations: [mdx()],
 
   env: {
     schema: {

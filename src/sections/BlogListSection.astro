@@ -1,0 +1,156 @@
+---
+import { BlogCard } from '@components';
+import { getSortedBlogPosts } from '@utils/blogManager';
+import { useTranslations } from '@utils/i18n';
+import type { BlogListSectionProps } from '@content/types/blog';
+
+const { lang } = Astro.props as BlogListSectionProps;
+const t = useTranslations(lang);
+
+const sortedPosts = await getSortedBlogPosts(lang);
+---
+
+<section class="blog-section section-radial-bg">
+  <div class="container">
+    <h1 id="blog-heading" class="section-title">{t('blog.heading')}</h1>
+
+    {
+      sortedPosts.length === 0 ? (
+        <p class="no-posts">{t('blog.noPosts')}</p>
+      ) : (
+        <div class="posts-grid" role="list">
+          {sortedPosts.map((post) => {
+            return (
+              <>
+                <BlogCard
+                  title={
+                    typeof post.data.title === 'object'
+                      ? (post.data.title?.[lang] ?? t('blog.noTitle'))
+                      : (post.data.title ?? t('blog.noTitle'))
+                  }
+                  description={
+                    typeof post.data.description === 'object'
+                      ? (post.data.description?.[lang] ?? '')
+                      : (post.data.description ?? '')
+                  }
+                  author={post.data.author}
+                  date={post.data.createdAt}
+                  tags={post.data.tags}
+                  href={`/${lang}/blog/${post.id}`}
+                  fullWidth={true}
+                  lang={lang}
+                  image={
+                    post.data.image
+                      ? `/images/blog/${post.data.image}`
+                      : undefined
+                  }
+                  variant="bloglist"
+                  aria-label={t('blog.viewPostAria').replace(
+                    '{title}',
+                    typeof post.data.title === 'object'
+                      ? (post.data.title?.[lang] ?? t('blog.noTitle'))
+                      : (post.data.title ?? t('blog.noTitle'))
+                  )}
+                  key={post.id}
+                />
+              </>
+            );
+          })}
+        </div>
+      )
+    }
+  </div>
+</section>
+
+<style>
+  .blog-section {
+    padding: 6rem 0;
+    position: relative;
+    min-height: 60vh;
+    box-sizing: border-box;
+    z-index: 0;
+  }
+
+  .section-radial-bg {
+    position: relative;
+    z-index: 0;
+  }
+  .section-radial-bg::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(
+      circle at 30% 20%,
+      rgba(0, 212, 255, 0.1) 0%,
+      transparent 50%
+    );
+    z-index: -1;
+    pointer-events: none;
+  }
+  .container {
+    position: relative;
+    z-index: 1;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+  .section-title {
+    text-align: center;
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
+    margin-bottom: 2.5rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    background: var(--gradient-primary);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .posts-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    width: 100%;
+    margin-bottom: 4rem;
+  }
+  .no-posts {
+    text-align: center;
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    margin: 2rem 0 4rem 0;
+  }
+  @media (max-width: 1200px) {
+    .container {
+      padding: 0 1.5rem;
+    }
+    .posts-grid {
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1.8rem;
+    }
+  }
+  @media (max-width: 900px) {
+    .posts-grid {
+      gap: 1.5rem;
+      margin-bottom: 3rem;
+    }
+  }
+  @media (max-width: 600px) {
+    .posts-grid {
+      gap: 1.1rem;
+      margin-bottom: 2rem;
+    }
+  }
+  @media (max-width: 480px) {
+    .container {
+      padding: 0 0.5rem;
+    }
+    .section-title {
+      font-size: 1.5rem;
+    }
+    .posts-grid {
+      gap: 1.25rem;
+    }
+  }
+</style>

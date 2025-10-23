@@ -1,6 +1,6 @@
 ---
 import { Layout } from '@layouts';
-import { Header, Footer, ProjectCard, BackToHome } from '@components';
+import { ProjectCard, BackButton } from '@components';
 import { type Locale } from '@utils/i18n';
 import { projectsPage } from '@config/translations';
 import {
@@ -38,15 +38,12 @@ const regularBusinessProjects = businessProjects.filter((p) => !p.featured);
 <Layout
   title={pageTitle}
   description={pageDescription}
-  locale={locale}
   floatingCTAMode="contact"
+  layoutContext={{ locale, hasNavLinks, pageType: 'projects' }}
 >
   <!-- Back to Home Button -->
-  <BackToHome locale={locale} />
-
-  <Header hasNavLinks={hasNavLinks} locale={locale} />
-
-  <main class="projects-page">
+  <BackButton locale={locale} />
+  <main class="projects-page section-radial-bg">
     <!-- Hero Section -->
     <section class="projects-hero">
       <div class="container">
@@ -156,42 +153,9 @@ const regularBusinessProjects = businessProjects.filter((p) => !p.featured);
       </div>
     </section>
   </main>
-
-  <Footer hasNavLinks={hasNavLinks} locale={locale} pageType="projects" />
 </Layout>
 
 <style>
-  .projects-page {
-    min-height: 100vh;
-    background: var(--background-dark);
-  }
-
-  /* Hero Section */
-  .projects-hero {
-    padding: 8rem 0 4rem;
-    background: linear-gradient(
-      135deg,
-      var(--background-dark) 0%,
-      var(--accent-color) 100%
-    );
-    position: relative;
-    overflow: hidden;
-  }
-
-  .projects-hero::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: radial-gradient(
-      circle at 30% 20%,
-      rgba(0, 212, 255, 0.1) 0%,
-      transparent 50%
-    );
-  }
-
   .hero-content {
     text-align: center;
     max-width: 800px;
@@ -202,7 +166,6 @@ const regularBusinessProjects = businessProjects.filter((p) => !p.featured);
 
   .hero-title {
     font-size: clamp(3rem, 6vw, 4.5rem);
-    background: var(--gradient-primary);
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -221,20 +184,10 @@ const regularBusinessProjects = businessProjects.filter((p) => !p.featured);
   /* Section Styles */
   .business-projects-section {
     padding: 6rem 0;
-    background: linear-gradient(
-      135deg,
-      transparent 0%,
-      rgba(0, 212, 255, 0.03) 100%
-    );
   }
 
   .personal-projects-section {
     padding: 4rem 0 6rem;
-    background: linear-gradient(
-      135deg,
-      rgba(0, 212, 255, 0.05) 0%,
-      transparent 100%
-    );
     border-top: 1px solid rgba(0, 212, 255, 0.1);
   }
 

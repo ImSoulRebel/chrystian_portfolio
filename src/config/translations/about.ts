@@ -29,6 +29,8 @@ export const about: Record<'es' | 'en', AboutTranslations> = {
     },
     highlights: {
       title: 'Logros Destacados',
+      subtitle:
+        'Principales logros y resultados obtenidos en proyectos reales.',
       list: [
         {
           emoji: '🏨',
@@ -73,6 +75,7 @@ export const about: Record<'es' | 'en', AboutTranslations> = {
     },
     highlights: {
       title: 'Highlights',
+      subtitle: 'Key achievements and real-world project results.',
       list: [
         {
           emoji: '🏨',

@@ -1,0 +1,40 @@
+---
+import { getCollection, type CollectionEntry } from 'astro:content';
+import type { BlogPostData } from '@content/config';
+import { BlogSection } from '@sections';
+import { Layout } from '@layouts';
+
+export async function getStaticPaths() {
+  const blogPosts = await getCollection('blog');
+
+  return blogPosts.flatMap((post) => [
+    {
+      params: { lang: 'es', slug: post.id },
+      props: { post, lang: 'es' },
+    },
+    {
+      params: { lang: 'en', slug: post.id },
+      props: { post, lang: 'en' },
+    },
+  ]);
+}
+
+interface BlogPageProps {
+  post: CollectionEntry<'blog'> & { data: BlogPostData };
+  lang: 'es' | 'en';
+}
+
+const { post, lang } = Astro.props as BlogPageProps;
+// ...existing code...
+const { Content } = await post.render();
+
+// Instanciar helper de traducción para textos fijos
+---
+
+<Layout
+  title={post.data.title[lang]}
+  description={post.data.description?.[lang] ?? ''}
+  layoutContext={{ locale: lang, hasNavLinks: false, pageType: 'blog' }}
+>
+  <BlogSection post={post} lang={lang} Content={Content} />
+</Layout>

@@ -1,0 +1,83 @@
+---
+// src/layouts/BlogLayout.astro
+
+interface Props {
+  title: string;
+  description?: string;
+  keywords?: string;
+}
+
+const { title, description = '', keywords = '' } = Astro.props as Props;
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <meta name="keywords" content={keywords} />
+    <title>
+      {title ? `${title} - Chrystian Michell` : 'Blog - Chrystian Michell'}
+    </title>
+    <slot name="head" />
+  </head>
+  <body>
+    <main class="blog-layout">
+      <slot />
+    </main>
+  </body>
+</html>
+
+<style>
+  .blog-layout {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  }
+  .posts-grid {
+    display: grid;
+    gap: 2rem;
+    margin-top: 2rem;
+  }
+  .post-card {
+    padding: 1.5rem;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+  }
+  .post-card h2 {
+    margin: 0 0 1rem 0;
+  }
+  .post-card a {
+    text-decoration: none;
+    color: #0066cc;
+  }
+  .post-card a:hover {
+    text-decoration: underline;
+  }
+  .description {
+    color: #666;
+    margin-bottom: 1rem;
+  }
+  .post-meta {
+    display: flex;
+    gap: 1rem;
+    font-size: 0.9rem;
+    color: #888;
+    margin-bottom: 0.5rem;
+  }
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  .tag {
+    padding: 0.25rem 0.75rem;
+    background: #f0f0f0;
+    border-radius: 4px;
+    font-size: 0.85rem;
+  }
+</style>

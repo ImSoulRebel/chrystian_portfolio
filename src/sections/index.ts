@@ -17,9 +17,12 @@ export { default as HighlightsSection } from './HighlightsSection.astro';
 export { default as ProjectsSection } from './ProjectsSection.astro';
 export { default as SkillsSection } from './SkillsSection.astro';
 export { default as ExperienceSection } from './ExperienceSection.astro';
+export { default as BlogListSection } from './BlogListSection.astro';
+export { default as BlogSection } from './BlogSection.astro';
 
 // === Contact & Footer Sections ===
 export { default as ContactSection } from './ContactSection/ContactSection.astro';
+export { default as BlogPreviewSection } from './BlogPreviewSection.astro';
 
 // === Type definitions for section props ===
 export type SectionProps = {

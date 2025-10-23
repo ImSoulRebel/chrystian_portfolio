@@ -1,0 +1,126 @@
+---
+import styles from './BlogCard.module.css';
+
+type BlogCardVariant = 'default' | 'bloglist';
+interface BlogCardProps {
+  title: string;
+  description?: string;
+  author?: string;
+  date?: string;
+  tags?: string[];
+  href: string;
+  fullWidth?: boolean;
+  image?: string;
+  variant?: BlogCardVariant;
+}
+
+const {
+  title,
+  description,
+  author,
+  date,
+  tags,
+  href,
+  fullWidth = false,
+  image,
+  variant = 'default',
+} = Astro.props as BlogCardProps;
+---
+
+<a
+  href={href}
+  class={`${styles.blogCard}${fullWidth ? ' full-width' : ''}`}
+  aria-label={`Ir al post: ${title}`}
+  tabindex="0"
+  itemprop="url"
+  role="article"
+  rel="bookmark"
+>
+  {
+    variant === 'bloglist' && image ? (
+      <div class={styles.blogCardRow}>
+        <div class={styles.blogCardContent} style="flex: 2 1 0; min-width:0;">
+          <h3 class={styles.blogCardTitle} itemprop="name headline">
+            {title}
+          </h3>
+          <div class={styles.blogCardMeta}>
+            {author && <span class={styles.blogCardAuthor}>🖊️ {author}</span>}
+            {date && (
+              <span class={styles.blogCardDate} itemprop="datePublished">
+                {new Date(date).toLocaleDateString('es-ES', {
+                  year: 'numeric',
+                  month: 'long',
+                  day: 'numeric',
+                })}
+              </span>
+            )}
+          </div>
+          {description && (
+            <p class={styles.blogCardDescription} itemprop="description">
+              {description}
+            </p>
+          )}
+          {Array.isArray(tags) && tags.length > 0 && (
+            <div class={styles.blogCardTags}>
+              {(tags as string[]).map((tag: string) => (
+                <span class={styles.blogCardTag} itemprop="keywords">
+                  {tag}
+                </span>
+              ))}
+            </div>
+          )}
+        </div>
+        <div
+          class={styles.blogCardImageWrapper}
+          style="flex: 1 1 0; display:flex; align-items:center; justify-content:center; min-width:0;"
+        >
+          <img
+            src={image}
+            alt={`Preview ${title}`}
+            class={styles.blogCardImagePreview}
+            loading="lazy"
+          />
+        </div>
+      </div>
+    ) : (
+      <div class={styles.blogCardContent}>
+        <h3 class={styles.blogCardTitle} itemprop="name headline">
+          {title}
+        </h3>
+        <div class={styles.blogCardMeta}>
+          {author && <span class={styles.blogCardAuthor}>🖊️ {author}</span>}
+          {date && (
+            <span class={styles.blogCardDate} itemprop="datePublished">
+              {new Date(date).toLocaleDateString('es-ES', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+              })}
+            </span>
+          )}
+        </div>
+        {description && (
+          <p class={styles.blogCardDescription} itemprop="description">
+            {description}
+          </p>
+        )}
+        {Array.isArray(tags) && tags.length > 0 && (
+          <div class={styles.blogCardTags}>
+            {(tags as string[]).map((tag: string) => (
+              <span class={styles.blogCardTag} itemprop="keywords">
+                {tag}
+              </span>
+            ))}
+          </div>
+        )}
+      </div>
+    )
+  }
+</a>
+
+<style>
+  .full-width {
+    max-width: none !important;
+    width: 100% !important;
+  }
+</style>

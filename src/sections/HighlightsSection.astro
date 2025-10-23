@@ -8,16 +8,20 @@ interface Props {
 const { locale = 'es' } = Astro.props;
 const t = useTranslations(locale);
 
+// Tipado explícito para highlights
+type Highlight = { emoji: string; text: string };
 // Obtener highlights directamente del objeto de traducciones
-const highlights = translations[locale as Locale].about.highlights.list;
+const highlights: Highlight[] =
+  translations[locale as Locale].about.highlights.list;
 ---
 
 <section class="highlights">
   <div class="container">
     <h2 class="section-title">{t('about.highlights.title')}</h2>
+    <p class="section-subtitle">{t('about.highlights.subtitle')}</p>
     <div class="highlights-grid">
       {
-        highlights.map((highlight: { emoji: string; text: string }) => (
+        highlights.map((highlight: Highlight) => (
           <div class="highlight-item">
             <div class="highlight-emoji">{highlight.emoji}</div>
             <p class="highlight-text">{highlight.text}</p>
