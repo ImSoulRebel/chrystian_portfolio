@@ -238,14 +238,12 @@ const alternateLang = languageLabels[alternateLocale as Locale];
   }
 </style><script>
   function initLanguageSelector() {
-
     const toggle = document.querySelector(
       '[data-lang-toggle]'
     ) as HTMLButtonElement;
     const dropdown = document.querySelector(
       '[data-lang-dropdown]'
     ) as HTMLElement;
-
 
     if (!toggle || !dropdown) {
       return;
@@ -344,7 +342,7 @@ const alternateLang = languageLabels[alternateLocale as Locale];
       }
     });
 
-  //
+    //
   }
 
   // Ejecutar cuando el DOM esté listo
