@@ -1,3 +1,51 @@
+/* Layout horizontal para variante bloglist */
+.blogCardRow {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  align-items: stretch;
+  gap: 0;
+  height: 100%;
+  min-height: 100%;
+}
+
+.blogCardImageWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+  flex: 1 1 0;
+  align-self: stretch;
+  padding: 1.5rem;
+  box-sizing: border-box;
+}
+
+.blogCardImagePreview {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4/3;
+  border-radius: 12px;
+  object-fit: contain;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+  display: block;
+  max-width: 100%;
+  max-height: 100%;
+}
+
+@media (max-width: 900px) {
+  .blogCardRow {
+    flex-direction: column;
+  }
+  .blogCardImageWrapper {
+    padding: 0.5rem 0;
+    justify-content: flex-start;
+  }
+  .blogCardImagePreview {
+    max-width: 100%;
+    max-height: 180px;
+    margin: 0 auto;
+  }
+}
 /* Permite que la tarjeta ocupe todo el ancho del padre en BlogListSection */
 .full-width {
   max-width: 100% !important;

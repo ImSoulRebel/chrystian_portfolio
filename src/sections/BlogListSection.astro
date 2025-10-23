@@ -19,33 +19,43 @@ const sortedPosts = await getSortedBlogPosts(lang);
         <p class="no-posts">{t('blog.noPosts')}</p>
       ) : (
         <div class="posts-grid" role="list">
-          {sortedPosts.map((post) => (
-            <BlogCard
-              title={
-                typeof post.data.title === 'object'
-                  ? (post.data.title?.[lang] ?? t('blog.noTitle'))
-                  : (post.data.title ?? t('blog.noTitle'))
-              }
-              description={
-                typeof post.data.description === 'object'
-                  ? (post.data.description?.[lang] ?? '')
-                  : (post.data.description ?? '')
-              }
-              author={post.data.author}
-              date={post.data.createdAt}
-              tags={post.data.tags}
-              href={`/${lang}/blog/${post.id}`}
-              fullWidth={true}
-              lang={lang}
-              aria-label={t('blog.viewPostAria').replace(
-                '{title}',
-                typeof post.data.title === 'object'
-                  ? (post.data.title?.[lang] ?? t('blog.noTitle'))
-                  : (post.data.title ?? t('blog.noTitle'))
-              )}
-              key={post.id}
-            />
-          ))}
+          {sortedPosts.map((post) => {
+            return (
+              <>
+                <BlogCard
+                  title={
+                    typeof post.data.title === 'object'
+                      ? (post.data.title?.[lang] ?? t('blog.noTitle'))
+                      : (post.data.title ?? t('blog.noTitle'))
+                  }
+                  description={
+                    typeof post.data.description === 'object'
+                      ? (post.data.description?.[lang] ?? '')
+                      : (post.data.description ?? '')
+                  }
+                  author={post.data.author}
+                  date={post.data.createdAt}
+                  tags={post.data.tags}
+                  href={`/${lang}/blog/${post.id}`}
+                  fullWidth={true}
+                  lang={lang}
+                  image={
+                    post.data.image
+                      ? `/images/blog/${post.data.image}`
+                      : undefined
+                  }
+                  variant="bloglist"
+                  aria-label={t('blog.viewPostAria').replace(
+                    '{title}',
+                    typeof post.data.title === 'object'
+                      ? (post.data.title?.[lang] ?? t('blog.noTitle'))
+                      : (post.data.title ?? t('blog.noTitle'))
+                  )}
+                  key={post.id}
+                />
+              </>
+            );
+          })}
         </div>
       )
     }

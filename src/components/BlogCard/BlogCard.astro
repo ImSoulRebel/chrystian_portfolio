@@ -1,6 +1,7 @@
 ---
 import styles from './BlogCard.module.css';
 
+type BlogCardVariant = 'default' | 'bloglist';
 interface BlogCardProps {
   title: string;
   description?: string;
@@ -9,6 +10,8 @@ interface BlogCardProps {
   tags?: string[];
   href: string;
   fullWidth?: boolean;
+  image?: string;
+  variant?: BlogCardVariant;
 }
 
 const {
@@ -19,6 +22,8 @@ const {
   tags,
   href,
   fullWidth = false,
+  image,
+  variant = 'default',
 } = Astro.props as BlogCardProps;
 ---
 
@@ -31,41 +36,86 @@ const {
   role="article"
   rel="bookmark"
 >
-  <div class={styles.blogCardContent}>
-    <h3 class={styles.blogCardTitle} itemprop="name headline">{title}</h3>
-    <div class={styles.blogCardMeta}>
-      {author && <span class={styles.blogCardAuthor}>🖊️ {author}</span>}
-      {
-        date && (
-          <span class={styles.blogCardDate} itemprop="datePublished">
-            {new Date(date).toLocaleDateString('es-ES', {
-              year: 'numeric',
-              month: 'long',
-              day: 'numeric',
-            })}
-          </span>
-        )
-      }
-    </div>
-    {
-      description && (
-        <p class={styles.blogCardDescription} itemprop="description">
-          {description}
-        </p>
-      )
-    }
-    {
-      Array.isArray(tags) && tags.length > 0 && (
-        <div class={styles.blogCardTags}>
-          {(tags as string[]).map((tag: string) => (
-            <span class={styles.blogCardTag} itemprop="keywords">
-              {tag}
-            </span>
-          ))}
+  {
+    variant === 'bloglist' && image ? (
+      <div class={styles.blogCardRow}>
+        <div class={styles.blogCardContent} style="flex: 2 1 0; min-width:0;">
+          <h3 class={styles.blogCardTitle} itemprop="name headline">
+            {title}
+          </h3>
+          <div class={styles.blogCardMeta}>
+            {author && <span class={styles.blogCardAuthor}>🖊️ {author}</span>}
+            {date && (
+              <span class={styles.blogCardDate} itemprop="datePublished">
+                {new Date(date).toLocaleDateString('es-ES', {
+                  year: 'numeric',
+                  month: 'long',
+                  day: 'numeric',
+                })}
+              </span>
+            )}
+          </div>
+          {description && (
+            <p class={styles.blogCardDescription} itemprop="description">
+              {description}
+            </p>
+          )}
+          {Array.isArray(tags) && tags.length > 0 && (
+            <div class={styles.blogCardTags}>
+              {(tags as string[]).map((tag: string) => (
+                <span class={styles.blogCardTag} itemprop="keywords">
+                  {tag}
+                </span>
+              ))}
+            </div>
+          )}
         </div>
-      )
-    }
-  </div>
+        <div
+          class={styles.blogCardImageWrapper}
+          style="flex: 1 1 0; display:flex; align-items:center; justify-content:center; min-width:0;"
+        >
+          <img
+            src={image}
+            alt={`Preview ${title}`}
+            class={styles.blogCardImagePreview}
+            loading="lazy"
+          />
+        </div>
+      </div>
+    ) : (
+      <div class={styles.blogCardContent}>
+        <h3 class={styles.blogCardTitle} itemprop="name headline">
+          {title}
+        </h3>
+        <div class={styles.blogCardMeta}>
+          {author && <span class={styles.blogCardAuthor}>🖊️ {author}</span>}
+          {date && (
+            <span class={styles.blogCardDate} itemprop="datePublished">
+              {new Date(date).toLocaleDateString('es-ES', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+              })}
+            </span>
+          )}
+        </div>
+        {description && (
+          <p class={styles.blogCardDescription} itemprop="description">
+            {description}
+          </p>
+        )}
+        {Array.isArray(tags) && tags.length > 0 && (
+          <div class={styles.blogCardTags}>
+            {(tags as string[]).map((tag: string) => (
+              <span class={styles.blogCardTag} itemprop="keywords">
+                {tag}
+              </span>
+            ))}
+          </div>
+        )}
+      </div>
+    )
+  }
 </a>
 
 <style>
