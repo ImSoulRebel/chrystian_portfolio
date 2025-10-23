@@ -1,7 +1,7 @@
 ---
 import { PUBLIC_AUTHOR_NAME } from 'astro:env/client';
 import { Layout } from '@layouts';
-import { Header, Footer, BackToHome } from '@components';
+import { BackButton } from '@components';
 import { ContactSection } from '@sections';
 import { useTranslations, type Locale } from '@utils/i18n';
 
@@ -21,16 +21,14 @@ const pageTitle = `${t('contact.seo.title')} | ${PUBLIC_AUTHOR_NAME}`;
 const pageDescription = t<string>('contact.seo.description');
 ---
 
-<Layout title={pageTitle} description={pageDescription} locale={locale}>
+<Layout
+  title={pageTitle}
+  description={pageDescription}
   floatingCTAMode="contact"
-  <!-- Back to Home Button -->
-  <BackToHome locale={locale} />
-
-  <Header hasNavLinks={hasNavLinks} locale={locale} />
-
-  <main>
+  layoutContext={{ locale, hasNavLinks, pageType: 'contact' }}
+>
+  <BackButton locale={locale} />
+  <main class="section-radial-bg">
     <ContactSection locale={locale} />
   </main>
-
-  <Footer hasNavLinks={hasNavLinks} locale={locale} pageType="contact" />
 </Layout>

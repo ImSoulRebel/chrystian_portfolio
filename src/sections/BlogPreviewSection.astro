@@ -1,0 +1,177 @@
+---
+import { getSortedBlogPosts } from '@utils/blogManager';
+import { useTranslations, type Locale } from '@utils/i18n';
+import { BlogCard } from '@components';
+import type { BlogPreviewSectionProps } from '@content/types/blog';
+
+const { locale } = Astro.props as BlogPreviewSectionProps;
+const t = useTranslations(locale);
+
+const previewPosts = await getSortedBlogPosts(locale, { limit: 3 });
+---
+
+<section id="blog" class="blog-preview-section">
+  <div class="section-divider"></div>
+  <div class="container">
+    <div class="blog-preview-header">
+      <h2 class="section-title">{t('blog.heading')}</h2>
+      <p class="section-subtitle">{t('blog.previewSubtitle')}</p>
+    </div>
+    {
+      previewPosts.length === 0 ? (
+        <p class="no-posts">{t('blog.noPosts')}</p>
+      ) : (
+        <div class="blog-preview-grid" role="list">
+          {previewPosts.map((post) => (
+            <div role="listitem">
+              <BlogCard
+                title={
+                  typeof post.data.title === 'object'
+                    ? (post.data.title?.[locale as Locale] ?? t('blog.noTitle'))
+                    : (post.data.title ?? t('blog.noTitle'))
+                }
+                description={
+                  typeof post.data.description === 'object'
+                    ? (post.data.description?.[locale as Locale] ?? '')
+                    : (post.data.description ?? '')
+                }
+                author={post.data.author}
+                date={post.data.createdAt}
+                tags={post.data.tags}
+                href={`/${locale}/blog/${post.id}`}
+              />
+            </div>
+          ))}
+        </div>
+      )
+    }
+    <div class="view-more-container">
+      <a
+        href={`/${locale}/blog`}
+        class="btn btn-primary"
+        aria-label={t('blog')['viewAllAria']}
+      >
+        <span>{t('blog.viewAll')}</span>
+        <svg
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M7 17L17 7M17 7H7M17 7V17"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"></path>
+        </svg>
+      </a>
+    </div>
+  </div>
+</section>
+<style>
+  .blog-preview-section {
+    padding: 0;
+    background: var(--background-card, transparent);
+    position: relative;
+  }
+  .container {
+    max-width: 1200px;
+    padding-top: 6rem;
+    padding-bottom: 6rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .blog-preview-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    text-align: center;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 4rem;
+  }
+  .section-title {
+    font-size: clamp(2rem, 4vw, 2.5rem);
+    font-weight: 700;
+    background: var(--gradient-primary);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin: 0;
+  }
+  .section-subtitle {
+    font-size: 1.2rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: 0;
+    font-weight: 400;
+    text-align: center;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .blog-preview-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2rem;
+    margin-bottom: 4rem;
+    justify-items: center;
+    align-items: start;
+    width: 100%;
+  }
+  .view-more-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 3rem;
+    width: 100%;
+  }
+  /* El botón usa las clases globales btn y btn-primary para continuidad visual */
+  .no-posts {
+    text-align: center;
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    margin: 2rem 0 4rem 0;
+  }
+  @media (max-width: 1200px) {
+    .blog-preview-grid {
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1.8rem;
+    }
+  }
+  @media (max-width: 900px) {
+    .blog-preview-grid {
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+  }
+  @media (max-width: 768px) {
+    .blog-preview-grid {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+      margin-bottom: 3rem;
+    }
+  }
+  @media (max-width: 480px) {
+    .blog-preview-grid {
+      gap: 1.25rem;
+    }
+  }
+  .section-divider {
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      var(--primary-color),
+      transparent
+    );
+    opacity: 0.3;
+    margin-bottom: 0;
+  }
+</style>

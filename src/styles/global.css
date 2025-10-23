@@ -1,22 +1,14 @@
-/* Base Styles */
 @import './base/_variables.css';
 @import './base/_reset.css';
 @import './base/_typography.css';
-
-/* Layout */
 @import './layout/_container.css';
 @import './layout/_sections.css';
-
-/* Components */
 @import './components/_buttons.css';
-
-/* Sections */
+@import './components/_header.css';
 @import './sections/_hero.css';
 @import './sections/_about.css';
 @import './sections/_skills.css';
 @import './sections/_projects.css';
 @import './sections/_contact.css';
 @import './sections/_highlights.css';
-
-/* Responsive Design */
 @import './base/_responsive.css';

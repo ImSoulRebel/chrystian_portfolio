@@ -17,7 +17,7 @@ const formAction = PUBLIC_FORMSPREE_ENDPOINT;
 const contactEmail = PUBLIC_CONTACT_EMAIL;
 
 // Debug logging
-console.log('ContactForm - Form action:', formAction);
+
 console.log('ContactForm - Contact email:', contactEmail);
 
 // Show warning if form action is not configured
@@ -265,7 +265,6 @@ if (!formAction) {
 
   // Initialize the form
   document.addEventListener('DOMContentLoaded', () => {
-    console.log('Initializing ContactForm...');
     new ContactForm({
       translations,
       enableLogging: true,

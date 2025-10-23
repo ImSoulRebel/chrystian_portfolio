@@ -1,31 +1,21 @@
-/**
- * Skills Manager - Utilidades para gestión de habilidades con Content Collections
- *
- * Proporciona funciones especializadas para trabajar con la colección de skills:
- * - Filtrado por categoría, nivel y estado
- * - Ordenamiento por prioridad y años de experiencia
- * - Caché para optimización de performance
- * - Mapeo de iconos con fallback automático
- */
+import { useTranslations, type Locale } from '@utils/i18n';
+export async function getTranslatedSkills(locale: Locale = 'es') {
+  const t = useTranslations(locale);
+  const allSkills = await getAllSkills();
+  return allSkills.map((s) => ({
+    ...s,
+    name: t(`skills.list.${s.id}.name` as any) || s.id,
+    description: t(`skills.list.${s.id}.description` as any) || '',
+  }));
+}
 
 import { getCollection } from 'astro:content';
 import type { SkillData } from '@content/config';
 import { projectPlaceholder } from '@assets';
 
-// ===========================================
-// TYPES
-// ===========================================
-
-/**
- * Tipo para skill procesado con icono resuelto
- */
 export interface ProcessedSkill extends SkillData {
   iconUrl: string;
 }
-
-/**
- * Categorías disponibles para skills
- */
 export type SkillCategory =
   | 'mobile'
   | 'frontend'
@@ -33,35 +23,13 @@ export type SkillCategory =
   | 'devops'
   | 'leadership'
   | 'tools';
-
-/**
- * Niveles de experiencia disponibles
- */
 export type SkillLevel = 'beginner' | 'intermediate' | 'advanced' | 'expert';
-
-/**
- * Estado de la skill
- */
 export type SkillStatus = 'active' | 'archived' | 'learning';
 
-// ===========================================
-// ICON MAPPING
-// ===========================================
-
-/**
- * Mapeo dinámico de iconos usando import.meta.glob
- * Esto permite cargar automáticamente todos los iconos disponibles
- */
 const skillIcons = import.meta.glob<{ default: ImageMetadata }>(
   '/src/assets/logos/*.svg',
-  {
-    eager: true,
-  }
+  { eager: true }
 );
-
-/**
- * Mapeo de iconos genéricos para skills que no tienen logo específico
- */
 const genericIconMap: Record<string, string> = {
   code: '/src/assets/logos/clean_architecture_logo.svg',
   api: '/src/assets/logos/websocket_logo.svg',
@@ -77,80 +45,25 @@ const genericIconMap: Record<string, string> = {
   cloud: '/src/assets/logos/aws_logo.svg',
 };
 
-/**
- * Obtiene la URL del icono para una skill
- * @param iconName - Nombre del icono (ej: 'flutter', 'react', 'code') o undefined
- * @returns URL del icono o placeholder si no existe
- */
-export function getSkillIcon(iconName?: string): string {
-  // Si no hay iconName, devolver placeholder directamente
-  if (!iconName || iconName.trim() === '') {
-    return projectPlaceholder.src;
-  }
-
-  try {
-    // Buscar icono específico primero (ej: flutter_logo.svg)
-    const specificIconPath = `/src/assets/logos/${iconName}_logo.svg`;
-    if (skillIcons[specificIconPath]) {
-      return skillIcons[specificIconPath].default.src;
-    }
-
-    // Buscar icono directo (ej: flutter.svg)
-    const directIconPath = `/src/assets/logos/${iconName}.svg`;
-    if (skillIcons[directIconPath]) {
-      return skillIcons[directIconPath].default.src;
-    }
-
-    // Buscar en mapeo genérico
-    const genericIconPath = genericIconMap[iconName];
-    if (genericIconPath && skillIcons[genericIconPath]) {
-      return skillIcons[genericIconPath].default.src;
-    }
-
-    // Fallback a placeholder
-    return projectPlaceholder.src;
-  } catch (error) {
-    console.warn(`Could not load icon for skill: ${iconName}`, error);
-    return projectPlaceholder.src;
-  }
-}
-
-// ===========================================
-// CORE FUNCTIONS
-// ===========================================
-
-/**
- * Caché para skills procesados
- */
 const skillsCache = new Map<string, ProcessedSkill[]>();
 
-/**
- * Obtiene todas las skills y las procesa con iconos
- * @returns Array de skills procesadas con iconos
- */
 export async function getAllSkills(): Promise<ProcessedSkill[]> {
   const cacheKey = 'all-skills';
-
   if (skillsCache.has(cacheKey)) {
     return skillsCache.get(cacheKey)!;
   }
-
   try {
     const skills = await getCollection('skills');
-
     const processedSkills: ProcessedSkill[] = skills.map((skillEntry) => ({
       ...skillEntry.data,
       iconUrl: getSkillIcon(skillEntry.data.icon),
     }));
-
-    // Ordenar por prioridad y luego por años de experiencia
     processedSkills.sort((a, b) => {
       if (a.priority !== b.priority) {
         return a.priority - b.priority;
       }
       return b.years - a.years;
     });
-
     skillsCache.set(cacheKey, processedSkills);
     return processedSkills;
   } catch (error) {
@@ -159,33 +72,21 @@ export async function getAllSkills(): Promise<ProcessedSkill[]> {
   }
 }
 
-/**
- * Obtiene skills filtradas por categoría
- * @param category - Categoría de skills a filtrar
- * @returns Array de skills de la categoría especificada
- */
 export async function getSkillsByCategory(
   category: SkillCategory
 ): Promise<ProcessedSkill[]> {
   const cacheKey = `skills-${category}`;
-
   if (skillsCache.has(cacheKey)) {
     return skillsCache.get(cacheKey)!;
   }
-
   const allSkills = await getAllSkills();
   const categorySkills = allSkills.filter(
     (skill) => skill.category === category && skill.status === 'active'
   );
-
   skillsCache.set(cacheKey, categorySkills);
   return categorySkills;
 }
 
-/**
- * Obtiene skills destacadas (featured)
- * @returns Array de skills destacadas
- */
 export async function getFeaturedSkills(): Promise<ProcessedSkill[]> {
   const cacheKey = 'featured-skills';
 
@@ -202,11 +103,6 @@ export async function getFeaturedSkills(): Promise<ProcessedSkill[]> {
   return featuredSkills;
 }
 
-/**
- * Obtiene skills por nivel de experiencia
- * @param level - Nivel de experiencia
- * @returns Array de skills del nivel especificado
- */
 export async function getSkillsByLevel(
   level: SkillLevel
 ): Promise<ProcessedSkill[]> {
@@ -225,32 +121,35 @@ export async function getSkillsByLevel(
   return levelSkills;
 }
 
-/**
- * Busca skills por nombre o descripción
- * @param query - Término de búsqueda
- * @param locale - Idioma para búsqueda en descripción ('es' | 'en')
- * @returns Array de skills que coinciden con la búsqueda
- */
 export async function searchSkills(
   query: string,
   locale: 'es' | 'en' = 'es'
 ): Promise<ProcessedSkill[]> {
   const allSkills = await getAllSkills();
   const searchTerm = query.toLowerCase();
-
   return allSkills.filter((skill) => {
-    const nameMatch = skill.name.toLowerCase().includes(searchTerm);
-    const descriptionMatch =
-      skill.description?.[locale]?.toLowerCase().includes(searchTerm) || false;
-
+    const nameMatch =
+      typeof skill.name === 'string' &&
+      skill.name.toLowerCase().includes(searchTerm);
+    let descriptionMatch = false;
+    const desc: unknown = skill.description;
+    if (typeof desc === 'string') {
+      descriptionMatch = desc.toLowerCase().includes(searchTerm);
+    } else if (
+      desc &&
+      typeof desc === 'object' &&
+      desc !== null &&
+      typeof (desc as Record<string, unknown>)[locale] === 'string'
+    ) {
+      const localizedDesc = (desc as Record<string, string>)[locale];
+      if (localizedDesc) {
+        descriptionMatch = localizedDesc.toLowerCase().includes(searchTerm);
+      }
+    }
     return (nameMatch || descriptionMatch) && skill.status === 'active';
   });
 }
 
-/**
- * Obtiene estadísticas de skills
- * @returns Objeto con estadísticas generales
- */
 export async function getSkillsStats(): Promise<{
   total: number;
   byCategory: Record<SkillCategory, number>;
@@ -290,34 +189,74 @@ export async function getSkillsStats(): Promise<{
   };
 }
 
-/**
- * Limpia el caché de skills (útil para desarrollo)
- */
 export function clearSkillsCache(): void {
   skillsCache.clear();
 }
 
-/**
- * Obtiene skills que tienen URLs oficiales
- */
 export async function getSkillsWithUrls(): Promise<ProcessedSkill[]> {
   const allSkills = await getAllSkills();
   return allSkills.filter((skill) => skill.url);
 }
 
-/**
- * Obtiene la URL oficial de una skill específica
- */
 export async function getSkillUrl(skillId: string): Promise<string | null> {
   const allSkills = await getAllSkills();
   const skill = allSkills.find((s) => s.id === skillId);
   return skill?.url || null;
 }
 
-// ===========================================
-// EXPORTS
-// ===========================================
+export function getSkillIcon(iconName?: string, fallback?: string): string {
+  if (!iconName || iconName.trim() === '') {
+    return fallback || projectPlaceholder.src;
+  }
+  const patterns = [
+    `/src/assets/logos/${iconName}_logo.svg`,
+    `/src/assets/logos/${iconName}.svg`,
+    genericIconMap[iconName],
+  ];
+  for (const path of patterns) {
+    if (path && skillIcons[path]) {
+      return skillIcons[path].default.src;
+    }
+  }
+  return fallback || projectPlaceholder.src;
+}
 
+export function filterAndSortSkills(
+  skills: SkillData[],
+  options?: {
+    category?: SkillCategory;
+    level?: SkillLevel;
+    status?: SkillStatus;
+    featured?: boolean;
+    orderBy?: keyof SkillData;
+    orderDir?: 'asc' | 'desc';
+  }
+): SkillData[] {
+  let result = [...skills];
+  if (options?.category)
+    result = result.filter((s) => s.category === options.category);
+  if (options?.level) result = result.filter((s) => s.level === options.level);
+  if (options?.status)
+    result = result.filter((s) => s.status === options.status);
+  if (options?.featured !== undefined)
+    result = result.filter((s) => !!s.featured === options.featured);
+  if (options?.orderBy) {
+    result.sort((a, b) => {
+      const dir = options.orderDir === 'desc' ? -1 : 1;
+      const aVal = a[options.orderBy!];
+      const bVal = b[options.orderBy!];
+      if (aVal == null && bVal == null) return 0;
+      if (aVal == null) return 1;
+      if (bVal == null) return -1;
+      if (aVal < bVal) return -1 * dir;
+      if (aVal > bVal) return 1 * dir;
+      return 0;
+    });
+  }
+  return result;
+}
+
+// Exportar agrupado para importación moderna
 export default {
   getAllSkills,
   getSkillsByCategory,
@@ -329,4 +268,6 @@ export default {
   clearSkillsCache,
   getSkillsWithUrls,
   getSkillUrl,
+  filterAndSortSkills,
+  getTranslatedSkills,
 };

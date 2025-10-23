@@ -30,8 +30,8 @@ export interface NavTranslations {
   experience: string;
   projects: string;
   contact: string;
-  backToHome: string;
-  backToHomeLabel: string;
+  back: string;
+  backLabel: string;
 }
 
 export interface Error404Translations {
@@ -69,6 +69,7 @@ export interface AboutTranslations {
   };
   highlights: {
     title: string;
+    subtitle: string;
     list: Array<{ emoji: string; text: string }>;
   };
 }
@@ -84,10 +85,17 @@ export interface SkillsTranslations {
     leadership: string;
     tools: string;
   };
+  list?: {
+    [key: string]: {
+      name: string;
+      description: string;
+    };
+  };
 }
 
 export interface ExperienceTranslations {
   title: string;
+  subtitle: string;
   current: string;
   months: string;
   years: string;
@@ -105,6 +113,7 @@ export interface ExperienceTranslations {
 
 export interface ProjectsTranslations {
   title: string;
+  subtitle: string;
   viewDemo: string;
   viewCode: string;
   viewMore: string;
@@ -318,6 +327,24 @@ export interface LanguageTranslations {
 }
 
 // Tipo completo para todas las traducciones de un locale
+export interface BlogTranslations {
+  title: string;
+  heading: string;
+  seo: {
+    description: string;
+  };
+  noPosts: string;
+  noTitle?: string;
+  previewSubtitle?: string;
+  viewAll?: string;
+  viewAllAria?: string;
+  blogHeader?: {
+    backToBlogLabel?: string;
+    authorLabel?: string;
+    updatedLabel?: string;
+  };
+}
+
 export interface LocaleTranslations {
   welcome: string;
   and: string;
@@ -335,6 +362,7 @@ export interface LocaleTranslations {
   structuredData: StructuredDataTranslations;
   recruiterMeta: RecruiterMetaTranslations;
   language: LanguageTranslations;
+  blog: BlogTranslations;
 }
 
 // Tipo para el objeto de traducciones completo

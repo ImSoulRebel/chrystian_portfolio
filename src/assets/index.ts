@@ -54,7 +54,7 @@ export { default as cicdLogo } from './logos/cicd_logo.svg';
 // LEADERSHIP & TEAM
 // ============================================
 export { default as teamLeaderLogo } from './logos/team_leader_logo.svg';
-export { default as teamManagementLogo } from './logos/team_management.svg';
+export { default as teamManagementLogo } from './logos/team_management_logo.svg';
 
 // ============================================
 // TOOLS & UTILITIES

@@ -11,6 +11,19 @@
   position: relative;
   background: var(--gradient-secondary);
   overflow: hidden;
+  opacity: 0;
+  animation: fadeInHero 1.2s ease 0.1s forwards;
+}
+
+@keyframes fadeInHero {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
 }
 
 .hero::before {
@@ -95,6 +108,14 @@
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  transition:
+    letter-spacing 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+    text-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.hero-title:hover {
+  letter-spacing: 2px;
+  text-shadow: 0 2px 16px rgba(0, 212, 255, 0.18);
 }
 
 .hero-description {
@@ -112,4 +133,29 @@
   justify-content: center;
   flex-wrap: wrap;
   margin-top: 2rem;
+  transition: gap 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.hero-cta .btn,
+.hero-cta .btn-primary,
+.hero-cta .btn-outline {
+  transition:
+    transform 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+    background 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.hero-cta .btn:hover,
+.hero-cta .btn-primary:hover,
+.hero-cta .btn-outline:hover {
+  transform: translateY(-3px) scale(1.04);
+  box-shadow: 0 8px 32px rgba(0, 212, 255, 0.18);
+}
+@media (max-width: 599px) {
+  .hero-title {
+    font-size: 2.1rem;
+  }
+  .hero-description {
+    font-size: 1.05rem;
+  }
 }

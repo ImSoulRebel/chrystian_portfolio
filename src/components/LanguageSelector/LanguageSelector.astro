@@ -238,8 +238,6 @@ const alternateLang = languageLabels[alternateLocale as Locale];
   }
 </style><script>
   function initLanguageSelector() {
-    console.log('Iniciando LanguageSelector...');
-
     const toggle = document.querySelector(
       '[data-lang-toggle]'
     ) as HTMLButtonElement;
@@ -247,11 +245,7 @@ const alternateLang = languageLabels[alternateLocale as Locale];
       '[data-lang-dropdown]'
     ) as HTMLElement;
 
-    console.log('Toggle encontrado:', toggle);
-    console.log('Dropdown encontrado:', dropdown);
-
     if (!toggle || !dropdown) {
-      console.warn('LanguageSelector: Elementos no encontrados');
       return;
     }
 
@@ -279,7 +273,6 @@ const alternateLang = languageLabels[alternateLocale as Locale];
     }
 
     function openDropdown() {
-      console.log('🔵 Abriendo dropdown...');
       isOpen = true;
 
       // Ajustar ancho antes de mostrar
@@ -295,7 +288,6 @@ const alternateLang = languageLabels[alternateLocale as Locale];
     }
 
     function closeDropdown() {
-      console.log('🔴 Cerrando dropdown...');
       isOpen = false;
       dropdown.style.display = 'none';
       dropdown.style.opacity = '0';
@@ -307,7 +299,6 @@ const alternateLang = languageLabels[alternateLocale as Locale];
     }
 
     function toggleDropdown() {
-      console.log('🔄 Toggle dropdown, estado actual:', isOpen);
       if (isOpen) {
         closeDropdown();
       } else {
@@ -322,7 +313,6 @@ const alternateLang = languageLabels[alternateLocale as Locale];
 
     // Event listener para el click
     toggle.addEventListener('click', function (e) {
-      console.log('👆 Click en toggle detectado');
       e.preventDefault();
       e.stopPropagation();
       toggleDropdown();
@@ -333,7 +323,6 @@ const alternateLang = languageLabels[alternateLocale as Locale];
       const target = e.target as HTMLElement;
       if (!toggle.contains(target) && !dropdown.contains(target)) {
         if (isOpen) {
-          console.log('👆 Click fuera detectado, cerrando...');
           closeDropdown();
         }
       }
@@ -342,7 +331,6 @@ const alternateLang = languageLabels[alternateLocale as Locale];
     // Cerrar con ESC
     document.addEventListener('keydown', function (e) {
       if (e.key === 'Escape' && isOpen) {
-        console.log('⌨️ ESC presionado, cerrando...');
         closeDropdown();
       }
     });
@@ -354,7 +342,7 @@ const alternateLang = languageLabels[alternateLocale as Locale];
       }
     });
 
-    console.log('✅ LanguageSelector inicializado correctamente');
+    //
   }
 
   // Ejecutar cuando el DOM esté listo

@@ -1,0 +1,46 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '@/layouts/Layout.astro';
+import { Locale } from '@config/translations';
+import { useTranslations } from '@utils/i18n';
+import { BackButton } from '@components';
+import { BlogListSection } from '@sections';
+
+export async function getStaticPaths() {
+  return [{ params: { lang: 'es' } }, { params: { lang: 'en' } }];
+}
+
+const { lang } = Astro.params;
+const locale = (lang as Locale) || 'es';
+const t = useTranslations(locale);
+const hasNavLinks = false;
+
+const blogTranslations = t('blog');
+const pageTitle = blogTranslations.title || 'Blog';
+const pageDescription =
+  blogTranslations.seo?.description || t('seo').description;
+
+const allPosts = await getCollection(
+  'blog',
+  ({ data }) => data.status === 'published'
+);
+const sortedPosts = allPosts.sort(
+  (a, b) =>
+    new Date(b.data.createdAt).getTime() - new Date(a.data.createdAt).getTime()
+);
+---
+
+<Layout
+  title={pageTitle}
+  description={pageDescription}
+  floatingCTAMode="contact"
+  layoutContext={{ locale, hasNavLinks, pageType: 'blog' }}
+>
+  <BackButton locale={locale} />
+
+  <BlogListSection
+    sortedPosts={sortedPosts}
+    lang={lang}
+    blogTranslations={blogTranslations}
+  />
+</Layout>

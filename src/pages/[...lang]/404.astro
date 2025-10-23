@@ -1,5 +1,5 @@
 ---
-import { Header, Footer } from '@components';
+// ...existing code...
 import { Layout } from '@layouts';
 import { useTranslations, type Locale, getLocalizedPath } from '@utils/i18n';
 
@@ -20,7 +20,7 @@ const hasNavLinks = false;
 // Generar URLs localizadas correctamente
 const homeUrl = getLocalizedPath('/', locale);
 const contactUrl = getLocalizedPath('/contact', locale);
-const projectsUrl = getLocalizedPath('/projects', locale);
+// const projectsUrl = getLocalizedPath('/projects', locale);
 
 // Contenido traducido desde el sistema centralizado
 const pageContent = {
@@ -35,32 +35,30 @@ const pageContent = {
 };
 
 // Enlaces de navegación sugeridos
-const suggestedLinks = [
-  {
-    label: t<string>('nav.home'),
-    url: homeUrl,
-    icon: '🏠',
-  },
-  {
-    label: t<string>('nav.projects'),
-    url: projectsUrl,
-    icon: '💼',
-  },
-  {
-    label: t<string>('nav.contact'),
-    url: contactUrl,
-    icon: '📧',
-  },
-];
+// const suggestedLinks = [
+//   {
+//     label: t<string>('nav.home'),
+//     url: homeUrl,
+//     icon: '🏠',
+//   },
+//   {
+//     label: t<string>('nav.projects'),
+//     url: projectsUrl,
+//     icon: '💼',
+//   },
+//   {
+//     label: t<string>('nav.contact'),
+//     url: contactUrl,
+//     icon: '📧',
+//   },
+// ];
 ---
 
 <Layout
   title={pageContent.title}
   description={pageContent.description}
-  locale={locale}
+  layoutContext={{ locale, hasNavLinks, pageType: '404' }}
 >
-  <Header hasNavLinks={hasNavLinks} locale={locale} />
-
   <main class="error-page">
     <div class="container">
       <div class="error-content">
@@ -70,12 +68,10 @@ const suggestedLinks = [
           <span class="digit zero">0</span>
           <span class="digit">4</span>
         </div>
-
         <!-- Título y mensaje -->
         <h1 class="error-title">{pageContent.subheading}</h1>
         <p class="error-description">{pageContent.message}</p>
 
-        <!-- Botones de acción principales -->
         <div class="error-actions">
           <a
             href={homeUrl}
@@ -92,28 +88,26 @@ const suggestedLinks = [
             {pageContent.contactButton}
           </a>
         </div>
-
-        <!-- Sugerencias de navegación -->
-        <div class="suggested-links">
-          <p class="suggested-text">{pageContent.suggestion}</p>
-          <nav class="quick-links" aria-label="Quick navigation">
-            {
-              suggestedLinks.map((link) => (
-                <a href={link.url} class="quick-link" aria-label={link.label}>
-                  <span class="link-icon" aria-hidden="true">
-                    {link.icon}
-                  </span>
-                  <span class="link-label">{link.label}</span>
-                </a>
-              ))
-            }
-          </nav>
-        </div>
       </div>
     </div>
-  </main>
 
-  <Footer hasNavLinks={hasNavLinks} locale={locale} pageType="404" />
+    <!-- Sugerencias de navegación -->
+    <!-- <div class="suggested-links">
+      <p class="suggested-text">{pageContent.suggestion}</p>
+      <nav class="quick-links" aria-label="Quick navigation">
+        {
+          suggestedLinks.map((link) => (
+            <a href={link.url} class="quick-link" aria-label={link.label}>
+              <span class="link-icon" aria-hidden="true">
+                {link.icon}
+              </span>
+              <span class="link-label">{link.label}</span>
+            </a>
+          ))
+        }
+      </nav>
+    </div> -->
+  </main>
 </Layout>
 
 <style>

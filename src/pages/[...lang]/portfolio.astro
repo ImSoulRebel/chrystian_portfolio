@@ -8,7 +8,6 @@ import {
   ContactSection,
   HeroSection,
 } from '@sections';
-import { Header, Footer } from '@components';
 import { Layout } from '@layouts';
 import { useTranslations, type Locale } from '@utils/i18n';
 
@@ -232,11 +231,9 @@ const additionalMeta = [
   keywords={pageKeywords}
   structuredData={homeStructuredData}
   additionalMeta={additionalMeta}
-  locale={locale}
   floatingCTAMode="contact"
+  layoutContext={{ locale, hasNavLinks: true }}
 >
-  <Header locale={locale} />
-
   <HeroSection locale={locale} />
 
   <AboutSection locale={locale} />
@@ -250,6 +247,4 @@ const additionalMeta = [
   <ProjectsSection locale={locale} />
 
   <ContactSection locale={locale} />
-
-  <Footer locale={locale} />
 </Layout>

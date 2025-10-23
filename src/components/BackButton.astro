@@ -1,0 +1,29 @@
+---
+import { Icon } from '@components';
+import { useTranslations } from '@utils/i18n';
+import type { Locale } from '@utils/i18n';
+
+interface Props {
+  locale?: Locale;
+  label?: string;
+  link?: string;
+}
+
+const { locale = 'es', label = '', link = '/' } = Astro.props;
+const t = useTranslations(locale);
+const defaultLabel = t('nav.backLabel');
+---
+
+<nav class="back">
+  <a
+    href={link}
+    class="back-btn"
+    aria-label={label || defaultLabel}
+    title={label || defaultLabel}
+  >
+    <Icon name="arrow-left" size={20} color="var(--primary-color)" />
+    <span class="back-text">
+      {label || defaultLabel}
+    </span>
+  </a>
+</nav>

@@ -1,6 +1,6 @@
 ---
 import LanguageSelector from './LanguageSelector/LanguageSelector.astro';
-import BackToHome from './BackToHome.astro';
+import BackButton from './BackButton.astro';
 import {
   useTranslations,
   getRelativeLocaleUrl,
@@ -32,6 +32,7 @@ const navLinks = [
   { name: t('nav.skills'), href: '#skills' },
   { name: t('nav.experience'), href: '#experience' },
   { name: t('nav.projects'), href: '#projects' },
+  { name: t('blog.title'), href: '#blog' },
   { name: t('nav.contact'), href: '#contact' },
 ];
 ---
@@ -41,7 +42,7 @@ const navLinks = [
     <nav class="nav">
       {
         isProjectOrContactPage ? (
-          <BackToHome locale={locale} />
+          <BackButton locale={locale} />
         ) : (
           <div class="nav-toggle" id="nav-toggle">
             <span />
@@ -184,6 +185,9 @@ const navLinks = [
     width: 100%;
   }
 
+  /* Animación y color activo para el enlace Blog */
+  /* El enlace Blog usa el mismo estilo y animación que los demás nav-link */
+
   .nav-toggle {
     display: none;
     flex-direction: column;
@@ -213,7 +217,7 @@ const navLinks = [
   }
 
   /* Mobile Responsive */
-  @media (max-width: 768px) {
+  @media (max-width: 1080px) {
     .nav {
       gap: 1rem;
     }
@@ -295,17 +299,34 @@ const navLinks = [
     }
   }
 
-  // Close mobile menu when clicking on a link
+  // Close mobile menu when clicking on a link (incluye #blog)
+
   const navLinks = document.querySelectorAll('.nav-link');
   navLinks.forEach((link) => {
-    link.addEventListener('click', () => {
+    link.addEventListener('click', (e) => {
+      const href = link.getAttribute('href');
+      if (href && href.startsWith('#')) {
+        const sectionId = href.replace('#', '');
+        const section = document.getElementById(sectionId);
+        if (section) {
+          e.preventDefault();
+          const header = document.getElementById('header');
+          const headerHeight = header ? header.offsetHeight : 0;
+          const sectionTop =
+            section.getBoundingClientRect().top + window.scrollY - headerHeight;
+          window.scrollTo({ top: sectionTop, behavior: 'smooth' });
+        }
+      }
       navToggle?.classList.remove('active');
       navMenu?.classList.remove('active');
     });
   });
 
   // Active link highlighting
-  const sections = document.querySelectorAll('section[id]');
+  // Incluir también el div con id="blog" como sección válida
+  const sections = Array.from(
+    document.querySelectorAll('section[id], div[id]')
+  );
 
   function highlightNavLink() {
     const scrollY = window.pageYOffset;
@@ -313,17 +334,19 @@ const navLinks = [
     sections.forEach((current) => {
       const element = current as HTMLElement;
       const sectionHeight = element.offsetHeight;
-      const sectionTop = element.offsetTop - 100;
-      const sectionId = current.getAttribute('id');
+      // Ajustar el offset para el header fijo
+      const header = document.getElementById('header');
+      const headerHeight = header ? header.offsetHeight : 100;
+      const sectionTop = element.offsetTop - headerHeight;
+      const sectionId = element.getAttribute('id');
 
-      if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
-        document
-          .querySelector(`.nav-link[href="#${sectionId}"]`)
-          ?.classList.add('active');
-      } else {
-        document
-          .querySelector(`.nav-link[href="#${sectionId}"]`)
-          ?.classList.remove('active');
+      const navLink = document.querySelector(`.nav-link[href="#${sectionId}"]`);
+      if (navLink) {
+        if (scrollY >= sectionTop && scrollY < sectionTop + sectionHeight) {
+          navLink.classList.add('active');
+        } else {
+          navLink.classList.remove('active');
+        }
       }
     });
   }
