@@ -1,0 +1,309 @@
+---
+id: 'flutter-smart-tv-navigation-2025'
+title:
+  es: 'Navegación espacial en Flutter para Smart TVs: retos y soluciones'
+  en: 'Spatial Navigation in Flutter for Smart TVs: Challenges and Solutions'
+description:
+  es: 'Relato técnico sobre cómo diseñé un subsistema de navegación espacial en Flutter para Smart TVs, abordando problemas reales, decisiones arquitectónicas y soluciones prácticas sin violar NDA.'
+  en: 'Technical storytelling on how I designed a spatial navigation subsystem in Flutter for Smart TVs, covering real-world issues, architectural decisions, and practical solutions while NDA-safe.'
+tags:
+  - 'Flutter'
+  - 'SmartTV'
+  - 'Navigation'
+  - 'UX'
+  - 'CrossPlatform'
+  - 'RemoteControl'
+  - 'Portfolio'
+author: 'Chrystian Michell Álvarez Sánchez'
+image: 'flutter-smart-tv-navigation.png'
+featured: true
+priority: 10
+status: 'published'
+createdAt: '2025-10-23T00:00:00.000Z'
+updatedAt: '2025-10-23T00:00:00.000Z'
+---
+
+
+import { Highlight, Quote } from '@components';
+
+export const content = {
+  es: (
+    <> <h1>Flutter en Smart TVs: de pionero a tendencia global</h1>
+
+    <p>
+    Llevar una app Flutter diseñada para táctil al mundo de las Smart TVs fue,
+    para mí, una mezcla de técnica y humildad: entender que los usuarios no
+    "tocan" la pantalla, la usan con flechas y un botón de confirmación.
+    Cambiar esa mentalidad cambió todo el proyecto.
+  </p>
+
+  <p>
+    El reto no era solo adaptar layouts: era construir un subsistema de
+    navegación espacial que fuera predecible, testeable y reutilizable entre
+    listas horizontales, grids bidimensionales y carouseles con elementos
+    dinámicos.
+  </p>
+
+  <h2>El enfoque: desacoplar para ganar control</h2>
+
+  <p>
+    Elegí separar la solución en cuatro capas claras para reducir el
+    acoplamiento y mejorar la mantenibilidad:
+  </p>
+
+  <ul>
+    <li>
+      <strong>Widget contenedor</strong> con <em>FocusNode</em> que captura
+      teclas y traduce entradas a eventos semánticos.
+    </li>
+    <li>
+      <strong>Decisor (BLoC/Controller)</strong> puro que procesa eventos y
+      calcula el siguiente foco consultando el mapa de elementos.
+    </li>
+    <li>
+      <strong>Orquestador (NavigationService)</strong> que registra limpia y
+      publica mapas de navegación por pantalla y maneja stacks para overlays.
+    </li>
+    <li>
+      <strong>Mapa de elementos</strong>, modelo inmutable por elemento con
+      metadatos de posición, visibilidad, tipo y callbacks por dirección.
+    </li>
+  </ul>
+
+  <Highlight>
+    La clave fue convertir la navegación espacial en un subsistema: captura,
+    decisión y descripción de elementos.
+  </Highlight>
+
+  <h2>Historias desde la trinchera: tres problemas difíciles</h2>
+
+  <h3>1) Pulsaciones largas y movimiento errático</h3>
+
+  <p>
+    El primer fallo visible era que, al mantener la flecha, el foco saltaba
+    sin control o respondía con latencia. La solución fue un Debouncer/Rate
+    Limitter en dos modos: <em>toque</em> (transición inmediata) y
+    <em>mantenimiento</em> (delay inicial mayor y cadence estable). Ajusté
+    parámetros por plataforma: las TVs toleran mayor inercia que un desktop.
+    Resultado: sensación de control y fluidez.
+  </p>
+
+  <h3>2) Saltos entre zonas heterogéneas</h3>
+
+  <p>
+    Pasar de un carousel horizontal a un grid vertical provocaba saltos
+    inesperados porque el motor dependía del orden de renderizado. Remodelé
+    cada elemento con fila/columna, tipo y reglas de borde. El motor ahora
+    calcula destinos usando esos metadatos y reglas de salto (buscar
+    siguiente visible, aplicar circularidad, etc.). Las transiciones pasaron
+    a ser coherentes y previsibles.
+  </p>
+
+  <h3>3) Overlays que rompen el mapa de foco</h3>
+
+  <p>
+    Abrir un modal o reproductor rompía el mapa si no se guardaba el estado.
+    Implementé un stack de mapas: registrar un nuevo mapa al abrir overlay y
+    restaurar el anterior al cerrarlo, con hooks de limpieza para evitar
+    referencias colgantes. Esto permitió overlays sin efectos colaterales.
+  </p>
+
+  <h2>Pros y contras del enfoque</h2>
+
+  <h3>Pros</h3>
+  <ul>
+    <li>Escalable: nuevas pantallas se describen declarativamente.</li>
+    <li>Testable: la lógica del decisor es determinista y fácil de unit‑testear.</li>
+    <li>Reutilizable: listas, grids y carouseles usan la misma infraestructura.</li>
+    <li>Mejor UX: debounce y reglas de visibilidad hacen la navegación natural.</li>
+  </ul>
+
+  <h3>Contras</h3>
+  <ul>
+    <li>Curva inicial: modelar posiciones y reglas por elemento requiere tiempo.</li>
+    <li>Sobrecarga: metadatos en apps muy dinámicas implican coste de sincronía.</li>
+    <li>Disciplina: olvidar registrar/limpiar mapas introduce bugs sutiles.</li>
+  </ul>
+
+  <h2>Checklist práctico para integrar la navegación espacial</h2>
+
+  <ol>
+    <li>Envolver la pantalla en un contenedor con FocusNode y solicitar foco.</li>
+    <li>
+      Definir la estructura navegable como lista o matriz con metadatos y
+      visibilidad.
+    </li>
+    <li>Registrar la estructura con el orquestador al montar la pantalla.</li>
+    <li>Proveer callbacks por elemento: onEnter, onBack, onUp, onDown, onLeft, onRight.</li>
+    <li>Configurar debounce/ratelimit por plataforma.</li>
+    <li>Testear: pulsación larga, transiciones entre secciones y overlays.</li>
+    <li>Limpiar registro al desmontar o al cerrar overlays.</li>
+  </ol>
+
+  <h2>Trucos que me salvaron en producción</h2>
+
+  <ul>
+    <li>Visualizador del mapa de foco en modo debug para inspección en tiempo real.</li>
+    <li>Tests deterministas que simulan secuencias de teclas y pulsaciones largas.</li>
+    <li>Parámetros de debounce expuestos en Remote Config para ajuste sin redeploy.</li>
+    <li>Animaciones de foco ligeras: feedback instantáneo, sin bloquear navegación.</li>
+    <li>Documentar el contrato UI ↔ orquestador: metadatos obligatorios y hooks esperados.</li>
+  </ul>
+
+  <h2>Conclusión</h2>
+
+  <p>
+    La navegación espacial no es "mover un rectángulo": es diseñar reglas,
+    excepciones y restauración de estado que den sensación de control y
+    seguridad al usuario. Separar captura, decisión y descripción convierte
+    el problema en un subsistema controlable y testeable; el esfuerzo de
+    modelado inicial se compensa cuando la app crece y aparecen overlays,
+    grids mixtos y requisitos de accesibilidad.
+  </p>
+
+  <hr />
+
+  <p>
+    <strong>¿Quieres que te ayude a evaluar o integrar navegación espacial en tu producto?</strong>
+    <br />
+    <a href="/es/contact">Contáctame</a> o explora mi <a href="/">portfolio</a>.
+  </p>
+</>
+  ),
+  en: (
+     <> <h1>Flutter on Smart TVs: From Pioneer to Global Trend</h1>
+      <p>
+    Porting a touch-oriented Flutter app to Smart TVs taught me one thing:
+    interaction changes everything. Users don’t touch the screen; they move
+    with arrows and press a confirm button. Designing for that mental model
+    reshaped the entire project.
+  </p>
+
+  <p>
+    The challenge was more than layouts: it was creating a spatial navigation
+    subsystem that’s predictable, testable, and reusable across horizontal
+    lists, two-dimensional grids and dynamic carousels.
+  </p>
+
+  <h2>The approach: decouple to gain control</h2>
+
+  <p>
+    I split the solution into four clear layers to reduce coupling and increase
+    maintainability:
+  </p>
+
+  <ul>
+    <li>
+      <strong>Container widget</strong> with a <em>FocusNode</em> to capture keys
+      and translate inputs into semantic events.
+    </li>
+    <li>
+      <strong>Decisor (BLoC/Controller)</strong> that processes events and
+      computes next focus by consulting the elements map.
+    </li>
+    <li>
+      <strong>Orchestrator (NavigationService)</strong> to register, clear and
+      publish navigation maps per screen and handle stacks for overlays.
+    </li>
+    <li>
+      <strong>Elements map</strong>, an immutable model per element with position,
+      visibility, type and directional callbacks.
+    </li>
+  </ul>
+
+  <Highlight>
+    Turning spatial navigation into a subsystem—capture, decision, description—was key.
+  </Highlight>
+
+  <h2>War stories: three hard problems</h2>
+
+  <h3>1) Continuous press and erratic movement</h3>
+
+  <p>
+    Holding the arrow caused the focus to jump uncontrollably or feel sluggish.
+    The fix was a two-mode Debouncer/RateLimiter: <em>tap</em> (single, instant
+    transition) and <em>hold</em> (initial delay + steady cadence). Platform
+    tuning matters—TVs tolerate higher inertia than desktops.
+  </p>
+
+  <h3>2) Jumps between heterogeneous zones</h3>
+
+  <p>
+    Transitions from a horizontal carousel to a vertical grid were broken by
+    relying on render order. I gave every element row/col metadata and border
+    rules. The motor now computes destinations from metadata and jump rules
+    (find next visible, apply circularity), producing smooth, coherent transitions.
+  </p>
+
+  <h3>3) Overlays breaking the focus map</h3>
+
+  <p>
+    Modals and players could invalidate the navigation map. I implemented a
+    stack of maps: register a new map when opening an overlay and restore the
+    previous one on close. Cleanup hooks prevent dangling references.
+  </p>
+
+  <h2>Pros and cons of this approach</h2>
+
+  <h3>Pros</h3>
+  <ul>
+    <li>Scalable: screens can be described declaratively.</li>
+    <li>Testable: the decisor logic is deterministic and unit-test friendly.</li>
+    <li>Reusable: lists, grids and carousels share the same infra.</li>
+    <li>Better UX: debounce and visibility rules feel natural on TVs.</li>
+  </ul>
+
+  <h3>Cons</h3>
+  <ul>
+    <li>Steep upfront modeling cost for positions and rules per element.</li>
+    <li>Metadata overhead in highly dynamic apps.</li>
+    <li>Discipline required: forgetting register/cleanup steps causes subtle bugs.</li>
+  </ul>
+
+  <h2>Practical checklist to integrate spatial navigation</h2>
+
+  <ol>
+    <li>Wrap your screen in a FocusNode container and request focus on mount.</li>
+    <li>Define the navigable structure as a list or matrix with position & visibility metadata.</li>
+    <li>Register the structure with the orchestrator on mount.</li>
+    <li>Provide per-element callbacks: onEnter, onBack, onUp, onDown, onLeft, onRight.</li>
+    <li>Tune debounce/ratelimit per platform.</li>
+    <li>Test long-presses, section transitions and overlays.</li>
+    <li>Clean registration on unmount or when closing overlays.</li>
+  </ol>
+
+  <h2>Production tricks that helped</h2>
+
+  <ul>
+    <li>Focus-map visualizer in debug mode for real-time inspection.</li>
+    <li>Deterministic tests that simulate key sequences and long presses.</li>
+    <li>Expose debounce parameters via Remote Config for production tuning.</li>
+    <li>Lightweight focus animations: instant feedback without blocking.</li>
+    <li>Document the UI ↔ orchestrator contract: required metadata and hooks.</li>
+  </ul>
+
+  <h2>Conclusion</h2>
+
+  <p>
+    Spatial navigation is not just “moving a rectangle”: it’s about rules,
+    exceptions and state restoration that give users a sense of control. By
+    separating capture, decision and description, the problem becomes a
+    manageable, testable subsystem. Upfront modeling effort pays off as the
+    app grows and handles overlays, mixed layouts and accessibility.
+  </p>
+
+  <hr />
+
+  <p>
+    <strong>Interested in evaluating or integrating spatial navigation in your product?</strong>
+    <br />
+    <a href="/en/contact">Contact me</a> or explore my <a href="/">portfolio</a>.
+  </p>
+</>
+
+  ),
+};
+
+export default function BlogContent({ lang }) {
+  return content[lang] || content['es'];
+}
