@@ -1,4 +1,5 @@
 ---
+import { BackButton } from '@components';
 import { formatDate, useTranslations } from '@utils/i18n';
 
 interface BlogHeaderSectionProps {
@@ -34,12 +35,7 @@ const formattedUpdatedAt =
 ---
 
 <header class="blog-header">
-  <nav class="blog-nav" aria-label="Volver al listado de blogs">
-    <a href={`/${lang}/blog`} class="blog-link">
-      {backToBlogLabel}
-    </a>
-  </nav>
-  <!-- Imagen destacada arriba si existe -->
+  <BackButton label={backToBlogLabel} link={`/${lang}/blog`} />
   {
     image && (
       <figure class="featured-image-wrapper">
@@ -155,13 +151,6 @@ const formattedUpdatedAt =
     text-align: center;
     width: 100%;
   }
-  .blog-nav {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    margin-bottom: 1.5em;
-    justify-content: flex-start;
-  }
   .post-meta-group {
     display: flex;
     flex-wrap: wrap;
@@ -172,29 +161,7 @@ const formattedUpdatedAt =
     margin-bottom: 0.5em;
     width: 100%;
   }
-  .blog-link {
-    font-size: 0.8em;
-    color: var(--primary-color);
-    text-decoration: none;
-    background: var(--accent-color);
-    border: none;
-    padding: 0.3em 0.7em;
-    border-radius: 0.5em;
-    transition: var(--transition);
-    cursor: pointer;
-    font-weight: 600;
-    box-shadow: var(--shadow-light);
-    outline: none;
-  }
-  .blog-link:hover,
-  .blog-link:focus {
-    color: var(--text-primary);
-    background: var(--primary-color);
-    text-decoration: none;
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-dark);
-    outline: 2px solid var(--primary-color);
-  }
+
   .blog-title {
     font-size: 1.2rem;
     font-weight: 700;

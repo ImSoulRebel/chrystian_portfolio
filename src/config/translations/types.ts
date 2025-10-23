@@ -30,8 +30,8 @@ export interface NavTranslations {
   experience: string;
   projects: string;
   contact: string;
-  backToHome: string;
-  backToHomeLabel: string;
+  back: string;
+  backLabel: string;
 }
 
 export interface Error404Translations {

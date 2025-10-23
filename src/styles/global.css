@@ -12,8 +12,3 @@
 @import './sections/_contact.css';
 @import './sections/_highlights.css';
 @import './base/_responsive.css';
-
-/* Fix stacking context para dropdown de idioma */
-.header {
-  overflow: visible !important;
-}

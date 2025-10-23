@@ -9,12 +9,12 @@ export interface FloatingCTATranslations {
 export const floatingCTA: Record<Locale, FloatingCTATranslations> = {
   es: {
     contact: 'Contactar',
-    contactLabel: 'Contactar',
+    contactLabel: 'Abrir formulario de contacto',
     goToContactPage: 'Ir a la página de contacto',
   },
   en: {
     contact: 'Contact',
-    contactLabel: 'Contact',
+    contactLabel: 'Open contact form',
     goToContactPage: 'Go to contact page',
   },
 } as const;

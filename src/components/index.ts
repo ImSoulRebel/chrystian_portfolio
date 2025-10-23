@@ -28,7 +28,7 @@ export { default as ContactForm } from './ContactForm/ContactForm.astro';
 
 // === Interactive Components ===
 export { default as FloatingCTA } from './FloatingCTA/FloatingCTA.astro';
-export { default as BackToHome } from './BackToHome.astro';
+export { default as BackButton } from './BackButton.astro';
 
 // === MDX Components ===
 export { default as Quote } from './Quote.astro';

@@ -9,7 +9,7 @@ const t = useTranslations(lang);
 ---
 
 <article
-  class="blog-post"
+  class="blog-post section-radial-bg"
   itemscope=""
   itemtype="https://schema.org/BlogPosting"
   aria-label={typeof post.data.title === 'object'
@@ -38,15 +38,14 @@ const t = useTranslations(lang);
 </article>
 <style>
   .blog-post {
-    max-width: 800px;
     margin: 0 auto;
     padding: 2rem;
     margin-top: 3.5rem;
-    background: var(--background-card);
     color: var(--text-primary);
-    border-radius: var(--border-radius);
-    box-shadow: var(--shadow-light);
+    position: relative;
+    z-index: 0;
   }
+
   .blog-section {
     width: 100%;
     max-width: 1200px;
@@ -66,12 +65,4 @@ const t = useTranslations(lang);
       margin-bottom: 2rem;
     }
   }
-  /*
-    Optimización visual y responsiva:
-    - Grid responsivo para listas de posts
-    - Consistencia en paddings, márgenes y breakpoints
-    - Uso de CSS Modules en tarjetas
-    - Accesibilidad: outline visible, contraste y focus
-    - Comentarios para facilitar mantenimiento
-  */
 </style>

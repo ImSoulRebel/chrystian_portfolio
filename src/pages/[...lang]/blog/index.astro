@@ -3,7 +3,7 @@ import { getCollection } from 'astro:content';
 import Layout from '@/layouts/Layout.astro';
 import { Locale } from '@config/translations';
 import { useTranslations } from '@utils/i18n';
-import { BackToHome } from '@components';
+import { BackButton } from '@components';
 import { BlogListSection } from '@sections';
 
 export async function getStaticPaths() {
@@ -36,7 +36,7 @@ const sortedPosts = allPosts.sort(
   floatingCTAMode="contact"
   layoutContext={{ locale, hasNavLinks, pageType: 'blog' }}
 >
-  <BackToHome locale={locale} />
+  <BackButton locale={locale} />
 
   <BlogListSection
     sortedPosts={sortedPosts}

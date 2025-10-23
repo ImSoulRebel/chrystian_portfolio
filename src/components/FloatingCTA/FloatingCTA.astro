@@ -28,30 +28,18 @@ const buttonIcon = isContactMode ? 'email' : 'message-circle';
 >
   {
     isContactMode ? (
-      <button
-        class={styles.ctaButton}
-        aria-label={floatingCTAT.contactLabel}
-        title={buttonText}
-        data-contact-btn
-      >
+      <button class={'action-btn ' + styles.ctaButton} data-contact-btn>
         <div class={styles.ctaIcon}>
           <Icon name={buttonIcon} size={20} color="var(--background-dark)" />
         </div>
         <span class={styles.ctaText}>{buttonText}</span>
-        <div class={styles.tooltip}>{floatingCTAT.contactLabel}</div>
       </button>
     ) : (
-      <a
-        href={buttonHref}
-        class={styles.ctaButton}
-        aria-label={floatingCTAT.goToContactPage}
-        title={buttonText}
-      >
+      <a href={buttonHref} class={'action-btn ' + styles.ctaButton}>
         <div class={styles.ctaIcon}>
           <Icon name={buttonIcon} size={20} color="var(--background-dark)" />
         </div>
         <span class={styles.ctaText}>{buttonText}</span>
-        <div class={styles.tooltip}>{floatingCTAT.goToContactPage}</div>
       </a>
     )
   }

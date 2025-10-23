@@ -1,6 +1,6 @@
 ---
 import LanguageSelector from './LanguageSelector/LanguageSelector.astro';
-import BackToHome from './BackToHome.astro';
+import BackButton from './BackButton.astro';
 import {
   useTranslations,
   getRelativeLocaleUrl,
@@ -42,7 +42,7 @@ const navLinks = [
     <nav class="nav">
       {
         isProjectOrContactPage ? (
-          <BackToHome locale={locale} />
+          <BackButton locale={locale} />
         ) : (
           <div class="nav-toggle" id="nav-toggle">
             <span />

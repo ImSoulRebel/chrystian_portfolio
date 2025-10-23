@@ -310,22 +310,23 @@ const localeSpecificMeta =
     <meta name="format-detection" content="telephone=no" />
   </head>
   <body>
-    <Header hasNavLinks={layoutContext.hasNavLinks} locale={locale} />
-    <main id="main-content">
-      <slot />
-    </main>
-    <Footer
-      locale={locale}
-      hasNavLinks={layoutContext.hasNavLinks}
-      pageType={layoutContext.pageType}
-    />
-    <!-- Floating CTA Button -->
-    <FloatingCTA locale={locale} mode={floatingCTAMode} />
+    <div class="layout-root">
+      <Header hasNavLinks={layoutContext.hasNavLinks} locale={locale} />
+      <main id="main-content" class="layout-main">
+        <slot />
+      </main>
+      <Footer
+        locale={locale}
+        hasNavLinks={layoutContext.hasNavLinks}
+        pageType={layoutContext.pageType}
+      />
+      <!-- Floating CTA Button -->
+      <FloatingCTA locale={locale} mode={floatingCTAMode} />
+    </div>
   </body>
 </html>
 
 <style>
-  /* Color scheme support para mejor integración con temas del SO */
   :root {
     color-scheme: light dark;
   }
@@ -335,15 +336,24 @@ const localeSpecificMeta =
     margin: 0;
     width: 100%;
     height: 100%;
+    min-height: 100vh;
     scroll-behavior: smooth;
   }
 
-  /* Optimizaciones de performance */
+  .layout-root {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .layout-main {
+    flex: 1 0 auto;
+  }
+
   * {
     box-sizing: border-box;
   }
 
-  /* Mejoras de accesibilidad */
   @media (prefers-reduced-motion: reduce) {
     html {
       scroll-behavior: auto;

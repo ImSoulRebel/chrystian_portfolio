@@ -1,7 +1,7 @@
 ---
 import { PUBLIC_AUTHOR_NAME } from 'astro:env/client';
 import { Layout } from '@layouts';
-import { BackToHome } from '@components';
+import { BackButton } from '@components';
 import { ContactSection } from '@sections';
 import { useTranslations, type Locale } from '@utils/i18n';
 
@@ -27,8 +27,8 @@ const pageDescription = t<string>('contact.seo.description');
   floatingCTAMode="contact"
   layoutContext={{ locale, hasNavLinks, pageType: 'contact' }}
 >
-  <BackToHome locale={locale} />
-  <main>
+  <BackButton locale={locale} />
+  <main class="section-radial-bg">
     <ContactSection locale={locale} />
   </main>
 </Layout>

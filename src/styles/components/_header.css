@@ -1,3 +1,7 @@
+/* Fix stacking context para dropdown de idioma */
+.header {
+  overflow: visible !important;
+}
 .nav-menu {
   white-space: nowrap;
   overflow: hidden;

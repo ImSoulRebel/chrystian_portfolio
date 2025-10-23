@@ -13,7 +13,7 @@ export const blog = {
     viewAll: 'Explorar más artículos',
     viewPostAria: 'Ver artículo: {title}',
     blogHeader: {
-      backToBlogLabel: '← Ver todos los blogs',
+      backToBlogLabel: 'Ver todos los blogs',
       authorLabel: 'Por',
       updatedLabel: 'Actualizado:',
     },
@@ -32,7 +32,7 @@ export const blog = {
     viewAll: 'Explore more posts',
     viewPostAria: 'View post: {title}',
     blogHeader: {
-      backToBlogLabel: '← All posts',
+      backToBlogLabel: 'All posts',
       authorLabel: 'By',
       updatedLabel: 'Updated:',
     },

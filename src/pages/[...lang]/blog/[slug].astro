@@ -36,7 +36,5 @@ const { Content } = await post.render();
   description={post.data.description?.[lang] ?? ''}
   layoutContext={{ locale: lang, hasNavLinks: false, pageType: 'blog' }}
 >
-  <!-- <BackToHome locale={lang} /> -->
-
   <BlogSection post={post} lang={lang} Content={Content} />
 </Layout>
