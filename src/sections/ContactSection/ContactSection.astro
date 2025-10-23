@@ -6,20 +6,21 @@ import {
   PUBLIC_LINKEDIN_URL,
 } from 'astro:env/client';
 import { Icon, ContactForm } from '@components';
-import { useTranslations, type Locale } from '@utils/i18n';
 import styles from './contactSection.module.css';
+import { splitEmail, splitPhone, useTranslations, type Locale } from '@utils';
 
-// Recibir locale como prop en lugar de detectarlo
 interface Props {
   locale?: Locale;
 }
 
 const { locale = 'es' } = Astro.props;
 const t = useTranslations(locale);
-const contactEmail = PUBLIC_CONTACT_EMAIL;
-const contactPhone = PUBLIC_CONTACT_PHONE;
 const githubUsername = PUBLIC_GITHUB_USERNAME;
 const linkedinUrl = PUBLIC_LINKEDIN_URL;
+
+const { user, domain } = splitEmail(PUBLIC_CONTACT_EMAIL);
+const { prefix: phonePrefix, number: phoneNumber } =
+  splitPhone(PUBLIC_CONTACT_PHONE);
 ---
 
 <section id="contact" class={styles.contact}>
@@ -95,11 +96,11 @@ const linkedinUrl = PUBLIC_LINKEDIN_URL;
       <div class={styles.contactQuickLinks}>
         <p class={styles.quickLinksLabel}>{t('contact.quickLinks.label')}</p>
         <div class={styles.quickLinksGrid}>
-          <a href={`mailto:${contactEmail}`} class={styles.quickLink}>
+          <a href={`mailto:${user}@${domain}`} class={styles.quickLink}>
             <Icon name="email" size={20} color="var(--primary-color)" />
             <span>{t('contact.quickLinks.email')}</span>
           </a>
-          <a href={`tel:${contactPhone}`} class={styles.quickLink}>
+          <a href={`tel:${phonePrefix}${phoneNumber}`} class={styles.quickLink}>
             <Icon name="phone" size={20} color="var(--primary-color)" />
             <span>{t('contact.quickLinks.phone')}</span>
           </a>

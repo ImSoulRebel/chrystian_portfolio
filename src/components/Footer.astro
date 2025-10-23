@@ -8,10 +8,12 @@ import {
   PUBLIC_CONTACT_ADDRESS,
 } from 'astro:env/client';
 import {
+  splitEmail,
+  splitPhone,
   useTranslations,
   getRelativeLocaleUrl,
   type Locale,
-} from '@utils/i18n';
+} from '@utils';
 import Icon from './Icon.astro';
 
 interface Props {
@@ -43,9 +45,11 @@ const currentYear = new Date().getFullYear();
 
 const githubUrl = `https://github.com/${PUBLIC_GITHUB_USERNAME}`;
 const linkedinUrl = PUBLIC_LINKEDIN_URL;
-const contactEmail = `mailto:${PUBLIC_CONTACT_EMAIL}`;
 const authorName = PUBLIC_AUTHOR_NAME;
-const contactPhone = `tel:${PUBLIC_CONTACT_PHONE}`;
+
+const { user, domain } = splitEmail(PUBLIC_CONTACT_EMAIL);
+const { prefix: phonePrefix, number: phoneNumber } =
+  splitPhone(PUBLIC_CONTACT_PHONE);
 
 const socialLinks = [
   {
@@ -60,7 +64,7 @@ const socialLinks = [
   },
   {
     name: 'Email',
-    url: contactEmail,
+    url: `mailto:${user}@${domain}`,
     icon: 'email',
   },
 ];
@@ -130,12 +134,14 @@ const socialLinks = [
             <h4>{t('footer.contact.title')}</h4>
             <ul>
               <li>
-                <a href={contactEmail}>
-                  {PUBLIC_CONTACT_EMAIL}
+                <a href={`mailto:${user}@${domain}`}>
+                  {user}@{domain}
                 </a>
               </li>
               <li>
-                <a href={contactPhone}>{PUBLIC_CONTACT_PHONE}</a>
+                <a href={`tel:${phonePrefix}${phoneNumber}`}
+                  >{phonePrefix}{phoneNumber}</a
+                >
               </li>
               <li>{PUBLIC_CONTACT_ADDRESS}</li>
             </ul>
