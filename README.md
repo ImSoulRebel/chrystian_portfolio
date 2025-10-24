@@ -41,14 +41,13 @@ yarn dev
 - [✨ Características](#-características)
 - [🚀 Configuración Inicial](#-configuración-inicial)
 - [🔐 Variables de Entorno](#-variables-de-entorno)
-- [🌍 Deployment con GitHub Actions](#-deployment-con-github-actions)
+- [📝 Blog](#-blog)
+- [🌍 Deploy: GitHub Pages, Netlify, Vercel](#-deploy-github-pages-netlify-vercel)
 - [🎨 Personalización](#-personalización)
-- [📧 Formulario de Contacto](#-formulario-de-contacto)
-- [🔧 Scripts Disponibles](#-scripts-disponibles)
+- [🔧 Scripts Automáticos](#-scripts-automaticos)
 - [📁 Estructura del Proyecto](#-estructura-del-proyecto)
 - [🌐 Internacionalización](#-internacionalización)
 - [🎯 SEO y Structured Data](#-seo-y-structured-data)
-- [️ Tecnologías](#️-tecnologías)
 - [🐛 Troubleshooting](#-troubleshooting)
 - [📝 Licencia](#-licencia)
 
@@ -71,13 +70,59 @@ yarn dev
 - **Optimización de imágenes**: Sharp integration para imágenes optimizadas
 - **Type-safe Environment Variables**: Sistema nativo de Astro con `env.schema`
 
-### 🌍 Deployment y CI/CD
+### 🌍 Deploy y CI/CD
 
-- **GitHub Actions**: Deployment automático con `withastro/action@v3`
-- **GitHub Variables**: Configuración externa type-safe
-- **Zero hardcoded values**: Todas las variables externalizadas
+- **GitHub Actions**: Deploy automático con `withastro/action@v3`
+- **Netlify & Vercel**: Deploy sin cambios de código, solo configurando variables
+- **Variables type-safe**: Todas las variables externalizadas y validadas
 - **Linting y Formateo**: Validación automática en cada push
-- **Portabilidad**: Fácil migración a Netlify/Vercel sin cambios de código
+- **Portabilidad real**: Migración entre plataformas sin modificar el código
+
+---
+
+## 📝 Blog
+
+El portfolio incluye un sistema de blog profesional, multi-idioma y modular:
+
+- **Gestión de posts**: Los posts se almacenan en `src/content/blog/` usando el sistema de colecciones de Astro.
+- **Componentes**: `BlogCard`, `BlogSection`, `BlogListSection`, `BlogHeaderSection`, `BlogContentSection`.
+- **Listados y detalle**: Página de listado de posts y vista individual con SEO optimizado.
+- **Multi-idioma**: Cada post puede tener título y descripción en varios idiomas.
+- **Tags, autor, fecha, imagen**: Todos los metadatos soportados y visibles.
+- **Cómo crear un post**:
+  1. Crea un archivo MD/MDX en `src/content/blog/`.
+  2. Usa los campos: `title`, `description`, `author`, `createdAt`, `tags`, `image`, `status: published`.
+  3. El sistema lo detecta y lo muestra automáticamente en el listado.
+
+**Ejemplo de frontmatter:**
+
+```md
+---
+title:
+  es: 'Mi primer post'
+  en: 'My first post'
+description:
+  es: 'Descripción en español'
+  en: 'Description in English'
+author: 'Chrystian Michell'
+createdAt: '2025-10-24'
+tags: ['Astro', 'Portfolio']
+image: 'blog1.jpg'
+status: 'published'
+---
+
+Contenido del post...
+```
+
+**Problemas comunes y soluciones:**
+
+- Si el post no aparece en el listado, revisa que `status: published` esté presente y que el idioma exista en el campo `title`.
+- Si la imagen no se muestra, verifica la ruta y que el archivo esté en `public/images/blog/`.
+- Para posts multi-idioma, asegúrate de definir ambos idiomas en los campos `title` y `description`.
+
+---
+
+---
 
 ### 🎯 SEO y Marketing
 
@@ -155,310 +200,42 @@ cp .env.example .env
 yarn dev
 ```
 
-```
+````
 
 Tu portfolio estará disponible en `http://localhost:4321`
 
 ---
 
-## 🌍 Deployment
 
-Este proyecto soporta deployment en múltiples plataformas sin cambios de código. Elige la que prefieras:
+## 🌍 Deploy: GitHub Pages, Netlify, Vercel
 
-### Opción 1: GitHub Pages (Gratuito)
+El portfolio soporta deploy automático en las tres plataformas principales, sin cambios de código:
 
-Ideal para portfolios personales. Deployment automático con GitHub Actions.
+| Plataforma      | Dominio propio | Deploy automático | HTTPS | Configuración |
+|-----------------|----------------|-------------------|-------|--------------|
+| GitHub Pages    | ❌             | ✅                | ✅    | GitHub Vars   |
+| Netlify         | ✅             | ✅                | ✅    | Web UI        |
+| Vercel          | ✅             | ✅                | ✅    | Web UI        |
 
-#### 1. Configurar GitHub Variables
+### Pasos generales:
+1. **Configura las variables de entorno** (ver sección [Variables de Entorno](#-variables-de-entorno)).
+2. **Conecta el repositorio** en la plataforma elegida.
+3. **Deploy automático** en cada push a `main`.
 
-Ve a tu repositorio en GitHub:
+#### GitHub Pages
+- Usa GitHub Actions y variables de repositorio.
+- Habilita Pages en Settings → Pages → Source: GitHub Actions.
 
-```
+#### Netlify
+- Conecta el repo y configura variables en Site Settings → Build & deploy → Environment variables.
+- Usa el comando `yarn build:netlify`.
 
-Settings → Secrets and variables → Actions → Variables
+#### Vercel
+- Importa el repo y configura variables en Project Settings → Environment Variables.
 
-````
-
-**Importante:** Usa **"Repository variables"** (NO "Environment variables").
-
-#### 2. Variables Esenciales (OBLIGATORIAS)
-
-Crea estas variables haciendo clic en **"New repository variable"**:
-
-| Variable                  | Ejemplo                                    |
-| ------------------------- | ------------------------------------------ |
-| `PUBLIC_SITE_URL`         | `https://tu-usuario.github.io/tu-repo`     |
-| `PUBLIC_BASE_PATH`        | `/tu-repo`                                 |
-| `PUBLIC_BASE_DOMAIN`      | `https://tu-usuario.github.io`             |
-| `PUBLIC_SITE_TITLE`       | `Tu Nombre - Full Stack Developer`         |
-| `PUBLIC_SITE_DESCRIPTION` | `Portfolio personal - Desarrollador Full Stack` |
-| `PUBLIC_AUTHOR_NAME`      | `Tu Nombre Completo`                       |
-| `PUBLIC_CONTACT_EMAIL`    | `tu-email@example.com`                     |
-
-#### 3. Variables Opcionales (⭐ RECOMENDADAS PARA MEJOR SEO)
-
-Añade estas para mejorar significativamente tu SEO:
-
-**Información Personal (Mejora Knowledge Graph):**
-- `PUBLIC_AUTHOR_GIVEN_NAME` → `Tu Nombre`
-- `PUBLIC_AUTHOR_FAMILY_NAME` → `Tu Apellido`
-
-**Contacto Detallado (Mejora SEO Local +80%):**
-- `PUBLIC_CONTACT_PHONE` → `+34612345678`
-- `PUBLIC_CONTACT_STREET` → `Calle Principal 123`
-- `PUBLIC_CONTACT_POSTAL_CODE` → `28001`
-- `PUBLIC_CONTACT_CITY` → `Tu Ciudad`
-- `PUBLIC_CONTACT_REGION` → `Tu Comunidad`
-- `PUBLIC_CONTACT_COUNTRY` → `Tu País`
-
-**Redes Sociales (Mejora sameAs array +34%):**
-- `PUBLIC_GITHUB_USERNAME` → `tu-usuario`
-- `PUBLIC_GITHUB_URL` → `https://github.com/tu-usuario`
-- `PUBLIC_LINKEDIN_URL` → `https://linkedin.com/in/tu-usuario`
-- `PUBLIC_TWITTER_URL` → `https://twitter.com/tu-usuario`
-- `PUBLIC_TWITTER_HANDLE` → `@tu-usuario`
-
-**Media (Mejora Core Web Vitals):**
-- `PUBLIC_PROFILE_IMAGE` → `/profile-image.jpg`
-- `PUBLIC_PROFILE_IMAGE_WIDTH` → `400`
-- `PUBLIC_PROFILE_IMAGE_HEIGHT` → `400`
-
-**Servicios:**
-- `PUBLIC_FORMSPREE_ENDPOINT` → `https://formspree.io/f/xxxxxx`
-
-**Ver impacto SEO completo en:** [Variables de Entorno](#-variables-de-entorno)
-
-#### 4. Habilitar GitHub Pages
-
-1. Ve a: `Settings → Pages`
-2. Source: Selecciona **"GitHub Actions"**
-3. Guarda los cambios
-
-#### 5. Hacer Deploy
-
-```bash
-git add .
-git commit -m "feat: configurar portfolio"
-git push origin main
-````
-
-El workflow de GitHub Actions se ejecutará automáticamente y deployará tu sitio.
-
-#### 6. Verificar Deployment
-
-1. Ve a la pestaña **"Actions"** en tu repositorio
-2. Verifica que el workflow "Deploy to GitHub Pages" se ejecute correctamente
-3. Una vez completado, tu sitio estará en: `https://tu-usuario.github.io/tu-repo`
+**Migración entre plataformas:** Solo cambia la configuración de variables, el código es 100% portable gracias a `env.schema`.
 
 ---
-
-### Opción 2: Netlify (Recomendado para Dominio Personalizado)
-
-Ideal si tienes un dominio propio. Deployment automático con cada push.
-
-#### 1. Conectar Repositorio
-
-1. Ve a [app.netlify.com](https://app.netlify.com)
-2. Clic en **"Add new site"** → **"Import an existing project"**
-3. Conecta tu cuenta de GitHub y selecciona tu repositorio
-
-#### 2. Configurar Build Settings
-
-Netlify detecta automáticamente la configuración desde `netlify.toml`:
-
-```toml
-[build]
-  command = "yarn build:netlify"
-  publish = "dist"
-
-[build.environment]
-  NODE_VERSION = "20"
-```
-
-Verifica en la UI:
-
-- **Build command:** `yarn build:netlify`
-- **Publish directory:** `dist`
-- **Branch to deploy:** `main`
-
-#### 3. Configurar Variables de Entorno
-
-Ve a: **Site settings** → **Build & deploy** → **Environment variables**
-
-**Variables OBLIGATORIAS:**
-
-```env
-PUBLIC_SITE_URL=https://tu-sitio.netlify.app
-PUBLIC_BASE_PATH=
-PUBLIC_BASE_DOMAIN=https://tu-sitio.netlify.app
-PUBLIC_SITE_TITLE=Tu Nombre - Full Stack Developer
-PUBLIC_SITE_DESCRIPTION=Portfolio personal - Desarrollador Full Stack
-PUBLIC_AUTHOR_NAME=Tu Nombre Completo
-PUBLIC_AUTHOR_GIVEN_NAME=Tu Nombre
-PUBLIC_AUTHOR_FAMILY_NAME=Tu Apellido
-PUBLIC_CONTACT_EMAIL=tu-email@example.com
-```
-
-**⚠️ Importante:** `PUBLIC_BASE_PATH` debe estar **vacío** para Netlify (sin valor)
-
-**Variables OPCIONALES (Recomendadas para SEO):**
-
-```env
-# Contacto Detallado
-PUBLIC_CONTACT_PHONE=+34612345678
-PUBLIC_CONTACT_STREET=Calle Principal 123
-PUBLIC_CONTACT_POSTAL_CODE=28001
-PUBLIC_CONTACT_CITY=Tu Ciudad
-PUBLIC_CONTACT_REGION=Tu Comunidad
-PUBLIC_CONTACT_COUNTRY=Tu País
-
-# Redes Sociales
-PUBLIC_GITHUB_USERNAME=tu-usuario
-PUBLIC_GITHUB_URL=https://github.com/tu-usuario
-PUBLIC_LINKEDIN_URL=https://linkedin.com/in/tu-usuario
-PUBLIC_TWITTER_URL=https://twitter.com/tu-usuario
-PUBLIC_TWITTER_HANDLE=@tu-usuario
-
-# Media
-PUBLIC_PROFILE_IMAGE=/profile-image.jpg
-PUBLIC_PROFILE_IMAGE_WIDTH=400
-PUBLIC_PROFILE_IMAGE_HEIGHT=400
-
-# Servicios
-PUBLIC_FORMSPREE_ENDPOINT=https://formspree.io/f/xxxxxx
-
-# Producción
-PUBLIC_SITE_VERSION=1.0.0
-PUBLIC_DEBUG_MODE=false
-PUBLIC_DEPLOYMENT_PLATFORM=netlify
-NODE_VERSION=20
-```
-
-**Añadir variables:**
-
-1. Clic en **"Add a variable"**
-2. **Key:** Nombre de la variable (ej: `PUBLIC_SITE_URL`)
-3. **Value:** Valor correspondiente
-4. **Scopes:** Marca Production, Deploy previews, Branch deploys
-5. **Create variable**
-
-#### 4. Deploy Site
-
-Clic en **"Deploy site"** o simplemente haz push:
-
-```bash
-git push origin main
-```
-
-Netlify detectará el push y hará deploy automáticamente.
-
-#### 5. Configurar Dominio Personalizado (Opcional)
-
-Si tienes un dominio (ej: `www.tu-dominio.com`):
-
-1. Ve a **Site settings** → **Domain management**
-2. Clic en **"Add custom domain"**
-3. Ingresa tu dominio: `tu-dominio.com`
-4. Sigue las instrucciones para configurar DNS
-
-**Opciones de DNS:**
-
-**Opción A: Usar Netlify DNS (Recomendado)**
-
-1. Netlify te dará nameservers (ej: `dns1.p03.nsone.net`)
-2. En tu proveedor de dominio (Namecheap, GoDaddy, etc.):
-   - Ve a configuración de DNS/Nameservers
-   - Cambia a los nameservers de Netlify
-3. Netlify manejará todo automáticamente
-
-**Opción B: Configurar DNS manualmente**
-
-En tu proveedor de dominio, configura:
-
-| Type             | Host  | Value                  | TTL       |
-| ---------------- | ----- | ---------------------- | --------- |
-| **A Record**     | `@`   | `75.2.60.5`            | Automatic |
-| **CNAME Record** | `www` | `tu-sitio.netlify.app` | Automatic |
-
-> La IP puede variar. Netlify te dará la IP exacta en "DNS configuration".
-
-#### 6. Activar HTTPS
-
-1. En **Domain management**, clic en **"Verify DNS configuration"**
-2. Una vez verificado, clic en **"Provision certificate"**
-3. Netlify generará un certificado SSL/TLS gratuito con Let's Encrypt
-4. HTTPS se activará automáticamente (puede tardar 5-30 minutos)
-
-#### 7. Actualizar Variables de Entorno
-
-Actualiza `PUBLIC_SITE_URL` y `PUBLIC_BASE_DOMAIN` con tu dominio:
-
-```env
-PUBLIC_SITE_URL=https://www.tu-dominio.com
-PUBLIC_BASE_DOMAIN=https://www.tu-dominio.com
-```
-
-Luego, trigger un nuevo deploy:
-
-- Ve a **Deploys** → **Trigger deploy** → **Deploy site**
-
-#### 8. Verificar Deployment
-
-Tu sitio estará disponible en:
-
-- ✅ `https://tu-dominio.com` (dominio principal)
-- ✅ `https://www.tu-dominio.com` (redirige al principal)
-- ✅ `https://tu-sitio.netlify.app` (siempre disponible)
-
----
-
-### Opción 3: Vercel
-
-#### 1. Importar Proyecto
-
-1. Ve a [vercel.com](https://vercel.com)
-2. **"New Project"** → Importa tu repositorio de GitHub
-
-#### 2. Configurar Variables
-
-**Project Settings** → **Environment Variables**
-
-Añade las mismas variables que en Netlify (con `PUBLIC_BASE_PATH` vacío)
-
-#### 3. Deploy
-
-Deploy automático en cada push a `main`.
-
----
-
-### Comparación de Plataformas
-
-| Característica            | GitHub Pages     | Netlify   | Vercel |
-| ------------------------- | ---------------- | --------- | ------ |
-| **Precio**                | Gratis           | Gratis    | Gratis |
-| **Dominio personalizado** | ❌               | ✅        | ✅     |
-| **HTTPS automático**      | ✅               | ✅        | ✅     |
-| **Deploy automático**     | ✅               | ✅        | ✅     |
-| **Edge Functions**        | ❌               | ✅        | ✅     |
-| **Analytics**             | ❌               | ✅ (Lite) | ✅     |
-| **Deploy previews**       | ❌               | ✅        | ✅     |
-| **Configuración**         | GitHub Variables | Web UI    | Web UI |
-
-**Recomendación:**
-
-- **GitHub Pages**: Portfolio personal simple, sin dominio propio
-- **Netlify**: Portfolio profesional con dominio, mejor DX
-- **Vercel**: Similar a Netlify, excelente para proyectos Next.js
-
----
-
-### Sin Cambios de Código
-
-Gracias a la arquitectura con `env.schema`, puedes migrar entre plataformas **sin modificar el código**:
-
-- ✅ Mismo código funciona en todas las plataformas
-- ✅ Solo cambias dónde configuras las variables
-- ✅ Type-safety garantizado en todas partes
 
 ---
 
@@ -490,7 +267,7 @@ export const translations = {
     // ... traducciones al inglés
   },
 };
-```
+````
 
 ### 2. Imágenes
 
@@ -1054,61 +831,23 @@ Gracias a la arquitectura con `env.schema`, puedes migrar entre plataformas **si
 
 ---
 
-## 🔧 Scripts Disponibles
 
-### Desarrollo
+## 🔧 Scripts Automáticos
 
-```bash
-yarn dev              # Servidor de desarrollo (localhost:4321)
-yarn start            # Alias de yarn dev
-yarn setup            # Wizard de configuración inicial (.env)
-```
+Scripts clave para desarrollo, build y assets:
 
-### Build y Preview
+- `yarn dev`              → Servidor de desarrollo
+- `yarn setup`            → Wizard de configuración inicial (.env)
+- `yarn build`            → Build de producción
+- `yarn preview`          → Preview del build
+- `yarn generate:assets`  → Genera OG images, favicons e icon types
+- `yarn format`           → Formatea código con Prettier
+- `yarn check`            → Type-checking con Astro
+- `yarn clean`            → Limpia dist y .astro
 
-```bash
-yarn build            # Build de producción
-yarn preview          # Preview del build
-yarn preview:build    # Build + Preview en un comando
-```
+**Nota:** Los assets se generan automáticamente antes de cada build gracias al hook `prebuild`.
 
-### Assets y Media
-
-```bash
-yarn generate:og        # Genera imágenes Open Graph
-yarn generate:favicons  # Genera favicons y app icons
-yarn generate:assets    # Genera todos los assets (OG + favicons)
-```
-
-> 💡 **Nota**: Los assets se generan automáticamente antes de cada build gracias al hook `prebuild`
-
-### Calidad de Código
-
-```bash
-yarn check            # Type-checking con Astro
-yarn check:watch      # Type-checking en modo watch
-yarn type-check       # Type-checking con TypeScript
-yarn lint             # Prettier + Astro check
-yarn format           # Formatear código con Prettier
-yarn format:check     # Verificar formato sin modificar
-yarn validate         # Lint + Type-check + Build (validación completa)
-```
-
-### Utilidades
-
-```bash
-yarn clean            # Limpiar dist y .astro
-yarn clean:all        # Limpiar todo (incluye node_modules)
-yarn astro sync       # Sincronizar tipos de Astro
-yarn test             # Tests (placeholder por ahora)
-```
-
-### Hooks Automáticos
-
-```bash
-yarn postinstall      # Se ejecuta automáticamente después de yarn install
-                      # Ejecuta astro sync para generar tipos
-```
+---
 
 ---
 
@@ -1343,29 +1082,23 @@ Genera todos los favicons e íconos necesarios:
 - Información sensible en las imágenes
 - Cambiar frecuentemente (afecta cache de redes sociales)
 
-### 🐛 Troubleshooting
 
-**Problema: Las imágenes no se actualizan en Facebook**
-```bash
-# Solución: Forzar re-scrape
-1. Ir a Facebook Debugger
-2. Ingresar tu URL
-3. Click en "Scrape Again"
-```
+## 🐛 Troubleshooting
 
-**Problema: Error al generar imágenes**
-```bash
-# Solución: Verificar que Sharp esté instalado
-yarn install
-yarn generate:assets
-```
+### Blog
+- **Post no aparece:** Verifica que el frontmatter tenga `status: published` y el idioma correcto.
+- **Imagen rota:** Confirma la ruta y que el archivo exista en `public/images/blog/`.
+- **Tags o autor no visibles:** Revisa que los campos estén correctamente definidos en el frontmatter.
 
-**Problema: Imágenes se ven cortadas**
-```bash
-# Solución: Ajustar el layout en los scripts
-# Editar scripts/generate-og-images.js
-# Modificar las constantes de posición en el objeto 'layouts'
-```
+### Imágenes OG y Favicons
+- **Imágenes no se actualizan en Facebook:** Usa [Facebook Debugger](https://developers.facebook.com/tools/debug/) y haz "Scrape Again".
+- **Error al generar imágenes:** Verifica que Sharp esté instalado (`yarn install`, `yarn generate:assets`).
+- **Imágenes cortadas:** Ajusta el layout en `scripts/generate-og-images.js`.
+
+### Deploy
+- **Variables no definidas:** Revisa que todas las variables estén configuradas en la plataforma elegida.
+- **URLs con doble base path:** Usa los helpers de Astro para rutas.
+- **Imágenes no cargan en GitHub Pages:** Usa rutas relativas y revisa el base path.
 
 ---
 
@@ -1796,10 +1529,29 @@ MIT License - Este proyecto está bajo la Licencia MIT. Ver el archivo [LICENSE]
 </div>
 
 # Commit
+# Commit
 
-git commit -m "chore: remove personal data files for template release"
+---
 
-````
+## 🚦 Roadmap y Cambios Recientes
+
+### v2.1.0 (Octubre 2025)
+- Nuevo wizard con 28 variables y métricas SEO.
+- Sistema de blog modular y multi-idioma.
+- Deploy simplificado y portable entre GitHub Pages, Netlify y Vercel.
+- Scripts automáticos para OG images, favicons e icon types.
+- Documentación optimizada y reorganizada.
+
+### v2.0.0
+- Arquitectura simplificada con `env.schema` y variables type-safe.
+- Reducción de dependencias y scripts.
+- Validación SEO y structured data.
+
+**Próximos pasos:**
+- Añadir tests automáticos.
+- Mejorar sistema de comentarios en el blog.
+- Integración con analytics y notificaciones.
+
 
 ### 2. Verificar .gitignore
 
@@ -2015,3 +1767,4 @@ Ver el archivo [LICENSE](LICENSE) para más detalles.
 </div>
 
 </div>
+````
