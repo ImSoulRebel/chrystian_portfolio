@@ -5,15 +5,18 @@ import { BlogSection } from '@sections';
 import { Layout } from '@layouts';
 
 export async function getStaticPaths() {
-  const blogPosts = await getCollection('blog');
+  const blogPosts = await getCollection('blog', ({ data }) => {
+    // Filtrar solo posts publicados
+    return data.status === 'published';
+  });
 
   return blogPosts.flatMap((post) => [
     {
-      params: { lang: 'es', slug: post.id },
+      params: { lang: 'es', slug: post.slug }, // ✅ CAMBIO: post.id → post.slug
       props: { post, lang: 'es' },
     },
     {
-      params: { lang: 'en', slug: post.id },
+      params: { lang: 'en', slug: post.slug }, // ✅ CAMBIO: post.id → post.slug
       props: { post, lang: 'en' },
     },
   ]);
@@ -25,15 +28,21 @@ interface BlogPageProps {
 }
 
 const { post, lang } = Astro.props as BlogPageProps;
-// ...existing code...
 const { Content } = await post.render();
 
-// Instanciar helper de traducción para textos fijos
+// Obtener título y descripción según idioma
+const title =
+  typeof post.data.title === 'object' ? post.data.title[lang] : post.data.title;
+
+const description =
+  typeof post.data.description === 'object'
+    ? post.data.description[lang]
+    : post.data.description || '';
 ---
 
 <Layout
-  title={post.data.title[lang]}
-  description={post.data.description?.[lang] ?? ''}
+  title={title}
+  description={description ?? ''}
   layoutContext={{ locale: lang, hasNavLinks: false, pageType: 'blog' }}
 >
   <BlogSection post={post} lang={lang} Content={Content} />

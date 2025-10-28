@@ -38,7 +38,7 @@ const previewPosts = await getSortedBlogPosts(locale, { limit: 3 });
                 author={post.data.author}
                 date={post.data.createdAt}
                 tags={post.data.tags}
-                href={`/${locale}/blog/${post.id}`}
+                href={`/${locale}/blog/${post.slug}`}
               />
             </div>
           ))}

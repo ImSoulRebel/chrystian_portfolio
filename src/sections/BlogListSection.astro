@@ -36,7 +36,7 @@ const sortedPosts = await getSortedBlogPosts(lang);
                   author={post.data.author}
                   date={post.data.createdAt}
                   tags={post.data.tags}
-                  href={`/${lang}/blog/${post.id}`}
+                  href={`/${lang}/blog/${post.slug}`}
                   fullWidth={true}
                   lang={lang}
                   image={
@@ -51,7 +51,7 @@ const sortedPosts = await getSortedBlogPosts(lang);
                       ? (post.data.title?.[lang] ?? t('blog.noTitle'))
                       : (post.data.title ?? t('blog.noTitle'))
                   )}
-                  key={post.id}
+                  key={post.slug}
                 />
               </>
             );
