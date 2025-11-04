@@ -129,7 +129,12 @@ const blogPostSchema = z.object({
   // Metadatos
   tags: z.array(z.string()).default([]),
   author: z.string().optional(),
-  image: z.string().optional(),
+  image: z
+    .object({
+      es: z.string().optional(),
+      en: z.string().optional(),
+    })
+    .optional(),
   featured: z.boolean().default(false),
   priority: z.number().min(1).max(100).default(1),
 

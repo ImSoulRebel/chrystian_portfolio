@@ -25,11 +25,15 @@ const t = useTranslations(lang);
     createdAt={post.data.createdAt}
     updatedAt={post.data.updatedAt}
     lang={lang}
-    image={post.data.image}
+    image={typeof post.data.image === 'object'
+      ? (post.data.image[lang] ?? post.data.image['es'] ?? '')
+      : post.data.image}
     itemprop="headline"
   />
   <BlogContentSection
-    image={post.data.image}
+    image={typeof post.data.image === 'object'
+      ? (post.data.image[lang] ?? post.data.image['es'] ?? '')
+      : post.data.image}
     title={post.data.title}
     lang={lang}
     Content={Content}

@@ -10,7 +10,8 @@ interface BlogCardProps {
   tags?: string[];
   href: string;
   fullWidth?: boolean;
-  image?: string;
+  image?: string | { es?: string; en?: string };
+  lang?: 'es' | 'en';
   variant?: BlogCardVariant;
 }
 
@@ -23,6 +24,7 @@ const {
   href,
   fullWidth = false,
   image,
+  lang = 'es',
   variant = 'default',
 } = Astro.props as BlogCardProps;
 ---
@@ -75,7 +77,11 @@ const {
           style="flex: 1 1 0; display:flex; align-items:center; justify-content:center; min-width:0;"
         >
           <img
-            src={image}
+            src={
+              typeof image === 'object'
+                ? `/images/blog/${image[lang] ?? image['es'] ?? ''}`
+                : image
+            }
             alt={`Preview ${title}`}
             class={styles.blogCardImagePreview}
             loading="lazy"
