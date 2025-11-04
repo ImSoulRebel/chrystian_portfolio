@@ -14,6 +14,7 @@ import {
   skills,
   structure,
   blog,
+  loading,
   type Locale,
   type DeepKeyOf,
 } from '@config/translations/';
@@ -51,6 +52,7 @@ export const translations = {
     recruiterMeta: recruiterMeta.es,
     language: language.es,
     blog: blog.es,
+    loading: loading.es,
   },
   en: {
     // General
@@ -73,6 +75,7 @@ export const translations = {
     recruiterMeta: recruiterMeta.en,
     language: language.en,
     blog: blog.en,
+    loading: loading.en,
   },
 } as const;
 

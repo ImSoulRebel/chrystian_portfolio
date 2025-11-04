@@ -12,6 +12,8 @@
  */
 
 import { getRelativeLocaleUrl } from 'astro:i18n';
+import { LoadingSection } from '@sections';
+import '@styles/global.css';
 
 // Para sitios estáticos, la detección de idioma se hace del lado del cliente
 const esUrl = getRelativeLocaleUrl('es', '/404');
@@ -40,6 +42,6 @@ const enUrl = getRelativeLocaleUrl('en', '/404');
     </noscript>
   </head>
   <body>
-    <p>Redirecting to 404 page...</p>
+    <LoadingSection message="Redirecting..." />
   </body>
 </html>

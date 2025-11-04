@@ -13,6 +13,9 @@ export { default as HeroSection } from './HeroSection.astro';
 export { default as AboutSection } from './AboutSection.astro';
 export { default as HighlightsSection } from './HighlightsSection.astro';
 
+// === Utility Sections ===
+export { default as LoadingSection } from './LoadingSection.astro';
+
 // === Content Sections ===
 export { default as ProjectsSection } from './ProjectsSection.astro';
 export { default as SkillsSection } from './SkillsSection.astro';
