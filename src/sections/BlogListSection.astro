@@ -41,7 +41,13 @@ const sortedPosts = await getSortedBlogPosts(lang);
                   lang={lang}
                   image={
                     post.data.image
-                      ? `/images/blog/${post.data.image}`
+                      ? `/images/blog/${
+                          typeof post.data.image === 'object'
+                            ? (post.data.image[lang] ??
+                              post.data.image['es'] ??
+                              '')
+                            : post.data.image
+                        }`
                       : undefined
                   }
                   variant="bloglist"
