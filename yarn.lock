@@ -962,10 +962,10 @@ astring@^1.8.0:
   resolved "https://registry.npmjs.org/astring/-/astring-1.9.0.tgz#cc73e6062a7eb03e7d19c22d8b0b3451fd9bfeef"
   integrity sha512-LElXdjswlqjWrPpJFg1Fx4wpkOCxj1TDHlSV4PlaRxHGWko024xICaa97ZkMfs6DRKlCguiAI+rbXv5GWwXIkg==
 
-astro@^5.14.4:
-  version "5.14.5"
-  resolved "https://registry.yarnpkg.com/astro/-/astro-5.14.5.tgz#6d6127a8b82721beffe9bdcd646f7c5befad5392"
-  integrity sha512-EHt7y3+nHYyKzBats1AL3N4Pyrvqyr+zXBC7njUa9Tfe+gsiHlunaw+lXitTT/DDVwO2R/f/qVG7Xc6rl0b2KQ==
+astro@5.15.3:
+  version "5.15.3"
+  resolved "https://registry.npmjs.org/astro/-/astro-5.15.3.tgz#f63d937f74a2cdd2cedef931e746166a97264ead"
+  integrity sha512-wUO/isJrcUoduRoKacKB9jpO6TxTlPV1zw8UqQx39jSNY7z9IxusJAiib3AiNvqK+dCWhqXx+OnExCCwELmcUw==
   dependencies:
     "@astrojs/compiler" "^2.12.2"
     "@astrojs/internal-helpers" "0.7.4"
@@ -999,7 +999,6 @@ astro@^5.14.4:
     http-cache-semantics "^4.2.0"
     import-meta-resolve "^4.2.0"
     js-yaml "^4.1.0"
-    kleur "^4.1.5"
     magic-string "^0.30.18"
     magicast "^0.3.5"
     mrmime "^2.0.1"
@@ -1007,6 +1006,7 @@ astro@^5.14.4:
     p-limit "^6.2.0"
     p-queue "^8.1.0"
     package-manager-detector "^1.3.0"
+    picocolors "^1.1.1"
     picomatch "^4.0.3"
     prompts "^2.4.2"
     rehype "^13.0.2"
@@ -1021,7 +1021,7 @@ astro@^5.14.4:
     unist-util-visit "^5.0.0"
     unstorage "^1.17.0"
     vfile "^6.0.3"
-    vite "^6.3.6"
+    vite "^6.4.1"
     vitefu "^1.1.1"
     xxhash-wasm "^1.1.0"
     yargs-parser "^21.1.1"
@@ -3484,10 +3484,10 @@ vfile@^6.0.0, vfile@^6.0.3:
     "@types/unist" "^3.0.0"
     vfile-message "^4.0.0"
 
-vite@^6.3.6:
-  version "6.3.7"
-  resolved "https://registry.yarnpkg.com/vite/-/vite-6.3.7.tgz#acc4ca1ca36389c4b02e1ef8451f2d43df503bd1"
-  integrity sha512-mQYaKepA0NGMBsz8Xktt3tJUG5ELE2iT7IJ+ssXI6nxVdE2sFc/d/6w/JByqMLvWg8hNKHpPgzjgOkrhpKFnrA==
+vite@^6.4.1:
+  version "6.4.1"
+  resolved "https://registry.npmjs.org/vite/-/vite-6.4.1.tgz#afbe14518cdd6887e240a4b0221ab6d0ce733f96"
+  integrity sha512-+Oxm7q9hDoLMyJOYfUYBuHQo+dkAloi33apOPP56pzj+vsdJDzr+j1NISE5pyaAuKL4A3UD34qd0lx5+kfKp2g==
   dependencies:
     esbuild "^0.25.0"
     fdir "^6.4.4"

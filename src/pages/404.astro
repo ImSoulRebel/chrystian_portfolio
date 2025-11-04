@@ -7,21 +7,39 @@
  * Las páginas 404 localizadas están en:
  * - /es/404 para español
  * - /en/404 para inglés
+ *
+ * Nota: Usa detección de idioma del lado del cliente para sitios estáticos (Astro 5.x)
  */
 
 import { getRelativeLocaleUrl } from 'astro:i18n';
 
-// Detectar idioma preferido del navegador
-const acceptLanguage = Astro.request.headers.get('accept-language') || '';
-const preferredLocale =
-  acceptLanguage.toLowerCase().includes('en') &&
-  !acceptLanguage.toLowerCase().startsWith('es')
-    ? 'en'
-    : 'es';
-
-// Redirigir a la página 404 localizada
-// getRelativeLocaleUrl incluye automáticamente el base path configurado
-// @ts-ignore - TypeScript doesn't detect usage in Astro.redirect return statement
-const redirectUrl = getRelativeLocaleUrl(preferredLocale, '/404');
-return Astro.redirect(redirectUrl, 302);
+// Para sitios estáticos, la detección de idioma se hace del lado del cliente
+const esUrl = getRelativeLocaleUrl('es', '/404');
+const enUrl = getRelativeLocaleUrl('en', '/404');
 ---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Redirecting...</title>
+    <script is:inline define:vars={{ esUrl, enUrl }}>
+      // Detectar idioma preferido del navegador en el cliente
+      const browserLang = navigator.language || navigator.userLanguage || '';
+      const preferredLocale = browserLang.toLowerCase().startsWith('es')
+        ? 'es'
+        : 'en';
+      const redirectUrl = preferredLocale === 'es' ? esUrl : enUrl;
+
+      // Redirigir inmediatamente
+      window.location.replace(redirectUrl);
+    </script>
+    <noscript>
+      <meta http-equiv="refresh" content="0;url={esUrl}" />
+    </noscript>
+  </head>
+  <body>
+    <p>Redirecting to 404 page...</p>
+  </body>
+</html>
