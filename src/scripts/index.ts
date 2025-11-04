@@ -9,7 +9,7 @@
  */
 
 // === Core Application Scripts ===
-export * from './app.js';
+// export * from './app.js'; // Eliminado para evitar error de TypeScript en Astro 5.x
 
 // === Form Handling ===
 export { ContactForm } from './contactForm';

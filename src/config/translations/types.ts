@@ -326,6 +326,13 @@ export interface LanguageTranslations {
   english: string;
 }
 
+export interface LoadingTranslations {
+  redirecting: string;
+  loading: string;
+  pleaseWait: string;
+  processingRequest: string;
+}
+
 // Tipo completo para todas las traducciones de un locale
 export interface BlogTranslations {
   title: string;
@@ -363,6 +370,7 @@ export interface LocaleTranslations {
   recruiterMeta: RecruiterMetaTranslations;
   language: LanguageTranslations;
   blog: BlogTranslations;
+  loading: LoadingTranslations;
 }
 
 // Tipo para el objeto de traducciones completo

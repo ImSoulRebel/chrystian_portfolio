@@ -24,3 +24,4 @@ export { structureData as structure } from './structureData';
 export { floatingCTA } from './floatingCTA';
 export { projectsPage } from './projectsPage';
 export { blog } from './blog';
+export { loading } from './loading';
