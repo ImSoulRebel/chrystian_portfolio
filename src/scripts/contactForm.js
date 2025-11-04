@@ -469,10 +469,10 @@ export class ContactForm {
         console.warn(prefix, message, ...args);
         break;
       case 'info':
-        console.log(prefix, message, ...args);
+        // ...existing code...
         break;
       default:
-        console.log(prefix, message, ...args);
+      // ...existing code...
     }
   }
 

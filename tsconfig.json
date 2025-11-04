@@ -13,7 +13,10 @@
       "@pages/*": ["src/pages/*"],
       "@scripts/*": ["src/scripts/*"],
       "@sections/*": ["src/sections/*"],
-      "@styles/*": ["src/styles/*"]
+      "@styles/*": ["src/styles/*"],
+      "@utils/*": ["src/utils/*"],
+      "@content/*": ["src/content/*"],
+      "@data/*": ["src/data/*"]
     },
     "verbatimModuleSyntax": false,
     "strictNullChecks": true,

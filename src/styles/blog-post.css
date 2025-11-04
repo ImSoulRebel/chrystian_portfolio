@@ -93,43 +93,85 @@
   outline: none;
 }
 
+/* Código inline optimizado para tema oscuro */
 .prose code {
-  background: #f5f5f5;
-  padding: 0.2rem 0.4rem;
-  border-radius: 3px;
-  font-size: 0.98em;
+  background: rgba(0, 212, 255, 0.1);
+  color: var(--primary-color, #00d4ff);
+  padding: 0.2em 0.5em;
+  border-radius: 6px;
+  font-size: 0.92em;
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+  font-weight: 500;
+  border: 1px solid rgba(0, 212, 255, 0.2);
+  box-shadow: 0 0 8px rgba(0, 212, 255, 0.08);
 }
+
+/* Evitar estilos de código inline dentro de bloques pre */
+.prose pre code {
+  background: transparent !important;
+  color: inherit !important;
+  padding: 0 !important;
+  border: none !important;
+  font-size: 1em !important;
+  font-weight: normal !important;
+  box-shadow: none !important;
+}
+
+/* Variante para modo claro (por si acaso) */
+@media (prefers-color-scheme: light) {
+  .prose code {
+    background: rgba(0, 212, 255, 0.12);
+    color: #0099cc;
+    border-color: rgba(0, 212, 255, 0.25);
+  }
+}
+
+/* Bloques de código pre optimizados para tu tema */
 .prose pre {
-  background: #1e1e1e;
-  color: #d4d4d4;
+  background: var(--accent-color, #16213e);
+  color: var(--text-primary, #ffffff);
   padding: 1.5rem;
-  border-radius: 8px;
+  border-radius: var(--border-radius, 12px);
   overflow-x: auto;
   margin-bottom: 2em;
+  border: 1px solid rgba(0, 212, 255, 0.15);
+  box-shadow: var(--shadow-dark, 0 8px 30px rgba(0, 0, 0, 0.3));
 }
 
 /* Mejora contraste y sintaxis en bloques de código markdown */
 .prose pre,
 .prose pre code {
-  background: #1e1e1e !important;
-  color: #e6e6e6 !important;
+  background: var(--accent-color, #16213e) !important;
+  color: var(--text-primary, #ffffff) !important;
 }
 
+/* Sintaxis highlighting ajustado a tu paleta */
 .prose pre .token.comment,
 .prose pre .token.prolog,
 .prose pre .token.doctype,
 .prose pre .token.cdata {
-  color: #8b949e !important;
+  color: var(--text-muted, #7a8ca8) !important;
 }
 .prose pre .token.keyword {
   color: #ff7b72 !important;
 }
 .prose pre .token.string {
-  color: #a5d6ff !important;
+  color: var(--primary-color, #00d4ff) !important;
 }
 .prose pre .token.function {
-  color: #d2a8ff !important;
+  color: #a5d6ff !important;
 }
 .prose pre .token.number {
   color: #f2cc60 !important;
+}
+.prose pre .token.boolean,
+.prose pre .token.constant {
+  color: var(--primary-color, #00d4ff) !important;
+}
+.prose pre .token.class-name {
+  color: #79c0ff !important;
+}
+.prose pre .token.operator,
+.prose pre .token.punctuation {
+  color: var(--text-secondary, #b8c4d6) !important;
 }

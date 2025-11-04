@@ -232,9 +232,7 @@ export async function preloadCriticalImages(
       })
     );
 
-    console.log(
-      `[ProjectsManager] Preloaded ${criticalProjects.length} critical images`
-    );
+    // ...existing code...
   } catch (error) {
     console.error('[ProjectsManager] Error preloading images:', error);
   }

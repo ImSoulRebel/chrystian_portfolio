@@ -1,11 +1,6 @@
 import { defineConfig, envField } from 'astro/config';
 import mdx from '@astrojs/mdx';
 
-// Obtener valores de configuración de process.env
-// Estos valores se cargan desde:
-// - Archivo .env para desarrollo local
-// - GitHub Variables para GitHub Actions
-// - Variables de entorno de Netlify para despliegues en Netlify
 const siteUrl = process.env.PUBLIC_SITE_URL || 'http://localhost:4321';
 const basePath = process.env.PUBLIC_BASE_PATH || '';
 
@@ -212,6 +207,7 @@ export default defineConfig({
     },
     validateSecrets: true,
   },
+
   i18n: {
     locales: ['es', 'en'],
     defaultLocale: 'es',
@@ -220,10 +216,13 @@ export default defineConfig({
       redirectToDefaultLocale: true,
     },
   },
+
   build: {
+    format: 'directory', // ✅ URLs limpias sin extensión
     inlineStylesheets: 'auto',
     assets: '_astro',
   },
+
   vite: {
     build: {
       cssCodeSplit: true,
@@ -242,5 +241,15 @@ export default defineConfig({
       devSourcemap: true,
     },
   },
+
   compressHTML: true,
+
+  // ✅ Configuración de Markdown/MDX optimizada
+  markdown: {
+    shikiConfig: {
+      theme: 'dracula', // Tema oscuro para código
+      wrap: true,
+    },
+    syntaxHighlight: 'shiki',
+  },
 });
