@@ -7,7 +7,7 @@ export interface BlogPost extends CollectionEntry<'blog'> {
 
 export async function getSortedBlogPosts(
   locale: 'es' | 'en',
-  options?: { featuredOnly?: boolean; limit?: number }
+  options?: { featuredOnly?: boolean; limit?: number; sortByDateOnly?: boolean }
 ): Promise<BlogPost[]> {
   // Obtener todos los posts publicados
   const allPosts = await getCollection(
@@ -30,11 +30,31 @@ export async function getSortedBlogPosts(
     posts = posts.filter((p) => p.data.featured);
   }
 
-  // Ordenar: primero por prioridad si es destacado, luego por fecha
+  // Ordenar: primero por featured, luego por priority, y finalmente por fecha
   posts = posts.sort((a, b) => {
-    if (a.data.featured && b.data.featured) {
-      return (b.data.priority ?? 0) - (a.data.priority ?? 0);
+    // Si sortByDateOnly está activo, solo ordenar por fecha
+    if (options?.sortByDateOnly) {
+      return (
+        new Date(b.data.createdAt).getTime() -
+        new Date(a.data.createdAt).getTime()
+      );
     }
+
+    // 1. Priorizar posts featured
+    const featuredA = a.data.featured ? 1 : 0;
+    const featuredB = b.data.featured ? 1 : 0;
+    if (featuredA !== featuredB) {
+      return featuredB - featuredA;
+    }
+
+    // 2. Ordenar por priority (mayor a menor)
+    const priorityA = a.data.priority ?? 0;
+    const priorityB = b.data.priority ?? 0;
+    if (priorityA !== priorityB) {
+      return priorityB - priorityA;
+    }
+
+    // 3. Fallback a fecha de creación más reciente
     return (
       new Date(b.data.createdAt).getTime() -
       new Date(a.data.createdAt).getTime()
