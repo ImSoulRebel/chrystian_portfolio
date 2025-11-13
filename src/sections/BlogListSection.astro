@@ -7,7 +7,7 @@ import type { BlogListSectionProps } from '@content/types/blog';
 const { lang } = Astro.props as BlogListSectionProps;
 const t = useTranslations(lang);
 
-const sortedPosts = await getSortedBlogPosts(lang);
+const sortedPosts = await getSortedBlogPosts(lang, { sortByDateOnly: true });
 ---
 
 <section class="blog-section section-radial-bg">
@@ -51,6 +51,7 @@ const sortedPosts = await getSortedBlogPosts(lang);
                       : undefined
                   }
                   variant="bloglist"
+                  featured={post.data.featured}
                   aria-label={t('blog.viewPostAria').replace(
                     '{title}',
                     typeof post.data.title === 'object'
