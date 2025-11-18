@@ -41,6 +41,12 @@ const projects = allProjects
       liveUrl: p.data.liveUrl,
       githubUrl: p.data.githubUrl,
       image: projectImages[p.data.id] || null,
+      nda: p.data.nda ?? false,
+      sector: projectT.sector,
+      role: projectT.role,
+      duration: projectT.duration,
+      team: projectT.team,
+      metrics: projectT.metrics,
     };
   });
 ---
@@ -65,6 +71,12 @@ const projects = allProjects
             githubUrl={project.githubUrl}
             image={project.image}
             locale={locale}
+            nda={project.nda}
+            sector={project.sector}
+            role={project.role}
+            duration={project.duration}
+            team={project.team}
+            metrics={project.metrics}
           />
         ))
       }

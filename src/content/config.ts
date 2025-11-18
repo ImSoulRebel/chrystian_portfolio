@@ -41,6 +41,9 @@ const projectSchema = z.object({
   featured: z.boolean().default(false),
   priority: z.number().min(1).max(100).default(1),
 
+  // NDA and confidentiality
+  nda: z.boolean().default(false),
+
   // URLs opcionales
   liveUrl: z.string().url('URL de demostración debe ser válida').optional(),
   githubUrl: z.string().url('URL de GitHub debe ser válida').optional(),

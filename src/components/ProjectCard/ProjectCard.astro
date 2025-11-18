@@ -14,6 +14,12 @@ interface Props {
   githubUrl?: string | undefined;
   featured?: boolean;
   locale?: Locale;
+  nda?: boolean;
+  sector?: string | undefined;
+  role?: string | undefined;
+  duration?: string | undefined;
+  team?: string | undefined;
+  metrics?: Array<{ label: string; value: string }> | undefined;
 }
 
 const {
@@ -26,6 +32,12 @@ const {
   githubUrl,
   featured = false,
   locale = 'es',
+  nda = false,
+  sector,
+  role,
+  duration,
+  team,
+  metrics,
 } = Astro.props;
 
 const t = useTranslations(locale);
@@ -33,7 +45,9 @@ const t = useTranslations(locale);
 const techStack = typeof stack === 'string' ? stack.split(' · ') : stack || [];
 ---
 
-<div class={`${styles.projectCard} ${featured ? styles.featured : ''}`}>
+<div
+  class={`${styles.projectCard} ${featured ? styles.featured : ''} ${nda ? styles.nda : ''}`}
+>
   <div class={styles.projectImage}>
     {
       image ? (
@@ -77,15 +91,95 @@ const techStack = typeof stack === 'string' ? stack.split(' · ') : stack || [];
       )
     }
     <div class={styles.imageOverlay}></div>
+
+    {/* NDA Badge */}
+    {
+      nda && (
+        <div class={styles.ndaBadge}>
+          <svg
+            width="12"
+            height="12"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M12 2C10.3431 2 9 3.34315 9 5V8H7C5.89543 8 5 8.89543 5 10V20C5 21.1046 5.89543 22 7 22H17C18.1046 22 19 21.1046 19 20V10C19 8.89543 18.1046 8 17 8H15V5C15 3.34315 13.6569 2 12 2Z"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linejoin="round"
+            />
+            <circle cx="12" cy="15" r="2" fill="currentColor" />
+          </svg>
+          <span>{t('projects.badges.nda')}</span>
+        </div>
+      )
+    }
   </div>
 
   <div class={styles.projectContent}>
     <div class={styles.projectHeader}>
       <h3 class={styles.projectTitle}>{title}</h3>
+
+      {/* Project Metadata */}
+      {
+        (sector || role || duration || team) && (
+          <div class={styles.projectMeta}>
+            {sector && (
+              <div class={styles.metaItem}>
+                <span class={styles.metaLabel}>
+                  {t('projects.metadata.sector')}:
+                </span>
+                <span class={styles.metaValue}>{sector}</span>
+              </div>
+            )}
+            {role && (
+              <div class={styles.metaItem}>
+                <span class={styles.metaLabel}>
+                  {t('projects.metadata.role')}:
+                </span>
+                <span class={styles.metaValue}>{role}</span>
+              </div>
+            )}
+            {duration && (
+              <div class={styles.metaItem}>
+                <span class={styles.metaLabel}>
+                  {t('projects.metadata.duration')}:
+                </span>
+                <span class={styles.metaValue}>{duration}</span>
+              </div>
+            )}
+            {team && (
+              <div class={styles.metaItem}>
+                <span class={styles.metaLabel}>
+                  {t('projects.metadata.team')}:
+                </span>
+                <span class={styles.metaValue}>{team}</span>
+              </div>
+            )}
+          </div>
+        )
+      }
+
+      {/* Impact Subtitle */}
       {impact && <p class={styles.projectSubtitle}>{impact}</p>}
     </div>
 
     <p class={styles.projectDescription}>{description}</p>
+
+    {/* Highlighted Metrics */}
+    {
+      metrics && metrics.length > 0 && (
+        <div class={styles.metricsHighlight}>
+          {metrics.map((metric: { label: string; value: string }) => (
+            <div class={styles.metricItem}>
+              <span class={styles.metricValue}>{metric.value}</span>
+              <span class={styles.metricLabel}>{metric.label}</span>
+            </div>
+          ))}
+        </div>
+      )
+    }
 
     <div class={styles.techStack}>
       {
@@ -120,11 +214,19 @@ const techStack = typeof stack === 'string' ? stack.split(' · ') : stack || [];
           </div>
         )
       }
+      {
+        nda && (
+          <div class={styles.statItem}>
+            <span class={styles.statIcon}>🔒</span>
+            <span>{t('projects.stats.underNDA')}</span>
+          </div>
+        )
+      }
     </div>
 
     {/* Project Actions */}
     {
-      (liveUrl || githubUrl) && (
+      (liveUrl || githubUrl || nda) && (
         <div class={styles.projectActions}>
           {liveUrl && (
             <a
@@ -199,6 +301,48 @@ const techStack = typeof stack === 'string' ? stack.split(' · ') : stack || [];
                 />
               </svg>
               {t('projects.viewCode')}
+            </a>
+          )}
+          {nda && (
+            <a
+              href="#contact"
+              class={`${styles.actionButton} ${styles.actionNDA}`}
+              title={t('projects.actions.requestCaseStudy')}
+              aria-label={t('projects.actions.requestCaseStudyLabel')}
+            >
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M14 2H6C4.89543 2 4 2.89543 4 4V20C4 21.1046 4.89543 22 6 22H18C19.1046 22 20 21.1046 20 20V8L14 2Z"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M14 2V8H20"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M9 15H15"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                />
+                <path
+                  d="M9 11H15"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                />
+              </svg>
+              {t('projects.actions.contactForDetails')}
             </a>
           )}
         </div>

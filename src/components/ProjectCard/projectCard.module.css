@@ -20,6 +20,20 @@
   margin: 0 auto;
 }
 
+/* NDA Projects with different border */
+.projectCard.nda {
+  border-left: 3px solid rgba(150, 150, 170, 0.5);
+  background: linear-gradient(
+    135deg,
+    rgba(26, 26, 46, 0.85),
+    rgba(32, 32, 52, 0.65)
+  );
+}
+
+.projectCard.nda:hover {
+  border-left-color: rgba(150, 150, 170, 0.8);
+}
+
 .projectCard::before {
   content: '';
   position: absolute;
@@ -70,6 +84,34 @@
   z-index: 2;
   box-shadow: 0 4px 12px rgba(0, 212, 255, 0.4);
   animation: pulseGlow 2s ease-in-out infinite alternate;
+}
+
+/* NDA Badge */
+.ndaBadge {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: rgba(150, 150, 170, 0.2);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(150, 150, 170, 0.4);
+  color: rgba(200, 200, 220, 0.95);
+  padding: 0.4rem 0.8rem;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  z-index: 2;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.ndaBadge svg {
+  width: 12px;
+  height: 12px;
+  opacity: 0.9;
 }
 
 @keyframes pulseGlow {
@@ -152,12 +194,83 @@
   margin: 0;
 }
 
+/* Project Metadata */
+.projectMeta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+  padding: 0.75rem;
+  background: rgba(0, 212, 255, 0.03);
+  border-radius: 8px;
+  border: 1px solid rgba(0, 212, 255, 0.08);
+}
+
+.metaItem {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 0.8rem;
+}
+
+.metaLabel {
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+.metaValue {
+  color: var(--primary-color);
+  font-weight: 500;
+}
+
 .projectDescription {
   color: var(--text-secondary);
   font-size: 0.95rem;
   line-height: 1.6;
   margin: 0;
   flex: 1;
+}
+
+/* Metrics Highlight */
+.metricsHighlight {
+  display: flex;
+  justify-content: space-around;
+  gap: 1rem;
+  padding: 1rem;
+  background: linear-gradient(
+    135deg,
+    rgba(0, 212, 255, 0.08),
+    rgba(0, 212, 255, 0.04)
+  );
+  border-radius: 12px;
+  border: 1px solid rgba(0, 212, 255, 0.15);
+  margin: 0.75rem 0;
+}
+
+.metricItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  flex: 1;
+  min-width: 0;
+}
+
+.metricValue {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--primary-color);
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.metricLabel {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin-top: 0.25rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  line-height: 1.2;
 }
 
 /* Tech Stack */
@@ -287,6 +400,21 @@
   background: rgba(0, 212, 255, 0.2);
   border-color: var(--primary-color);
   transform: translateY(-2px);
+}
+
+/* NDA Action Button */
+.actionNDA {
+  background: rgba(150, 150, 170, 0.15);
+  border: 1px solid rgba(150, 150, 170, 0.3);
+  color: rgba(200, 200, 220, 0.95);
+  flex: 1;
+}
+
+.actionNDA:hover {
+  background: rgba(150, 150, 170, 0.25);
+  border-color: rgba(150, 150, 170, 0.5);
+  transform: translateY(-2px);
+  color: rgba(220, 220, 240, 1);
 }
 
 /* Loading State */
