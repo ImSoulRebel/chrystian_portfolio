@@ -17,8 +17,7 @@ export const projects: Record<'es' | 'en', ProjectsTranslations> = {
       underNDA: 'Bajo NDA',
     },
     badges: {
-      nda: 'Confidencial',
-      confidential: 'Bajo NDA',
+      confidential: 'Confidencial',
     },
     actions: {
       visitWebsite: 'Visitar sitio web',
@@ -165,8 +164,7 @@ export const projects: Record<'es' | 'en', ProjectsTranslations> = {
       underNDA: 'Under NDA',
     },
     badges: {
-      nda: 'Confidential',
-      confidential: 'Under NDA',
+      confidential: 'Confidential',
     },
     actions: {
       visitWebsite: 'Visit website',

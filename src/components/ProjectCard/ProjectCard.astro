@@ -14,7 +14,8 @@ interface Props {
   githubUrl?: string | undefined;
   featured?: boolean;
   locale?: Locale;
-  nda?: boolean;
+  confidential?: boolean;
+  production?: boolean;
   sector?: string | undefined;
   role?: string | undefined;
   duration?: string | undefined;
@@ -28,10 +29,10 @@ const {
   stack,
   description,
   impact,
-  liveUrl,
   featured = false,
   locale = 'es',
-  nda = false,
+  confidential = false,
+  production = false,
   sector,
   role,
   duration,
@@ -46,7 +47,7 @@ const techStack = typeof stack === 'string' ? stack.split(' · ') : stack || [];
 
 <a href={`/${locale}/projects/${id}`} class={styles.cardLink}>
   <article
-    class={`${styles.projectCard} ${featured ? styles.featured : ''} ${nda ? styles.nda : ''}`}
+    class={`${styles.projectCard} ${featured ? styles.featured : ''} ${confidential ? styles.nda : ''}`}
   >
     <div class={styles.projectContent}>
       <div class={styles.projectHeader}>
@@ -132,9 +133,9 @@ const techStack = typeof stack === 'string' ? stack.split(' · ') : stack || [];
       </div>
 
       {
-        (liveUrl || featured || nda) && (
+        (featured || confidential || production) && (
           <div class={styles.projectStats}>
-            {nda && (
+            {confidential && (
               <div class={styles.statItem}>
                 <span class={styles.statIcon}>
                   <svg
@@ -153,10 +154,10 @@ const techStack = typeof stack === 'string' ? stack.split(' · ') : stack || [];
                     <circle cx="12" cy="15" r="2" fill="currentColor" />
                   </svg>
                 </span>
-                <span>{t('projects.badges.nda')}</span>
+                <span>{t('projects.badges.confidential')}</span>
               </div>
             )}
-            {liveUrl && (
+            {production && (
               <div class={styles.statItem}>
                 <span class={styles.statIcon}>🌐</span>
                 <span>{t('projects.stats.inProduction')}</span>

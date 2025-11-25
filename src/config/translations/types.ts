@@ -126,7 +126,6 @@ export interface ProjectsTranslations {
     underNDA: string;
   };
   badges: {
-    nda: string;
     confidential: string;
   };
   actions: {

@@ -85,8 +85,10 @@ const pageDescription = projectT.description.substring(0, 160);
               )
             }
             {
-              project.data.nda && (
-                <span class="badge nda">{t('projects.badges.nda')}</span>
+              project.data.confidential && (
+                <span class="badge confidential">
+                  {t('projects.badges.confidential')}
+                </span>
               )
             }
           </div>
@@ -192,8 +194,8 @@ const pageDescription = projectT.description.substring(0, 160);
                 )
               }
               {
-                project.data.nda && (
-                  <a href={`/${locale}/contact`} class="btn btn-nda">
+                project.data.confidential && (
+                  <a href={`/${locale}/contact`} class="btn btn-confidential">
                     <span>{t('projects.actions.contactForDetails')}</span>
                     <svg
                       width="20"
@@ -360,7 +362,7 @@ const pageDescription = projectT.description.substring(0, 160);
     border: 1px solid rgba(0, 212, 255, 0.2);
   }
 
-  .badge.nda {
+  .badge.confidential {
     background: rgba(150, 150, 170, 0.1);
     color: var(--text-muted);
     border: 1px solid rgba(150, 150, 170, 0.2);
@@ -460,13 +462,13 @@ const pageDescription = projectT.description.substring(0, 160);
     transform: translateY(-2px);
   }
 
-  .btn-nda {
+  .btn-confidential {
     background: rgba(150, 150, 170, 0.1);
     color: var(--text-muted);
     border: 1px solid rgba(150, 150, 170, 0.2);
   }
 
-  .btn-nda:hover {
+  .btn-confidential:hover {
     background: rgba(150, 150, 170, 0.2);
     color: var(--text-primary);
   }

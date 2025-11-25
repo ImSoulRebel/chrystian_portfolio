@@ -19,7 +19,8 @@ export interface ProcessedProject {
   status: 'active' | 'archived' | 'draft';
   createdAt: string;
   updatedAt: string;
-  nda?: boolean;
+  confidential?: boolean;
+  production?: boolean;
   sector?: string | undefined;
   role?: string | undefined;
   duration?: string | undefined;
@@ -129,7 +130,8 @@ export async function processProject(
     status: project.data.status,
     createdAt: project.data.createdAt,
     updatedAt: project.data.updatedAt,
-    nda: project.data.nda ?? false,
+    confidential: project.data.confidential ?? false,
+    production: project.data.production ?? false,
     sector: translations?.sector,
     role: translations?.role,
     duration: translations?.duration,

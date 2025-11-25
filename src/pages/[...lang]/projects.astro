@@ -89,7 +89,12 @@ const regularBusinessProjects = businessProjects.filter((p) => !p.featured);
                   githubUrl={project.githubUrl}
                   image={project.image}
                   locale={locale}
-                  {...(project.nda !== undefined && { nda: project.nda })}
+                  {...(project.confidential !== undefined && {
+                    confidential: project.confidential,
+                  })}
+                  {...(project.production !== undefined && {
+                    production: project.production,
+                  })}
                   {...(project.sector && { sector: project.sector })}
                   {...(project.role && { role: project.role })}
                   {...(project.duration && { duration: project.duration })}
@@ -121,7 +126,12 @@ const regularBusinessProjects = businessProjects.filter((p) => !p.featured);
                     githubUrl={project.githubUrl}
                     image={project.image}
                     locale={locale}
-                    {...(project.nda !== undefined && { nda: project.nda })}
+                    {...(project.confidential !== undefined && {
+                      confidential: project.confidential,
+                    })}
+                    {...(project.production !== undefined && {
+                      production: project.production,
+                    })}
                     {...(project.sector && { sector: project.sector })}
                     {...(project.role && { role: project.role })}
                     {...(project.duration && { duration: project.duration })}
@@ -161,7 +171,12 @@ const regularBusinessProjects = businessProjects.filter((p) => !p.featured);
                 githubUrl={project.githubUrl}
                 image={project.image}
                 locale={locale}
-                {...(project.nda !== undefined && { nda: project.nda })}
+                {...(project.confidential !== undefined && {
+                  confidential: project.confidential,
+                })}
+                {...(project.production !== undefined && {
+                  production: project.production,
+                })}
                 {...(project.sector && { sector: project.sector })}
                 {...(project.role && { role: project.role })}
                 {...(project.duration && { duration: project.duration })}

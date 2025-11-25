@@ -42,7 +42,8 @@ const projects = allProjects
       liveUrl: p.data.liveUrl,
       githubUrl: p.data.githubUrl,
       image: projectImages[p.data.id] || null,
-      nda: p.data.nda ?? false,
+      confidential: p.data.confidential ?? false,
+      production: p.data.production ?? false,
       sector: projectT.sector,
       role: projectT.role,
       duration: projectT.duration,
@@ -73,7 +74,8 @@ const projects = allProjects
             githubUrl={project.githubUrl}
             image={project.image}
             locale={locale}
-            nda={project.nda}
+            confidential={project.confidential}
+            production={project.production}
             sector={project.sector}
             role={project.role}
             duration={project.duration}
