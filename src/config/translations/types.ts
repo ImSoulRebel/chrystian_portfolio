@@ -117,6 +117,7 @@ export interface ProjectsTranslations {
   viewDemo: string;
   viewCode: string;
   viewMore: string;
+  readMore: string;
   featured: string;
   stats: {
     inProduction: string;

@@ -1,5 +1,4 @@
 ---
-import { Image } from 'astro:assets';
 import { useTranslations, type Locale } from '@utils/i18n';
 import { SvgComponent } from 'astro/types';
 import styles from './projectCard.module.css';
@@ -29,7 +28,6 @@ const {
   stack,
   description,
   impact,
-  image,
   liveUrl,
   featured = false,
   locale = 'es',
@@ -50,75 +48,6 @@ const techStack = typeof stack === 'string' ? stack.split(' · ') : stack || [];
   <article
     class={`${styles.projectCard} ${featured ? styles.featured : ''} ${nda ? styles.nda : ''}`}
   >
-    <div class={styles.projectImage}>
-      {
-        image ? (
-          <Image
-            src={image}
-            alt={title || 'Project Image'}
-            loading="lazy"
-            width={400}
-            height={200}
-            class={styles.img}
-          />
-        ) : (
-          <div class={styles.projectPlaceholder}>
-            <svg
-              width="60"
-              height="60"
-              viewBox="0 0 24 24"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M12 2L2 7L12 12L22 7L12 2Z"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linejoin="round"
-              />
-              <path
-                d="M2 17L12 22L22 17"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linejoin="round"
-              />
-              <path
-                d="M2 12L12 17L22 12"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linejoin="round"
-              />
-            </svg>
-          </div>
-        )
-      }
-      <div class={styles.imageOverlay}></div>
-
-      {/* NDA Badge */}
-      {
-        nda && (
-          <div class={styles.ndaBadge}>
-            <svg
-              width="12"
-              height="12"
-              viewBox="0 0 24 24"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M12 2C10.3431 2 9 3.34315 9 5V8H7C5.89543 8 5 8.89543 5 10V20C5 21.1046 5.89543 22 7 22H17C18.1046 22 19 21.1046 19 20V10C19 8.89543 18.1046 8 17 8H15V5C15 3.34315 13.6569 2 12 2Z"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linejoin="round"
-              />
-              <circle cx="12" cy="15" r="2" fill="currentColor" />
-            </svg>
-            <span>{t('projects.badges.nda')}</span>
-          </div>
-        )
-      }
-    </div>
-
     <div class={styles.projectContent}>
       <div class={styles.projectHeader}>
         <h3 class={styles.projectTitle}>{title}</h3>
@@ -151,7 +80,25 @@ const techStack = typeof stack === 'string' ? stack.split(' · ') : stack || [];
         {impact && <p class={styles.projectSubtitle}>{impact}</p>}
       </div>
 
-      <p class={styles.projectDescription}>{description}</p>
+      <p class={styles.projectDescription}>
+        {description}
+      </p>
+      <span class={styles.readMore}>
+        {t('projects.readMore') || 'Leer más'}
+        <svg
+          width="14"
+          height="14"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+        >
+          <path
+            d="M5 12h14M12 5l7 7-7 7"
+            stroke-linecap="round"
+            stroke-linejoin="round"></path>
+        </svg>
+      </span>
 
       {/* Highlighted Metrics */}
       {
@@ -172,36 +119,58 @@ const techStack = typeof stack === 'string' ? stack.split(' · ') : stack || [];
       <div class={styles.techStack}>
         {
           techStack
-            .slice(0, 4)
+            .slice(0, 8)
             .map((tech: string) => (
               <span class={styles.techTag}>{tech.trim()}</span>
             ))
         }
         {
-          techStack.length > 4 && (
-            <span class={styles.techTag}>+{techStack.length - 4}</span>
+          techStack.length > 8 && (
+            <span class={styles.techTag}>+{techStack.length - 8}</span>
           )
         }
       </div>
 
-      <div class={styles.projectStats}>
-        {
-          liveUrl && (
-            <div class={styles.statItem}>
-              <span class={styles.statIcon}>🌐</span>
-              <span>{t('projects.stats.inProduction')}</span>
-            </div>
-          )
-        }
-        {
-          featured && (
-            <div class={styles.statItem}>
-              <span class={styles.statIcon}>⭐</span>
-              <span>{t('projects.stats.featuredProject')}</span>
-            </div>
-          )
-        }
-      </div>
+      {
+        (liveUrl || featured || nda) && (
+          <div class={styles.projectStats}>
+            {nda && (
+              <div class={styles.statItem}>
+                <span class={styles.statIcon}>
+                  <svg
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <path
+                      d="M12 2C10.3431 2 9 3.34315 9 5V8H7C5.89543 8 5 8.89543 5 10V20C5 21.1046 5.89543 22 7 22H17C18.1046 22 19 21.1046 19 20V10C19 8.89543 18.1046 8 17 8H15V5C15 3.34315 13.6569 2 12 2Z"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                    <circle cx="12" cy="15" r="2" fill="currentColor" />
+                  </svg>
+                </span>
+                <span>{t('projects.badges.nda')}</span>
+              </div>
+            )}
+            {liveUrl && (
+              <div class={styles.statItem}>
+                <span class={styles.statIcon}>🌐</span>
+                <span>{t('projects.stats.inProduction')}</span>
+              </div>
+            )}
+            {featured && (
+              <div class={styles.statItem}>
+                <span class={styles.statIcon}>⭐</span>
+                <span>{t('projects.stats.featuredProject')}</span>
+              </div>
+            )}
+          </div>
+        )
+      }
     </div>
   </article>
 </a>
