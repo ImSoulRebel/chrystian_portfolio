@@ -79,6 +79,7 @@ const regularBusinessProjects = businessProjects.filter((p) => !p.featured);
             {
               featuredBusinessProjects.map((project: ProcessedProject) => (
                 <ProjectCard
+                  id={project.id}
                   title={project.title}
                   stack={project.stack.join(' · ')}
                   description={project.description}
@@ -110,6 +111,7 @@ const regularBusinessProjects = businessProjects.filter((p) => !p.featured);
               <div class="projects-grid regular-grid">
                 {regularBusinessProjects.map((project: ProcessedProject) => (
                   <ProjectCard
+                    id={project.id}
                     title={project.title}
                     stack={project.stack.join(' · ')}
                     description={project.description}
@@ -149,6 +151,7 @@ const regularBusinessProjects = businessProjects.filter((p) => !p.featured);
           {
             personalProjects.map((project: ProcessedProject) => (
               <ProjectCard
+                id={project.id}
                 title={project.title}
                 stack={project.stack.join(' · ')}
                 description={project.description}

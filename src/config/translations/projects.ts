@@ -146,24 +146,6 @@ export const projects: Record<'es' | 'en', ProjectsTranslations> = {
           { label: 'Sesiones sin crashes', value: '99.5%' },
         ],
       },
-      tookane: {
-        title: 'TOOKANE – App Multipropósito',
-        stack:
-          'Flutter · Provider · Riverpod · BLoC · Firebase · Hive · SharedPreferences',
-        description:
-          'Aplicación multipropósito con Clean Architecture + MVVM + Repository Pattern. Autenticación multiplataforma (correo, Google, Facebook), gestión de usuarios y perfiles, consumo de APIs externas y visualización de datos. Notificaciones push, soporte offline-first con Hive/SharedPreferences, internacionalización multiidioma, animaciones y transiciones personalizadas. CI/CD para despliegues automatizados.',
-        impact:
-          'Buenas prácticas con linter, análisis estático, pruebas unitarias y de widgets, documentación clara y CI/CD. Mejora del 30% en eficiencia mediante optimización basada en datos reales.',
-      },
-      portfolio: {
-        title: 'Portfolio Personal – Chrystian Michell',
-        stack:
-          'Astro · TypeScript · CSS Modules · GitHub Actions · Netlify · PWA',
-        description:
-          'Portfolio personal moderno y responsive desarrollado con Astro para renderizado estático optimizado. Arquitectura modular con TypeScript, sistema de traducciones i18n, SEO avanzado con structured data, PWA con manifest y service worker. Optimización de performance con lazy loading, code splitting y compresión de assets. Deployment automatizado con GitHub Actions.',
-        impact:
-          'Lighthouse score 100/100 en todas las métricas. Tiempo de carga <1s, SEO optimizado para posicionamiento profesional. Internacionalización ES/EN completa.',
-      },
     },
   },
   en: {

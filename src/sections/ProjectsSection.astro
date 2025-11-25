@@ -34,6 +34,7 @@ const projects = allProjects
       throw new Error(`Missing translations for project: ${p.data.id}`);
     return {
       title: projectT.title,
+      id: p.data.id,
       stack: projectT.stack,
       description: projectT.description,
       impact: projectT.impact,
@@ -62,6 +63,7 @@ const projects = allProjects
       {
         projects.map((project) => (
           <ProjectCard
+            id={project.id}
             title={project.title}
             stack={project.stack}
             description={project.description}
