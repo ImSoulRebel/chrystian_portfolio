@@ -44,7 +44,7 @@ export const projects: Record<'es' | 'en', ProjectsTranslations> = {
     },
     list: {
       yuvod: {
-        title: 'YUVOD – Plataforma OTT para Hoteles',
+        title: 'Plataforma OTT para Hoteles',
         sector: 'Streaming & Hospitalidad',
         role: 'Lead Flutter Developer & Arquitecto',
         duration: '6 meses (2023-2024)',
@@ -79,7 +79,7 @@ export const projects: Record<'es' | 'en', ProjectsTranslations> = {
         ],
       },
       tookane: {
-        title: 'TOOKANE – App Multipösito',
+        title: 'App Multipropósito SaaS',
         sector: 'SaaS Multipropósito',
         role: 'Lead Flutter Developer',
         duration: '7 meses (2022-2023)',
@@ -113,7 +113,7 @@ export const projects: Record<'es' | 'en', ProjectsTranslations> = {
         ],
       },
       stelcamping: {
-        title: 'STELCAMPING – Gestión de Campings',
+        title: 'Sistema de Gestión de Campings',
         sector: 'Turismo & Gestión',
         role: 'Flutter Developer',
         duration: '5 meses (2022)',
@@ -130,7 +130,7 @@ export const projects: Record<'es' | 'en', ProjectsTranslations> = {
         ],
       },
       bnc10: {
-        title: 'BNC10 – Neobanco Frontend',
+        title: 'Neobanco Frontend',
         sector: 'FinTech B2B',
         role: 'Senior Flutter Architect',
         duration: '8 meses (2023)',
@@ -192,7 +192,7 @@ export const projects: Record<'es' | 'en', ProjectsTranslations> = {
     },
     list: {
       yuvod: {
-        title: 'YUVOD – OTT Platform for Hotels',
+        title: 'OTT Platform for Hotels',
         sector: 'Streaming & Hospitality',
         role: 'Lead Flutter Developer & Architect',
         duration: '6 months (2023-2024)',
@@ -227,7 +227,7 @@ export const projects: Record<'es' | 'en', ProjectsTranslations> = {
         ],
       },
       stelcamping: {
-        title: 'STELCAMPING – Camping Management',
+        title: 'Camping Management System',
         sector: 'Tourism & Management',
         role: 'Flutter Developer',
         duration: '5 months (2022)',
@@ -244,7 +244,7 @@ export const projects: Record<'es' | 'en', ProjectsTranslations> = {
         ],
       },
       bnc10: {
-        title: 'BNC10 – Neobanking Frontend',
+        title: 'Neobanking Frontend',
         sector: 'FinTech B2B',
         role: 'Senior Flutter Architect',
         duration: '8 months (2023)',
@@ -262,7 +262,7 @@ export const projects: Record<'es' | 'en', ProjectsTranslations> = {
         ],
       },
       tookane: {
-        title: 'TOOKANE – Multipurpose App',
+        title: 'Multipurpose SaaS App',
         sector: 'Multipurpose SaaS',
         role: 'Lead Flutter Developer',
         duration: '7 months (2022-2023)',
