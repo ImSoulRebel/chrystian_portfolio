@@ -64,31 +64,39 @@ const pageDescription = projectT.description.substring(0, 160);
   floatingCTAMode="contact"
   layoutContext={{ locale, hasNavLinks: false, pageType: 'project-detail' }}
 >
-  <BackButton locale={locale} link={`/${locale}/projects`} />
+  <BackButton
+    locale={locale}
+    link={`/${locale}/projects`}
+    label={locale === 'es' ? 'Volver a Proyectos' : 'Back to Projects'}
+  />
 
   <main class="project-detail">
     {/* Hero Section */}
     <section class="hero-section">
       <div class="container">
+        {/* Hero Title - Full Width */}
+        <div class="hero-title-wrapper">
+          <div class="badges">
+            {
+              project.data.featured && (
+                <span class="badge featured">
+                  {t('projects.stats.featuredProject')}
+                </span>
+              )
+            }
+            {
+              project.data.nda && (
+                <span class="badge nda">{t('projects.badges.nda')}</span>
+              )
+            }
+          </div>
+
+          <h1 class="project-title">{projectT.title}</h1>
+        </div>
+
+        {/* Hero Grid - Content and Image */}
         <div class="hero-grid">
           <div class="hero-content">
-            <div class="badges">
-              {
-                project.data.featured && (
-                  <span class="badge featured">
-                    {t('projects.stats.featuredProject')}
-                  </span>
-                )
-              }
-              {
-                project.data.nda && (
-                  <span class="badge nda">{t('projects.badges.nda')}</span>
-                )
-              }
-            </div>
-
-            <h1 class="project-title">{projectT.title}</h1>
-
             <div class="project-meta">
               {
                 projectT.sector && (
@@ -147,22 +155,12 @@ const pageDescription = projectT.description.substring(0, 160);
                       fill="none"
                       stroke="currentColor"
                       stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
                     >
-                      <path
-                        d="M18 13V6A2 2 0 0 0 16 4H4A2 2 0 0 0 2 6V18A2 2 0 0 0 4 20H11"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                      />
-                      <path
-                        d="M15 15L21 9"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                      />
-                      <path
-                        d="M16 9H21V14"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                      />
+                      <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                      <polyline points="15 3 21 3 21 9" />
+                      <line x1="10" y1="14" x2="21" y2="3" />
                     </svg>
                   </a>
                 )
@@ -195,7 +193,7 @@ const pageDescription = projectT.description.substring(0, 160);
               }
               {
                 project.data.nda && (
-                  <a href="#contact" class="btn btn-nda">
+                  <a href={`/${locale}/contact`} class="btn btn-nda">
                     <span>{t('projects.actions.contactForDetails')}</span>
                     <svg
                       width="20"
@@ -327,6 +325,11 @@ const pageDescription = projectT.description.substring(0, 160);
       rgba(0, 212, 255, 0.05),
       transparent 70%
     );
+  }
+
+  .hero-title-wrapper {
+    margin-bottom: 3rem;
+    padding-top: 2rem;
   }
 
   .hero-grid {
@@ -475,13 +478,19 @@ const pageDescription = projectT.description.substring(0, 160);
     overflow: hidden;
     border: 1px solid rgba(255, 255, 255, 0.1);
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    background: linear-gradient(
+      135deg,
+      var(--primary-color) 100%,
+      var(--background-card) 0%
+    );
   }
 
   .project-img {
     width: 100%;
     height: auto;
     display: block;
-    object-fit: cover;
+    object-fit: contain;
+    padding: 2rem;
   }
 
   .image-glow {
