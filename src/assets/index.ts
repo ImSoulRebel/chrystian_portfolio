@@ -78,12 +78,12 @@ export { default as linkedinIcon } from './logos/linkedin_logo.svg';
 // ============================================
 // LOGOS DE PROYECTOS
 // ============================================
-export { default as bnc10Logo } from './projects/bnc10_logo.svg';
-export { default as nextivalLogo } from './projects/nextival_logo.svg';
+export { default as neobankLogo } from './projects/neobank_logo.png';
+export { default as festivalCmsLogo } from './projects/festival_cms_logo.png';
 export { default as optimusLogo } from './projects/optimus_apps_lab_logo.svg';
-export { default as stelLogo } from './projects/stel_logo.svg';
-export { default as tookaneLogo } from './projects/tookane_logo.svg';
-export { default as yuvodLogo } from './projects/yuvod_logo.svg';
+export { default as campingLogo } from './projects/camping_logo.png';
+export { default as saasLogo } from './projects/saas_logo.png';
+export { default as streamingPlatformLogo } from './projects/streaming_platform_logo.png';
 export { default as projectPlaceholder } from './placeholder.svg';
 
 // ============================================
