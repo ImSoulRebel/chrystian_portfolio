@@ -43,7 +43,7 @@ export const projects: Record<'es' | 'en', ProjectsTranslations> = {
         'Explora los proyectos destacados de Chrystian Michell: aplicaciones Flutter multiplataforma, plataformas OTT, Smart TV apps y soluciones móviles innovadoras desplegadas en múltiples países.',
     },
     list: {
-      yuvod: {
+      'streaming-platform': {
         title: 'Plataforma OTT para Hoteles',
         sector: 'Streaming & Hospitalidad',
         role: 'Lead Flutter Developer & Arquitecto',
@@ -61,8 +61,8 @@ export const projects: Record<'es' | 'en', ProjectsTranslations> = {
           { label: 'Uptime', value: '99.9%' },
         ],
       },
-      nextival: {
-        title: 'Nextival CMS – Gestión de Festivales',
+      'festival-cms': {
+        title: 'CMS de Gestión de Festivales',
         sector: 'Música & Eventos',
         role: 'Full Stack Developer',
         duration: '4 meses (2024)',
@@ -78,7 +78,7 @@ export const projects: Record<'es' | 'en', ProjectsTranslations> = {
           { label: 'Tiempo desarrollo', value: '4 meses' },
         ],
       },
-      tookane: {
+      'multipurpose-saas': {
         title: 'App Multipropósito SaaS',
         sector: 'SaaS Multipropósito',
         role: 'Lead Flutter Developer',
@@ -112,7 +112,7 @@ export const projects: Record<'es' | 'en', ProjectsTranslations> = {
           { label: 'Idiomas', value: 'ES/EN' },
         ],
       },
-      stelcamping: {
+      'camping-management': {
         title: 'Sistema de Gestión de Campings',
         sector: 'Turismo & Gestión',
         role: 'Flutter Developer',
@@ -129,7 +129,7 @@ export const projects: Record<'es' | 'en', ProjectsTranslations> = {
           { label: 'Procesos automatizados', value: '100%' },
         ],
       },
-      bnc10: {
+      'neobank-frontend': {
         title: 'Neobanco Frontend',
         sector: 'FinTech B2B',
         role: 'Senior Flutter Architect',
@@ -191,7 +191,7 @@ export const projects: Record<'es' | 'en', ProjectsTranslations> = {
         "Explore Chrystian Michell's featured projects: cross-platform Flutter applications, OTT platforms, Smart TV apps, and innovative mobile solutions deployed across multiple countries.",
     },
     list: {
-      yuvod: {
+      'streaming-platform': {
         title: 'OTT Platform for Hotels',
         sector: 'Streaming & Hospitality',
         role: 'Lead Flutter Developer & Architect',
@@ -209,8 +209,8 @@ export const projects: Record<'es' | 'en', ProjectsTranslations> = {
           { label: 'Uptime', value: '99.9%' },
         ],
       },
-      nextival: {
-        title: 'Nextival CMS – Festival Management',
+      'festival-cms': {
+        title: 'Festival Management CMS',
         sector: 'Music & Events',
         role: 'Full Stack Developer',
         duration: '4 months (2024)',
@@ -226,7 +226,7 @@ export const projects: Record<'es' | 'en', ProjectsTranslations> = {
           { label: 'Development time', value: '4 months' },
         ],
       },
-      stelcamping: {
+      'camping-management': {
         title: 'Camping Management System',
         sector: 'Tourism & Management',
         role: 'Flutter Developer',
@@ -243,7 +243,7 @@ export const projects: Record<'es' | 'en', ProjectsTranslations> = {
           { label: 'Automated processes', value: '100%' },
         ],
       },
-      bnc10: {
+      'neobank-frontend': {
         title: 'Neobanking Frontend',
         sector: 'FinTech B2B',
         role: 'Senior Flutter Architect',
@@ -261,7 +261,7 @@ export const projects: Record<'es' | 'en', ProjectsTranslations> = {
           { label: 'Crash-free sessions', value: '99.5%' },
         ],
       },
-      tookane: {
+      'multipurpose-saas': {
         title: 'Multipurpose SaaS App',
         sector: 'Multipurpose SaaS',
         role: 'Lead Flutter Developer',
