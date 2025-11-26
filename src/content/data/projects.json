@@ -52,10 +52,10 @@
     "confidential": true,
     "production": true,
     "image": "camping_logo.png",
-    "tags": ["Tourism", "Management", "REST API"],
+    "tags": ["Tourism", "Mobile App", "Digital Transformation", "Hospitality"],
     "status": "active",
     "createdAt": "2022-05-01T00:00:00.000Z",
-    "updatedAt": "2024-03-10T00:00:00.000Z"
+    "updatedAt": "2024-11-27T00:00:00.000Z"
   },
   {
     "id": "portfolio",

@@ -113,20 +113,20 @@ export const projects: Record<'es' | 'en', ProjectsTranslations> = {
         ],
       },
       'camping-management': {
-        title: 'Sistema de Gestión de Campings',
-        sector: 'Turismo & Gestión',
-        role: 'Flutter Developer',
+        title: 'App Móvil para Gestión de Campings',
+        sector: 'Turismo & Hospitalidad',
+        role: 'Desarrollador Móvil',
         duration: '5 meses (2022)',
         stack:
-          'Flutter · Firebase · GetX/BLoC · dio · StringLocalizations · REST APIs',
+          'Flutter · Firebase · Arquitectura Modular · APIs · Autenticación Segura',
         description:
-          'Aplicación integral para gestión de campings con clase base BaseState<T> para centralizar diálogos, localización, foco y utilidades de UI. Sistema de registro, autenticación, reservas, calendario de actividades, notificaciones y perfil. Integración con APIs REST (auth, reservas, actividades, notificaciones, perfil). Arquitectura modular con separación clara entre presentación, lógica de negocio y datos.',
+          'Aplicación móvil completa para iOS y Android que digitaliza la gestión integral de un camping turístico. Los usuarios pueden registrarse, realizar reservas de parcelas, consultar el calendario de actividades del camping, recibir notificaciones en tiempo real sobre eventos y servicios, y gestionar su perfil personal. La app permite al personal del camping administrar las operaciones diarias desde cualquier dispositivo móvil, mejorando significativamente la experiencia de los visitantes.',
         impact:
-          'Automatización de procesos que reducen costes operativos significativamente. Alta reutilización de código y consistencia en UX.',
+          'Transformación digital que automatizó completamente las operaciones del camping, eliminando procesos manuales en papel y reduciendo costes operativos en un 40%. La app mejoró la satisfacción de los huéspedes al facilitar reservas instantáneas y mantenerlos informados de todas las actividades disponibles.',
         metrics: [
-          { label: 'Usuarios activos', value: '+1,000' },
-          { label: 'Reducción costes', value: '40%' },
-          { label: 'Procesos automatizados', value: '100%' },
+          { label: 'Usuarios registrados', value: '+1,000' },
+          { label: 'Reducción costes operativos', value: '40%' },
+          { label: 'Procesos digitalizados', value: '100%' },
         ],
       },
       'neobank-frontend': {
@@ -227,20 +227,20 @@ export const projects: Record<'es' | 'en', ProjectsTranslations> = {
         ],
       },
       'camping-management': {
-        title: 'Camping Management System',
-        sector: 'Tourism & Management',
-        role: 'Flutter Developer',
+        title: 'Mobile App for Camping Management',
+        sector: 'Tourism & Hospitality',
+        role: 'Mobile Developer',
         duration: '5 months (2022)',
         stack:
-          'Flutter · Firebase · GetX/BLoC · dio · StringLocalizations · REST APIs',
+          'Flutter · Firebase · Modular Architecture · APIs · Secure Authentication',
         description:
-          'Comprehensive camping management application with BaseState<T> base class to centralize dialogs, localization, focus, and UI utilities. Registration, authentication, reservations, activities calendar, notifications, and profile system. Integration with REST APIs (auth, reservations, activities, notifications, profile). Modular architecture with clear separation between presentation, business logic, and data layers.',
+          'Complete mobile application for iOS and Android that digitalizes the comprehensive management of a tourist camping site. Users can register, make plot reservations, check the camping activities calendar, receive real-time notifications about events and services, and manage their personal profile. The app allows camping staff to manage daily operations from any mobile device, significantly improving the visitor experience.',
         impact:
-          'Process automation that significantly reduces operational costs. High code reusability and UX consistency.',
+          'Digital transformation that fully automated camping operations, eliminating manual paper-based processes and reducing operational costs by 40%. The app improved guest satisfaction by enabling instant reservations and keeping them informed of all available activities.',
         metrics: [
-          { label: 'Active users', value: '+1,000' },
-          { label: 'Cost reduction', value: '40%' },
-          { label: 'Automated processes', value: '100%' },
+          { label: 'Registered users', value: '+1,000' },
+          { label: 'Operational cost reduction', value: '40%' },
+          { label: 'Digitalized processes', value: '100%' },
         ],
       },
       'neobank-frontend': {
