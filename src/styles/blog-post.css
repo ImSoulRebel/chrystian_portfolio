@@ -1,21 +1,20 @@
-/* Depuración: Forzar color rojo en .highlight dentro de .prose */
-/* Forzar color en todos los hijos de .highlight para evitar sobrescritura por --text-secondary */
-/* Color definitivo: usar --secondary-color para texto en highlight */
-.prose .highlight,
-.highlight,
-.highlight * {
-  color: var(--secondary-color, #1a1a2e) !important;
-}
-/* Forzar color blanco en .highlight y .quote incluso dentro de .prose */
-.prose .quote,
-.quote {
-  color: #fff !important;
-}
+/* ===============================================
+   Blog Post Styles - Optimized for Programming Content
+   =============================================== */
+
+/* Custom properties for blog styling */
 :root {
   --blog-title: var(--color-text, #f4f4f4);
   --blog-primary: var(--color-primary, #0077ff);
   --blog-secondary: var(--color-secondary, #f4f4f4);
   --blog-bg: var(--background-card, #fff);
+  --blog-text: var(--color-text, #222);
+
+  /* Code block colors - Professional dark theme */
+  --code-bg: #0d1117;
+  --code-text: #e6edf3;
+  --code-border: rgba(0, 212, 255, 0.2);
+  --code-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -23,16 +22,35 @@
     --blog-text: var(--color-text, #f4f4f4);
   }
 }
+
+/* ===============================================
+   Main Content Container
+   =============================================== */
 .prose {
   background: var(--blog-bg);
-  color: var(--blog-text, var(--color-text, #222));
+  color: var(--blog-text);
   border-radius: 1.2em;
   padding: 2.5rem 2rem;
   box-shadow: 0 2px 24px rgba(0, 0, 0, 0.04);
-  max-width: 800px;
+  max-width: 720px; /* Optimized for code blocks */
   margin: 0 auto 3rem auto;
 }
 
+@media (max-width: 768px) {
+  .prose {
+    padding: 2rem 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .prose {
+    padding: 1.5rem 1rem;
+  }
+}
+
+/* ===============================================
+   Typography - Headings
+   =============================================== */
 .prose h1 {
   font-size: 2.5rem;
   color: var(--blog-title);
@@ -42,71 +60,149 @@
   line-height: 1.1;
   text-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
 }
+
 .prose h2 {
-  font-size: 1.7rem;
+  font-size: 1.75rem;
   color: var(--primary-color);
   font-weight: 700;
-  margin-top: 2.2em;
-  margin-bottom: 0.8em;
-  line-height: 1.18;
+  margin-top: 2.5em;
+  margin-bottom: 0.9em;
+  line-height: 1.2;
 }
+
 .prose h3 {
-  font-size: 1.2rem;
+  font-size: 1.35rem;
   color: var(--blog-secondary, var(--blog-text, #f4f4f4));
+  font-weight: 600;
+  margin-top: 2em;
+  margin-bottom: 0.7em;
+  line-height: 1.3;
+}
+
+.prose h4 {
+  font-size: 1.15rem;
+  color: var(--blog-secondary);
   font-weight: 600;
   margin-top: 1.8em;
   margin-bottom: 0.6em;
-  line-height: 1.18;
+  line-height: 1.4;
 }
-.prose h4 {
-  font-size: 1.05rem;
-  color: var(--blog-secondary);
-  font-weight: 600;
-  margin-top: 1.5em;
-  margin-bottom: 0.5em;
-  line-height: 1.18;
+
+/* ===============================================
+   Typography - Body Text
+   =============================================== */
+.prose p {
+  font-size: 1.125rem; /* 18px for optimal readability */
+  margin-bottom: 1.75em;
+  line-height: 1.75;
+  color: var(--blog-text);
 }
-.prose p,
+
 .prose ul,
 .prose ol {
-  font-size: 1.08rem;
-  margin-bottom: 1.5em;
-  line-height: 1.7;
-}
-.prose ul,
-.prose ol {
+  font-size: 1.125rem;
+  margin-bottom: 1.75em;
+  line-height: 1.75;
   padding-left: 1.5em;
-  color: var(--blog-text, var(--color-text, #222));
+  color: var(--blog-text);
 }
+
 .prose li {
-  margin-bottom: 0.5em;
-  color: var(--blog-text, var(--color-text, #222));
+  margin-bottom: 0.6em;
+  color: var(--blog-text);
 }
+
+.prose li::marker {
+  color: var(--primary-color);
+}
+
+/* ===============================================
+   Links
+   =============================================== */
 .prose a {
-  color: var(--blog-primary);
+  color: var(--primary-color);
   text-decoration: underline;
-  transition: color 0.2s;
+  text-decoration-color: rgba(0, 212, 255, 0.3);
+  text-underline-offset: 3px;
+  transition: all 0.2s ease;
 }
+
 .prose a:hover,
 .prose a:focus {
-  color: var(--color-accent-hover, #005fa3);
+  color: var(--primary-color);
+  text-decoration-color: var(--primary-color);
   outline: none;
 }
 
-/* Código inline optimizado para tema oscuro */
+/* ===============================================
+   CODE BLOCKS - PRIORITY STYLING
+   =============================================== */
+
+/* Inline Code - Professional styling */
 .prose code {
-  background: rgba(0, 212, 255, 0.1);
+  background: rgba(0, 212, 255, 0.12);
   color: var(--primary-color, #00d4ff);
-  padding: 0.2em 0.5em;
+  padding: 0.3em 0.6em;
   border-radius: 6px;
-  font-size: 0.92em;
-  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+  font-size: 0.9em;
+  font-family:
+    'Fira Code', 'JetBrains Mono', 'Cascadia Code', 'Consolas', 'Monaco',
+    'Courier New', monospace;
   font-weight: 500;
-  border: 1px solid rgba(0, 212, 255, 0.2);
-  box-shadow: 0 0 8px rgba(0, 212, 255, 0.08);
+  border: 1px solid rgba(0, 212, 255, 0.25);
+  box-shadow: 0 0 10px rgba(0, 212, 255, 0.1);
+  white-space: nowrap;
 }
 
-/* Evitar estilos de código inline dentro de bloques pre */
+/* Light mode inline code */
+@media (prefers-color-scheme: light) {
+  .prose code {
+    background: rgba(0, 119, 255, 0.08);
+    color: #0066cc;
+    border-color: rgba(0, 119, 255, 0.2);
+    box-shadow: 0 0 8px rgba(0, 119, 255, 0.05);
+  }
+}
+
+/* Code Blocks - Professional dark theme */
+.prose pre {
+  background: var(--code-bg, #0d1117);
+  color: var(--code-text, #e6edf3);
+  padding: 2rem;
+  border-radius: 12px;
+  overflow-x: auto;
+  margin-top: 2.5em;
+  margin-bottom: 2.5em;
+  border: 1px solid var(--code-border);
+  box-shadow: var(--code-shadow);
+  line-height: 1.6;
+  font-size: 0.95rem; /* 15px - optimal for code */
+  font-family:
+    'Fira Code', 'JetBrains Mono', 'Cascadia Code', 'Consolas', 'Monaco',
+    'Courier New', monospace;
+  position: relative;
+}
+
+/* Scrollbar styling for code blocks */
+.prose pre::-webkit-scrollbar {
+  height: 10px;
+}
+
+.prose pre::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+}
+
+.prose pre::-webkit-scrollbar-thumb {
+  background: rgba(0, 212, 255, 0.3);
+  border-radius: 5px;
+}
+
+.prose pre::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 212, 255, 0.5);
+}
+
+/* Reset inline code styles inside pre blocks */
 .prose pre code {
   background: transparent !important;
   color: inherit !important;
@@ -115,63 +211,214 @@
   font-size: 1em !important;
   font-weight: normal !important;
   box-shadow: none !important;
+  white-space: pre;
 }
 
-/* Variante para modo claro (por si acaso) */
-@media (prefers-color-scheme: light) {
-  .prose code {
-    background: rgba(0, 212, 255, 0.12);
-    color: #0099cc;
-    border-color: rgba(0, 212, 255, 0.25);
-  }
-}
+/* ===============================================
+   Syntax Highlighting - GitHub Dark Style
+   =============================================== */
 
-/* Bloques de código pre optimizados para tu tema */
-.prose pre {
-  background: var(--accent-color, #16213e);
-  color: var(--text-primary, #ffffff);
-  padding: 1.5rem;
-  border-radius: var(--border-radius, 12px);
-  overflow-x: auto;
-  margin-bottom: 2em;
-  border: 1px solid rgba(0, 212, 255, 0.15);
-  box-shadow: var(--shadow-dark, 0 8px 30px rgba(0, 0, 0, 0.3));
-}
-
-/* Mejora contraste y sintaxis en bloques de código markdown */
-.prose pre,
-.prose pre code {
-  background: var(--accent-color, #16213e) !important;
-  color: var(--text-primary, #ffffff) !important;
-}
-
-/* Sintaxis highlighting ajustado a tu paleta */
+/* Comments */
 .prose pre .token.comment,
 .prose pre .token.prolog,
 .prose pre .token.doctype,
 .prose pre .token.cdata {
-  color: var(--text-muted, #7a8ca8) !important;
+  color: #8b949e !important;
+  font-style: italic;
 }
+
+/* Keywords (if, else, return, function, class, etc.) */
 .prose pre .token.keyword {
   color: #ff7b72 !important;
+  font-weight: 600;
 }
-.prose pre .token.string {
-  color: var(--primary-color, #00d4ff) !important;
-}
-.prose pre .token.function {
+
+/* Strings */
+.prose pre .token.string,
+.prose pre .token.attr-value {
   color: #a5d6ff !important;
 }
+
+/* Functions */
+.prose pre .token.function {
+  color: #d2a8ff !important;
+}
+
+/* Numbers */
 .prose pre .token.number {
-  color: #f2cc60 !important;
-}
-.prose pre .token.boolean,
-.prose pre .token.constant {
-  color: var(--primary-color, #00d4ff) !important;
-}
-.prose pre .token.class-name {
   color: #79c0ff !important;
 }
+
+/* Booleans and Constants */
+.prose pre .token.boolean,
+.prose pre .token.constant {
+  color: #79c0ff !important;
+}
+
+/* Class names */
+.prose pre .token.class-name {
+  color: #ffa657 !important;
+}
+
+/* Operators and Punctuation */
 .prose pre .token.operator,
 .prose pre .token.punctuation {
-  color: var(--text-secondary, #b8c4d6) !important;
+  color: #c9d1d9 !important;
+}
+
+/* Variables and Properties */
+.prose pre .token.property,
+.prose pre .token.variable {
+  color: #79c0ff !important;
+}
+
+/* Tags (HTML/XML) */
+.prose pre .token.tag {
+  color: #7ee787 !important;
+}
+
+/* Attributes */
+.prose pre .token.attr-name {
+  color: #79c0ff !important;
+}
+
+/* Selectors (CSS) */
+.prose pre .token.selector {
+  color: #7ee787 !important;
+}
+
+/* Important/Bold */
+.prose pre .token.important,
+.prose pre .token.bold {
+  font-weight: bold;
+}
+
+/* Italic */
+.prose pre .token.italic {
+  font-style: italic;
+}
+
+/* Deleted */
+.prose pre .token.deleted {
+  color: #ffa198 !important;
+}
+
+/* Inserted */
+.prose pre .token.inserted {
+  color: #7ee787 !important;
+}
+
+/* ===============================================
+   Blockquotes - Technical Notes
+   =============================================== */
+.prose blockquote {
+  border-left: 4px solid var(--primary-color);
+  padding: 1rem 1.5rem;
+  margin: 2em 0;
+  background: rgba(0, 212, 255, 0.05);
+  border-radius: 0 8px 8px 0;
+  font-style: italic;
+  color: var(--blog-text);
+}
+
+.prose blockquote p {
+  margin-bottom: 0.5em;
+}
+
+.prose blockquote p:last-child {
+  margin-bottom: 0;
+}
+
+/* ===============================================
+   Images and Figures
+   =============================================== */
+.prose img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin: 2em auto;
+  display: block;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.prose figure {
+  margin: 2em 0;
+}
+
+.prose figcaption {
+  text-align: center;
+  font-size: 0.9rem;
+  color: var(--text-secondary, #888);
+  margin-top: 0.5em;
+  font-style: italic;
+}
+
+/* ===============================================
+   Tables - API Comparisons
+   =============================================== */
+.prose table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 2em 0;
+  font-size: 1rem;
+  overflow-x: auto;
+  display: block;
+}
+
+.prose thead {
+  background: rgba(0, 212, 255, 0.1);
+}
+
+.prose th {
+  padding: 0.75rem 1rem;
+  text-align: left;
+  font-weight: 600;
+  color: var(--primary-color);
+  border-bottom: 2px solid var(--primary-color);
+}
+
+.prose td {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid rgba(0, 212, 255, 0.1);
+}
+
+.prose tr:hover {
+  background: rgba(0, 212, 255, 0.05);
+}
+
+/* ===============================================
+   Horizontal Rules
+   =============================================== */
+.prose hr {
+  border: none;
+  height: 2px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    var(--primary-color),
+    transparent
+  );
+  margin: 3em 0;
+  opacity: 0.3;
+}
+
+/* ===============================================
+   Special Classes for Highlights
+   =============================================== */
+.prose .highlight,
+.highlight,
+.highlight * {
+  color: var(--secondary-color, #1a1a2e) !important;
+}
+
+.prose .quote,
+.quote {
+  color: #fff !important;
+}
+
+/* ===============================================
+   Smooth Scrolling
+   =============================================== */
+html {
+  scroll-behavior: smooth;
 }

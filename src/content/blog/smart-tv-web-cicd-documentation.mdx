@@ -79,10 +79,13 @@ export const content = {
       </p>
 
       <pre><code>
-        {`on:
-
-push:
-tags: # Smart TV Development Builds - 'v[0-9].[0-9]+.[0-9]+-dev-st.**' # Web Development Builds - 'v[0-9].[0-9]+.[0-9]+-dev-w.**'`}
+        {
+        `on:
+        push:
+          tags:
+          - 'v[0-9].[0-9]+.[0-9]+-dev-st.\*\*' # Smart TV Development Builds
+          - 'v[0-9].[0-9]+.[0-9]+-dev-w.\*\*' # Web Development Builds`
+        }
 
 </code></pre>
 
