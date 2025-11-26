@@ -77,21 +77,21 @@ export const projects: Record<'es' | 'en', ProjectsTranslations> = {
           { label: 'Tiempo desarrollo', value: '4 meses' },
         ],
       },
-      'multipurpose-saas': {
-        title: 'App Multipropósito SaaS',
-        sector: 'SaaS Multipropósito',
-        role: 'Lead Flutter Developer',
-        duration: '7 meses (2022-2023)',
+      'logistics-management': {
+        title: 'App de Gestión Logística Empresarial',
+        sector: 'Logística & Transporte',
+        role: 'Desarrollador Móvil Senior',
+        duration: '12 meses (2022-2023)',
         stack:
-          'Flutter · Provider · Riverpod · BLoC · Firebase · Hive · SharedPreferences',
+          'Flutter · Google Maps · Firebase · GPS en Tiempo Real · APIs REST',
         description:
-          'Aplicación multipropósito con Clean Architecture + MVVM + Repository Pattern. Autenticación multiplataforma (correo, Google, Facebook), gestión de usuarios y perfiles, consumo de APIs externas y visualización de datos. Notificaciones push, soporte offline-first con Hive/SharedPreferences, internacionalización multiidioma, animaciones y transiciones personalizadas. CI/CD para despliegues automatizados.',
+          'Aplicación móvil empresarial (iOS/Android) para optimizar operaciones de flotas y entregas. Incluye rastreo GPS en tiempo real de vehículos, gestión inteligente de rutas y tareas, reportes de incidencias con fotos, chat en tiempo real entre conductores y central, y funcionamiento sin conexión a internet. La app permite a conductores gestionar sus entregas diarias, reportar problemas, y mantener comunicación constante con el equipo.',
         impact:
-          'Buenas prácticas con linter, análisis estático y pruebas. Mejora significativa en eficiencia mediante optimización basada en datos.',
+          'Solución completa que redujo significativamente los tiempos de gestión operativa y mejoró la trazabilidad de entregas. Arquitectura profesional con múltiples ambientes de desarrollo, componentes reutilizables y código de alta calidad. Proyecto activo en producción con usuarios reales gestionando operaciones diarias.',
         metrics: [
-          { label: 'Mejora eficiencia', value: '30%' },
-          { label: 'Cobertura tests', value: '85%' },
-          { label: 'Plataformas', value: 'iOS/Android/Web' },
+          { label: 'Pantallas desarrolladas', value: '21' },
+          { label: 'Funciona sin internet', value: 'Sí' },
+          { label: 'Plataformas', value: 'iOS + Android' },
         ],
       },
       portfolio: {
@@ -259,21 +259,20 @@ export const projects: Record<'es' | 'en', ProjectsTranslations> = {
           { label: 'Crash-free sessions', value: '99.5%' },
         ],
       },
-      'multipurpose-saas': {
-        title: 'Multipurpose SaaS App',
-        sector: 'Multipurpose SaaS',
-        role: 'Lead Flutter Developer',
-        duration: '7 months (2022-2023)',
-        stack:
-          'Flutter · Provider · Riverpod · BLoC · Firebase · Hive · SharedPreferences',
+      'logistics-management': {
+        title: 'Enterprise Logistics Management App',
+        sector: 'Logistics & Transportation',
+        role: 'Senior Mobile Developer',
+        duration: '12 months (2022-2023)',
+        stack: 'Flutter · Google Maps · Firebase · Real-time GPS · REST APIs',
         description:
-          'Multipurpose application with Clean Architecture + MVVM + Repository Pattern. Cross-platform authentication (email, Google, Facebook), user and profile management, external API consumption and data visualization. Push notifications, offline-first support with Hive/SharedPreferences, multi-language internationalization, custom animations and transitions. CI/CD for automated deployments.',
+          'Enterprise mobile application (iOS/Android) to optimize fleet and delivery operations. Features real-time GPS tracking of vehicles, intelligent route and task management, incident reporting with photos, real-time chat between drivers and headquarters, and offline functionality. The app enables drivers to manage daily deliveries, report issues, and maintain constant communication with the team.',
         impact:
-          'Best practices with linter, static analysis and testing. Significant efficiency improvement through data-driven optimization.',
+          'Complete solution that significantly reduced operational management times and improved delivery traceability. Professional architecture with multiple development environments, reusable components, and high-quality code. Active production project with real users managing daily operations.',
         metrics: [
-          { label: 'Efficiency improvement', value: '30%' },
-          { label: 'Test coverage', value: '85%' },
-          { label: 'Platforms', value: 'iOS/Android/Web' },
+          { label: 'Screens developed', value: '21' },
+          { label: 'Works offline', value: 'Yes' },
+          { label: 'Platforms', value: 'iOS + Android' },
         ],
       },
       portfolio: {

@@ -26,17 +26,23 @@
     "updatedAt": "2024-05-15T00:00:00.000Z"
   },
   {
-    "id": "multipurpose-saas",
+    "id": "logistics-management",
     "category": "business",
     "featured": true,
     "priority": 3,
     "confidential": true,
     "production": true,
     "image": "saas_logo.png",
-    "tags": ["Multipurpose", "Authentication", "Offline"],
+    "tags": [
+      "Logistics",
+      "Real-time GPS",
+      "Mobile App",
+      "Flutter",
+      "Enterprise"
+    ],
     "status": "active",
     "createdAt": "2022-08-01T00:00:00.000Z",
-    "updatedAt": "2024-04-20T00:00:00.000Z"
+    "updatedAt": "2024-11-27T00:00:00.000Z"
   },
   {
     "id": "camping-management",
