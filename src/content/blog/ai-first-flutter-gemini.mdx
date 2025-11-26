@@ -1,0 +1,1056 @@
+---
+id: 'ai-first-flutter-gemini'
+title:
+  es: 'Arquitectura AI-first para Flutter: Gemini CLI, MCP Server y Firebase AI Logic'
+  en: 'AI-First Architecture for Flutter: Gemini CLI, MCP Server and Firebase AI Logic'
+description:
+  es: 'Explora cómo automatizar el desarrollo Flutter, integrar mejores prácticas de IA y crear apps inteligentes sin backend gracias a Gemini, MCP y Firebase.'
+  en: 'Explore how to automate Flutter development, integrate AI best practices, and create intelligent apps without backend thanks to Gemini, MCP and Firebase.'
+tags:
+  [
+    'Flutter',
+    'Gemini',
+    'Firebase',
+    'AI',
+    'MCP',
+    'Architecture',
+    'Portfolio',
+    'Dart',
+    'AIFirst',
+  ]
+author: 'Chrystian Michell Álvarez Sánchez'
+image:
+  es: 'gemini-flutter-firebase.png'
+  en: 'gemini-flutter-firebase.png'
+featured: true
+priority: 98
+status: 'published'
+createdAt: '2025-11-26T01:20:00.000Z'
+updatedAt: '2025-11-26T01:20:00.000Z'
+---
+
+import { Highlight, Quote } from '@components';
+
+export const content = {
+  es: (
+    <>
+      <h1>
+        Arquitectura AI-first para Flutter con Gemini CLI, MCP y Firebase AI
+        Logic
+      </h1>
+
+      <Quote>
+        Esta arquitectura acelera el desarrollo multiplataforma Flutter
+        combinando Gemini CLI, el servidor MCP y Firebase AI Logic. Automatiza
+        tareas clave, asegura buenas prácticas y expone IA avanzada en el
+        cliente sin backend propio.
+      </Quote>
+
+      <h2>Contexto: de AI-assisted a AI-driven en Flutter</h2>
+
+      <p>
+        En muchos equipos, la IA se usa solo como autocompletado de código o
+        para generar fragmentos aislados. Esta arquitectura va un paso más allá
+        y convierte la IA en un actor de primera clase dentro del flujo de
+        desarrollo y del runtime de la aplicación: la IA crea la base del
+        proyecto, propone el diseño técnico, ejecuta tareas sobre el código
+        mediante MCP y, en producción, impulsa experiencias inteligentes desde
+        el cliente con Firebase.
+      </p>
+
+      <p>
+        Para perfiles técnicos (CTO, Staff Engineers, Tech Leads) esto implica
+        menos fricción al adoptar IA a escala: se apoya en herramientas
+        oficiales (Gemini CLI, Flutter MCP, Firebase AI Logic) y protocolos
+        abiertos (MCP), evitando "black boxes" propietarias difíciles de
+        auditar.
+      </p>
+
+      <h2>Capas de la solución</h2>
+
+      <p>La arquitectura se puede entender en tres capas principales:</p>
+
+      <ul>
+        <li>
+          <Highlight>Capa de desarrollo:</Highlight> Gemini CLI con Flutter
+          Extension conectado a MCP server automatiza código, refactors y
+          testing.
+        </li>
+        <li>
+          <Highlight>Capa de reglas y specs:</Highlight> AI Rules, DESIGN.md,
+          IMPLEMENTATION.md y comandos personalizados para spec-driven
+          development.
+        </li>
+        <li>
+          <Highlight>Capa de ejecución:</Highlight> Firebase AI Logic con
+          Gemini 3 Pro preview para capacidades de IA dentro de la app Flutter
+          sin backend propio.
+        </li>
+      </ul>
+
+      <p>
+        Cada capa está diseñada para ser intercambiable y extensible, de modo
+        que se pueda integrar con herramientas existentes (VS Code, Cursor,
+        CI/CD, etc.).
+      </p>
+
+      <hr />
+
+      <h2>Flutter Extension para Gemini CLI: desarrollo asistido pero estructurado</h2>
+
+      <p>
+        La Flutter Extension extiende Gemini CLI con comandos específicos para
+        Flutter y Dart, siguiendo reglas de calidad explícitas y conectándose
+        al MCP server oficial.
+      </p>
+
+      <p>Tras instalar la extensión, se habilitan comandos como:</p>
+
+      <ul>
+        <li>
+          <strong>/create-app:</strong> guía para bootstrap de un nuevo
+          proyecto Flutter con buenas prácticas, generando diseño e
+          implementación paso a paso.
+        </li>
+        <li>
+          <strong>/create-package:</strong> scaffolding de paquetes Dart con
+          estructura estándar y tooling listo.
+        </li>
+        <li>
+          <strong>/modify:</strong> sesiones de modificación estructuradas
+          sobre código existente, con planificación automatizada y cambios por
+          fases.
+        </li>
+        <li>
+          <strong>/commit:</strong> pre-commit automatizado con análisis, tests
+          y generación de mensajes de commit descriptivos.
+        </li>
+      </ul>
+
+      <Highlight>
+        La clave no es solo "generar código", sino imponer un flujo de trabajo
+        disciplinado donde la IA propone un plan, lo materializa fase a fase y
+        pide validación humana antes de avanzar.
+      </Highlight>
+
+      <h3>Ejemplo de archivo AGENTS.md</h3>
+
+      <pre>
+        <code>
+          {`# AGENTS.md
+
+ProjectName: MarketXFlutter
+WidgetNaming: PascalCaseWidget
+FolderStructure: lib/features/{feature}/presentation
+PreferRiverpod: true`}
+
+</code>
+</pre>
+
+      <hr />
+
+      <h2>MCP Server: puente entre la IA y el stack Flutter real</h2>
+
+      <p>
+        El servidor MCP de Dart y Flutter expone acciones del ecosistema
+        (análisis, ejecución, tooling) a clientes compatibles como Gemini CLI,
+        IDEs o agentes externos.
+      </p>
+
+      <p>A alto nivel, la arquitectura MCP se puede representar como:</p>
+
+      <Quote>
+        LLM / Gemini CLI ⇄ Cliente MCP (CLI/IDE/agente) ⇄ Servidor MCP de
+        Dart/Flutter ⇄ Código, herramientas y entorno local.
+      </Quote>
+
+      <p>Entre las capacidades típicas del servidor MCP se incluyen:</p>
+
+      <ul>
+        <li>
+          Análisis y corrección de errores en el código (Dart Analysis Server).
+        </li>
+        <li>
+          Hot reload, obtención del widget seleccionado, captura de errores en
+          tiempo de ejecución.
+        </li>
+        <li>
+          Búsqueda y gestión de dependencias en pub.dev y en pubspec.yaml.
+        </li>
+        <li>Ejecución de tests y análisis de resultados.</li>
+      </ul>
+
+      <p>
+        Esto permite que la IA no trabaje sobre una "copia estática" del repo,
+        sino sobre el mismo tooling que usa el equipo de desarrollo, con
+        operaciones auditablemente definidas.
+      </p>
+
+      <hr />
+
+      <h2>AI Rules y documentación viva: de prompt a contrato técnico</h2>
+
+      <p>
+        La extensión no solo añade comandos, también aplica un conjunto de
+        reglas de IA para garantizar buenas prácticas en Dart y Flutter,
+        incluyendo estilo de código, arquitectura, testing y accesibilidad.
+      </p>
+
+      <p>
+        Estas reglas se pueden complementar con archivos de especificación en
+        el propio repo:
+      </p>
+
+      <ul>
+        <li>
+          <strong>DESIGN.md:</strong> visión arquitectónica de alto nivel,
+          decisiones clave, patrones de navegación y estado.
+        </li>
+        <li>
+          <strong>IMPLEMENTATION.md:</strong> plan de implementación
+          incremental, organizado por fases y features, con checklist de
+          progreso.
+        </li>
+        <li>
+          Archivos como <strong>GEMINI.md</strong> o <strong>AGENTS.md</strong>{' '}
+          para ajustar convenciones de nombres, estructura de carpetas o
+          preferencias de state management de cada proyecto.
+        </li>
+      </ul>
+
+      <p>
+        Este enfoque convierte los prompts en algo versionable y revisable por
+        el equipo, alineando a la IA con los estándares internos de la
+        organización en lugar de depender de instrucciones ad-hoc en cada
+        sesión.
+      </p>
+
+      <hr />
+
+      <h2>Spec-driven development con comandos personalizados</h2>
+
+      <p>
+        A partir de estas reglas y especificaciones, el flujo de trabajo se
+        vuelve explícitamente "spec-driven":
+      </p>
+
+      <ol>
+        <li>
+          Se define el producto o funcionalidad con lenguaje natural (por
+          ejemplo, "app de planificación de entrenamientos con progreso y
+          biblioteca de ejercicios").
+        </li>
+        <li>
+          <code>/create-app</code> transforma esa intención en un DESIGN.md y
+          un IMPLEMENTATION.md que el equipo puede revisar, corregir y aprobar.
+        </li>
+        <li>
+          La IA implementa cada fase del plan, marcando progreso en los
+          documentos y pidiendo validación al completar cada bloque.
+        </li>
+        <li>
+          Comandos posteriores como <code>/modify</code> permiten aplicar
+          cambios sobre partes concretas del sistema (un feature, un widget, un
+          módulo), manteniendo el plan y la documentación sincronizados con el
+          código.
+        </li>
+      </ol>
+
+      <p>
+        Este ciclo reduce el coste de comunicación entre producto, arquitectura
+        y ejecución, especialmente en equipos distribuidos o con alta rotación.
+      </p>
+
+      <hr />
+
+      <h2>Integración con editores y herramientas existentes</h2>
+
+      <p>
+        La arquitectura está pensada para acoplarse a las herramientas ya
+        presentes en el stack del equipo:
+      </p>
+
+      <ul>
+        <li>
+          <strong>VS Code y GitHub Copilot:</strong> el plugin de Dart puede
+          registrar el servidor MCP y exponer sus herramientas a Copilot y
+          otras integraciones de IA.
+        </li>
+        <li>
+          <strong>Cursor:</strong> se puede configurar el servidor MCP de
+          Dart/Flutter mediante un archivo <code>.cursor/mcp.json</code>,
+          haciendo que el editor disponga de documentación y tooling en tiempo
+          real.
+        </li>
+        <li>
+          <strong>Otros clientes MCP:</strong> cualquier agente que hable MCP
+          puede aprovechar las mismas capacidades sin acceso directo al código
+          fuente desde la nube.
+        </li>
+      </ul>
+
+      <p>
+        Esto abre la puerta a agentes especializados (por ejemplo, enfocados en
+        rendimiento, accesibilidad o refactoring) trabajando sobre la misma
+        capa MCP compartida.
+      </p>
+
+      <hr />
+
+      <h2>Gemini 3 y Firebase AI Logic: IA de producción sin backend dedicado</h2>
+
+      <p>
+        En la capa de ejecución, Firebase AI Logic ofrece acceso directo a
+        Gemini 3 Pro preview desde los SDKs cliente, sin necesidad de desplegar
+        ni mantener un backend propio para la IA.
+      </p>
+
+      <p>Algunos puntos clave:</p>
+
+      <ul>
+        <li>
+          Soporte de la mayoría de capacidades de Gemini 3: mejor razonamiento
+          ("improved thinking"), function calling, "thought signatures" y
+          resolución de imagen mejorada.
+        </li>
+        <li>
+          SDKs cliente que gestionan automáticamente detalles complejos como la
+          preservación del contexto de pensamiento vía{' '}
+          <code>thought_signature</code>, sin orquestación manual.
+        </li>
+        <li>
+          Modelos disponibles como Gemini 3 Pro y variantes de visión,
+          accesibles para apps móviles y web desde Firebase.
+        </li>
+      </ul>
+
+      <p>
+        Para Flutter, esto se traduce en integrar el paquete{' '}
+        <code>firebase_ai</code> junto a <code>firebase_core</code>,
+        inicializar Firebase y crear un <code>GenerativeModel</code> apuntando
+        a "gemini-3-pro-preview".
+      </p>
+
+      <hr />
+
+      <h2>Razonamiento, "thought signatures" y control del coste</h2>
+
+      <p>
+        Gemini 3 introduce mejoras específicas orientadas a entornos de
+        producción que necesitan equilibrio entre calidad de respuesta,
+        latencia y coste:
+      </p>
+
+      <ul>
+        <li>
+          <strong>Improved thinking:</strong> capacidad de razonamiento más
+          profunda, con posibilidad de incluir resúmenes del proceso de
+          pensamiento cuando se habilita la configuración correspondiente.
+        </li>
+        <li>
+          <strong>Thought signatures:</strong> metadatos cifrados que
+          representan el "hilo de pensamiento" del modelo entre turnos; los
+          SDKs de Firebase se encargan de gestionarlos transparentemente.
+        </li>
+        <li>
+          <strong>Thinking budgets / levels:</strong> configuración del
+          "presupuesto de pensamiento" para reducir latencia y controlar gasto
+          en casos de uso que no requieren análisis extensivo.
+        </li>
+      </ul>
+
+      <p>
+        A esto se suma la posibilidad de ajustar la resolución de entrada
+        multimodal (por ejemplo, imágenes) para priorizar precisión o
+        rendimiento, según las necesidades del producto.
+      </p>
+
+      <hr />
+
+      <h2>Agentes en cliente con function calling</h2>
+
+      <p>
+        Uno de los patrones más interesantes para CEOs y CTOs interesados en
+        "agentic apps" es la combinación de Gemini 3 con function calling para
+        orquestar acciones dentro de la app Flutter directamente desde el
+        cliente.
+      </p>
+
+      <p>El flujo típico es:</p>
+
+      <ol>
+        <li>
+          Se definen <code>tools</code> en el modelo (por ejemplo, cambiar
+          tema, abrir un diálogo, registrar feedback) con esquemas bien
+          tipados.
+        </li>
+        <li>
+          El usuario formula una intención en lenguaje natural ("pon el tema
+          oscuro", "añade este ejercicio a mi rutina").
+        </li>
+        <li>
+          Gemini decide qué función llamar, pasa los argumentos tipados y la
+          app ejecuta la acción, devolviendo un resultado que el modelo puede
+          usar para continuar la interacción.
+        </li>
+      </ol>
+
+      <h3>Ejemplo de agentic app con function calling</h3>
+
+      <pre>
+        <code>
+          {`final tools = [
+
+Tool(functionDeclarations: [
+FunctionDeclaration('changeThemeColor', 'Cambia el color de la app', {...}),
+FunctionDeclaration('sendFeedback', 'Envía feedback del usuario', {...})
+])
+];
+
+final model = Firebase.ai(
+backend = GenerativeBackend.googleAI()
+).generativeModel(
+modelName: "gemini-3-pro-preview",
+tools: tools,
+);`}
+
+</code>
+</pre>
+
+      <p>
+        Esto proporciona experiencias tipo "copiloto en la app" sin necesidad
+        de un orquestador backend, lo que reduce la complejidad inicial y
+        acelera el time-to-market.
+      </p>
+
+      <hr />
+
+      <h2>Observabilidad y gobernanza: AI Monitoring y seguridad</h2>
+
+      <p>
+        Para entornos corporativos, la observabilidad y la gobernanza son tan
+        importantes como la funcionalidad. Firebase AI Logic incluye un panel
+        de monitorización específico para uso de IA que permite:
+      </p>
+
+      <ul>
+        <li>
+          Analizar costes, volumen de peticiones y latencias por modelo.
+        </li>
+        <li>
+          Comparar el rendimiento de Gemini 3 frente a modelos anteriores a lo
+          largo del tiempo.
+        </li>
+        <li>
+          Inspeccionar trazas con atributos de petición, inputs y outputs para
+          debugging y optimización.
+        </li>
+      </ul>
+
+      <p>Además, se integra con otros servicios de Firebase:</p>
+
+      <ul>
+        <li>
+          <strong>App Check:</strong> protección frente a uso no autorizado de
+          la API, asegurando que el consumo viene de apps legítimas.
+        </li>
+        <li>
+          <strong>Remote Config:</strong> ajuste dinámico de modelos, prompts y
+          parámetros (temperatura, top-k, etc.) sin necesidad de publicar
+          nuevas versiones de la app.
+        </li>
+        <li>
+          Infraestructura de seguridad y cumplimiento de Gemini 3, que ha
+          pasado por evaluaciones de seguridad y seguridad de contenido más
+          exhaustivas dentro del ecosistema Google.
+        </li>
+      </ul>
+
+      <hr />
+
+      <h2>Beneficios para equipos y negocio</h2>
+
+      <p>
+        Desde la perspectiva de negocio y liderazgo técnico, esta arquitectura
+        ofrece varios beneficios concretos:
+      </p>
+
+      <ul>
+        <li>
+          <strong>Reducción del tiempo de arranque</strong> de nuevos proyectos
+          gracias a <code>/create-app</code> y a la generación de diseño e
+          implementación estructurados.
+        </li>
+        <li>
+          <strong>Disminución de deuda técnica</strong> al aplicar
+          sistemáticamente reglas de calidad y aprovechar MCP para refactors,
+          fixes y pruebas automatizadas.
+        </li>
+        <li>
+          <strong>Aceleración del delivery de features de IA</strong> al
+          eliminar la necesidad de construir y mantener un backend dedicado
+          para el modelo, especialmente en fases iniciales de producto.
+        </li>
+        <li>
+          <strong>Mejor control de costes, rendimiento y riesgos</strong>{' '}
+          gracias al dashboard de AI monitoring, App Check y Remote Config.
+        </li>
+      </ul>
+
+      <p>
+        Para reclutadores y managers, también facilita evaluar y escalar
+        equipos en entornos donde la IA está integrada de manera nativa en el
+        ciclo de vida de desarrollo, pero bajo patrones, contratos y tooling
+        consistentes.
+      </p>
+
+      <hr />
+
+      <h2>¿Cómo podría ayudarte en tu proyecto?</h2>
+
+      <p>Este tipo de arquitectura es especialmente interesante si:</p>
+
+      <ul>
+        <li>
+          Quieres lanzar o escalar productos Flutter con features de IA
+          (asistentes dentro de la app, análisis de contenido, recomendaciones)
+          sin crecer exponencialmente en complejidad backend.
+        </li>
+        <li>
+          Buscas estandarizar cómo tu organización usa IA para escribir código,
+          aplicar refactors y mantener la calidad en repositorios
+          multiplataforma.
+        </li>
+        <li>
+          Necesitas un enfoque trazable y gobernable de IA, donde prompts,
+          reglas y decisiones estén versionadas en el propio repositorio, en
+          lugar de vivir solo en la cabeza del equipo.
+        </li>
+      </ul>
+
+      <Highlight>
+        Si tu empresa quiere explorar cómo integrar Gemini CLI, MCP y Firebase
+        AI Logic en su stack Flutter —ya sea para un nuevo producto o para
+        modernizar uno existente—, estaré encantado de conversar y diseñar
+        juntos una estrategia alineada con tus objetivos técnicos y de negocio.
+      </Highlight>
+
+      <hr />
+      <p>
+        <strong>
+          ¿Quieres explorar esta arquitectura AI-first para tu proyecto
+          Flutter?
+        </strong>
+        <br />
+        ¡Conversemos! <a href="/es/contact">Contáctame aquí</a> o revisa{' '}
+        <a href="/">mi portfolio completo</a>.
+      </p>
+    </>
+
+),
+en: (
+
+<>
+<h1>
+AI-First Architecture for Flutter with Gemini CLI, MCP and Firebase AI
+Logic
+</h1>
+
+      <Quote>
+        This architecture accelerates cross-platform Flutter development by
+        combining Gemini CLI, the MCP server, and Firebase AI Logic. It
+        automates key tasks, ensures best practices, and exposes advanced AI on
+        the client without its own backend.
+      </Quote>
+
+      <h2>Context: from AI-assisted to AI-driven in Flutter</h2>
+
+      <p>
+        In many teams, AI is only used for code autocompletion or to generate
+        isolated snippets. This architecture goes a step further and turns AI
+        into a first-class actor within the development flow and application
+        runtime: AI creates the project foundation, proposes technical design,
+        executes tasks on code via MCP, and in production, powers intelligent
+        experiences from the client with Firebase.
+      </p>
+
+      <p>
+        For technical profiles (CTOs, Staff Engineers, Tech Leads), this means
+        less friction when adopting AI at scale: it relies on official tools
+        (Gemini CLI, Flutter MCP, Firebase AI Logic) and open protocols (MCP),
+        avoiding proprietary "black boxes" that are difficult to audit.
+      </p>
+
+      <h2>Solution layers</h2>
+
+      <p>The architecture can be understood in three main layers:</p>
+
+      <ul>
+        <li>
+          <Highlight>Development layer:</Highlight> Gemini CLI with Flutter
+          Extension connected to MCP server automates code, refactors, and
+          testing.
+        </li>
+        <li>
+          <Highlight>Rules and specs layer:</Highlight> AI Rules, DESIGN.md,
+          IMPLEMENTATION.md, and custom commands for spec-driven development.
+        </li>
+        <li>
+          <Highlight>Execution layer:</Highlight> Firebase AI Logic with Gemini
+          3 Pro preview for AI capabilities within the Flutter app without its
+          own backend.
+        </li>
+      </ul>
+
+      <p>
+        Each layer is designed to be interchangeable and extensible, so it can
+        integrate with existing tools (VS Code, Cursor, CI/CD, etc.).
+      </p>
+
+      <hr />
+
+      <h2>Flutter Extension for Gemini CLI: assisted but structured development</h2>
+
+      <p>
+        The Flutter Extension extends Gemini CLI with specific commands for
+        Flutter and Dart, following explicit quality rules and connecting to
+        the official MCP server.
+      </p>
+
+      <p>After installing the extension, commands are enabled such as:</p>
+
+      <ul>
+        <li>
+          <strong>/create-app:</strong> guide for bootstrapping a new Flutter
+          project with best practices, generating design and implementation
+          step by step.
+        </li>
+        <li>
+          <strong>/create-package:</strong> scaffolding of Dart packages with
+          standard structure and ready tooling.
+        </li>
+        <li>
+          <strong>/modify:</strong> structured modification sessions on
+          existing code, with automated planning and phased changes.
+        </li>
+        <li>
+          <strong>/commit:</strong> automated pre-commit with analysis, tests,
+          and generation of descriptive commit messages.
+        </li>
+      </ul>
+
+      <Highlight>
+        The key is not just "generating code," but imposing a disciplined
+        workflow where AI proposes a plan, materializes it phase by phase, and
+        asks for human validation before advancing.
+      </Highlight>
+
+      <h3>Example AGENTS.md file</h3>
+
+      <pre>
+        <code>
+          {`# AGENTS.md
+
+ProjectName: MarketXFlutter
+WidgetNaming: PascalCaseWidget
+FolderStructure: lib/features/{feature}/presentation
+PreferRiverpod: true`}
+
+</code>
+</pre>
+
+      <hr />
+
+      <h2>MCP Server: bridge between AI and the real Flutter stack</h2>
+
+      <p>
+        The Dart and Flutter MCP server exposes ecosystem actions (analysis,
+        execution, tooling) to compatible clients like Gemini CLI, IDEs, or
+        external agents.
+      </p>
+
+      <p>At a high level, the MCP architecture can be represented as:</p>
+
+      <Quote>
+        LLM / Gemini CLI ⇄ MCP Client (CLI/IDE/agent) ⇄ Dart/Flutter MCP Server
+        ⇄ Code, tools, and local environment.
+      </Quote>
+
+      <p>Typical MCP server capabilities include:</p>
+
+      <ul>
+        <li>
+          Analysis and error correction in code (Dart Analysis Server).
+        </li>
+        <li>
+          Hot reload, getting the selected widget, capturing runtime errors.
+        </li>
+        <li>
+          Searching and managing dependencies in pub.dev and pubspec.yaml.
+        </li>
+        <li>Running tests and analyzing results.</li>
+      </ul>
+
+      <p>
+        This allows AI to work not on a "static copy" of the repo, but on the
+        same tooling used by the development team, with auditably defined
+        operations.
+      </p>
+
+      <hr />
+
+      <h2>AI Rules and living documentation: from prompt to technical contract</h2>
+
+      <p>
+        The extension not only adds commands, it also applies a set of AI rules
+        to ensure best practices in Dart and Flutter, including code style,
+        architecture, testing, and accessibility.
+      </p>
+
+      <p>
+        These rules can be complemented with specification files in the repo
+        itself:
+      </p>
+
+      <ul>
+        <li>
+          <strong>DESIGN.md:</strong> high-level architectural vision, key
+          decisions, navigation and state patterns.
+        </li>
+        <li>
+          <strong>IMPLEMENTATION.md:</strong> incremental implementation plan,
+          organized by phases and features, with progress checklist.
+        </li>
+        <li>
+          Files like <strong>GEMINI.md</strong> or <strong>AGENTS.md</strong>{' '}
+          to adjust naming conventions, folder structure, or state management
+          preferences for each project.
+        </li>
+      </ul>
+
+      <p>
+        This approach turns prompts into something versionable and reviewable
+        by the team, aligning AI with the organization's internal standards
+        instead of relying on ad-hoc instructions in each session.
+      </p>
+
+      <hr />
+
+      <h2>Spec-driven development with custom commands</h2>
+
+      <p>
+        From these rules and specifications, the workflow becomes explicitly
+        "spec-driven":
+      </p>
+
+      <ol>
+        <li>
+          The product or functionality is defined in natural language (for
+          example, "workout planning app with progress and exercise library").
+        </li>
+        <li>
+          <code>/create-app</code> transforms that intention into a DESIGN.md
+          and IMPLEMENTATION.md that the team can review, correct, and approve.
+        </li>
+        <li>
+          AI implements each phase of the plan, marking progress in the
+          documents and asking for validation upon completing each block.
+        </li>
+        <li>
+          Subsequent commands like <code>/modify</code> allow applying changes
+          to specific parts of the system (a feature, a widget, a module),
+          keeping the plan and documentation synchronized with the code.
+        </li>
+      </ol>
+
+      <p>
+        This cycle reduces the communication cost between product, architecture,
+        and execution, especially in distributed teams or those with high
+        turnover.
+      </p>
+
+      <hr />
+
+      <h2>Integration with editors and existing tools</h2>
+
+      <p>
+        The architecture is designed to couple with tools already present in
+        the team's stack:
+      </p>
+
+      <ul>
+        <li>
+          <strong>VS Code and GitHub Copilot:</strong> the Dart plugin can
+          register the MCP server and expose its tools to Copilot and other AI
+          integrations.
+        </li>
+        <li>
+          <strong>Cursor:</strong> the Dart/Flutter MCP server can be
+          configured via a <code>.cursor/mcp.json</code> file, making the
+          editor have documentation and tooling in real time.
+        </li>
+        <li>
+          <strong>Other MCP clients:</strong> any agent that speaks MCP can
+          leverage the same capabilities without direct access to source code
+          from the cloud.
+        </li>
+      </ul>
+
+      <p>
+        This opens the door to specialized agents (for example, focused on
+        performance, accessibility, or refactoring) working on the same shared
+        MCP layer.
+      </p>
+
+      <hr />
+
+      <h2>Gemini 3 and Firebase AI Logic: production AI without dedicated backend</h2>
+
+      <p>
+        In the execution layer, Firebase AI Logic offers direct access to
+        Gemini 3 Pro preview from client SDKs, without the need to deploy or
+        maintain its own backend for AI.
+      </p>
+
+      <p>Some key points:</p>
+
+      <ul>
+        <li>
+          Support for most Gemini 3 capabilities: improved reasoning ("improved
+          thinking"), function calling, "thought signatures," and improved
+          image resolution.
+        </li>
+        <li>
+          Client SDKs that automatically manage complex details like preserving
+          thought context via <code>thought_signature</code>, without manual
+          orchestration.
+        </li>
+        <li>
+          Available models like Gemini 3 Pro and vision variants, accessible
+          for mobile and web apps from Firebase.
+        </li>
+      </ul>
+
+      <p>
+        For Flutter, this translates to integrating the <code>firebase_ai</code>{' '}
+        package along with <code>firebase_core</code>, initializing Firebase,
+        and creating a <code>GenerativeModel</code> pointing to
+        "gemini-3-pro-preview".
+      </p>
+
+      <hr />
+
+      <h2>Reasoning, "thought signatures" and cost control</h2>
+
+      <p>
+        Gemini 3 introduces specific improvements aimed at production
+        environments that need balance between response quality, latency, and
+        cost:
+      </p>
+
+      <ul>
+        <li>
+          <strong>Improved thinking:</strong> deeper reasoning capability, with
+          the possibility of including summaries of the thought process when
+          the corresponding configuration is enabled.
+        </li>
+        <li>
+          <strong>Thought signatures:</strong> encrypted metadata representing
+          the model's "thread of thought" between turns; Firebase SDKs handle
+          them transparently.
+        </li>
+        <li>
+          <strong>Thinking budgets / levels:</strong> configuration of the
+          "thinking budget" to reduce latency and control spending in use cases
+          that don't require extensive analysis.
+        </li>
+      </ul>
+
+      <p>
+        Added to this is the ability to adjust multimodal input resolution (for
+        example, images) to prioritize accuracy or performance, depending on
+        product needs.
+      </p>
+
+      <hr />
+
+      <h2>Client agents with function calling</h2>
+
+      <p>
+        One of the most interesting patterns for CEOs and CTOs interested in
+        "agentic apps" is the combination of Gemini 3 with function calling to
+        orchestrate actions within the Flutter app directly from the client.
+      </p>
+
+      <p>The typical flow is:</p>
+
+      <ol>
+        <li>
+          <code>tools</code> are defined in the model (for example, change
+          theme, open a dialog, record feedback) with well-typed schemas.
+        </li>
+        <li>
+          The user formulates an intention in natural language ("set dark
+          theme", "add this exercise to my routine").
+        </li>
+        <li>
+          Gemini decides which function to call, passes typed arguments, and
+          the app executes the action, returning a result that the model can
+          use to continue the interaction.
+        </li>
+      </ol>
+
+      <h3>Example agentic app with function calling</h3>
+
+      <pre>
+        <code>
+          {`final tools = [
+
+Tool(functionDeclarations: [
+FunctionDeclaration('changeThemeColor', 'Changes app color', {...}),
+FunctionDeclaration('sendFeedback', 'Sends user feedback', {...})
+])
+];
+
+final model = Firebase.ai(
+backend = GenerativeBackend.googleAI()
+).generativeModel(
+modelName: "gemini-3-pro-preview",
+tools: tools,
+);`}
+
+</code>
+</pre>
+
+      <p>
+        This provides "copilot in the app" type experiences without the need
+        for a backend orchestrator, which reduces initial complexity and
+        accelerates time-to-market.
+      </p>
+
+      <hr />
+
+      <h2>Observability and governance: AI Monitoring and security</h2>
+
+      <p>
+        For corporate environments, observability and governance are as
+        important as functionality. Firebase AI Logic includes a specific
+        monitoring panel for AI usage that allows:
+      </p>
+
+      <ul>
+        <li>Analyzing costs, request volume, and latencies per model.</li>
+        <li>
+          Comparing Gemini 3 performance against previous models over time.
+        </li>
+        <li>
+          Inspecting traces with request attributes, inputs, and outputs for
+          debugging and optimization.
+        </li>
+      </ul>
+
+      <p>Additionally, it integrates with other Firebase services:</p>
+
+      <ul>
+        <li>
+          <strong>App Check:</strong> protection against unauthorized API use,
+          ensuring consumption comes from legitimate apps.
+        </li>
+        <li>
+          <strong>Remote Config:</strong> dynamic adjustment of models,
+          prompts, and parameters (temperature, top-k, etc.) without needing to
+          publish new app versions.
+        </li>
+        <li>
+          Gemini 3 security and compliance infrastructure, which has undergone
+          more thorough security and content safety evaluations within the
+          Google ecosystem.
+        </li>
+      </ul>
+
+      <hr />
+
+      <h2>Benefits for teams and business</h2>
+
+      <p>
+        From a business and technical leadership perspective, this architecture
+        offers several concrete benefits:
+      </p>
+
+      <ul>
+        <li>
+          <strong>Reduced startup time</strong> for new projects thanks to{' '}
+          <code>/create-app</code> and structured design and implementation
+          generation.
+        </li>
+        <li>
+          <strong>Decreased technical debt</strong> by systematically applying
+          quality rules and leveraging MCP for refactors, fixes, and automated
+          tests.
+        </li>
+        <li>
+          <strong>Accelerated AI feature delivery</strong> by eliminating the
+          need to build and maintain a dedicated backend for the model,
+          especially in early product phases.
+        </li>
+        <li>
+          <strong>Better cost, performance, and risk control</strong> thanks to
+          the AI monitoring dashboard, App Check, and Remote Config.
+        </li>
+      </ul>
+
+      <p>
+        For recruiters and managers, it also facilitates evaluating and scaling
+        teams in environments where AI is natively integrated into the
+        development lifecycle, but under consistent patterns, contracts, and
+        tooling.
+      </p>
+
+      <hr />
+
+      <h2>How could this help your project?</h2>
+
+      <p>This type of architecture is especially interesting if:</p>
+
+      <ul>
+        <li>
+          You want to launch or scale Flutter products with AI features
+          (in-app assistants, content analysis, recommendations) without
+          exponentially growing backend complexity.
+        </li>
+        <li>
+          You're looking to standardize how your organization uses AI to write
+          code, apply refactors, and maintain quality in cross-platform
+          repositories.
+        </li>
+        <li>
+          You need a traceable and governable AI approach, where prompts,
+          rules, and decisions are versioned in the repository itself, rather
+          than living only in the team's heads.
+        </li>
+      </ul>
+
+      <Highlight>
+        If your company wants to explore how to integrate Gemini CLI, MCP, and
+        Firebase AI Logic into its Flutter stack—whether for a new product or
+        to modernize an existing one—I'd be happy to talk and design together a
+        strategy aligned with your technical and business objectives.
+      </Highlight>
+
+      <hr />
+      <p>
+        <strong>
+          Want to explore this AI-first architecture for your Flutter project?
+        </strong>
+        <br />
+        Let's talk! <a href="/en/contact">Contact me here</a> or check out{' '}
+        <a href="/">my full portfolio</a>.
+      </p>
+    </>
+
+),
+};
+
+export default function BlogContent({ lang }) {
+  return content[lang] || content['es'];
+}

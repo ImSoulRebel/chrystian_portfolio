@@ -1,0 +1,362 @@
+---
+id: 'smart-tv-web-cicd-documentation'
+title:
+  es: 'Arquitectura CI/CD para Aplicación Smart TV y Web'
+  en: 'CI/CD Architecture for Smart TV & Web Application'
+description:
+  es: 'Este documento detalla la arquitectura CI/CD diseñada para una aplicación OTT/Streaming de alto rendimiento dirigida a plataformas Smart TV y Web, utilizando GitHub Actions para garantizar fiabilidad, escalabilidad y rapidez.'
+  en: 'This document details the CI/CD architecture designed for a high-performance OTT/Streaming application targeting Smart TV and Web platforms, using GitHub Actions to ensure reliability, scalability, and speed.'
+tags:
+  [
+    'CI/CD',
+    'GitHub Actions',
+    'Smart TV',
+    'Web Application',
+    'Docker',
+    'Flutter',
+    'DevOps',
+    'Portfolio',
+  ]
+author: 'Chrystian Michell Álvarez Sánchez'
+image:
+  es: 'smart-tv-web-cicd.png'
+  en: 'smart-tv-web-cicd.png'
+featured: false
+priority: 1
+status: 'published'
+createdAt: '2025-11-20T00:00:00.000Z'
+updatedAt: '2025-11-20T00:00:00.000Z'
+---
+
+import { Highlight, Quote } from '@components';
+
+export const content = {
+  es: (
+    <>
+      <h1>Arquitectura CI/CD para Aplicación Smart TV y Web</h1>
+      
+      <h2>Visión General</h2>
+      <p>
+        Este documento detalla el pipeline de <strong>Integración Continua y Despliegue Continuo (CI/CD)</strong> diseñado para una aplicación OTT/Streaming de alto rendimiento dirigida tanto a plataformas <strong>Smart TV</strong> como <strong>Web</strong>. 
+        <br />
+        El sistema está construido sobre <strong>GitHub Actions</strong>, aprovechando una arquitectura de flujos de trabajo modulares y reutilizables para garantizar fiabilidad, escalabilidad y velocidad a través de múltiples entornos (Desarrollo, Staging y Producción).
+      </p>
+
+      <h2>Características Clave</h2>
+      <ul>
+        <li>
+          <strong>Soporte Multiplataforma:</strong> Pipeline unificado manejando tanto builds Web como Smart TV con optimizaciones específicas por plataforma.
+        </li>
+        <li>
+          <strong>Despliegue Basado en Tags:</strong> Selección automática de entorno basada en tags de versionado semántico.
+        </li>
+        <li>
+          <strong>Flujos Reutilizables:</strong> Diseño modular reduciendo la duplicación de código y simplificando el mantenimiento.
+        </li>
+        <li>
+          <strong>Despliegue Seguro:</strong> Despliegue basado en SSH con gestión estricta de claves.
+        </li>
+        <li>
+          <strong>Containerización:</strong> Entrega basada en Docker garantizando consistencia entre entornos.
+        </li>
+        <li>
+          <strong>Optimización de Rendimiento:</strong> Flujos simplificados con ejecución en paralelo y eliminación de trabajos redundantes, reduciendo los tiempos de build en ~40%.
+        </li>
+      </ul>
+
+      <Highlight>
+        La arquitectura modular permite mantener consistencia y eficiencia en despliegues multiplataforma complejos.
+      </Highlight>
+
+      <h2>Estrategia de Flujo de Trabajo</h2>
+      <p>
+        El pipeline se activa mediante patrones específicos de tags, que determinan el entorno objetivo y la plataforma.
+      </p>
+
+      <h3>Configuración de Triggers</h3>
+      <p>
+        El sistema distingue entre entornos usando patrones regex en los tags de git:
+      </p>
+
+      <pre><code>
+        {
+        `on:
+        push:
+          tags:
+          - 'v[0-9].[0-9]+.[0-9]+-dev-st.\*\*' # Smart TV Development Builds
+          - 'v[0-9].[0-9]+.[0-9]+-dev-w.\*\*' # Web Development Builds`
+        }
+
+</code></pre>
+
+      <h2>Etapas del Pipeline</h2>
+
+      <h3>1. Detección Dinámica de Entorno y Plataforma</h3>
+      <p>
+        Un trabajo dedicado analiza el tag entrante para establecer el contexto de build dinámicamente:
+      </p>
+
+      <pre><code>
+        {`get-type:
+
+runs-on: ubuntu-latest
+needs: [print_branch_name]
+outputs:
+TYPE: \${{ steps.get_type.outputs.type }}
+steps: - name: Get Type
+id: get_type
+run: |
+if \${{ contains(github.ref, '-dev-w.') }}; then
+echo "type=web" >> \$GITHUB_OUTPUT
+else
+echo "type=smartTv" >> \$GITHUB_OUTPUT
+fi`}
+
+</code></pre>
+
+      <h3>2. Build y Containerización</h3>
+      <p>
+        Utilizamos un flujo de trabajo reutilizable que maneja la complejidad de construir la aplicación Flutter y crear la imagen Docker. Este flujo usa un ejecutor de scripts personalizado (<code>rps</code>) para abstraer los comandos de build específicos por plataforma.
+      </p>
+
+      <pre><code>
+        {`jobs:
+
+build-and-push:
+name: Build And Push
+runs-on: ubuntu-latest
+steps: # ... (Pasos de configuración omitidos por brevedad)
+
+      - name: Build Application
+        run: rps build:\${{ inputs.entry }}
+
+      - name: Build Container
+        run: rps docker:\${{ inputs.build_type }}:build -t \${{ env.CONTAINER_NAME }}
+
+      - name: Push Tag Container To Github
+        run: |
+          docker push \${{ env.CONTAINER_NAME_WITH_TAG }}`}
+      </code></pre>
+
+      <h3>3. Despliegue Automatizado</h3>
+      <p>
+        El proceso de despliegue está orquestado para actualizar múltiples servidores simultáneamente. Se conecta de forma segura vía SSH, actualiza la configuración de Docker Compose y reinicia los servicios con objetivos de tiempo de inactividad cero.
+      </p>
+
+      <Quote>
+        "La automatización del despliegue redujo el tiempo de entrega de 2 horas a 15 minutos, mejorando significativamente la experiencia del equipo de desarrollo."
+      </Quote>
+
+      <h2>Infraestructura como Código (IaC) y Herramientas</h2>
+      <ul>
+        <li>
+          <strong>Flutter:</strong> Framework para desarrollo multiplataforma.
+        </li>
+        <li>
+          <strong>RPS (Run Project Scripts):</strong> Ejecutor de tareas personalizado basado en Dart para gestionar argumentos de build complejos y preparación de entorno.
+        </li>
+        <li>
+          <strong>Docker:</strong> Garantiza que la aplicación funcione idénticamente en CI y Producción.
+        </li>
+        <li>
+          <strong>GitHub Container Registry (GHCR):</strong> Almacena los artefactos de build.
+        </li>
+      </ul>
+
+      <h3>Ejemplo de Configuración de Scripts RPS</h3>
+      <pre><code>
+        {`scripts:
+
+# Build optimizado para Smart TV (renderizado HTML)
+
+run:script:remove:build: dart run scripts/remove_build_script.dill
+run:script:prepare:custom_builds: dart run scripts/prepare_custom_builds_script.dill
+run:script:prepare:web_server_files: dart run scripts/prepare_web_server_files_script.dill
+run:script:optimize: npm --prefix ./build/web run optimize-files
+build:smartTv: rps run:script:remove:build && rps run:script:prepare:custom_builds && flutter build web --web-renderer html --release && rps run:script:prepare:web_server_files && rps run:script:optimize`}
+
+</code></pre>
+
+      <h2>Conclusión</h2>
+      <p>
+        Esta arquitectura CI/CD demuestra cómo construir pipelines robustos y escalables para aplicaciones multiplataforma complejas. La combinación de <strong>GitHub Actions</strong>, <strong>Docker</strong> y herramientas personalizadas como <strong>RPS</strong> proporciona un sistema de despliegue confiable que reduce significativamente los tiempos de entrega mientras mantiene alta calidad y seguridad.
+      </p>
+
+      <hr />
+      <p>
+        <strong>
+          ¿Necesitas implementar una arquitectura CI/CD robusta para tu proyecto multiplataforma?
+        </strong>
+        <br />
+        ¡Conversemos! <a href="/es/contact">Contáctame aquí</a> para discutir tu proyecto específico.
+        <br />O si prefieres, <a href="/">descubre mi portfolio completo aquí</a>.
+      </p>
+    </>
+
+),
+en: (
+
+<>
+<h1>CI/CD Architecture for Smart TV & Web Application</h1>
+
+      <h2>Overview</h2>
+      <p>
+        This document details the <strong>Continuous Integration and Continuous Deployment (CI/CD)</strong> pipeline designed for a high-performance OTT/Streaming application targeting both <strong>Smart TV</strong> and <strong>Web</strong> platforms.
+        <br />
+        The system is built on <strong>GitHub Actions</strong>, leveraging a modular and reusable workflow architecture to ensure reliability, scalability, and speed across multiple environments (Development, Staging, and Production).
+      </p>
+
+      <h2>Key Features</h2>
+      <ul>
+        <li>
+          <strong>Multi-Platform Support:</strong> Unified pipeline handling both Web and Smart TV builds with platform-specific optimizations.
+        </li>
+        <li>
+          <strong>Tag-Based Deployment:</strong> Automated environment selection based on semantic versioning tags.
+        </li>
+        <li>
+          <strong>Reusable Workflows:</strong> Modular design reducing code duplication and simplifying maintenance.
+        </li>
+        <li>
+          <strong>Secure Deployment:</strong> SSH-based deployment with strict key management.
+        </li>
+        <li>
+          <strong>Containerization:</strong> Docker-based delivery ensuring consistency across environments.
+        </li>
+        <li>
+          <strong>Performance Optimization:</strong> Streamlined workflows with parallel execution and redundant job elimination, reducing build times by ~40%.
+        </li>
+      </ul>
+
+      <Highlight>
+        The modular architecture enables maintaining consistency and efficiency in complex multi-platform deployments.
+      </Highlight>
+
+      <h2>Workflow Strategy</h2>
+      <p>
+        The pipeline is triggered by specific tag patterns, which determine the target environment and platform.
+      </p>
+
+      <h3>Trigger Configuration</h3>
+      <p>
+        The system distinguishes between environments using regex patterns on git tags:
+      </p>
+
+      <pre><code>
+        {`on:
+
+push:
+tags: # Smart TV Development Builds - 'v[0-9].[0-9]+.[0-9]+-dev-st.**' # Web Development Builds - 'v[0-9].[0-9]+.[0-9]+-dev-w.**'`}
+
+</code></pre>
+
+      <h2>Pipeline Stages</h2>
+
+      <h3>1. Dynamic Environment & Platform Detection</h3>
+      <p>
+        A dedicated job analyzes the incoming tag to set the build context dynamically:
+      </p>
+
+      <pre><code>
+        {`get-type:
+
+runs-on: ubuntu-latest
+needs: [print_branch_name]
+outputs:
+TYPE: \${{ steps.get_type.outputs.type }}
+steps: - name: Get Type
+id: get_type
+run: |
+if \${{ contains(github.ref, '-dev-w.') }}; then
+echo "type=web" >> \$GITHUB_OUTPUT
+else
+echo "type=smartTv" >> \$GITHUB_OUTPUT
+fi`}
+
+</code></pre>
+
+      <h3>2. Build & Containerization</h3>
+      <p>
+        We utilize a reusable workflow that handles the complexity of building the Flutter application and creating the Docker image. This workflow uses a custom script runner (<code>rps</code>) to abstract platform-specific build commands.
+      </p>
+
+      <pre><code>
+        {`jobs:
+
+build-and-push:
+name: Build And Push
+runs-on: ubuntu-latest
+steps: # ... (Setup steps omitted for brevity)
+
+      - name: Build Application
+        run: rps build:\${{ inputs.entry }}
+
+      - name: Build Container
+        run: rps docker:\${{ inputs.build_type }}:build -t \${{ env.CONTAINER_NAME }}
+
+      - name: Push Tag Container To Github
+        run: |
+          docker push \${{ env.CONTAINER_NAME_WITH_TAG }}`}
+      </code></pre>
+
+      <h3>3. Automated Deployment</h3>
+      <p>
+        The deployment process is orchestrated to update multiple servers simultaneously. It securely connects via SSH, updates the Docker Compose configuration, and restarts services with zero-downtime goals.
+      </p>
+
+      <Quote>
+        "Deployment automation reduced delivery time from 2 hours to 15 minutes, significantly improving the development team's experience."
+      </Quote>
+
+      <h2>Infrastructure as Code (IaC) & Tooling</h2>
+      <ul>
+        <li>
+          <strong>Flutter:</strong> Framework for cross-platform development.
+        </li>
+        <li>
+          <strong>RPS (Run Project Scripts):</strong> Custom Dart-based task runner to manage complex build arguments and environment preparation.
+        </li>
+        <li>
+          <strong>Docker:</strong> Ensures the application runs identically in CI and Production.
+        </li>
+        <li>
+          <strong>GitHub Container Registry (GHCR):</strong> Stores the build artifacts.
+        </li>
+      </ul>
+
+      <h3>Example RPS Script Configuration</h3>
+      <pre><code>
+        {`scripts:
+
+# Optimized build for Smart TV (HTML renderer)
+
+run:script:remove:build: dart run scripts/remove_build_script.dill
+run:script:prepare:custom_builds: dart run scripts/prepare_custom_builds_script.dill
+run:script:prepare:web_server_files: dart run scripts/prepare_web_server_files_script.dill
+run:script:optimize: npm --prefix ./build/web run optimize-files
+build:smartTv: rps run:script:remove:build && rps run:script:prepare:custom_builds && flutter build web --web-renderer html --release && rps run:script:prepare:web_server_files && rps run:script:optimize`}
+
+</code></pre>
+
+      <h2>Conclusion</h2>
+      <p>
+        This CI/CD architecture demonstrates how to build robust and scalable pipelines for complex multi-platform applications. The combination of <strong>GitHub Actions</strong>, <strong>Docker</strong>, and custom tools like <strong>RPS</strong> provides a reliable deployment system that significantly reduces delivery times while maintaining high quality and security.
+      </p>
+
+      <hr />
+      <p>
+        <strong>
+          Need to implement a robust CI/CD architecture for your multi-platform project?
+        </strong>
+        <br />
+        Let's talk! <a href="/en/contact">Contact me here</a> to discuss your specific project.
+        <br />Or if you prefer, <a href="/">discover my complete portfolio here</a>.
+      </p>
+    </>
+
+),
+};
+
+export default function BlogContent({ lang }) {
+  return content[lang] || content['es'];
+}

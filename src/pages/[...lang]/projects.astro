@@ -79,6 +79,7 @@ const regularBusinessProjects = businessProjects.filter((p) => !p.featured);
             {
               featuredBusinessProjects.map((project: ProcessedProject) => (
                 <ProjectCard
+                  id={project.id}
                   title={project.title}
                   stack={project.stack.join(' · ')}
                   description={project.description}
@@ -88,6 +89,17 @@ const regularBusinessProjects = businessProjects.filter((p) => !p.featured);
                   githubUrl={project.githubUrl}
                   image={project.image}
                   locale={locale}
+                  {...(project.confidential !== undefined && {
+                    confidential: project.confidential,
+                  })}
+                  {...(project.production !== undefined && {
+                    production: project.production,
+                  })}
+                  {...(project.sector && { sector: project.sector })}
+                  {...(project.role && { role: project.role })}
+                  {...(project.duration && { duration: project.duration })}
+                  {...(project.team && { team: project.team })}
+                  {...(project.metrics && { metrics: project.metrics })}
                 />
               ))
             }
@@ -104,6 +116,7 @@ const regularBusinessProjects = businessProjects.filter((p) => !p.featured);
               <div class="projects-grid regular-grid">
                 {regularBusinessProjects.map((project: ProcessedProject) => (
                   <ProjectCard
+                    id={project.id}
                     title={project.title}
                     stack={project.stack.join(' · ')}
                     description={project.description}
@@ -113,6 +126,17 @@ const regularBusinessProjects = businessProjects.filter((p) => !p.featured);
                     githubUrl={project.githubUrl}
                     image={project.image}
                     locale={locale}
+                    {...(project.confidential !== undefined && {
+                      confidential: project.confidential,
+                    })}
+                    {...(project.production !== undefined && {
+                      production: project.production,
+                    })}
+                    {...(project.sector && { sector: project.sector })}
+                    {...(project.role && { role: project.role })}
+                    {...(project.duration && { duration: project.duration })}
+                    {...(project.team && { team: project.team })}
+                    {...(project.metrics && { metrics: project.metrics })}
                   />
                 ))}
               </div>
@@ -137,6 +161,7 @@ const regularBusinessProjects = businessProjects.filter((p) => !p.featured);
           {
             personalProjects.map((project: ProcessedProject) => (
               <ProjectCard
+                id={project.id}
                 title={project.title}
                 stack={project.stack.join(' · ')}
                 description={project.description}
@@ -146,6 +171,17 @@ const regularBusinessProjects = businessProjects.filter((p) => !p.featured);
                 githubUrl={project.githubUrl}
                 image={project.image}
                 locale={locale}
+                {...(project.confidential !== undefined && {
+                  confidential: project.confidential,
+                })}
+                {...(project.production !== undefined && {
+                  production: project.production,
+                })}
+                {...(project.sector && { sector: project.sector })}
+                {...(project.role && { role: project.role })}
+                {...(project.duration && { duration: project.duration })}
+                {...(project.team && { team: project.team })}
+                {...(project.metrics && { metrics: project.metrics })}
               />
             ))
           }

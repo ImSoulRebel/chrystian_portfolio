@@ -117,17 +117,33 @@ export interface ProjectsTranslations {
   viewDemo: string;
   viewCode: string;
   viewMore: string;
+  readMore: string;
   featured: string;
   stats: {
     inProduction: string;
     featuredProject: string;
     codeAvailable: string;
+    underNDA: string;
+  };
+  badges: {
+    confidential: string;
   };
   actions: {
     visitWebsite: string;
     visitWebsiteLabel: string;
     viewGithub: string;
     viewGithubLabel: string;
+    requestCaseStudy: string;
+    requestCaseStudyLabel: string;
+    contactForDetails: string;
+    contactForDetailsLabel: string;
+  };
+  metadata: {
+    duration: string;
+    role: string;
+    team: string;
+    sector: string;
+    impact: string;
   };
   seo: {
     title: string;
@@ -139,6 +155,14 @@ export interface ProjectsTranslations {
       stack: string;
       description: string;
       impact: string;
+      sector?: string;
+      role?: string;
+      duration?: string;
+      team?: string;
+      metrics?: {
+        label: string;
+        value: string;
+      }[];
     };
   };
 }

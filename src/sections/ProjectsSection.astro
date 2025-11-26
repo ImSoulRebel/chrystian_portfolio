@@ -14,11 +14,11 @@ const t = useTranslations(locale);
 
 // Relacionar ids con assets locales si aplica
 const projectImages: Record<string, any> = {
-  yuvod: assets.yuvodLogo,
-  bnc10: assets.bnc10Logo,
-  tookane: assets.tookaneLogo,
-  stelcamping: assets.stelLogo,
-  nextival: assets.nextivalLogo,
+  'streaming-platform': assets.streamingPlatformLogo,
+  'neobank-frontend': assets.neobankLogo,
+  'multipurpose-saas': assets.saasLogo,
+  'camping-management': assets.campingLogo,
+  'festival-cms': assets.festivalCmsLogo,
   portfolio: assets.projectPlaceholder,
 };
 
@@ -34,6 +34,7 @@ const projects = allProjects
       throw new Error(`Missing translations for project: ${p.data.id}`);
     return {
       title: projectT.title,
+      id: p.data.id,
       stack: projectT.stack,
       description: projectT.description,
       impact: projectT.impact,
@@ -41,6 +42,13 @@ const projects = allProjects
       liveUrl: p.data.liveUrl,
       githubUrl: p.data.githubUrl,
       image: projectImages[p.data.id] || null,
+      confidential: p.data.confidential ?? false,
+      production: p.data.production ?? false,
+      sector: projectT.sector,
+      role: projectT.role,
+      duration: projectT.duration,
+      team: projectT.team,
+      metrics: projectT.metrics,
     };
   });
 ---
@@ -56,6 +64,7 @@ const projects = allProjects
       {
         projects.map((project) => (
           <ProjectCard
+            id={project.id}
             title={project.title}
             stack={project.stack}
             description={project.description}
@@ -65,6 +74,13 @@ const projects = allProjects
             githubUrl={project.githubUrl}
             image={project.image}
             locale={locale}
+            confidential={project.confidential}
+            production={project.production}
+            sector={project.sector}
+            role={project.role}
+            duration={project.duration}
+            team={project.team}
+            metrics={project.metrics}
           />
         ))
       }

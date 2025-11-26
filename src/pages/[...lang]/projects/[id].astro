@@ -1,0 +1,652 @@
+---
+import { Layout } from '@layouts';
+import { BackButton } from '@components';
+import { useTranslations, type Locale, translations } from '@utils/i18n';
+import { getCollection } from 'astro:content';
+import { Image } from 'astro:assets';
+import * as assets from '@assets';
+
+export async function getStaticPaths() {
+  const projects = await getCollection('projects');
+  const paths: any[] = [];
+
+  ['es', 'en'].forEach((lang) => {
+    projects.forEach((project) => {
+      paths.push({
+        params: { lang, id: project.data.id },
+        props: { project },
+      });
+    });
+  });
+
+  return paths;
+}
+
+const { lang, id } = Astro.params;
+const locale = (lang as Locale) || 'es';
+const t = useTranslations(locale);
+const { project } = Astro.props;
+
+// Get translation data
+const projectT =
+  translations[locale].projects.list[
+    id as keyof (typeof translations)['es']['projects']['list']
+  ];
+
+if (!projectT) {
+  return Astro.redirect(`/${locale}/404`);
+}
+
+// Map assets
+const projectImages: Record<string, any> = {
+  'streaming-platform': assets.streamingPlatformLogo,
+  'neobank-frontend': assets.neobankLogo,
+  'multipurpose-saas': assets.saasLogo,
+  'camping-management': assets.campingLogo,
+  'festival-cms': assets.festivalCmsLogo,
+  portfolio: assets.projectPlaceholder,
+};
+
+const image = projectImages[id] || null;
+const techStack =
+  typeof projectT.stack === 'string'
+    ? projectT.stack.split(' · ')
+    : projectT.stack || [];
+
+// SEO
+const pageTitle = `${projectT.title} | Chrystian Michell`;
+const pageDescription = projectT.description.substring(0, 160);
+---
+
+<Layout
+  title={pageTitle}
+  description={pageDescription}
+  floatingCTAMode="contact"
+  layoutContext={{ locale, hasNavLinks: false, pageType: 'project-detail' }}
+>
+  <BackButton
+    locale={locale}
+    link={`/${locale}/projects`}
+    label={locale === 'es' ? 'Volver a Proyectos' : 'Back to Projects'}
+  />
+
+  <main class="project-detail">
+    {/* Hero Section */}
+    <section class="hero-section">
+      <div class="container">
+        {/* Hero Title - Full Width */}
+        <div class="hero-title-wrapper">
+          <div class="badges">
+            {
+              project.data.featured && (
+                <span class="badge featured">
+                  {t('projects.stats.featuredProject')}
+                </span>
+              )
+            }
+            {
+              project.data.confidential && (
+                <span class="badge confidential">
+                  {t('projects.badges.confidential')}
+                </span>
+              )
+            }
+          </div>
+
+          <h1 class="project-title">{projectT.title}</h1>
+        </div>
+
+        {/* Hero Grid - Content and Image */}
+        <div class="hero-grid">
+          <div class="hero-content">
+            <div class="project-meta">
+              {
+                projectT.sector && (
+                  <div class="meta-item">
+                    <span class="meta-label">
+                      {t('projects.metadata.sector')}
+                    </span>
+                    <span class="meta-value">{projectT.sector}</span>
+                  </div>
+                )
+              }
+              {
+                projectT.role && (
+                  <div class="meta-item">
+                    <span class="meta-label">
+                      {t('projects.metadata.role')}
+                    </span>
+                    <span class="meta-value">{projectT.role}</span>
+                  </div>
+                )
+              }
+              {
+                projectT.duration && (
+                  <div class="meta-item">
+                    <span class="meta-label">
+                      {t('projects.metadata.duration')}
+                    </span>
+                    <span class="meta-value">{projectT.duration}</span>
+                  </div>
+                )
+              }
+            </div>
+
+            <div class="tech-stack">
+              {
+                techStack.map((tech: string) => (
+                  <span class="tech-tag">{tech.trim()}</span>
+                ))
+              }
+            </div>
+
+            <div class="actions">
+              {
+                project.data.liveUrl && (
+                  <a
+                    href={project.data.liveUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="btn btn-primary"
+                  >
+                    <span>{t('projects.viewDemo')}</span>
+                    <svg
+                      width="20"
+                      height="20"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                      <polyline points="15 3 21 3 21 9" />
+                      <line x1="10" y1="14" x2="21" y2="3" />
+                    </svg>
+                  </a>
+                )
+              }
+              {
+                project.data.githubUrl && (
+                  <a
+                    href={project.data.githubUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="btn btn-secondary"
+                  >
+                    <span>{t('projects.viewCode')}</span>
+                    <svg
+                      width="20"
+                      height="20"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                    >
+                      <path
+                        d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                    </svg>
+                  </a>
+                )
+              }
+              {
+                project.data.confidential && (
+                  <a href={`/${locale}/contact`} class="btn btn-confidential">
+                    <span>{t('projects.actions.contactForDetails')}</span>
+                    <svg
+                      width="20"
+                      height="20"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                    >
+                      <path
+                        d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                    </svg>
+                  </a>
+                )
+              }
+            </div>
+          </div>
+
+          <div class="hero-image">
+            {
+              image ? (
+                <div class="image-wrapper">
+                  <Image
+                    src={image}
+                    alt={projectT.title}
+                    width={800}
+                    height={500}
+                    loading="eager"
+                    class="project-img"
+                  />
+                  <div class="image-glow" />
+                </div>
+              ) : (
+                <div class="placeholder-wrapper">
+                  <div class="placeholder-icon">
+                    <svg
+                      width="64"
+                      height="64"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1"
+                    >
+                      <rect x="2" y="3" width="20" height="14" rx="2" ry="2" />
+                      <line x1="8" y1="21" x2="16" y2="21" />
+                      <line x1="12" y1="17" x2="12" y2="21" />
+                    </svg>
+                  </div>
+                </div>
+              )
+            }
+          </div>
+        </div>
+      </div>
+    </section>
+
+    {/* Overview Section */}
+    <section class="overview-section">
+      <div class="container">
+        <div class="grid-layout">
+          <div class="main-content">
+            <h2 class="section-heading">Overview</h2>
+            <p class="description">{projectT.description}</p>
+
+            {
+              projectT.impact && (
+                <div class="impact-box">
+                  <h3>{t('projects.metadata.impact')}</h3>
+                  <p>{projectT.impact}</p>
+                </div>
+              )
+            }
+          </div>
+
+          <div class="sidebar">
+            {
+              projectT.metrics && projectT.metrics.length > 0 && (
+                <div class="metrics-card">
+                  <h3>Key Metrics</h3>
+                  <div class="metrics-list">
+                    {projectT.metrics.map(
+                      (metric: { label: string; value: string }) => (
+                        <div class="metric-item">
+                          <span class="metric-value">{metric.value}</span>
+                          <span class="metric-label">{metric.label}</span>
+                        </div>
+                      )
+                    )}
+                  </div>
+                </div>
+              )
+            }
+
+            {
+              projectT.team && (
+                <div class="info-card">
+                  <h3>{t('projects.metadata.team')}</h3>
+                  <p>{projectT.team}</p>
+                </div>
+              )
+            }
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+</Layout>
+
+<style>
+  .project-detail {
+    min-height: 100vh;
+    background: var(--background-main);
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+
+  /* Hero Section */
+  .hero-section {
+    padding: 8rem 0 4rem;
+    background: radial-gradient(
+      circle at 50% 0%,
+      rgba(0, 212, 255, 0.05),
+      transparent 70%
+    );
+  }
+
+  .hero-title-wrapper {
+    margin-bottom: 3rem;
+    padding-top: 2rem;
+  }
+
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+  }
+
+  .badges {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .badge {
+    padding: 0.4rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .badge.featured {
+    background: rgba(0, 212, 255, 0.1);
+    color: var(--primary-color);
+    border: 1px solid rgba(0, 212, 255, 0.2);
+  }
+
+  .badge.confidential {
+    background: rgba(150, 150, 170, 0.1);
+    color: var(--text-muted);
+    border: 1px solid rgba(150, 150, 170, 0.2);
+  }
+
+  .project-title {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 800;
+    line-height: 1.1;
+    margin-bottom: 2rem;
+    background: linear-gradient(135deg, #fff 0%, rgba(255, 255, 255, 0.7) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .project-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    margin-bottom: 2rem;
+    padding: 1.5rem;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  .meta-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+
+  .meta-label {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .meta-value {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+
+  .tech-stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .tech-tag {
+    padding: 0.5rem 1rem;
+    background: rgba(0, 212, 255, 0.05);
+    border: 1px solid rgba(0, 212, 255, 0.1);
+    border-radius: 30px;
+    color: var(--primary-color);
+    font-size: 0.9rem;
+    font-weight: 500;
+  }
+
+  .actions {
+    display: flex;
+    gap: 1rem;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.8rem 1.5rem;
+    border-radius: 8px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+  }
+
+  .btn-primary {
+    background: var(--primary-color);
+    color: #000;
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 20px rgba(0, 212, 255, 0.3);
+  }
+
+  .btn-secondary {
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--text-primary);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateY(-2px);
+  }
+
+  .btn-confidential {
+    background: rgba(150, 150, 170, 0.1);
+    color: var(--text-muted);
+    border: 1px solid rgba(150, 150, 170, 0.2);
+  }
+
+  .btn-confidential:hover {
+    background: rgba(150, 150, 170, 0.2);
+    color: var(--text-primary);
+  }
+
+  /* Hero Image */
+  .image-wrapper {
+    position: relative;
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    background: linear-gradient(
+      135deg,
+      var(--primary-color) 100%,
+      var(--background-card) 0%
+    );
+  }
+
+  .project-img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: contain;
+    padding: 2rem;
+  }
+
+  .image-glow {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+      circle at 50% 50%,
+      transparent 0%,
+      rgba(0, 0, 0, 0.2) 100%
+    );
+    pointer-events: none;
+  }
+
+  .placeholder-wrapper {
+    width: 100%;
+    aspect-ratio: 16/9;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .placeholder-icon {
+    color: var(--text-muted);
+    opacity: 0.5;
+  }
+
+  /* Overview Section */
+  .overview-section {
+    padding: 4rem 0 8rem;
+  }
+
+  .grid-layout {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 4rem;
+  }
+
+  .section-heading {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    color: var(--text-primary);
+  }
+
+  .description {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: var(--text-secondary);
+    margin-bottom: 3rem;
+    white-space: pre-line;
+  }
+
+  .impact-box {
+    background: linear-gradient(
+      135deg,
+      rgba(0, 212, 255, 0.05),
+      rgba(0, 212, 255, 0.02)
+    );
+    border: 1px solid rgba(0, 212, 255, 0.1);
+    border-radius: 12px;
+    padding: 2rem;
+  }
+
+  .impact-box h3 {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+  }
+
+  .impact-box p {
+    color: var(--text-primary);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  /* Sidebar */
+  .sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .metrics-card,
+  .info-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    padding: 1.5rem;
+  }
+
+  .metrics-card h3,
+  .info-card h3 {
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--text-muted);
+    margin-bottom: 1.5rem;
+  }
+
+  .metrics-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .metric-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+
+  .metric-value {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--primary-color);
+  }
+
+  .metric-label {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+  }
+
+  /* Responsive */
+  @media (max-width: 1024px) {
+    .hero-grid {
+      grid-template-columns: 1fr;
+      gap: 3rem;
+    }
+
+    .grid-layout {
+      grid-template-columns: 1fr;
+      gap: 3rem;
+    }
+
+    .sidebar {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .project-title {
+      font-size: 2.5rem;
+    }
+
+    .sidebar {
+      grid-template-columns: 1fr;
+    }
+
+    .project-meta {
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+  }
+</style>

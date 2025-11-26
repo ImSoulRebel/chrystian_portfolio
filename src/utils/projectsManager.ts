@@ -19,6 +19,13 @@ export interface ProcessedProject {
   status: 'active' | 'archived' | 'draft';
   createdAt: string;
   updatedAt: string;
+  confidential?: boolean;
+  production?: boolean;
+  sector?: string | undefined;
+  role?: string | undefined;
+  duration?: string | undefined;
+  team?: string | undefined;
+  metrics?: Array<{ label: string; value: string }> | undefined;
 }
 
 // Cache de imágenes cargadas dinámicamente
@@ -123,6 +130,13 @@ export async function processProject(
     status: project.data.status,
     createdAt: project.data.createdAt,
     updatedAt: project.data.updatedAt,
+    confidential: project.data.confidential ?? false,
+    production: project.data.production ?? false,
+    sector: translations?.sector,
+    role: translations?.role,
+    duration: translations?.duration,
+    team: translations?.team,
+    metrics: translations?.metrics,
   };
 }
 

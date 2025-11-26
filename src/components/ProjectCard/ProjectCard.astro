@@ -1,10 +1,10 @@
 ---
-import { Image } from 'astro:assets';
 import { useTranslations, type Locale } from '@utils/i18n';
 import { SvgComponent } from 'astro/types';
 import styles from './projectCard.module.css';
 
 interface Props {
+  id: string;
   title: string | undefined;
   stack: string | string[] | undefined;
   description: string | undefined;
@@ -14,18 +14,30 @@ interface Props {
   githubUrl?: string | undefined;
   featured?: boolean;
   locale?: Locale;
+  confidential?: boolean;
+  production?: boolean;
+  sector?: string | undefined;
+  role?: string | undefined;
+  duration?: string | undefined;
+  team?: string | undefined;
+  metrics?: Array<{ label: string; value: string }> | undefined;
 }
 
 const {
+  id,
   title,
   stack,
   description,
   impact,
-  image,
-  liveUrl,
-  githubUrl,
   featured = false,
   locale = 'es',
+  confidential = false,
+  production = false,
+  sector,
+  role,
+  duration,
+  team,
+  metrics,
 } = Astro.props;
 
 const t = useTranslations(locale);
@@ -33,176 +45,133 @@ const t = useTranslations(locale);
 const techStack = typeof stack === 'string' ? stack.split(' · ') : stack || [];
 ---
 
-<div class={`${styles.projectCard} ${featured ? styles.featured : ''}`}>
-  <div class={styles.projectImage}>
-    {
-      image ? (
-        <Image
-          src={image}
-          alt={title}
-          loading="lazy"
-          width={400}
-          height={200}
-          style="object-fit: contain; padding: 20px;"
-        />
-      ) : (
-        <div class={styles.projectPlaceholder}>
-          <svg
-            width="60"
-            height="60"
-            viewBox="0 0 24 24"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M12 2L2 7L12 12L22 7L12 2Z"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linejoin="round"
-            />
-            <path
-              d="M2 17L12 22L22 17"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linejoin="round"
-            />
-            <path
-              d="M2 12L12 17L22 12"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linejoin="round"
-            />
-          </svg>
-        </div>
-      )
-    }
-    <div class={styles.imageOverlay}></div>
-  </div>
+<a href={`/${locale}/projects/${id}`} class={styles.cardLink}>
+  <article
+    class={`${styles.projectCard} ${featured ? styles.featured : ''} ${confidential ? styles.nda : ''}`}
+  >
+    <div class={styles.projectContent}>
+      <div class={styles.projectHeader}>
+        <h3 class={styles.projectTitle}>{title}</h3>
 
-  <div class={styles.projectContent}>
-    <div class={styles.projectHeader}>
-      <h3 class={styles.projectTitle}>{title}</h3>
-      {impact && <p class={styles.projectSubtitle}>{impact}</p>}
-    </div>
+        {/* Project Metadata */}
+        {
+          (sector || role || duration || team) && (
+            <div class={styles.projectMeta}>
+              {sector && (
+                <div class={styles.metaItem}>
+                  <span class={styles.metaLabel}>
+                    {t('projects.metadata.sector')}:
+                  </span>
+                  <span class={styles.metaValue}>{sector}</span>
+                </div>
+              )}
+              {role && (
+                <div class={styles.metaItem}>
+                  <span class={styles.metaLabel}>
+                    {t('projects.metadata.role')}:
+                  </span>
+                  <span class={styles.metaValue}>{role}</span>
+                </div>
+              )}
+            </div>
+          )
+        }
 
-    <p class={styles.projectDescription}>{description}</p>
+        {/* Impact Subtitle */}
+        {impact && <p class={styles.projectSubtitle}>{impact}</p>}
+      </div>
 
-    <div class={styles.techStack}>
+      <p class={styles.projectDescription}>
+        {description}
+      </p>
+      <span class={styles.readMore}>
+        {t('projects.readMore') || 'Leer más'}
+        <svg
+          width="14"
+          height="14"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+        >
+          <path
+            d="M5 12h14M12 5l7 7-7 7"
+            stroke-linecap="round"
+            stroke-linejoin="round"></path>
+        </svg>
+      </span>
+
+      {/* Highlighted Metrics */}
       {
-        techStack.map((tech: string) => (
-          <span class={styles.techTag}>{tech.trim()}</span>
-        ))
-      }
-    </div>
-
-    <div class={styles.projectStats}>
-      {
-        liveUrl && (
-          <div class={styles.statItem}>
-            <span class={styles.statIcon}>🌐</span>
-            <span>{t('projects.stats.inProduction')}</span>
+        metrics && metrics.length > 0 && (
+          <div class={styles.metricsHighlight}>
+            {metrics
+              .slice(0, 2)
+              .map((metric: { label: string; value: string }) => (
+                <div class={styles.metricItem}>
+                  <span class={styles.metricValue}>{metric.value}</span>
+                  <span class={styles.metricLabel}>{metric.label}</span>
+                </div>
+              ))}
           </div>
         )
       }
+
+      <div class={styles.techStack}>
+        {
+          techStack
+            .slice(0, 8)
+            .map((tech: string) => (
+              <span class={styles.techTag}>{tech.trim()}</span>
+            ))
+        }
+        {
+          techStack.length > 8 && (
+            <span class={styles.techTag}>+{techStack.length - 8}</span>
+          )
+        }
+      </div>
+
       {
-        featured && (
-          <div class={styles.statItem}>
-            <span class={styles.statIcon}>⭐</span>
-            <span>{t('projects.stats.featuredProject')}</span>
-          </div>
-        )
-      }
-      {
-        githubUrl && (
-          <div class={styles.statItem}>
-            <span class={styles.statIcon}>💻</span>
-            <span>{t('projects.stats.codeAvailable')}</span>
+        (featured || confidential || production) && (
+          <div class={styles.projectStats}>
+            {confidential && (
+              <div class={styles.statItem}>
+                <span class={styles.statIcon}>
+                  <svg
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <path
+                      d="M12 2C10.3431 2 9 3.34315 9 5V8H7C5.89543 8 5 8.89543 5 10V20C5 21.1046 5.89543 22 7 22H17C18.1046 22 19 21.1046 19 20V10C19 8.89543 18.1046 8 17 8H15V5C15 3.34315 13.6569 2 12 2Z"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                    <circle cx="12" cy="15" r="2" fill="currentColor" />
+                  </svg>
+                </span>
+                <span>{t('projects.badges.confidential')}</span>
+              </div>
+            )}
+            {production && (
+              <div class={styles.statItem}>
+                <span class={styles.statIcon}>🌐</span>
+                <span>{t('projects.stats.inProduction')}</span>
+              </div>
+            )}
+            {featured && (
+              <div class={styles.statItem}>
+                <span class={styles.statIcon}>⭐</span>
+                <span>{t('projects.stats.featuredProject')}</span>
+              </div>
+            )}
           </div>
         )
       }
     </div>
-
-    {/* Project Actions */}
-    {
-      (liveUrl || githubUrl) && (
-        <div class={styles.projectActions}>
-          {liveUrl && (
-            <a
-              href={liveUrl}
-              class={`${styles.actionButton} ${styles.actionSecondary}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              title={t('projects.actions.visitWebsite')}
-              aria-label={t('projects.actions.visitWebsiteLabel')}
-            >
-              <svg
-                width="20"
-                height="20"
-                viewBox="0 0 24 24"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M18 13V6A2 2 0 0 0 16 4H4A2 2 0 0 0 2 6V18A2 2 0 0 0 4 20H11"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                />
-                <path
-                  d="M15 15L21 9"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                />
-                <path
-                  d="M16 9H21V14"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                />
-              </svg>
-              {t('projects.viewDemo')}
-            </a>
-          )}
-          {githubUrl && (
-            <a
-              href={githubUrl}
-              class={`${styles.actionButton} ${styles.actionSecondary}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              title={t('projects.actions.viewGithub')}
-              aria-label={t('projects.actions.viewGithubLabel')}
-            >
-              <svg
-                width="20"
-                height="20"
-                viewBox="0 0 24 24"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M15 22V18C15.1392 16.7473 14.78 15.4901 14 14.5C17 14.5 20 12.5 20 9C20.08 7.75 19.73 6.52 19 5.5C19.28 4.35 19.28 3.15 19 2C19 2 18 2 16 3.5C13.36 3 10.64 3 8 3.5C6 2 5 2 5 2C4.7 3.15 4.7 4.35 5 5.5C4.27 6.52 3.92 7.75 4 9C4 12.5 7 14.5 10 14.5C9.61 14.99 9.32 15.55 9.15 16.15C8.98 16.75 8.93 17.38 9 18V22"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                />
-                <path
-                  d="M9 18C4.49 20 4 16 2 16"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                />
-              </svg>
-              {t('projects.viewCode')}
-            </a>
-          )}
-        </div>
-      )
-    }
-  </div>
-</div>
+  </article>
+</a>
