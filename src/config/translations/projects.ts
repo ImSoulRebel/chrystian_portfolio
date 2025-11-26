@@ -129,21 +129,21 @@ export const projects: Record<'es' | 'en', ProjectsTranslations> = {
         ],
       },
       'neobank-frontend': {
-        title: 'Neobanco Frontend',
-        sector: 'FinTech B2B',
-        role: 'Senior Flutter Architect',
-        duration: '8 meses (2023)',
-        team: 'Lead Developer',
+        title: 'Aplicación Bancaria Digital Multiplataforma',
+        sector: 'Banca Digital y FinTech',
+        role: 'Desarrollador Flutter Full-Stack',
+        duration: 'Proyecto de producción (2023)',
+        team: 'Desarrollador Principal',
         stack:
-          'Flutter · GetX · Firebase · GetStorage · responsive_framework · Sentry',
+          'Flutter · GetX · Firebase · GraphQL · NFC · Biometría · Google Pay · Sentry',
         description:
-          'Frontend de neobanco con responsive avanzado usando responsive_framework. Theming diferenciado para web y móvil. Monitoreo de errores en producción con Sentry. Modularización en core, resources, routing y commons. Buenas prácticas de UI/UX: orientación fija, control de escala, transiciones animadas. Seguridad bancaria con autenticación biométrica y storage encriptado.',
+          'Aplicación bancaria completa para iOS, Android y Web que permite gestionar cuentas personales y compartidas, realizar transferencias bancarias, pagos instantáneos entre usuarios, y gestionar tarjetas virtuales y físicas. Implementé un sistema avanzado de verificación de identidad con captura automática de documentos mediante inteligencia artificial, reconocimiento facial y lectura NFC de documentos electrónicos. La app incluye autenticación multinivel con biometría (Face ID/Touch ID/Huella), sistema de notificaciones en tiempo real, y arquitectura modular que separa la lógica de negocio de la interfaz para facilitar el mantenimiento y la escalabilidad.',
         impact:
-          'Experiencia fluida cross-platform con reducción significativa en fricción de autenticación y alta estabilidad en producción.',
+          'Aplicación bancaria de producción con experiencia de usuario premium en tres plataformas con una sola base de código, reduciendo costos de desarrollo en un 70%. El proceso de verificación de identidad automatizado reduce en un 80% las validaciones manuales, permitiendo alta de nuevos clientes en menos de 10 minutos.',
         metrics: [
-          { label: 'Usuarios activos', value: '500+' },
-          { label: 'Rating', value: '4.7⭐' },
-          { label: 'Sesiones sin crashes', value: '99.5%' },
+          { label: 'Pantallas desarrolladas', value: '50+' },
+          { label: 'Plataformas', value: 'iOS + Android + Web' },
+          { label: 'Estabilidad', value: '99.5%' },
         ],
       },
     },
@@ -242,21 +242,21 @@ export const projects: Record<'es' | 'en', ProjectsTranslations> = {
         ],
       },
       'neobank-frontend': {
-        title: 'Neobanking Frontend',
-        sector: 'FinTech B2B',
-        role: 'Senior Flutter Architect',
-        duration: '8 months (2023)',
+        title: 'Cross-Platform Digital Banking Application',
+        sector: 'Digital Banking & FinTech',
+        role: 'Full-Stack Flutter Developer',
+        duration: 'Production project (2023)',
         team: 'Lead Developer',
         stack:
-          'Flutter · GetX · Firebase · GetStorage · responsive_framework · Sentry',
+          'Flutter · GetX · Firebase · GraphQL · NFC · Biometrics · Google Pay · Sentry',
         description:
-          'Neobanking frontend with advanced responsive design using responsive_framework. Differentiated theming for web and mobile. Production error monitoring with Sentry. Modularization in core, resources, routing, and commons. UI/UX best practices: fixed orientation, scale control, animated transitions. Banking security with biometric authentication and encrypted storage.',
+          'Comprehensive banking application for iOS, Android, and Web enabling management of personal and shared accounts, bank transfers, instant peer-to-peer payments, and virtual/physical card management. I implemented an advanced identity verification system with AI-powered automatic document capture, facial recognition, and NFC reading of electronic documents. The app features multi-level authentication with biometrics (Face ID/Touch ID/Fingerprint), real-time notification system, and modular architecture that separates business logic from UI for enhanced maintainability and scalability.',
         impact:
-          'Smooth cross-platform experience with significant reduction in authentication friction and high production stability.',
+          'Production banking application with premium user experience across three platforms using a single codebase, reducing development costs by 70%. The automated identity verification process reduces manual validations by 80%, enabling customer onboarding in under 10 minutes.',
         metrics: [
-          { label: 'Active users', value: '500+' },
-          { label: 'Rating', value: '4.7⭐' },
-          { label: 'Crash-free sessions', value: '99.5%' },
+          { label: 'Screens developed', value: '50+' },
+          { label: 'Platforms', value: 'iOS + Android + Web' },
+          { label: 'Stability', value: '99.5%' },
         ],
       },
       'logistics-management': {
