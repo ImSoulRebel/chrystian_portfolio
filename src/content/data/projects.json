@@ -79,9 +79,9 @@
     "confidential": true,
     "production": false,
     "image": "festival_cms_logo.png",
-    "tags": ["CMS", "Music", "Festivals", "WebSockets"],
+    "tags": ["Web Platform", "Events", "Content Management", "Real-time"],
     "status": "active",
     "createdAt": "2024-01-15T00:00:00.000Z",
-    "updatedAt": "2024-05-30T00:00:00.000Z"
+    "updatedAt": "2024-11-27T00:00:00.000Z"
   }
 ]

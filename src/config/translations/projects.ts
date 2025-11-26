@@ -61,20 +61,21 @@ export const projects: Record<'es' | 'en', ProjectsTranslations> = {
         ],
       },
       'festival-cms': {
-        title: 'CMS de Gestión de Festivales',
+        title: 'Plataforma de Administración de Festivales Musicales',
         sector: 'Música & Eventos',
-        role: 'Full Stack Developer',
-        duration: '4 meses (2024)',
+        role: 'Desarrollador Full Stack',
+        duration: '5 meses (2025)',
+        team: 'Individual',
         stack:
-          'Astro · SolidJS · TypeScript · TailwindCSS · WebSockets · JWT · Spotify API',
+          'Astro · SolidJS · TypeScript · TailwindCSS · Spotify API · Integración de Mapas',
         description:
-          'Sistema de gestión de contenido para festivales musicales con Clean Architecture y Repository Pattern. API RESTful con Server Actions y middleware JWT. Integración con Spotify Web API y Geocoding API. Editor WYSIWYG (Quill.js) para gestión avanzada de artistas y escenarios. WebSockets para notificaciones y mensajería en tiempo real.',
+          'Sistema web profesional para administrar todos los aspectos de festivales de música: lineup de artistas, horarios, escenarios, contenido editorial y ubicaciones. La plataforma permite a los organizadores gestionar centralizadamente la programación del evento, actualizar información en tiempo real y publicar contenido que se sincroniza automáticamente con aplicaciones móviles y sitios web públicos. Incluye integración con Spotify para vincular música de artistas, editor visual de contenidos, y sistema de gestión de ubicaciones con mapas interactivos.',
         impact:
-          'Entregado en 4 meses como proyecto funcional para producción con optimización SEO completa.',
+          'Plataforma completa lista para producción que centraliza la gestión de eventos complejos, reduciendo el tiempo de actualización de contenidos en un 70% y eliminando errores manuales. Arquitectura profesional y escalable que facilita la gestión de múltiples ediciones del festival.',
         metrics: [
-          { label: 'Tiempo de carga', value: '<1.5s' },
-          { label: 'SEO Score', value: '100/100' },
-          { label: 'Tiempo desarrollo', value: '4 meses' },
+          { label: 'Carga inicial', value: '<1.5s' },
+          { label: 'Reducción tiempo actualización', value: '70%' },
+          { label: 'Entrega del proyecto', value: '4 meses' },
         ],
       },
       'logistics-management': {
@@ -208,20 +209,21 @@ export const projects: Record<'es' | 'en', ProjectsTranslations> = {
         ],
       },
       'festival-cms': {
-        title: 'Festival Management CMS',
+        title: 'Music Festival Management Platform',
         sector: 'Music & Events',
         role: 'Full Stack Developer',
-        duration: '4 months (2024)',
+        duration: '5 months (2025)',
+        team: 'Individual',
         stack:
-          'Astro · SolidJS · TypeScript · TailwindCSS · WebSockets · JWT · Spotify API',
+          'Astro · SolidJS · TypeScript · TailwindCSS · Spotify API · Maps Integration',
         description:
-          'Content management system for music festivals with Clean Architecture and Repository Pattern. RESTful API with Server Actions and JWT middleware. Integration with Spotify Web API and Geocoding API. WYSIWYG editor (Quill.js) for advanced artist and stage management. WebSockets for real-time notifications and messaging.',
+          'Professional web system for managing all aspects of music festivals: artist lineup, schedules, stages, editorial content, and locations. The platform allows organizers to centrally manage event programming, update information in real-time, and publish content that automatically syncs with mobile apps and public websites. Features Spotify integration to link artist music, visual content editor, and location management system with interactive maps.',
         impact:
-          'Delivered in 4 months as a production-ready project with complete SEO optimization.',
+          'Complete production-ready platform that centralizes complex event management, reducing content update time by 70% and eliminating manual errors. Professional and scalable architecture that facilitates managing multiple festival editions.',
         metrics: [
-          { label: 'Load time', value: '<1.5s' },
-          { label: 'SEO Score', value: '100/100' },
-          { label: 'Development time', value: '4 months' },
+          { label: 'Initial load', value: '<1.5s' },
+          { label: 'Update time reduction', value: '70%' },
+          { label: 'Project delivery', value: '4 months' },
         ],
       },
       'camping-management': {
