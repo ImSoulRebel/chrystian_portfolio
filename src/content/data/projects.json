@@ -58,6 +58,27 @@
     "updatedAt": "2024-11-27T00:00:00.000Z"
   },
   {
+    "id": "digital-catalog",
+    "category": "business",
+    "featured": false,
+    "priority": 5,
+    "confidential": true,
+    "production": true,
+    "image": "catalog_logo.png",
+    "tags": [
+      "Flutter",
+      "Mobile App",
+      "E-Commerce",
+      "Construction",
+      "Parse Server",
+      "AWS S3",
+      "Multi-tenant"
+    ],
+    "status": "active",
+    "createdAt": "2022-01-01T00:00:00.000Z",
+    "updatedAt": "2022-12-31T00:00:00.000Z"
+  },
+  {
     "id": "portfolio",
     "category": "personal",
     "featured": true,

@@ -84,6 +84,7 @@ export { default as optimusLogo } from './projects/optimus_apps_lab_logo.svg';
 export { default as campingLogo } from './projects/camping_logo.png';
 export { default as saasLogo } from './projects/saas_logo.png';
 export { default as streamingPlatformLogo } from './projects/streaming_platform_logo.png';
+export { default as catalogLogo } from './projects/catalog_logo.png';
 export { default as projectPlaceholder } from './placeholder.svg';
 
 // ============================================

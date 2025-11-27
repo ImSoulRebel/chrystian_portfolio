@@ -147,6 +147,24 @@ export const projects: Record<'es' | 'en', ProjectsTranslations> = {
           { label: 'Estabilidad', value: '99.5%' },
         ],
       },
+      'digital-catalog': {
+        title: 'Catálogo Digital de Productos',
+        sector: 'Construcción y Decoración',
+        role: 'Desarrollador Flutter Full-Stack',
+        duration: '2022',
+        team: 'Individual',
+        stack:
+          'Flutter 2.16 · Dart · GetX · Parse Server · AWS S3 · cached_network_image · carousel_slider · Multi-tenant · Clean Architecture',
+        description:
+          'Aplicación móvil de catálogo digital desarrollada en Flutter que permite explorar y consultar productos de construcción y decoración de manera interactiva. Implementé una arquitectura escalable multi-tenant con navegación multinivel (series, productos, ambientes, subseries) y sistema de filtrado avanzado con múltiples criterios combinables. La app integra Parse Server como backend y AWS S3 para gestión de assets, con un sistema inteligente de caché de imágenes que optimiza el consumo de datos. Desarrollé 61 archivos Dart organizados en capas (Models, Services, Controllers, Views), incluyendo 17 modelos de datos, 12 servicios especializados, y 12 widgets personalizados reutilizables. El proyecto destaca por su configuración dinámica desde servidor que permite personalizar la UI sin modificar código, y una estrategia de fallback inteligente para imágenes.',
+        impact:
+          'Digitalización completa que eliminó catálogos físicos voluminosos, reduciendo costos de impresión y distribución. La arquitectura multi-tenant permite soportar múltiples clientes desde una única base de código. Las optimizaciones de performance con caché de imágenes reducen el consumo de datos en un 70% en uso repetido, mejorando significativamente la experiencia del usuario.',
+        metrics: [
+          { label: 'Archivos Dart', value: '61' },
+          { label: 'Modelos de datos', value: '17' },
+          { label: 'Reducción consumo datos', value: '70%' },
+        ],
+      },
     },
   },
   en: {
@@ -259,6 +277,24 @@ export const projects: Record<'es' | 'en', ProjectsTranslations> = {
           { label: 'Screens developed', value: '50+' },
           { label: 'Platforms', value: 'iOS + Android + Web' },
           { label: 'Stability', value: '99.5%' },
+        ],
+      },
+      'digital-catalog': {
+        title: 'Digital Product Catalog',
+        sector: 'Construction & Decoration',
+        role: 'Full-Stack Flutter Developer',
+        duration: '2022',
+        team: 'Individual',
+        stack:
+          'Flutter 2.16 · Dart · GetX · Parse Server · AWS S3 · cached_network_image · carousel_slider · Multi-tenant · Clean Architecture',
+        description:
+          'Digital catalog mobile application developed in Flutter that enables interactive exploration and consultation of construction and decoration products. I implemented a scalable multi-tenant architecture with multi-level navigation (series, products, environments, subseries) and advanced filtering system with multiple combinable criteria. The app integrates Parse Server as backend and AWS S3 for asset management, with an intelligent image caching system that optimizes data consumption. I developed 61 Dart files organized in layers (Models, Services, Controllers, Views), including 17 data models, 12 specialized services, and 12 reusable custom widgets. The project stands out for its dynamic server-side configuration that allows UI customization without code modifications, and an intelligent fallback strategy for images.',
+        impact:
+          'Complete digitalization that eliminated bulky physical catalogs, reducing printing and distribution costs. The multi-tenant architecture supports multiple clients from a single codebase. Performance optimizations with image caching reduce data consumption by 70% on repeated use, significantly improving user experience.',
+        metrics: [
+          { label: 'Dart files', value: '61' },
+          { label: 'Data models', value: '17' },
+          { label: 'Data consumption reduction', value: '70%' },
         ],
       },
       'logistics-management': {
