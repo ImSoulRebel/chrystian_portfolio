@@ -142,9 +142,9 @@ export const projects: Record<'es' | 'en', ProjectsTranslations> = {
         impact:
           'Aplicación bancaria de producción con experiencia de usuario premium en tres plataformas con una sola base de código, reduciendo costos de desarrollo en un 70%. El proceso de verificación de identidad automatizado reduce en un 80% las validaciones manuales, permitiendo alta de nuevos clientes en menos de 10 minutos.',
         metrics: [
-          { label: 'Pantallas desarrolladas', value: '50+' },
-          { label: 'Plataformas', value: 'iOS + Android + Web' },
-          { label: 'Estabilidad', value: '99.5%' },
+          { label: 'Pantallas', value: '50+' },
+          { label: 'Servicios', value: '15+' },
+          { label: 'Plataformas', value: '3' },
         ],
       },
       'digital-catalog': {
@@ -274,9 +274,9 @@ export const projects: Record<'es' | 'en', ProjectsTranslations> = {
         impact:
           'Production banking application with premium user experience across three platforms using a single codebase, reducing development costs by 70%. The automated identity verification process reduces manual validations by 80%, enabling customer onboarding in under 10 minutes.',
         metrics: [
-          { label: 'Screens developed', value: '50+' },
-          { label: 'Platforms', value: 'iOS + Android + Web' },
-          { label: 'Stability', value: '99.5%' },
+          { label: 'Screens', value: '50+' },
+          { label: 'Services', value: '15+' },
+          { label: 'Platforms', value: '3' },
         ],
       },
       'digital-catalog': {

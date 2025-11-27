@@ -313,11 +313,11 @@
 }
 
 .metricValue {
-  font-size: 1.25rem;
+  font-size: 1.1rem;
   font-weight: 700;
   color: var(--primary-color);
   line-height: 1.2;
-  white-space: nowrap;
+  white-space: normal;
 }
 
 .metricLabel {
