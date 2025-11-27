@@ -45,18 +45,18 @@ export const projects: Record<'es' | 'en', ProjectsTranslations> = {
       'streaming-platform': {
         title: 'Plataforma OTT para Hoteles',
         sector: 'Streaming & Hospitalidad',
-        role: 'Lead Flutter Developer & Arquitecto',
-        duration: '6 meses (2023-2024)',
+        role: 'Lead Flutter Developer & Arquitecto de Software',
+        duration: '18 meses (2023-2024)',
         team: '4 desarrolladores',
         stack:
-          'Flutter · BLoC · auto_route · get_it · Video.js · Docker · GitHub Actions · WebSockets',
+          'Flutter 3.16 · Dart 3.0+ · BLoC Pattern · Clean Architecture · auto_route · GetIt · Dio · IndexedDB · DRM · Video Player · Docker · GitHub Actions · CI/CD · JavaScript Interop',
         description:
-          'Plataforma de streaming multiplataforma para SmartTVs, móviles y web con arquitectura multientrada y selección dinámica de UI. Navegación espacial avanzada con NavigationHandlerBloc, soporte para menús anidados, grids y carouseles. Reproductor modular con DRM, subtítulos dinámicos, autenticación por token y pantalla completa. DevOps con RPS en pubspec.yaml, Docker Compose y Git Hooks en Dart.',
+          'Plataforma de streaming multiplataforma con arquitectura Clean Architecture y patrón BLoC. Sistema dual-entry para Smart TV (HTML renderer) y Web (CanvasKit) con arquitectura modular escalable. Video player personalizado con DRM, multi-audio/subtítulos y reproducción adaptativa. Persistencia local con IndexedDB via JS interop, caché inteligente HTTP con estrategias configurables. 68+ componentes UI reutilizables, 17+ BLoCs para gestión de estado, integración con API REST mediante interceptores JWT. Sistema de routing tipado con 33+ rutas. CI/CD completo con GitHub Actions y Docker para múltiples ambientes.',
         impact:
-          'Desplegada en +30 hoteles en Europa y LATAM. Experiencia fluida en SmartTV, despliegues confiables y arquitectura extensible.',
+          'Arquitectura escalable desplegada en producción con CI/CD automatizado. Reducción de costos mediante código compartido entre 6 plataformas. Performance optimizado con lazy loading, caché estratégico y tree shaking. Alta disponibilidad en múltiples ambientes.',
         metrics: [
           { label: 'Hoteles activos', value: '+30' },
-          { label: 'Mejora satisfacción', value: '35%' },
+          { label: 'Plataformas', value: '6' },
           { label: 'Uptime', value: '99.9%' },
         ],
       },
@@ -193,18 +193,18 @@ export const projects: Record<'es' | 'en', ProjectsTranslations> = {
       'streaming-platform': {
         title: 'OTT Platform for Hotels',
         sector: 'Streaming & Hospitality',
-        role: 'Lead Flutter Developer & Architect',
-        duration: '6 months (2023-2024)',
+        role: 'Lead Flutter Developer & Software Architect',
+        duration: '18 months (2023-2024)',
         team: '4 developers',
         stack:
-          'Flutter · BLoC · auto_route · get_it · Video.js · Docker · GitHub Actions · WebSockets',
+          'Flutter 3.16 · Dart 3.0+ · BLoC Pattern · Clean Architecture · auto_route · GetIt · Dio · IndexedDB · DRM · Video Player · Docker · GitHub Actions · CI/CD · JavaScript Interop',
         description:
-          'Cross-platform streaming platform for SmartTVs, mobile, and web with multi-entry architecture and dynamic UI selection. Advanced spatial navigation with NavigationHandlerBloc, support for nested menus, grids, and carousels. Modular player with DRM, dynamic subtitles, token authentication, and fullscreen. DevOps with RPS in pubspec.yaml, Docker Compose, and Git Hooks in Dart.',
+          'Cross-platform streaming platform with Clean Architecture and BLoC pattern. Dual-entry system for Smart TV (HTML renderer) and Web (CanvasKit) with scalable modular architecture. Custom video player with DRM, multi-audio/subtitles, and adaptive streaming. Local persistence with IndexedDB via JS interop, smart HTTP caching with configurable strategies. 68+ reusable UI components, 17+ BLoCs for state management, REST API integration with JWT interceptors. Typed routing system with 33+ routes. Complete CI/CD with GitHub Actions and Docker for multiple environments.',
         impact:
-          'Deployed in +30 hotels across Europe and LATAM. Smooth SmartTV experience, reliable deployments, and extensible architecture.',
+          'Scalable architecture deployed in production with automated CI/CD. Cost reduction through shared code across 6 platforms. Optimized performance with lazy loading, strategic caching, and tree shaking. High availability across multiple environments.',
         metrics: [
           { label: 'Active hotels', value: '+30' },
-          { label: 'Satisfaction improvement', value: '35%' },
+          { label: 'Platforms', value: '6' },
           { label: 'Uptime', value: '99.9%' },
         ],
       },
