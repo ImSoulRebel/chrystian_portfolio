@@ -1,9 +1,13 @@
 [
   {
     "id": "streaming-platform",
+    "id": "streaming-platform",
     "category": "business",
     "featured": true,
     "priority": 1,
+    "confidential": true,
+    "production": true,
+    "image": "streaming_platform_logo.png",
     "confidential": true,
     "production": true,
     "image": "streaming_platform_logo.png",
@@ -14,9 +18,13 @@
   },
   {
     "id": "neobank-frontend",
+    "id": "neobank-frontend",
     "category": "business",
     "featured": true,
     "priority": 2,
+    "confidential": true,
+    "production": false,
+    "image": "neobank_logo.png",
     "confidential": true,
     "production": false,
     "image": "neobank_logo.png",
@@ -45,6 +53,7 @@
     "updatedAt": "2022-05-31T00:00:00.000Z"
   },
   {
+    "id": "camping-management",
     "id": "camping-management",
     "category": "business",
     "featured": false,
@@ -84,8 +93,10 @@
     "featured": true,
     "priority": 1,
     "production": true,
+    "production": true,
     "liveUrl": "https://chrystianmichell.com/",
     "githubUrl": "https://github.com/ImSoulRebel/chrystian_portfolio",
+    "image": "placeholder.png",
     "image": "placeholder.png",
     "tags": ["Portfolio", "Astro", "Performance", "SEO"],
     "status": "active",
@@ -93,6 +104,7 @@
     "updatedAt": "2025-11-28T00:00:00.000Z"
   },
   {
+    "id": "festival-cms",
     "id": "festival-cms",
     "category": "personal",
     "featured": false,
