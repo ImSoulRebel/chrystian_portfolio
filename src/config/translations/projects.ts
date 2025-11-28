@@ -18,6 +18,7 @@ export const projects: Record<'es' | 'en', ProjectsTranslations> = {
     },
     badges: {
       confidential: 'Confidencial',
+      underNDA: 'Bajo NDA',
     },
     actions: {
       visitWebsite: 'Visitar sitio web',
@@ -35,6 +36,10 @@ export const projects: Record<'es' | 'en', ProjectsTranslations> = {
       team: 'Equipo',
       sector: 'Sector',
       impact: 'Impacto',
+      requestCaseStudy: 'Solicitar case study completo',
+      requestCaseStudyLabel: 'Solicitar acceso al case study completo bajo NDA',
+      contactForDetails: 'Solicitar detalles',
+      contactForDetailsLabel: 'Contactar para acceder a detalles completos',
     },
     seo: {
       title: 'Proyectos | Chrystian Michell - Portfolio de Desarrollo Flutter',
@@ -45,60 +50,61 @@ export const projects: Record<'es' | 'en', ProjectsTranslations> = {
       'streaming-platform': {
         title: 'Plataforma OTT para Hoteles',
         sector: 'Streaming & Hospitalidad',
-        role: 'Lead Flutter Developer & Arquitecto',
-        duration: '6 meses (2023-2024)',
+        role: 'Lead Flutter Developer & Arquitecto de Software',
+        duration: '30 meses (jul. 2022 - ene. 2025)',
         team: '4 desarrolladores',
         stack:
-          'Flutter · BLoC · auto_route · get_it · Video.js · Docker · GitHub Actions · WebSockets',
+          'Flutter 3.16 · Dart 3.0+ · BLoC Pattern · Clean Architecture · auto_route · GetIt · Dio · IndexedDB · DRM · Video Player · Docker · GitHub Actions · CI/CD · JavaScript Interop',
         description:
-          'Plataforma de streaming multiplataforma para SmartTVs, móviles y web con arquitectura multientrada y selección dinámica de UI. Navegación espacial avanzada con NavigationHandlerBloc, soporte para menús anidados, grids y carouseles. Reproductor modular con DRM, subtítulos dinámicos, autenticación por token y pantalla completa. DevOps con RPS en pubspec.yaml, Docker Compose y Git Hooks en Dart.',
+          'Plataforma de streaming multiplataforma con arquitectura Clean Architecture y patrón BLoC. Sistema dual-entry para Smart TV (HTML renderer) y Web (CanvasKit) con arquitectura modular escalable. Video player personalizado con DRM, multi-audio/subtítulos y reproducción adaptativa. Persistencia local con IndexedDB via JS interop, caché inteligente HTTP con estrategias configurables. 68+ componentes UI reutilizables, 17+ BLoCs para gestión de estado, integración con API REST mediante interceptores JWT. Sistema de routing tipado con 33+ rutas. CI/CD completo con GitHub Actions y Docker para múltiples ambientes.',
         impact:
-          'Desplegada en +30 hoteles en Europa y LATAM. Experiencia fluida en SmartTV, despliegues confiables y arquitectura extensible.',
+          'Arquitectura escalable desplegada en producción con CI/CD automatizado. Reducción de costos mediante código compartido entre 6 plataformas. Performance optimizado con lazy loading, caché estratégico y tree shaking. Alta disponibilidad en múltiples ambientes.',
         metrics: [
           { label: 'Hoteles activos', value: '+30' },
-          { label: 'Mejora satisfacción', value: '35%' },
+          { label: 'Plataformas', value: '6' },
           { label: 'Uptime', value: '99.9%' },
         ],
       },
       'festival-cms': {
-        title: 'CMS de Gestión de Festivales',
+        title: 'Plataforma de Administración de Festivales Musicales',
         sector: 'Música & Eventos',
-        role: 'Full Stack Developer',
-        duration: '4 meses (2024)',
+        role: 'Desarrollador Full Stack',
+        duration: '7 meses (ene. 2025 - jul. 2025)',
+        team: 'Individual',
         stack:
-          'Astro · SolidJS · TypeScript · TailwindCSS · WebSockets · JWT · Spotify API',
+          'Astro · SolidJS · TypeScript · TailwindCSS · Spotify API · Integración de Mapas',
         description:
-          'Sistema de gestión de contenido para festivales musicales con Clean Architecture y Repository Pattern. API RESTful con Server Actions y middleware JWT. Integración con Spotify Web API y Geocoding API. Editor WYSIWYG (Quill.js) para gestión avanzada de artistas y escenarios. WebSockets para notificaciones y mensajería en tiempo real.',
+          'Sistema web profesional para administrar todos los aspectos de festivales de música: lineup de artistas, horarios, escenarios, contenido editorial y ubicaciones. La plataforma permite a los organizadores gestionar centralizadamente la programación del evento, actualizar información en tiempo real y publicar contenido que se sincroniza automáticamente con aplicaciones móviles y sitios web públicos. Incluye integración con Spotify para vincular música de artistas, editor visual de contenidos, y sistema de gestión de ubicaciones con mapas interactivos.',
         impact:
-          'Entregado en 4 meses como proyecto funcional para producción con optimización SEO completa.',
+          'Plataforma completa lista para producción que centraliza la gestión de eventos complejos, reduciendo el tiempo de actualización de contenidos en un 70% y eliminando errores manuales. Arquitectura profesional y escalable que facilita la gestión de múltiples ediciones del festival.',
         metrics: [
-          { label: 'Tiempo de carga', value: '<1.5s' },
-          { label: 'SEO Score', value: '100/100' },
-          { label: 'Tiempo desarrollo', value: '4 meses' },
+          { label: 'Carga inicial', value: '<1.5s' },
+          { label: 'Reducción tiempo actualización', value: '70%' },
+          { label: 'Entrega del proyecto', value: '4 meses' },
         ],
       },
-      'multipurpose-saas': {
-        title: 'App Multipropósito SaaS',
-        sector: 'SaaS Multipropósito',
-        role: 'Lead Flutter Developer',
-        duration: '7 meses (2022-2023)',
+      'logistics-management': {
+        title: 'App de Gestión Logística Empresarial',
+        sector: 'Logística & Transporte',
+        role: 'Desarrollador Móvil Senior',
+        duration: '6 meses (dic. 2021 - may. 2022)',
         stack:
-          'Flutter · Provider · Riverpod · BLoC · Firebase · Hive · SharedPreferences',
+          'Flutter · Google Maps · Firebase · GPS en Tiempo Real · APIs REST',
         description:
-          'Aplicación multipropósito con Clean Architecture + MVVM + Repository Pattern. Autenticación multiplataforma (correo, Google, Facebook), gestión de usuarios y perfiles, consumo de APIs externas y visualización de datos. Notificaciones push, soporte offline-first con Hive/SharedPreferences, internacionalización multiidioma, animaciones y transiciones personalizadas. CI/CD para despliegues automatizados.',
+          'Aplicación móvil empresarial (iOS/Android) para optimizar operaciones de flotas y entregas. Incluye rastreo GPS en tiempo real de vehículos, gestión inteligente de rutas y tareas, reportes de incidencias con fotos, chat en tiempo real entre conductores y central, y funcionamiento sin conexión a internet. La app permite a conductores gestionar sus entregas diarias, reportar problemas, y mantener comunicación constante con el equipo.',
         impact:
-          'Buenas prácticas con linter, análisis estático y pruebas. Mejora significativa en eficiencia mediante optimización basada en datos.',
+          'Solución completa que redujo significativamente los tiempos de gestión operativa y mejoró la trazabilidad de entregas. Arquitectura profesional con múltiples ambientes de desarrollo, componentes reutilizables y código de alta calidad. Proyecto activo en producción con usuarios reales gestionando operaciones diarias.',
         metrics: [
-          { label: 'Mejora eficiencia', value: '30%' },
-          { label: 'Cobertura tests', value: '85%' },
-          { label: 'Plataformas', value: 'iOS/Android/Web' },
+          { label: 'Pantallas desarrolladas', value: '21' },
+          { label: 'Funciona sin internet', value: 'Sí' },
+          { label: 'Plataformas', value: 'iOS + Android' },
         ],
       },
       portfolio: {
         title: 'Portfolio Personal – Chrystian Michell',
         sector: 'Personal Branding',
         role: 'Developer & Designer',
-        duration: '2 meses (2024)',
+        duration: '2 meses (oct. 2025 - actualidad)',
         stack:
           'Astro · TypeScript · CSS Modules · GitHub Actions · Netlify · PWA',
         description:
@@ -112,38 +118,56 @@ export const projects: Record<'es' | 'en', ProjectsTranslations> = {
         ],
       },
       'camping-management': {
-        title: 'Sistema de Gestión de Campings',
-        sector: 'Turismo & Gestión',
-        role: 'Flutter Developer',
-        duration: '5 meses (2022)',
+        title: 'App Móvil para Gestión de Campings',
+        sector: 'Turismo & Hospitalidad',
+        role: 'Desarrollador Móvil',
+        duration: '5 meses (ene. 2022 - may. 2022)',
         stack:
-          'Flutter · Firebase · GetX/BLoC · dio · StringLocalizations · REST APIs',
+          'Flutter · Firebase · Arquitectura Modular · APIs · Autenticación Segura',
         description:
-          'Aplicación integral para gestión de campings con clase base BaseState<T> para centralizar diálogos, localización, foco y utilidades de UI. Sistema de registro, autenticación, reservas, calendario de actividades, notificaciones y perfil. Integración con APIs REST (auth, reservas, actividades, notificaciones, perfil). Arquitectura modular con separación clara entre presentación, lógica de negocio y datos.',
+          'Aplicación móvil completa para iOS y Android que digitaliza la gestión integral de un camping turístico. Los usuarios pueden registrarse, realizar reservas de parcelas, consultar el calendario de actividades del camping, recibir notificaciones en tiempo real sobre eventos y servicios, y gestionar su perfil personal. La app permite al personal del camping administrar las operaciones diarias desde cualquier dispositivo móvil, mejorando significativamente la experiencia de los visitantes.',
         impact:
-          'Automatización de procesos que reducen costes operativos significativamente. Alta reutilización de código y consistencia en UX.',
+          'Transformación digital que automatizó completamente las operaciones del camping, eliminando procesos manuales en papel y reduciendo costes operativos en un 40%. La app mejoró la satisfacción de los huéspedes al facilitar reservas instantáneas y mantenerlos informados de todas las actividades disponibles.',
         metrics: [
-          { label: 'Usuarios activos', value: '+1,000' },
-          { label: 'Reducción costes', value: '40%' },
-          { label: 'Procesos automatizados', value: '100%' },
+          { label: 'Usuarios registrados', value: '+1,000' },
+          { label: 'Reducción costes operativos', value: '40%' },
+          { label: 'Procesos digitalizados', value: '100%' },
         ],
       },
       'neobank-frontend': {
-        title: 'Neobanco Frontend',
-        sector: 'FinTech B2B',
-        role: 'Senior Flutter Architect',
-        duration: '8 meses (2023)',
-        team: 'Lead Developer',
+        title: 'Aplicación Bancaria Digital Multiplataforma',
+        sector: 'Banca Digital y FinTech',
+        role: 'Desarrollador Flutter Full-Stack',
+        duration: '3 meses (oct. 2021 - dic. 2021)',
+        team: 'Desarrollador Principal',
         stack:
-          'Flutter · GetX · Firebase · GetStorage · responsive_framework · Sentry',
+          'Flutter · GetX · Firebase · GraphQL · NFC · Biometría · Google Pay · Sentry',
         description:
-          'Frontend de neobanco con responsive avanzado usando responsive_framework. Theming diferenciado para web y móvil. Monitoreo de errores en producción con Sentry. Modularización en core, resources, routing y commons. Buenas prácticas de UI/UX: orientación fija, control de escala, transiciones animadas. Seguridad bancaria con autenticación biométrica y storage encriptado.',
+          'Aplicación bancaria completa para iOS, Android y Web que permite gestionar cuentas personales y compartidas, realizar transferencias bancarias, pagos instantáneos entre usuarios, y gestionar tarjetas virtuales y físicas. Implementé un sistema avanzado de verificación de identidad con captura automática de documentos mediante inteligencia artificial, reconocimiento facial y lectura NFC de documentos electrónicos. La app incluye autenticación multinivel con biometría (Face ID/Touch ID/Huella), sistema de notificaciones en tiempo real, y arquitectura modular que separa la lógica de negocio de la interfaz para facilitar el mantenimiento y la escalabilidad.',
         impact:
-          'Experiencia fluida cross-platform con reducción significativa en fricción de autenticación y alta estabilidad en producción.',
+          'Aplicación bancaria de producción con experiencia de usuario premium en tres plataformas con una sola base de código, reduciendo costos de desarrollo en un 70%. El proceso de verificación de identidad automatizado reduce en un 80% las validaciones manuales, permitiendo alta de nuevos clientes en menos de 10 minutos.',
         metrics: [
-          { label: 'Usuarios activos', value: '500+' },
-          { label: 'Rating', value: '4.7⭐' },
-          { label: 'Sesiones sin crashes', value: '99.5%' },
+          { label: 'Pantallas', value: '50+' },
+          { label: 'Servicios', value: '15+' },
+          { label: 'Plataformas', value: '3' },
+        ],
+      },
+      'digital-catalog': {
+        title: 'Catálogo Digital de Productos',
+        sector: 'Construcción y Decoración',
+        role: 'Desarrollador Flutter Full-Stack',
+        duration: '3 meses (jun. 2022 - ago. 2022)',
+        team: 'Individual',
+        stack:
+          'Flutter 2.16 · Dart · GetX · Parse Server · AWS S3 · cached_network_image · carousel_slider · Multi-tenant · Clean Architecture',
+        description:
+          'Aplicación móvil de catálogo digital desarrollada en Flutter que permite explorar y consultar productos de construcción y decoración de manera interactiva. Implementé una arquitectura escalable multi-tenant con navegación multinivel (series, productos, ambientes, subseries) y sistema de filtrado avanzado con múltiples criterios combinables. La app integra Parse Server como backend y AWS S3 para gestión de assets, con un sistema inteligente de caché de imágenes que optimiza el consumo de datos. Desarrollé 61 archivos Dart organizados en capas (Models, Services, Controllers, Views), incluyendo 17 modelos de datos, 12 servicios especializados, y 12 widgets personalizados reutilizables. El proyecto destaca por su configuración dinámica desde servidor que permite personalizar la UI sin modificar código, y una estrategia de fallback inteligente para imágenes.',
+        impact:
+          'Digitalización completa que eliminó catálogos físicos voluminosos, reduciendo costos de impresión y distribución. La arquitectura multi-tenant permite soportar múltiples clientes desde una única base de código. Las optimizaciones de performance con caché de imágenes reducen el consumo de datos en un 70% en uso repetido, mejorando significativamente la experiencia del usuario.',
+        metrics: [
+          { label: 'Archivos Dart', value: '61' },
+          { label: 'Modelos de datos', value: '17' },
+          { label: 'Reducción consumo datos', value: '70%' },
         ],
       },
     },
@@ -165,6 +189,7 @@ export const projects: Record<'es' | 'en', ProjectsTranslations> = {
     },
     badges: {
       confidential: 'Confidential',
+      underNDA: 'Under NDA',
     },
     actions: {
       visitWebsite: 'Visit website',
@@ -182,6 +207,10 @@ export const projects: Record<'es' | 'en', ProjectsTranslations> = {
       team: 'Team',
       sector: 'Sector',
       impact: 'Impact',
+      requestCaseStudy: 'Request full case study',
+      requestCaseStudyLabel: 'Request access to full case study under NDA',
+      contactForDetails: 'Request details',
+      contactForDetailsLabel: 'Contact to access full details',
     },
     seo: {
       title: 'Projects | Chrystian Michell - Flutter Development Portfolio',
@@ -192,95 +221,113 @@ export const projects: Record<'es' | 'en', ProjectsTranslations> = {
       'streaming-platform': {
         title: 'OTT Platform for Hotels',
         sector: 'Streaming & Hospitality',
-        role: 'Lead Flutter Developer & Architect',
-        duration: '6 months (2023-2024)',
+        role: 'Lead Flutter Developer & Software Architect',
+        duration: '30 months (Jul 2022 - Jan 2025)',
         team: '4 developers',
         stack:
-          'Flutter · BLoC · auto_route · get_it · Video.js · Docker · GitHub Actions · WebSockets',
+          'Flutter 3.16 · Dart 3.0+ · BLoC Pattern · Clean Architecture · auto_route · GetIt · Dio · IndexedDB · DRM · Video Player · Docker · GitHub Actions · CI/CD · JavaScript Interop',
         description:
-          'Cross-platform streaming platform for SmartTVs, mobile, and web with multi-entry architecture and dynamic UI selection. Advanced spatial navigation with NavigationHandlerBloc, support for nested menus, grids, and carousels. Modular player with DRM, dynamic subtitles, token authentication, and fullscreen. DevOps with RPS in pubspec.yaml, Docker Compose, and Git Hooks in Dart.',
+          'Cross-platform streaming platform with Clean Architecture and BLoC pattern. Dual-entry system for Smart TV (HTML renderer) and Web (CanvasKit) with scalable modular architecture. Custom video player with DRM, multi-audio/subtitles, and adaptive streaming. Local persistence with IndexedDB via JS interop, smart HTTP caching with configurable strategies. 68+ reusable UI components, 17+ BLoCs for state management, REST API integration with JWT interceptors. Typed routing system with 33+ routes. Complete CI/CD with GitHub Actions and Docker for multiple environments.',
         impact:
-          'Deployed in +30 hotels across Europe and LATAM. Smooth SmartTV experience, reliable deployments, and extensible architecture.',
+          'Scalable architecture deployed in production with automated CI/CD. Cost reduction through shared code across 6 platforms. Optimized performance with lazy loading, strategic caching, and tree shaking. High availability across multiple environments.',
         metrics: [
           { label: 'Active hotels', value: '+30' },
-          { label: 'Satisfaction improvement', value: '35%' },
+          { label: 'Platforms', value: '6' },
           { label: 'Uptime', value: '99.9%' },
         ],
       },
       'festival-cms': {
-        title: 'Festival Management CMS',
+        title: 'Music Festival Management Platform',
         sector: 'Music & Events',
         role: 'Full Stack Developer',
-        duration: '4 months (2024)',
+        duration: '7 months (Jan 2025 - Jul 2025)',
+        team: 'Individual',
         stack:
-          'Astro · SolidJS · TypeScript · TailwindCSS · WebSockets · JWT · Spotify API',
+          'Astro · SolidJS · TypeScript · TailwindCSS · Spotify API · Maps Integration',
         description:
-          'Content management system for music festivals with Clean Architecture and Repository Pattern. RESTful API with Server Actions and JWT middleware. Integration with Spotify Web API and Geocoding API. WYSIWYG editor (Quill.js) for advanced artist and stage management. WebSockets for real-time notifications and messaging.',
+          'Professional web system for managing all aspects of music festivals: artist lineup, schedules, stages, editorial content, and locations. The platform allows organizers to centrally manage event programming, update information in real-time, and publish content that automatically syncs with mobile apps and public websites. Features Spotify integration to link artist music, visual content editor, and location management system with interactive maps.',
         impact:
-          'Delivered in 4 months as a production-ready project with complete SEO optimization.',
+          'Complete production-ready platform that centralizes complex event management, reducing content update time by 70% and eliminating manual errors. Professional and scalable architecture that facilitates managing multiple festival editions.',
         metrics: [
-          { label: 'Load time', value: '<1.5s' },
-          { label: 'SEO Score', value: '100/100' },
-          { label: 'Development time', value: '4 months' },
+          { label: 'Initial load', value: '<1.5s' },
+          { label: 'Update time reduction', value: '70%' },
+          { label: 'Project delivery', value: '4 months' },
         ],
       },
       'camping-management': {
-        title: 'Camping Management System',
-        sector: 'Tourism & Management',
-        role: 'Flutter Developer',
-        duration: '5 months (2022)',
+        title: 'Mobile App for Camping Management',
+        sector: 'Tourism & Hospitality',
+        role: 'Mobile Developer',
+        duration: '5 months (Jan 2022 - May 2022)',
         stack:
-          'Flutter · Firebase · GetX/BLoC · dio · StringLocalizations · REST APIs',
+          'Flutter · Firebase · Modular Architecture · APIs · Secure Authentication',
         description:
-          'Comprehensive camping management application with BaseState<T> base class to centralize dialogs, localization, focus, and UI utilities. Registration, authentication, reservations, activities calendar, notifications, and profile system. Integration with REST APIs (auth, reservations, activities, notifications, profile). Modular architecture with clear separation between presentation, business logic, and data layers.',
+          'Complete mobile application for iOS and Android that digitalizes the comprehensive management of a tourist camping site. Users can register, make plot reservations, check the camping activities calendar, receive real-time notifications about events and services, and manage their personal profile. The app allows camping staff to manage daily operations from any mobile device, significantly improving the visitor experience.',
         impact:
-          'Process automation that significantly reduces operational costs. High code reusability and UX consistency.',
+          'Digital transformation that fully automated camping operations, eliminating manual paper-based processes and reducing operational costs by 40%. The app improved guest satisfaction by enabling instant reservations and keeping them informed of all available activities.',
         metrics: [
-          { label: 'Active users', value: '+1,000' },
-          { label: 'Cost reduction', value: '40%' },
-          { label: 'Automated processes', value: '100%' },
+          { label: 'Registered users', value: '+1,000' },
+          { label: 'Operational cost reduction', value: '40%' },
+          { label: 'Digitalized processes', value: '100%' },
         ],
       },
       'neobank-frontend': {
-        title: 'Neobanking Frontend',
-        sector: 'FinTech B2B',
-        role: 'Senior Flutter Architect',
-        duration: '8 months (2023)',
+        title: 'Cross-Platform Digital Banking Application',
+        sector: 'Digital Banking & FinTech',
+        role: 'Full-Stack Flutter Developer',
+        duration: '3 months (Oct 2021 - Dec 2021)',
         team: 'Lead Developer',
         stack:
-          'Flutter · GetX · Firebase · GetStorage · responsive_framework · Sentry',
+          'Flutter · GetX · Firebase · GraphQL · NFC · Biometrics · Google Pay · Sentry',
         description:
-          'Neobanking frontend with advanced responsive design using responsive_framework. Differentiated theming for web and mobile. Production error monitoring with Sentry. Modularization in core, resources, routing, and commons. UI/UX best practices: fixed orientation, scale control, animated transitions. Banking security with biometric authentication and encrypted storage.',
+          'Comprehensive banking application for iOS, Android, and Web enabling management of personal and shared accounts, bank transfers, instant peer-to-peer payments, and virtual/physical card management. I implemented an advanced identity verification system with AI-powered automatic document capture, facial recognition, and NFC reading of electronic documents. The app features multi-level authentication with biometrics (Face ID/Touch ID/Fingerprint), real-time notification system, and modular architecture that separates business logic from UI for enhanced maintainability and scalability.',
         impact:
-          'Smooth cross-platform experience with significant reduction in authentication friction and high production stability.',
+          'Production banking application with premium user experience across three platforms using a single codebase, reducing development costs by 70%. The automated identity verification process reduces manual validations by 80%, enabling customer onboarding in under 10 minutes.',
         metrics: [
-          { label: 'Active users', value: '500+' },
-          { label: 'Rating', value: '4.7⭐' },
-          { label: 'Crash-free sessions', value: '99.5%' },
+          { label: 'Screens', value: '50+' },
+          { label: 'Services', value: '15+' },
+          { label: 'Platforms', value: '3' },
         ],
       },
-      'multipurpose-saas': {
-        title: 'Multipurpose SaaS App',
-        sector: 'Multipurpose SaaS',
-        role: 'Lead Flutter Developer',
-        duration: '7 months (2022-2023)',
+      'digital-catalog': {
+        title: 'Digital Product Catalog',
+        sector: 'Construction & Decoration',
+        role: 'Full-Stack Flutter Developer',
+        duration: '3 months (Jun 2022 - Aug 2022)',
+        team: 'Individual',
         stack:
-          'Flutter · Provider · Riverpod · BLoC · Firebase · Hive · SharedPreferences',
+          'Flutter 2.16 · Dart · GetX · Parse Server · AWS S3 · cached_network_image · carousel_slider · Multi-tenant · Clean Architecture',
         description:
-          'Multipurpose application with Clean Architecture + MVVM + Repository Pattern. Cross-platform authentication (email, Google, Facebook), user and profile management, external API consumption and data visualization. Push notifications, offline-first support with Hive/SharedPreferences, multi-language internationalization, custom animations and transitions. CI/CD for automated deployments.',
+          'Digital catalog mobile application developed in Flutter that enables interactive exploration and consultation of construction and decoration products. I implemented a scalable multi-tenant architecture with multi-level navigation (series, products, environments, subseries) and advanced filtering system with multiple combinable criteria. The app integrates Parse Server as backend and AWS S3 for asset management, with an intelligent image caching system that optimizes data consumption. I developed 61 Dart files organized in layers (Models, Services, Controllers, Views), including 17 data models, 12 specialized services, and 12 reusable custom widgets. The project stands out for its dynamic server-side configuration that allows UI customization without code modifications, and an intelligent fallback strategy for images.',
         impact:
-          'Best practices with linter, static analysis and testing. Significant efficiency improvement through data-driven optimization.',
+          'Complete digitalization that eliminated bulky physical catalogs, reducing printing and distribution costs. The multi-tenant architecture supports multiple clients from a single codebase. Performance optimizations with image caching reduce data consumption by 70% on repeated use, significantly improving user experience.',
         metrics: [
-          { label: 'Efficiency improvement', value: '30%' },
-          { label: 'Test coverage', value: '85%' },
-          { label: 'Platforms', value: 'iOS/Android/Web' },
+          { label: 'Dart files', value: '61' },
+          { label: 'Data models', value: '17' },
+          { label: 'Data consumption reduction', value: '70%' },
+        ],
+      },
+      'logistics-management': {
+        title: 'Enterprise Logistics Management App',
+        sector: 'Logistics & Transportation',
+        role: 'Senior Mobile Developer',
+        duration: '6 months (Dec 2021 - May 2022)',
+        stack: 'Flutter · Google Maps · Firebase · Real-time GPS · REST APIs',
+        description:
+          'Enterprise mobile application (iOS/Android) to optimize fleet and delivery operations. Features real-time GPS tracking of vehicles, intelligent route and task management, incident reporting with photos, real-time chat between drivers and headquarters, and offline functionality. The app enables drivers to manage daily deliveries, report issues, and maintain constant communication with the team.',
+        impact:
+          'Complete solution that significantly reduced operational management times and improved delivery traceability. Professional architecture with multiple development environments, reusable components, and high-quality code. Active production project with real users managing daily operations.',
+        metrics: [
+          { label: 'Screens developed', value: '21' },
+          { label: 'Works offline', value: 'Yes' },
+          { label: 'Platforms', value: 'iOS + Android' },
         ],
       },
       portfolio: {
         title: 'Personal Portfolio – Chrystian Michell',
         sector: 'Personal Branding',
         role: 'Developer & Designer',
-        duration: '2 months (2024)',
+        duration: '2 months (Oct 2025 - Present)',
         stack:
           'Astro · TypeScript · CSS Modules · GitHub Actions · Netlify · PWA',
         description:

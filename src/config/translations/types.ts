@@ -127,6 +127,7 @@ export interface ProjectsTranslations {
   };
   badges: {
     confidential: string;
+    underNDA: string;
   };
   actions: {
     visitWebsite: string;
@@ -144,6 +145,10 @@ export interface ProjectsTranslations {
     team: string;
     sector: string;
     impact: string;
+    requestCaseStudy: string;
+    requestCaseStudyLabel: string;
+    contactForDetails: string;
+    contactForDetailsLabel: string;
   };
   seo: {
     title: string;

@@ -1,18 +1,23 @@
 [
   {
     "id": "streaming-platform",
+    "id": "streaming-platform",
     "category": "business",
     "featured": true,
     "priority": 1,
     "confidential": true,
     "production": true,
     "image": "streaming_platform_logo.png",
+    "confidential": true,
+    "production": true,
+    "image": "streaming_platform_logo.png",
     "tags": ["OTT", "SmartTV", "Streaming", "Hotels"],
     "status": "active",
-    "createdAt": "2023-01-15T00:00:00.000Z",
-    "updatedAt": "2024-06-01T00:00:00.000Z"
+    "createdAt": "2022-07-01T00:00:00.000Z",
+    "updatedAt": "2025-01-01T00:00:00.000Z"
   },
   {
+    "id": "neobank-frontend",
     "id": "neobank-frontend",
     "category": "business",
     "featured": true,
@@ -20,25 +25,35 @@
     "confidential": true,
     "production": false,
     "image": "neobank_logo.png",
+    "confidential": true,
+    "production": false,
+    "image": "neobank_logo.png",
     "tags": ["Banking", "Fintech", "Security"],
     "status": "active",
-    "createdAt": "2023-03-01T00:00:00.000Z",
-    "updatedAt": "2024-05-15T00:00:00.000Z"
+    "createdAt": "2021-10-01T00:00:00.000Z",
+    "updatedAt": "2021-12-31T00:00:00.000Z"
   },
   {
-    "id": "multipurpose-saas",
+    "id": "logistics-management",
     "category": "business",
     "featured": true,
     "priority": 3,
     "confidential": true,
     "production": true,
     "image": "saas_logo.png",
-    "tags": ["Multipurpose", "Authentication", "Offline"],
+    "tags": [
+      "Logistics",
+      "Real-time GPS",
+      "Mobile App",
+      "Flutter",
+      "Enterprise"
+    ],
     "status": "active",
-    "createdAt": "2022-08-01T00:00:00.000Z",
-    "updatedAt": "2024-04-20T00:00:00.000Z"
+    "createdAt": "2021-12-01T00:00:00.000Z",
+    "updatedAt": "2022-05-31T00:00:00.000Z"
   },
   {
+    "id": "camping-management",
     "id": "camping-management",
     "category": "business",
     "featured": false,
@@ -46,10 +61,31 @@
     "confidential": true,
     "production": true,
     "image": "camping_logo.png",
-    "tags": ["Tourism", "Management", "REST API"],
+    "tags": ["Tourism", "Mobile App", "Digital Transformation", "Hospitality"],
     "status": "active",
-    "createdAt": "2022-05-01T00:00:00.000Z",
-    "updatedAt": "2024-03-10T00:00:00.000Z"
+    "createdAt": "2022-01-01T00:00:00.000Z",
+    "updatedAt": "2022-05-31T00:00:00.000Z"
+  },
+  {
+    "id": "digital-catalog",
+    "category": "business",
+    "featured": false,
+    "priority": 5,
+    "confidential": true,
+    "production": true,
+    "image": "catalog_logo.png",
+    "tags": [
+      "Flutter",
+      "Mobile App",
+      "E-Commerce",
+      "Construction",
+      "Parse Server",
+      "AWS S3",
+      "Multi-tenant"
+    ],
+    "status": "active",
+    "createdAt": "2022-06-01T00:00:00.000Z",
+    "updatedAt": "2022-08-31T00:00:00.000Z"
   },
   {
     "id": "portfolio",
@@ -57,15 +93,18 @@
     "featured": true,
     "priority": 1,
     "production": true,
+    "production": true,
     "liveUrl": "https://chrystianmichell.com/",
     "githubUrl": "https://github.com/ImSoulRebel/chrystian_portfolio",
     "image": "placeholder.png",
+    "image": "placeholder.png",
     "tags": ["Portfolio", "Astro", "Performance", "SEO"],
     "status": "active",
-    "createdAt": "2024-10-01T00:00:00.000Z",
-    "updatedAt": "2024-10-17T00:00:00.000Z"
+    "createdAt": "2025-10-01T00:00:00.000Z",
+    "updatedAt": "2025-11-28T00:00:00.000Z"
   },
   {
+    "id": "festival-cms",
     "id": "festival-cms",
     "category": "personal",
     "featured": false,
@@ -73,9 +112,9 @@
     "confidential": true,
     "production": false,
     "image": "festival_cms_logo.png",
-    "tags": ["CMS", "Music", "Festivals", "WebSockets"],
+    "tags": ["Web Platform", "Events", "Content Management", "Real-time"],
     "status": "active",
-    "createdAt": "2024-01-15T00:00:00.000Z",
-    "updatedAt": "2024-05-30T00:00:00.000Z"
+    "createdAt": "2025-01-01T00:00:00.000Z",
+    "updatedAt": "2025-07-31T00:00:00.000Z"
   }
 ]
