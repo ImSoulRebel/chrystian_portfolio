@@ -9,8 +9,8 @@
     "image": "streaming_platform_logo.png",
     "tags": ["OTT", "SmartTV", "Streaming", "Hotels"],
     "status": "active",
-    "createdAt": "2023-01-15T00:00:00.000Z",
-    "updatedAt": "2025-11-27T00:00:00.000Z"
+    "createdAt": "2022-07-01T00:00:00.000Z",
+    "updatedAt": "2025-01-01T00:00:00.000Z"
   },
   {
     "id": "neobank-frontend",
@@ -22,8 +22,8 @@
     "image": "neobank_logo.png",
     "tags": ["Banking", "Fintech", "Security"],
     "status": "active",
-    "createdAt": "2023-03-01T00:00:00.000Z",
-    "updatedAt": "2024-05-15T00:00:00.000Z"
+    "createdAt": "2021-10-01T00:00:00.000Z",
+    "updatedAt": "2021-12-31T00:00:00.000Z"
   },
   {
     "id": "logistics-management",
@@ -41,8 +41,8 @@
       "Enterprise"
     ],
     "status": "active",
-    "createdAt": "2022-08-01T00:00:00.000Z",
-    "updatedAt": "2024-11-27T00:00:00.000Z"
+    "createdAt": "2021-12-01T00:00:00.000Z",
+    "updatedAt": "2022-05-31T00:00:00.000Z"
   },
   {
     "id": "camping-management",
@@ -54,8 +54,8 @@
     "image": "camping_logo.png",
     "tags": ["Tourism", "Mobile App", "Digital Transformation", "Hospitality"],
     "status": "active",
-    "createdAt": "2022-05-01T00:00:00.000Z",
-    "updatedAt": "2024-11-27T00:00:00.000Z"
+    "createdAt": "2022-01-01T00:00:00.000Z",
+    "updatedAt": "2022-05-31T00:00:00.000Z"
   },
   {
     "id": "digital-catalog",
@@ -75,8 +75,8 @@
       "Multi-tenant"
     ],
     "status": "active",
-    "createdAt": "2022-01-01T00:00:00.000Z",
-    "updatedAt": "2022-12-31T00:00:00.000Z"
+    "createdAt": "2022-06-01T00:00:00.000Z",
+    "updatedAt": "2022-08-31T00:00:00.000Z"
   },
   {
     "id": "portfolio",
@@ -89,8 +89,8 @@
     "image": "placeholder.png",
     "tags": ["Portfolio", "Astro", "Performance", "SEO"],
     "status": "active",
-    "createdAt": "2024-10-01T00:00:00.000Z",
-    "updatedAt": "2024-10-17T00:00:00.000Z"
+    "createdAt": "2025-10-01T00:00:00.000Z",
+    "updatedAt": "2025-11-28T00:00:00.000Z"
   },
   {
     "id": "festival-cms",
@@ -102,7 +102,7 @@
     "image": "festival_cms_logo.png",
     "tags": ["Web Platform", "Events", "Content Management", "Real-time"],
     "status": "active",
-    "createdAt": "2024-01-15T00:00:00.000Z",
-    "updatedAt": "2024-11-27T00:00:00.000Z"
+    "createdAt": "2025-01-01T00:00:00.000Z",
+    "updatedAt": "2025-07-31T00:00:00.000Z"
   }
 ]

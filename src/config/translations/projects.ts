@@ -46,7 +46,7 @@ export const projects: Record<'es' | 'en', ProjectsTranslations> = {
         title: 'Plataforma OTT para Hoteles',
         sector: 'Streaming & Hospitalidad',
         role: 'Lead Flutter Developer & Arquitecto de Software',
-        duration: '18 meses (2023-2024)',
+        duration: '30 meses (jul. 2022 - ene. 2025)',
         team: '4 desarrolladores',
         stack:
           'Flutter 3.16 · Dart 3.0+ · BLoC Pattern · Clean Architecture · auto_route · GetIt · Dio · IndexedDB · DRM · Video Player · Docker · GitHub Actions · CI/CD · JavaScript Interop',
@@ -64,7 +64,7 @@ export const projects: Record<'es' | 'en', ProjectsTranslations> = {
         title: 'Plataforma de Administración de Festivales Musicales',
         sector: 'Música & Eventos',
         role: 'Desarrollador Full Stack',
-        duration: '5 meses (2025)',
+        duration: '7 meses (ene. 2025 - jul. 2025)',
         team: 'Individual',
         stack:
           'Astro · SolidJS · TypeScript · TailwindCSS · Spotify API · Integración de Mapas',
@@ -82,7 +82,7 @@ export const projects: Record<'es' | 'en', ProjectsTranslations> = {
         title: 'App de Gestión Logística Empresarial',
         sector: 'Logística & Transporte',
         role: 'Desarrollador Móvil Senior',
-        duration: '12 meses (2022-2023)',
+        duration: '6 meses (dic. 2021 - may. 2022)',
         stack:
           'Flutter · Google Maps · Firebase · GPS en Tiempo Real · APIs REST',
         description:
@@ -99,7 +99,7 @@ export const projects: Record<'es' | 'en', ProjectsTranslations> = {
         title: 'Portfolio Personal – Chrystian Michell',
         sector: 'Personal Branding',
         role: 'Developer & Designer',
-        duration: '2 meses (2024)',
+        duration: '2 meses (oct. 2025 - actualidad)',
         stack:
           'Astro · TypeScript · CSS Modules · GitHub Actions · Netlify · PWA',
         description:
@@ -116,7 +116,7 @@ export const projects: Record<'es' | 'en', ProjectsTranslations> = {
         title: 'App Móvil para Gestión de Campings',
         sector: 'Turismo & Hospitalidad',
         role: 'Desarrollador Móvil',
-        duration: '5 meses (2022)',
+        duration: '5 meses (ene. 2022 - may. 2022)',
         stack:
           'Flutter · Firebase · Arquitectura Modular · APIs · Autenticación Segura',
         description:
@@ -133,7 +133,7 @@ export const projects: Record<'es' | 'en', ProjectsTranslations> = {
         title: 'Aplicación Bancaria Digital Multiplataforma',
         sector: 'Banca Digital y FinTech',
         role: 'Desarrollador Flutter Full-Stack',
-        duration: 'Proyecto de producción (2023)',
+        duration: '3 meses (oct. 2021 - dic. 2021)',
         team: 'Desarrollador Principal',
         stack:
           'Flutter · GetX · Firebase · GraphQL · NFC · Biometría · Google Pay · Sentry',
@@ -151,7 +151,7 @@ export const projects: Record<'es' | 'en', ProjectsTranslations> = {
         title: 'Catálogo Digital de Productos',
         sector: 'Construcción y Decoración',
         role: 'Desarrollador Flutter Full-Stack',
-        duration: '2022',
+        duration: '3 meses (jun. 2022 - ago. 2022)',
         team: 'Individual',
         stack:
           'Flutter 2.16 · Dart · GetX · Parse Server · AWS S3 · cached_network_image · carousel_slider · Multi-tenant · Clean Architecture',
@@ -212,7 +212,7 @@ export const projects: Record<'es' | 'en', ProjectsTranslations> = {
         title: 'OTT Platform for Hotels',
         sector: 'Streaming & Hospitality',
         role: 'Lead Flutter Developer & Software Architect',
-        duration: '18 months (2023-2024)',
+        duration: '30 months (Jul 2022 - Jan 2025)',
         team: '4 developers',
         stack:
           'Flutter 3.16 · Dart 3.0+ · BLoC Pattern · Clean Architecture · auto_route · GetIt · Dio · IndexedDB · DRM · Video Player · Docker · GitHub Actions · CI/CD · JavaScript Interop',
@@ -230,7 +230,7 @@ export const projects: Record<'es' | 'en', ProjectsTranslations> = {
         title: 'Music Festival Management Platform',
         sector: 'Music & Events',
         role: 'Full Stack Developer',
-        duration: '5 months (2025)',
+        duration: '7 months (Jan 2025 - Jul 2025)',
         team: 'Individual',
         stack:
           'Astro · SolidJS · TypeScript · TailwindCSS · Spotify API · Maps Integration',
@@ -248,7 +248,7 @@ export const projects: Record<'es' | 'en', ProjectsTranslations> = {
         title: 'Mobile App for Camping Management',
         sector: 'Tourism & Hospitality',
         role: 'Mobile Developer',
-        duration: '5 months (2022)',
+        duration: '5 months (Jan 2022 - May 2022)',
         stack:
           'Flutter · Firebase · Modular Architecture · APIs · Secure Authentication',
         description:
@@ -265,7 +265,7 @@ export const projects: Record<'es' | 'en', ProjectsTranslations> = {
         title: 'Cross-Platform Digital Banking Application',
         sector: 'Digital Banking & FinTech',
         role: 'Full-Stack Flutter Developer',
-        duration: 'Production project (2023)',
+        duration: '3 months (Oct 2021 - Dec 2021)',
         team: 'Lead Developer',
         stack:
           'Flutter · GetX · Firebase · GraphQL · NFC · Biometrics · Google Pay · Sentry',
@@ -283,7 +283,7 @@ export const projects: Record<'es' | 'en', ProjectsTranslations> = {
         title: 'Digital Product Catalog',
         sector: 'Construction & Decoration',
         role: 'Full-Stack Flutter Developer',
-        duration: '2022',
+        duration: '3 months (Jun 2022 - Aug 2022)',
         team: 'Individual',
         stack:
           'Flutter 2.16 · Dart · GetX · Parse Server · AWS S3 · cached_network_image · carousel_slider · Multi-tenant · Clean Architecture',
@@ -301,7 +301,7 @@ export const projects: Record<'es' | 'en', ProjectsTranslations> = {
         title: 'Enterprise Logistics Management App',
         sector: 'Logistics & Transportation',
         role: 'Senior Mobile Developer',
-        duration: '12 months (2022-2023)',
+        duration: '6 months (Dec 2021 - May 2022)',
         stack: 'Flutter · Google Maps · Firebase · Real-time GPS · REST APIs',
         description:
           'Enterprise mobile application (iOS/Android) to optimize fleet and delivery operations. Features real-time GPS tracking of vehicles, intelligent route and task management, incident reporting with photos, real-time chat between drivers and headquarters, and offline functionality. The app enables drivers to manage daily deliveries, report issues, and maintain constant communication with the team.',
@@ -317,7 +317,7 @@ export const projects: Record<'es' | 'en', ProjectsTranslations> = {
         title: 'Personal Portfolio – Chrystian Michell',
         sector: 'Personal Branding',
         role: 'Developer & Designer',
-        duration: '2 months (2024)',
+        duration: '2 months (Oct 2025 - Present)',
         stack:
           'Astro · TypeScript · CSS Modules · GitHub Actions · Netlify · PWA',
         description:
