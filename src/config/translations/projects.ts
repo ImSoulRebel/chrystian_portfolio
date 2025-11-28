@@ -9,11 +9,8 @@ export const projects: Record<'es' | 'en', ProjectsTranslations> = {
     viewCode: 'Ver Código',
     viewMore: 'Ver Más Proyectos',
     readMore: 'Leer más',
-    readMore: 'Leer más',
     featured: 'Destacado',
     stats: {
-      inProduction: 'Producción',
-      featuredProject: 'Destacado',
       inProduction: 'Producción',
       featuredProject: 'Destacado',
       codeAvailable: 'Código Disponible',
@@ -22,9 +19,6 @@ export const projects: Record<'es' | 'en', ProjectsTranslations> = {
     badges: {
       confidential: 'Confidencial',
       underNDA: 'Bajo NDA',
-    },
-    badges: {
-      confidential: 'Confidencial',
     },
     actions: {
       visitWebsite: 'Visitar sitio web',
@@ -46,13 +40,6 @@ export const projects: Record<'es' | 'en', ProjectsTranslations> = {
       requestCaseStudyLabel: 'Solicitar acceso al case study completo bajo NDA',
       contactForDetails: 'Solicitar detalles',
       contactForDetailsLabel: 'Contactar para acceder a detalles completos',
-    },
-    metadata: {
-      duration: 'Duración',
-      role: 'Rol',
-      team: 'Equipo',
-      sector: 'Sector',
-      impact: 'Impacto',
     },
     seo: {
       title: 'Proyectos | Chrystian Michell - Portfolio de Desarrollo Flutter',
@@ -193,11 +180,8 @@ export const projects: Record<'es' | 'en', ProjectsTranslations> = {
     viewCode: 'View Code',
     viewMore: 'View More Projects',
     readMore: 'Read more',
-    readMore: 'Read more',
     featured: 'Featured',
     stats: {
-      inProduction: 'Production',
-      featuredProject: 'Featured',
       inProduction: 'Production',
       featuredProject: 'Featured',
       codeAvailable: 'Code Available',
@@ -206,9 +190,6 @@ export const projects: Record<'es' | 'en', ProjectsTranslations> = {
     badges: {
       confidential: 'Confidential',
       underNDA: 'Under NDA',
-    },
-    badges: {
-      confidential: 'Confidential',
     },
     actions: {
       visitWebsite: 'Visit website',
@@ -230,13 +211,6 @@ export const projects: Record<'es' | 'en', ProjectsTranslations> = {
       requestCaseStudyLabel: 'Request access to full case study under NDA',
       contactForDetails: 'Request details',
       contactForDetailsLabel: 'Contact to access full details',
-    },
-    metadata: {
-      duration: 'Duration',
-      role: 'Role',
-      team: 'Team',
-      sector: 'Sector',
-      impact: 'Impact',
     },
     seo: {
       title: 'Projects | Chrystian Michell - Flutter Development Portfolio',

@@ -35,7 +35,6 @@ const projects = allProjects
     return {
       title: projectT.title,
       id: p.data.id,
-      id: p.data.id,
       stack: projectT.stack,
       description: projectT.description,
       impact: projectT.impact,
@@ -43,13 +42,6 @@ const projects = allProjects
       liveUrl: p.data.liveUrl,
       githubUrl: p.data.githubUrl,
       image: projectImages[p.data.id] || null,
-      confidential: p.data.confidential ?? false,
-      production: p.data.production ?? false,
-      sector: projectT.sector,
-      role: projectT.role,
-      duration: projectT.duration,
-      team: projectT.team,
-      metrics: projectT.metrics,
       confidential: p.data.confidential ?? false,
       production: p.data.production ?? false,
       sector: projectT.sector,
@@ -73,7 +65,6 @@ const projects = allProjects
         projects.map((project) => (
           <ProjectCard
             id={project.id}
-            id={project.id}
             title={project.title}
             stack={project.stack}
             description={project.description}
@@ -83,13 +74,6 @@ const projects = allProjects
             githubUrl={project.githubUrl}
             image={project.image}
             locale={locale}
-            confidential={project.confidential}
-            production={project.production}
-            sector={project.sector}
-            role={project.role}
-            duration={project.duration}
-            team={project.team}
-            metrics={project.metrics}
             confidential={project.confidential}
             production={project.production}
             sector={project.sector}
